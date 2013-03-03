@@ -8,6 +8,14 @@ You need a working Emscripten setup, with the Emscripten binaries in the PATH of
 
 The whole project is created from scratch via a single command, `make`, which will download, decompress, and compile the latest version of the Lua interpreter, transcode that to liblua.js, and add convenience hooks/compression/optimization for the final product, weblua.js.
 
+## Using weblua.js
+
+You don't have to install or set up Emscripten to use weblua.js, unless you want to actually make changes to weblua.js. The binaries are available precompiled for you in this repository. You can get straight to including it in your projects.
+
+To test out the demo and make sure things work, run `python -m SimpleHTTPServer 8770` in the root of this git repository, and go to `localhost:8770` in your browser.
+
+### Todo: API reference
+
 ## Current progress
 
 This is still very much prealpha quality stuff. I'm still learning my way around Emscripten and exposing library functions.
