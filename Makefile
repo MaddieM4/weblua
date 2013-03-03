@@ -1,9 +1,9 @@
 
 DOWNLOAD_URL=http://www.lua.org/ftp/lua-5.2.1.tar.gz
 DOWNLOAD_PROGRAM=wget
-DOWNLOADED_LOCATION=lua-5.2.1.tar.gz
-UNPACK_COMMAND=tar -xf
-LUA_ROOT=lua-5.2.1
+DOWNLOADED_LOCATION=src/lua-5.2.1.tar.gz
+UNPACK_COMMAND=tar -C src -xf
+LUA_ROOT=src/lua-5.2.1
 
 COMPILED_LIB=liblua.so.ll
 COMPILED_LIB_LOCATION=$(LUA_ROOT)/src/$(COMPILED_LIB)
@@ -25,4 +25,5 @@ $(LUA_ROOT) : $(DOWNLOADED_LOCATION)
 	cp lua_makefile_override $(LUA_ROOT)/src/Makefile
 
 $(DOWNLOADED_LOCATION):
-	$(DOWNLOAD_PROGRAM) $(DOWNLOAD_URL)
+	mkdir -p src
+	$(DOWNLOAD_PROGRAM) $(DOWNLOAD_URL) -O $(DOWNLOADED_LOCATION)
