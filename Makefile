@@ -8,13 +8,14 @@ LUA_ROOT=lua-5.2.1
 COMPILED_LIB=liblua.so.ll
 COMPILED_LIB_LOCATION=$(LUA_ROOT)/src/$(COMPILED_LIB)
 
-all: weblua.js
+all: build/weblua.js
 
-weblua.js : liblua.js
-	cp liblua.js weblua.js # TODO: entry hooks and optimization
+build/weblua.js : build/liblua.js
+	cp build/liblua.js build/weblua.js # TODO: entry hooks and optimization
 
-liblua.js : $(COMPILED_LIB_LOCATION)
-	emcc -o liblua.js $(COMPILED_LIB_LOCATION) -s LINKABLE=1
+build/liblua.js : $(COMPILED_LIB_LOCATION)
+	mkdir -p build
+	emcc -o build/liblua.js $(COMPILED_LIB_LOCATION) -s LINKABLE=1
 
 $(COMPILED_LIB_LOCATION) : $(LUA_ROOT)
 	emmake make linux -C $(LUA_ROOT)/src
