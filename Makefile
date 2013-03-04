@@ -28,6 +28,7 @@ $(WEBLUA_LOCATION) : build/liblua.js
 build/liblua.js : $(COMPILED_LIB_LOCATION)
 	mkdir -p build
 	emcc -o build/liblua.js $(COMPILED_LIB_LOCATION) -s LINKABLE=1
+	cat src/API.js >> build/liblua.js
 
 $(COMPILED_LIB_LOCATION) : $(LUA_ROOT)
 	emmake make linux -C $(LUA_ROOT)/src
@@ -37,5 +38,4 @@ $(LUA_ROOT) : $(DOWNLOADED_LOCATION)
 	cp lua_makefile_override $(LUA_ROOT)/src/Makefile
 
 $(DOWNLOADED_LOCATION):
-	mkdir -p src
 	$(DOWNLOAD_PROGRAM) $(DOWNLOAD_URL) -O $(DOWNLOADED_LOCATION)
