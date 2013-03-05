@@ -33,7 +33,7 @@ $(WEBLUA_LOCATION) : build/liblua.js $(CLOSURE_UNPACK_LOCATION)
 		--language_in ECMASCRIPT5 \
 		--compilation_level ADVANCED_OPTIMIZATIONS
 
-build/liblua.js : $(COMPILED_LIB_LOCATION)
+build/liblua.js : $(COMPILED_LIB_LOCATION) src/API.js
 	mkdir -p build
 	emcc -o build/liblua.js $(COMPILED_LIB_LOCATION) -s INVOKE_RUN=0 \
 		-s SAFE_HEAP=0 \
