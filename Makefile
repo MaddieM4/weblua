@@ -15,7 +15,7 @@ WEBLUA_LOCATION=build/weblua-$(WEBLUA_VERSION).js
 all: build/weblua.js
 
 clean:
-	rm -r src build
+	rm -r $(LUA_ROOT) build
 
 build/weblua.js : $(WEBLUA_LOCATION)
 	# Remove old symlink if it exists
@@ -27,7 +27,14 @@ $(WEBLUA_LOCATION) : build/liblua.js
 
 build/liblua.js : $(COMPILED_LIB_LOCATION)
 	mkdir -p build
-	emcc -o build/liblua.js $(COMPILED_LIB_LOCATION) -s LINKABLE=1
+	emcc -o build/liblua.js $(COMPILED_LIB_LOCATION) -s INVOKE_RUN=0 \
+		-s SAFE_HEAP=0 \
+		-s INIT_STACK=1 \
+		-s OPTIMIZE=1 \
+		-s ASSERTIONS=0 \
+		-s CORRECT_SIGNS=1 \
+		-s CORRECT_OVERFLOWS=1 \
+		-s EXPORTED_FUNCTIONS='["_lua_settop"]' \
 	cat src/API.js >> build/liblua.js
 
 $(COMPILED_LIB_LOCATION) : $(LUA_ROOT)
@@ -36,6 +43,8 @@ $(COMPILED_LIB_LOCATION) : $(LUA_ROOT)
 $(LUA_ROOT) : $(DOWNLOADED_LOCATION)
 	$(UNPACK_COMMAND) $(DOWNLOADED_LOCATION)
 	cp lua_makefile_override $(LUA_ROOT)/src/Makefile
+	# Export symbols with C extern
+	#sed -i 's/define LUA_API.*extern/define LUA_API\t\textern "C"/' src/lua-5.2.1/src/luaconf.h
 
 $(DOWNLOADED_LOCATION):
 	$(DOWNLOAD_PROGRAM) $(DOWNLOAD_URL) -O $(DOWNLOADED_LOCATION)
