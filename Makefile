@@ -1,11 +1,15 @@
 LUA_VERSION=5.2.1
 WEBLUA_VERSION=0.0.1
 
-DOWNLOAD_URL=http://www.lua.org/ftp/lua-$(LUA_VERSION).tar.gz
 DOWNLOAD_PROGRAM=wget
-DOWNLOADED_LOCATION=src/lua-$(LUA_VERSION).tar.gz
-UNPACK_COMMAND=tar -C src -xf
+LUA_SRC_URL=http://www.lua.org/ftp/lua-$(LUA_VERSION).tar.gz
+LUA_SRC_LOCATION=src/lua-$(LUA_VERSION).tar.gz
 LUA_ROOT=src/lua-$(LUA_VERSION)
+
+CLOSURE_SRC_URL=http://closure-compiler.googlecode.com/files/compiler-latest.zip
+CLOSURE_SRC_LOCATION=src/closure.zip
+CLOSURE_UNPACK_LOCATION=src/closure
+CLOSURE_COMMAND=java -jar $(CLOSURE_UNPACK_LOCATION)/compiler.jar
 
 COMPILED_LIB=liblua.so.ll
 COMPILED_LIB_LOCATION=$(LUA_ROOT)/src/$(COMPILED_LIB)
@@ -22,8 +26,12 @@ build/weblua.js : $(WEBLUA_LOCATION)
 	rm -f build/weblua.js
 	ln -s $(WEBLUA_LOCATION) build/weblua.js
 
-$(WEBLUA_LOCATION) : build/liblua.js
-	cp build/liblua.js $(WEBLUA_LOCATION) # TODO: entry hooks and optimization
+$(WEBLUA_LOCATION) : build/liblua.js $(CLOSURE_UNPACK_LOCATION)
+	$(CLOSURE_COMMAND) \
+		--js build/liblua.js \
+		--js_output_file $(WEBLUA_LOCATION) \
+		--language_in ECMASCRIPT5 \
+		--compilation_level ADVANCED_OPTIMIZATIONS
 
 build/liblua.js : $(COMPILED_LIB_LOCATION)
 	mkdir -p build
@@ -40,11 +48,15 @@ build/liblua.js : $(COMPILED_LIB_LOCATION)
 $(COMPILED_LIB_LOCATION) : $(LUA_ROOT)
 	emmake make linux -C $(LUA_ROOT)/src
 
-$(LUA_ROOT) : $(DOWNLOADED_LOCATION)
-	$(UNPACK_COMMAND) $(DOWNLOADED_LOCATION)
+$(LUA_ROOT) : $(LUA_SRC_LOCATION)
+	tar -C src -xf $(LUA_SRC_LOCATION)
 	cp lua_makefile_override $(LUA_ROOT)/src/Makefile
-	# Export symbols with C extern
-	#sed -i 's/define LUA_API.*extern/define LUA_API\t\textern "C"/' src/lua-5.2.1/src/luaconf.h
 
-$(DOWNLOADED_LOCATION):
-	$(DOWNLOAD_PROGRAM) $(DOWNLOAD_URL) -O $(DOWNLOADED_LOCATION)
+$(LUA_SRC_LOCATION):
+	$(DOWNLOAD_PROGRAM) $(LUA_SRC_URL) -O $(LUA_SRC_LOCATION)
+
+$(CLOSURE_UNPACK_LOCATION): $(CLOSURE_SRC_LOCATION)
+	unzip $(CLOSURE_SRC_LOCATION) -d $(CLOSURE_UNPACK_LOCATION)
+
+$(CLOSURE_SRC_LOCATION):
+	$(DOWNLOAD_PROGRAM) $(CLOSURE_SRC_URL) -O $(CLOSURE_SRC_LOCATION)
