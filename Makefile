@@ -17,7 +17,7 @@ COMPILED_LIB_LOCATION=$(LUA_ROOT)/src/$(COMPILED_LIB)
 WEBLUA_LOCATION=build/weblua-$(WEBLUA_VERSION).js
 
 REQUIRED_FUNCTIONS=$(shell grep -oP '_lua[a-zA-Z_0-9]+' src/API.js | uniq)
-REQUIRED_FUNCTION_STRING="'[$(foreach func,$(REQUIRED_FUNCTIONS),\"$(func)\",)]'"
+REQUIRED_FUNCTION_STRING="[$(foreach func,$(REQUIRED_FUNCTIONS),\"$(func)\",)]"
 
 all: build/weblua.js
 
@@ -39,17 +39,22 @@ $(WEBLUA_LOCATION) : build/liblua.js $(CLOSURE_UNPACK_LOCATION)
 		--language_in ECMASCRIPT5 \
 		--compilation_level ADVANCED_OPTIMIZATIONS
 
-build/liblua.js : $(COMPILED_LIB_LOCATION) src/API.js
+build/raw.js : $(COMPILED_LIB_LOCATION) src/API.js
 	mkdir -p build
-	emcc -o build/liblua.js $(COMPILED_LIB_LOCATION) -s INVOKE_RUN=0 \
+	emcc -o build/raw.js $(COMPILED_LIB_LOCATION) -s INVOKE_RUN=0 \
 		-s SAFE_HEAP=0 \
 		-s INIT_STACK=1 \
 		-s OPTIMIZE=1 \
 		-s ASSERTIONS=0 \
 		-s CORRECT_SIGNS=1 \
 		-s CORRECT_OVERFLOWS=1 \
+		-s WARN_ON_UNDEFINED_SYMBOLS=1 \
 		-s EXPORTED_FUNCTIONS=$(REQUIRED_FUNCTION_STRING)
-	cat src/API.js >> build/liblua.js
+		#-s EXCEPTION_DEBUG=1 \
+		#-s LABEL_DEBUG=1 \
+
+build/liblua.js : build/raw.js src/API.js
+	cat build/raw.js src/API.js > build/liblua.js
 
 $(COMPILED_LIB_LOCATION) : $(LUA_ROOT)
 	emmake make linux -C $(LUA_ROOT)/src
