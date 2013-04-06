@@ -4,10 +4,10 @@
 # == CHANGE THE SETTINGS BELOW TO SUIT YOUR ENVIRONMENT =======================
 
 # Your platform. See PLATS for possible values.
-PLAT=generic
+PLAT= generic
 
 CC= emcc
-CFLAGS= #-emit-llvm -m32 -g -U__i386__ -U__x86_64__ -U__i386 -U__i386___ -U__x86_64 -U__SSE__ -U__SSE2__ -UX87_DOUBLE_ROUNDING -UHAVE_GCC_ASM_FOR_X87
+CFLAGS= #-O2 -Wall -DLUA_COMPAT_ALL $(SYSCFLAGS) $(MYCFLAGS)
 LDFLAGS= $(SYSLDFLAGS) $(MYLDFLAGS)
 LIBS= -lm $(SYSLIBS) $(MYLIBS)
 
@@ -55,23 +55,21 @@ o:	$(ALL_O)
 
 a:	$(ALL_A)
 
-$(LUA_A): $(CORE_O) $(LIB_0)
-	$(AR) -o=$@ $?
-	$(RANLIB) -show-annotations $@
+$(LUA_A): $(BASE_O)
+	$(AR) -o=$@ $(BASE_O)
+	$(RANLIB) $@
 
 $(LUA_T): $(LUA_O) $(LUA_A)
-	$(CC) -o $@ $(MYLDFLAGS) $(LUA_O) $(LUA_A)
-	$(RANLIB) -show-annotations $@
+	$(CC) -o $@ $(LDFLAGS) $(LUA_O) $(LUA_A) $(LIBS)
 
 $(LUAC_T): $(LUAC_O) $(LUA_A)
-	$(CC) -o $@ $(MYLDFLAGS) $(LUAC_O) $(LUA_A)
-	$(RANLIB) -show-annotations $@
+	$(CC) -o $@ $(LDFLAGS) $(LUAC_O) $(LUA_A) $(LIBS)
 
 clean:
 	$(RM) $(ALL_T) $(ALL_O)
 
 depend:
-	@$(CC) $(CFLAGS) -MM l*.c print.c
+	@$(CC) $(CFLAGS) -MM l*.c
 
 echo:
 	@echo "PLAT= $(PLAT)"
@@ -186,4 +184,3 @@ lvm.o: lvm.c lua.h luaconf.h ldebug.h lstate.h lobject.h llimits.h ltm.h \
  lzio.h lmem.h ldo.h lfunc.h lgc.h lopcodes.h lstring.h ltable.h lvm.h
 lzio.o: lzio.c lua.h luaconf.h llimits.h lmem.h lstate.h lobject.h ltm.h \
  lzio.h
-

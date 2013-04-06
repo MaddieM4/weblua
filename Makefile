@@ -42,12 +42,7 @@ build/liblua.js : $(COMPILED_LIB_LOCATION) src/API.js
 		-s ASSERTIONS=0 \
 		-s CORRECT_SIGNS=1 \
 		-s CORRECT_OVERFLOWS=1 \
-		-s EXCEPTION_DEBUG=1 \
-		-s LABEL_DEBUG=1 \
-		-s CORRUPTION_CHECk=1 \
-   		-s EMCC_DEBUG=1 \
-   		-s LINKABLE=1 \
-		#-s EXPORTED_FUNCTIONS='["_lua_settop","_lua_newstate","_lua_openlibs","_malloc"]'
+		-s EXPORTED_FUNCTIONS='["_lua_settop","_luaL_newstate","_luaL_openlibs"]'
 	cat src/API.js >> build/liblua.js
 
 $(COMPILED_LIB_LOCATION) : $(LUA_ROOT)
