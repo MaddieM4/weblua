@@ -10,8 +10,12 @@
 this['Lua'] = {
     isInitialized: false,
     state: null,
-    initialize: function (command) {
-        throw "Not implemented yet: Lua.initialize";
+    initialize: function (stdout, stderr) {
+        if (this.isInitialized) throw new Error('Lua already initialized');
+        run();
+        this.state = _luaL_newstate();
+        _luaL_openlibs(this.state);
+        this.isInitialized = true;
     },
     eval: function (command) {
         throw "Not implemented yet: Lua.eval";
