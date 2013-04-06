@@ -16,10 +16,16 @@ COMPILED_LIB_LOCATION=$(LUA_ROOT)/src/$(COMPILED_LIB)
 
 WEBLUA_LOCATION=build/weblua-$(WEBLUA_VERSION).js
 
+REQUIRED_FUNCTIONS=$(shell grep -oP '_lua[a-zA-Z_0-9]+' src/API.js | uniq)
+REQUIRED_FUNCTION_STRING="'[$(foreach func,$(REQUIRED_FUNCTIONS),\"$(func)\",)]'"
+
 all: build/weblua.js
 
 clean:
 	rm -r $(LUA_ROOT) build
+
+diagnose:
+	echo REQUIRED_FUNCTION_STRING=$(REQUIRED_FUNCTION_STRING)
 
 build/weblua.js : $(WEBLUA_LOCATION)
 	# Remove old symlink if it exists
@@ -42,7 +48,7 @@ build/liblua.js : $(COMPILED_LIB_LOCATION) src/API.js
 		-s ASSERTIONS=0 \
 		-s CORRECT_SIGNS=1 \
 		-s CORRECT_OVERFLOWS=1 \
-		-s EXPORTED_FUNCTIONS='["_lua_settop","_luaL_newstate","_luaL_openlibs"]'
+		-s EXPORTED_FUNCTIONS=$(REQUIRED_FUNCTION_STRING)
 	cat src/API.js >> build/liblua.js
 
 $(COMPILED_LIB_LOCATION) : $(LUA_ROOT)
