@@ -23,40 +23,40 @@ this['Lua'] = {
     require_initialization: function(){
         if (!this.isInitialized) throw new Error('Lua not yet initialized');
     },
-    eval: function (command, source_name) {
+    parse: function (command, source_name) {
+        // Put new function, from buffer, at the top of the stack
         this.require_initialization();
-        source_name = source_name || this.default_source_name;
-
-        // Prepare the command, as an expression
-        command = 'return ' + command;
         var commandPtr = this.allocate_string(command);
-        var ret = null;
-
-        // Try to parse command
         var parseFailed = _luaL_loadbufferx(
             this.state, commandPtr, command.length, source_name
         );
         if (parseFailed) {
             this.report_error("Parsing failure");
-        } else {
+        }
+        _free(commandPtr);
+        return !parseFailed;
+    },
+    eval: function (command, source_name) {
+        source_name = source_name || this.default_source_name;
+        return this.exec("return "+command, source_name);
+    },
+    exec: function (command, source_name) {
+        this.require_initialization();
+        source_name = source_name || this.default_source_name;
+
+        if (this.parse(command, source_name)) {
+            // Parse success, now try calling func at top of stack
             var callFailed = _lua_pcallk(this.state, 0, 1, 0);
             if (callFailed) {
                 this.report_error("Evaluation failure");
             } else {
-                ret = _lua_gettop(this.state) > 0 ? this.popStack() : null;
+                return _lua_gettop(this.state) > 0 ? this.popStack() : null;
             }
+        } else {
+            this.report_error("Parsing failure");
         }
-
-        _free(commandPtr);
-        return ret;
     },
-    exec: function (command) {
-        throw "Not implemented yet: Lua.exec";
-    },
-    lua_to_js: function (name, object) {
-        throw "Not implemented yet: Lua.lua_to_js";
-    },
-    js_to_lua: function (command) {
+    js_to_lua: function (name, object) {
         throw "Not implemented yet: Lua.js_to_lua";
     },
     allocate_string: function(str) {
@@ -101,7 +101,7 @@ this['Lua'] = {
     report_error: function(defaultMessage) {
         if (this.isInitialized) {
             var errorMessage = this.popStack();
-            if (!errorMessage.length) errorMessage = defaultMessage;
+            if (!(errorMessage && errorMessage.length)) errorMessage = defaultMessage;
             this.stderr(errorMessage);
         } else {
             this.stderr(defaultMessage);
