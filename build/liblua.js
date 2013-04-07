@@ -72683,13 +72683,15 @@ this['Lua'] = {
         _free(commandPtr);
         return !parseFailed;
     },
-    eval: function (command, source_name) {
+    eval: function (command, source_name, source) {
         source_name = source_name || this.default_source_name;
-        return this.exec("return "+command, source_name);
+        source      = source      || command;
+        return this.exec("return "+command, source_name, source);
     },
-    exec: function (command, source_name) {
+    exec: function (command, source_name, source) {
         this.require_initialization();
         source_name = source_name || this.default_source_name;
+        source      = source      || command;
 
         if (this.parse(command, source_name)) {
             // Parse success, now try calling func at top of stack
@@ -72697,20 +72699,28 @@ this['Lua'] = {
             if (callFailed) {
                 this.report_error("Evaluation failure");
             } else {
-                return _lua_gettop(this.state) > 0 ? this.popStack() : null;
+                return _lua_gettop(this.state) > 0 ? this.popStack(source) : null;
             }
         } else {
             this.report_error("Parsing failure");
         }
     },
-    js_to_lua: function (name, object) {
-        throw "Not implemented yet: Lua.js_to_lua";
+    js_to_lua: function (object, name) {
+        if (object == undefined || object == null) {
+            return "nil";
+        }
+        switch (typeof object) {
+            case "string":
+                return '"' + object.replace('"','\\"') + '"';
+            default:
+                return object.toString();
+        }
     },
     allocate_string: function(str) {
         var arr = intArrayFromString(str);
         return allocate(arr, 'i8', 0);  // ALLOC_NORMAL
     },
-    popStack: function() {
+    popStack: function(source) {
         this.require_initialization();
         var ret;
         var type = _lua_type(this.state, -1);
@@ -72734,6 +72744,23 @@ this['Lua'] = {
                     buffer.push(String.fromCharCode(HEAP8[ptr+i]));
                 ret = buffer.join('');
                 break;
+            case 6:  // LUA_TFUNCTION
+                if (source) {
+                    var self = this;
+                    ret = function () {
+                        // Convert arguments to Lua
+                        var args = [];
+                        for (var i = 0; i < arguments.length; i++) {
+                            args.push(self.js_to_lua(arguments[i]));
+                        }
+                        // Call
+                        command = source + "(" + args.join(", ") + ")";
+                        // self.stderr(command);
+                        return self.eval(command)
+                    }
+                    ret.toString = function() { return "Lua function: " + source };
+                    break;
+                }
             default: // Other Lua type
                 var ptr = _lua_typename(this.state, type);
                 var typename = Pointer_stringify(ptr)
@@ -72756,3 +72783,4 @@ this['Lua'] = {
         _lua_settop(this.state, 0);
     }
 }
+this['Lua']['initialize'] = this['Lua'].initialize;
