@@ -3,7 +3,109 @@
 <head>
     <title>Lua Emscripten Example</title>
     <script src="build/weblua.js"></script>
+    <style>
+        .interpreter {
+            font-family: monospace;
+        }
+        .input {
+            width: 80em;
+        }
+        .multi-line {
+            min-height: 15em;
+        }
+        .stderr {
+            color: red;
+        }
+        #output {
+            margin-top: 5px;
+        }
+        #output pre {
+            margin: 0px;
+        }
+    </style>
+    <script>
+        function print(stream, str, title) {
+            var output = document.getElementById('output');
+            var element = document.createElement('pre');
+            element.setAttribute('class', stream);
+            if (title && title.length)
+                element.setAttribute('title', title);
+            element.appendChild(document.createTextNode(str));
+            output.appendChild(element);
+        }
+        function stdout(str, title) {
+            print('stdout', str, title);
+        }
+        function stderr(str, title) {
+            print('stderr', str, title);
+        }
+
+        function do_eval(value) {
+            if (!value) {
+                var element = document.getElementsByClassName("single-line")[0];
+                value = element.value;
+            }
+            stdout('> ' + value);
+            stdout('< ' + Lua.eval(value), value);
+        }
+
+        function do_exec(value) {
+            if (!value) {
+                var element = document.getElementsByClassName("multi-line")[0];
+                value = element.value;
+            }
+            var lines = value.split("\n");
+            for (var i = 0; i < lines.length; i++){
+                stdout('>> ' + lines[i]);
+            }
+            stdout('< ' + Lua.exec(value), value);
+        }
+
+        function do_inject(value) {
+            if (!value) {
+                var element = document.getElementsByClassName("js-inject")[0];
+                value = element.value;
+            }
+            try {
+                var value = eval(value);
+            } catch (e) {
+                stderr("inject eval failure: " + e, "Encountered while parsing:\n\n" +value)
+                return
+            }
+            do_eval(Lua.js_to_lua(value));
+        }
+
+        function initialize() {
+            Lua.initialize('stdin', stdout, stderr);
+            stdout('Lua interpreter v5.2.1, converted to JS with Emscripten and weblua.');
+            stdout('Enter your code below, using the buttons on the left to execute it.');
+        }
+    </script>
 </head>
 <body>
+<h2>Lua Emscripten Example (weblua.js)</h2>
+<p>This is a demo of weblua.js. You can enter Lua code with the single-line or multi-line textbox.</p>
+<p>For extra fun, try the JS injector. It evaluates your source as Javascript, converts it into a form Lua can understand, and evals it as Lua. This is very much a work in progress, so don't be surprised that things barely work.</p>
+
+<div class="interpreter">
+    <div id="output">
+    </div>
+    <hr/>
+    <a href="#" title="Execute line" onclick="do_eval(); return false;">&gt;&gt;&gt;</a>
+        <input class="input single-line" type="text" value="5+2"/>
+    <br><a href="#" title="Execute lines" onclick="do_exec(); return false;">...</a>
+        <textarea class="input multi-line">
+function add(a, b)
+    return a + b
+end
+</textarea>
+    <br><a href="#" title="Eval JS and convert to Lua" onclick="do_inject(); return false;">Inject JS:</a>
+        <textarea class="input js-inject">13.7</textarea>
+</div>
+
+<script>
+    initialize();
+</script>
+
 </body>
 </html>

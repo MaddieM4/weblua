@@ -59,7 +59,7 @@ this['Lua'] = {
             this.report_error("Parsing failure");
         }
     },
-    js_to_lua: function (object, name) {
+    js_to_lua: function (object) {
         if (object == undefined || object == null) {
             return "nil";
         }
@@ -137,4 +137,10 @@ this['Lua'] = {
         _lua_settop(this.state, 0);
     }
 }
+// Public functions
 this['Lua']['initialize'] = this['Lua'].initialize;
+this['Lua']['stdout'] = this['Lua'].stdout;
+this['Lua']['stderr'] = this['Lua'].stderr;
+this['Lua']['eval'] = this['Lua'].eval;
+this['Lua']['exec'] = this['Lua'].exec;
+this['Lua']['js_to_lua'] = this['Lua'].js_to_lua;
