@@ -66,6 +66,11 @@ this['Lua'] = {
         switch (typeof object) {
             case "string":
                 return '"' + object.replace('"','\\"') + '"';
+            case "function":
+                this.pushStack(object);
+                var name = "example";
+                _lua_setglobal(this.state, this.allocate_string(name));
+                return name;
             default:
                 return object.toString();
         }
@@ -123,6 +128,44 @@ this['Lua'] = {
         }
         _lua_settop(this.state, -2);
         return ret;
+    },
+    pushStack: function(object) {
+        if (object && object.type === "MultiReturn") {
+            for (var i = 0; i < object.args.length; i++) {
+                this.pushStack(objects.args[i]);
+            }
+            return object.args.length;
+        }
+        if (object === null) {
+            object = undefined;
+        }
+        switch(typeof object) {
+            case "undefined" :
+                _lua_pushnil(this.state);
+                return 1;
+            case "number" :
+                _lua_pushnumber(this.state, object);
+                return 1;
+            case "string" :
+                _lua_pushstring(this.state, this.allocate_string(object));
+                return 1;
+            case "function" :
+                var self = this;
+                var wrapper = function (state) {
+                    var num_args = _lua_gettop(state);
+                    var args = [];
+                    for (var i = 0; i < num_args; i++) {
+                        args.push(self.popStack());
+                    }
+                    var result = object.apply(self, args.reverse());
+                    return self.pushStack(result);
+                }
+                var pointer = Runtime.addFunction(wrapper);
+                _lua_pushcclosure(this.state, pointer, 0);
+                return 1;
+            default:
+                throw new Error("Cannot push object to stack: " + object);
+        }
     },
     stdout: function (str) {console.log("stdout: " +str)},
     stderr: function (str) {console.log("stderr: " +str)},

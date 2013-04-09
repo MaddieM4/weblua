@@ -6436,7 +6436,7 @@ function _lua_pushnil($L) {
 
   return;
 }
-
+Module["_lua_pushnil"] = _lua_pushnil;
 
 function _lua_pushnumber($L, $n) {
   var label = 0;
@@ -6467,7 +6467,7 @@ function _lua_pushnumber($L, $n) {
 
   return;
 }
-
+Module["_lua_pushnumber"] = _lua_pushnumber;
 
 function _lua_pushinteger($L, $n) {
   var label = 0;
@@ -7431,7 +7431,7 @@ function _lua_pushstring($L, $s) {
   }
 
 }
-_lua_pushstring["X"]=1;
+Module["_lua_pushstring"] = _lua_pushstring;_lua_pushstring["X"]=1;
 
 function _lua_pushvfstring($L, $fmt, $argp) {
   var label = 0;
@@ -7737,7 +7737,7 @@ function _lua_pushcclosure($L, $fn, $n) {
   }
 
 }
-_lua_pushcclosure["X"]=1;
+Module["_lua_pushcclosure"] = _lua_pushcclosure;_lua_pushcclosure["X"]=1;
 
 function _lua_getglobal($L, $var) {
   var label = 0;
@@ -8304,7 +8304,7 @@ function _lua_setglobal($L, $var) {
 
   return;
 }
-_lua_setglobal["X"]=1;
+Module["_lua_setglobal"] = _lua_setglobal;_lua_setglobal["X"]=1;
 
 function _lua_setfield($L, $idx, $k) {
   var label = 0;

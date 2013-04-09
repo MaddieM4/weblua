@@ -6436,7 +6436,7 @@ function _lua_pushnil($L) {
 
   return;
 }
-
+Module["_lua_pushnil"] = _lua_pushnil;
 
 function _lua_pushnumber($L, $n) {
   var label = 0;
@@ -6467,7 +6467,7 @@ function _lua_pushnumber($L, $n) {
 
   return;
 }
-
+Module["_lua_pushnumber"] = _lua_pushnumber;
 
 function _lua_pushinteger($L, $n) {
   var label = 0;
@@ -7431,7 +7431,7 @@ function _lua_pushstring($L, $s) {
   }
 
 }
-_lua_pushstring["X"]=1;
+Module["_lua_pushstring"] = _lua_pushstring;_lua_pushstring["X"]=1;
 
 function _lua_pushvfstring($L, $fmt, $argp) {
   var label = 0;
@@ -7737,7 +7737,7 @@ function _lua_pushcclosure($L, $fn, $n) {
   }
 
 }
-_lua_pushcclosure["X"]=1;
+Module["_lua_pushcclosure"] = _lua_pushcclosure;_lua_pushcclosure["X"]=1;
 
 function _lua_getglobal($L, $var) {
   var label = 0;
@@ -8304,7 +8304,7 @@ function _lua_setglobal($L, $var) {
 
   return;
 }
-_lua_setglobal["X"]=1;
+Module["_lua_setglobal"] = _lua_setglobal;_lua_setglobal["X"]=1;
 
 function _lua_setfield($L, $idx, $k) {
   var label = 0;
@@ -72713,6 +72713,11 @@ this['Lua'] = {
         switch (typeof object) {
             case "string":
                 return '"' + object.replace('"','\\"') + '"';
+            case "function":
+                this.pushStack(object);
+                var name = "example";
+                _lua_setglobal(this.state, this.allocate_string(name));
+                return name;
             default:
                 return object.toString();
         }
@@ -72770,6 +72775,44 @@ this['Lua'] = {
         }
         _lua_settop(this.state, -2);
         return ret;
+    },
+    pushStack: function(object) {
+        if (object && object.type === "MultiReturn") {
+            for (var i = 0; i < object.args.length; i++) {
+                this.pushStack(objects.args[i]);
+            }
+            return object.args.length;
+        }
+        if (object === null) {
+            object = undefined;
+        }
+        switch(typeof object) {
+            case "undefined" :
+                _lua_pushnil(this.state);
+                return 1;
+            case "number" :
+                _lua_pushnumber(this.state, object);
+                return 1;
+            case "string" :
+                _lua_pushstring(this.state, this.allocate_string(object));
+                return 1;
+            case "function" :
+                var self = this;
+                var wrapper = function (state) {
+                    var num_args = _lua_gettop(state);
+                    var args = [];
+                    for (var i = 0; i < num_args; i++) {
+                        args.push(self.popStack());
+                    }
+                    var result = object.apply(self, args.reverse());
+                    return self.pushStack(result);
+                }
+                var pointer = Runtime.addFunction(wrapper);
+                _lua_pushcclosure(this.state, pointer, 0);
+                return 1;
+            default:
+                throw new Error("Cannot push object to stack: " + object);
+        }
     },
     stdout: function (str) {console.log("stdout: " +str)},
     stderr: function (str) {console.log("stderr: " +str)},
