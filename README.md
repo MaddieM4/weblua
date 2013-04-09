@@ -47,9 +47,21 @@ Evaluates a block of Lua code. If it encounters a return statement, that value w
 
 **BEHIND THE SCENES MAGIC:** Both exec and eval use a part of the Lua API for turning a string into the contents of a function, and then running that function. Internally, there is no difference between Lua.eval("x") and Lua.exec("return x"). Literally, all eval does is prepend "return " to the command before calling this.exec().
 
+#### Lua.inject(object, name, final_location)
+
+Turns a JS object into a Lua object. If you want to create a global object, call with two arguments, where `name` is the name of the global. If you want to put your value in an arbitrary place, leave `name` undefined, and set `final_location` to where you want your value to end up.
+
+Call with just one argument if you want a peek into the intermediate storage technique.
+
+#### Lua.anon_lua_object(object)
+
+Return an anonymous Lua object based on the JS object given. Will use Lua.inject for complex structures, or a literal where possible.
+
+Always returns a string that will be eval-able by the interpreter.
+
 ## Current progress
 
-Basic features work. It's the special stuff that's flimsy, specifically in JS-to-Lua conversion. Example.html is still totally blank, as I've been working in web developer consoles, but ought to provide a more visual demo of the library's features.
+The only really big thing left to do is a bit of the Lua-to-JS object conversion code, specifically with tables.
 
 While the output is (of course) cross-platform, building weblua.js is currently only supported on Linux, but may work by accident/with a little tuning on other platforms. Likewise, due to API differences between Lua 5.1 and 5.2, currently API.js is only engineered to work with 5.2, and will need tweaking to work with 5.1, for anyone looking for that.
 

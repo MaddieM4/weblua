@@ -10,6 +10,7 @@
 this['Lua'] = {
     isInitialized: false,
     state: null,
+    tmp_id: 0,
     default_source_name: 'stdin',
     initialize: function (source_name, stdout, stderr) {
         if (this.isInitialized) throw new Error('Lua already initialized');
@@ -59,21 +60,14 @@ this['Lua'] = {
             this.report_error("Parsing failure");
         }
     },
-    js_to_lua: function (object) {
-        if (object == undefined || object == null) {
-            return "nil";
+    inject: function (object, name, final_location) {
+        name = name || this.get_tmp_name();
+        this.pushStack(object);
+        _lua_setglobal(this.state, this.allocate_string(name));
+        if (final_location) {
+            this.exec(final_location + " = " + name + "\n" + name + " = nil");
         }
-        switch (typeof object) {
-            case "string":
-                return '"' + object.replace('"','\\"') + '"';
-            case "function":
-                this.pushStack(object);
-                var name = "example";
-                _lua_setglobal(this.state, this.allocate_string(name));
-                return name;
-            default:
-                return object.toString();
-        }
+        return (final_location || name);
     },
     allocate_string: function(str) {
         var arr = intArrayFromString(str);
@@ -110,7 +104,7 @@ this['Lua'] = {
                         // Convert arguments to Lua
                         var args = [];
                         for (var i = 0; i < arguments.length; i++) {
-                            args.push(self.js_to_lua(arguments[i]));
+                            args.push(self.anon_lua_object(arguments[i]));
                         }
                         // Call
                         command = source + "(" + args.join(", ") + ")";
@@ -143,6 +137,9 @@ this['Lua'] = {
             case "undefined" :
                 _lua_pushnil(this.state);
                 return 1;
+            case "boolean" :
+                _lua_pushboolean(this.state, object);
+                return 1;
             case "number" :
                 _lua_pushnumber(this.state, object);
                 return 1;
@@ -163,9 +160,44 @@ this['Lua'] = {
                 var pointer = Runtime.addFunction(wrapper);
                 _lua_pushcclosure(this.state, pointer, 0);
                 return 1;
+            case "object" :
+                if (object.length === undefined) {
+                    _lua_createtable(this.state, object.length, 0);
+                    for (var k in object) {
+                        this.pushStack(object[k]);
+                        _lua_setfield(this.state, -2, this.allocate_string(k));
+                    }
+                } else {
+                    _lua_createtable(this.state, 0, 0);
+                    for (var k in object) {
+                        k = 1*k;
+                        this.pushStack(k)
+                        this.pushStack(object[k]);
+                        _lua_settable(this.state, -3);
+                    }
+                }
+                return 1;
             default:
                 throw new Error("Cannot push object to stack: " + object);
         }
+    },
+    anon_lua_object: function (object) {
+        // Create anonymous Lua object or literal from JS object
+        if (object == undefined || object == null) {
+            return "nil";
+        }
+        switch (typeof object) {
+            case "string":
+                return '"' + object.replace('"','\\"') + '"';
+            case "function":
+            case "object":
+                return this.inject(object);
+            default:
+                return object.toString();
+        }
+    },
+    get_tmp_name: function() {
+        return "_weblua_tmp_" + this.tmp_id++;
     },
     stdout: function (str) {console.log("stdout: " +str)},
     stderr: function (str) {console.log("stderr: " +str)},
@@ -186,4 +218,5 @@ this['Lua']['stdout'] = this['Lua'].stdout;
 this['Lua']['stderr'] = this['Lua'].stderr;
 this['Lua']['eval'] = this['Lua'].eval;
 this['Lua']['exec'] = this['Lua'].exec;
-this['Lua']['js_to_lua'] = this['Lua'].js_to_lua;
+this['Lua']['anon_lua_object'] = this['Lua'].anon_lua_object;
+this['Lua']['inject'] = this['Lua'].inject;
