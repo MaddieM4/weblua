@@ -9919,7 +9919,7 @@ function _lua_next($L, $idx) {
   }
 
 }
-
+Module["_lua_next"] = _lua_next;
 
 function _lua_concat($L, $n) {
   var label = 0;
@@ -72754,10 +72754,23 @@ this['Lua'] = {
         var arr = intArrayFromString(str);
         return allocate(arr, 'i8', 0);  // ALLOC_NORMAL
     },
+    inspect: function(index) {
+        var type = _lua_type(this.state, index);
+        var ptr = _lua_typename(this.state, type);
+        var typename = Pointer_stringify(ptr)
+        var address = _lua_topointer(this.state, index);
+        return {
+            'type': type,
+            'typename': typename,
+            'address': address,
+            'addrstr': address.toString(16),
+        }
+    },
     peekStack: function(index, source) {
         this.require_initialization();
         var ret;
-        var type = _lua_type(this.state, index);
+        var inspection = this.inspect(index);
+        var type = inspection.type;
         switch (type) {
             case -1: // LUA_TNONE
             case 0:  // LUA_TNIL
@@ -72777,6 +72790,18 @@ this['Lua'] = {
                 for (var i = 0; i < len; i++)
                     buffer.push(String.fromCharCode(HEAP8[ptr+i]));
                 ret = buffer.join('');
+                break;
+            case 5:  // LUA_TTABLE
+                _lua_pushnil(this.state);
+                ret = {};
+                // Populate with values
+                _lua_pushnil(this.state);
+                while (_lua_next(this.state, index-2)) {
+                    var value = this.popStack();
+                    var key = this.peekStack(-1);
+                    ret[key] = value;
+                }
+                this.popStack(); // Clear out leftover key
                 break;
             case 6:  // LUA_TFUNCTION
                 var self = this;
@@ -72815,10 +72840,7 @@ this['Lua'] = {
                 };
                 break;
             default: // Other Lua type
-                var ptr = _lua_typename(this.state, type);
-                var typename = Pointer_stringify(ptr)
-                var address = _lua_topointer(this.state, index);
-                ret = typename + " (typecode "+type+"): 0x" + address.toString(16);
+                ret = inspection.typename + " (typecode "+type+"): 0x" + inspection.addrstr;
         }
         return ret;
     },

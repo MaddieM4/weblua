@@ -9919,7 +9919,7 @@ function _lua_next($L, $idx) {
   }
 
 }
-
+Module["_lua_next"] = _lua_next;
 
 function _lua_concat($L, $n) {
   var label = 0;
