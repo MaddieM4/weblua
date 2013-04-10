@@ -6216,7 +6216,7 @@ function _lua_pushvalue($L, $idx) {
 
   return;
 }
-
+Module["_lua_pushvalue"] = _lua_pushvalue;
 
 function _lua_type($L, $idx) {
   var label = 0;
@@ -7802,7 +7802,7 @@ function _lua_getglobal($L, $var) {
 
   return;
 }
-_lua_getglobal["X"]=1;
+Module["_lua_getglobal"] = _lua_getglobal;_lua_getglobal["X"]=1;
 
 function _lua_gettable($L, $idx) {
   var label = 0;
@@ -72754,53 +72754,76 @@ this['Lua'] = {
         var arr = intArrayFromString(str);
         return allocate(arr, 'i8', 0);  // ALLOC_NORMAL
     },
-    popStack: function(source) {
+    peekStack: function(index, source) {
         this.require_initialization();
         var ret;
-        var type = _lua_type(this.state, -1);
+        var type = _lua_type(this.state, index);
         switch (type) {
             case -1: // LUA_TNONE
             case 0:  // LUA_TNIL
                 ret = null;
                 break;
             case 1:  // LUA_TBOOLEAN
-                var result = _lua_toboolean(this.state, -1);
+                var result = _lua_toboolean(this.state, index);
                 ret = result ? true : false;
                 break;
             case 3:  // LUA_TNUMBER
-                ret = _lua_tonumberx(this.state, -1);
+                ret = _lua_tonumberx(this.state, index);
                 break;
             case 4:  // LUA_TSTRING
-                var ptr = _lua_tolstring(this.state, -1, 0);
-                var len = _lua_rawlen(this.state, -1);
+                var ptr = _lua_tolstring(this.state, index, 0);
+                var len = _lua_rawlen(this.state, index);
                 var buffer = [];
                 for (var i = 0; i < len; i++)
                     buffer.push(String.fromCharCode(HEAP8[ptr+i]));
                 ret = buffer.join('');
                 break;
             case 6:  // LUA_TFUNCTION
-                if (source) {
-                    var self = this;
-                    ret = function () {
-                        // Convert arguments to Lua
-                        var args = [];
-                        for (var i = 0; i < arguments.length; i++) {
-                            args.push(self.anon_lua_object(arguments[i]));
-                        }
-                        // Call
-                        command = source + "(" + args.join(", ") + ")";
-                        // self.stderr(command);
-                        return self.eval(command)
+                var self = this;
+                var name = this.get_tmp_name();
+                var aname = this.allocate_string(name);
+                var address = _lua_topointer(this.state, index);
+                _lua_pushvalue(this.state, index); // For non-destructive pop
+                _lua_setglobal(this.state, aname);
+                ret = function () {
+                    var orig_top = _lua_gettop(self.state);
+                    // Push function to stack
+                    _lua_getglobal(self.state, aname);
+                    // Convert arguments to Lua
+                    for (var i = 0; i < arguments.length; i++) {
+                        self.pushStack(arguments[i])
                     }
-                    ret.toString = function() { return "Lua function: " + source };
-                    break;
+                    // Call
+                    var failure = _lua_pcallk(self.state, arguments.length, -1, 0) // LUA_MULTRET
+                    if (failure) {
+                        this.report_error("Failure calling Lua function");
+                    }
+                    var num_args = _lua_gettop(self.state) - orig_top ;
+                    var results = self.get_stack_args(num_args);
+                    switch (results.length) {
+                        case 0:
+                            return null;
+                        case 1:
+                            return results[0];
+                        default:
+                            return results;
+                    }
                 }
+                source = source || "";
+                ret.toString = function() { 
+                    return "Lua function " + source + ": " + name + " at " + address;
+                };
+                break;
             default: // Other Lua type
                 var ptr = _lua_typename(this.state, type);
                 var typename = Pointer_stringify(ptr)
-                var address = _lua_topointer(this.state, -1);
+                var address = _lua_topointer(this.state, index);
                 ret = typename + " (typecode "+type+"): 0x" + address.toString(16);
         }
+        return ret;
+    },
+    popStack: function(source) {
+        var ret = this.peekStack(-1, source);
         _lua_settop(this.state, -2);
         return ret;
     },
@@ -72830,12 +72853,7 @@ this['Lua'] = {
             case "function" :
                 var self = this;
                 var wrapper = function (state) {
-                    var num_args = _lua_gettop(state);
-                    var args = [];
-                    for (var i = 0; i < num_args; i++) {
-                        args.push(self.popStack());
-                    }
-                    var result = object.apply(self, args.reverse());
+                    var result = object.apply(self, self.get_stack_args());
                     return self.pushStack(result);
                 }
                 var pointer = Runtime.addFunction(wrapper);
@@ -72861,6 +72879,14 @@ this['Lua'] = {
             default:
                 throw new Error("Cannot push object to stack: " + object);
         }
+    },
+    get_stack_args: function(num_args) {
+        num_args = (num_args === undefined) ? _lua_gettop(this.state) : num_args;
+        var args = [];
+        for (var i = 0; i < num_args; i++) {
+            args.push(this.popStack());
+        }
+        return args.reverse();
     },
     anon_lua_object: function (object) {
         // Create anonymous Lua object or literal from JS object

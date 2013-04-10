@@ -6216,7 +6216,7 @@ function _lua_pushvalue($L, $idx) {
 
   return;
 }
-
+Module["_lua_pushvalue"] = _lua_pushvalue;
 
 function _lua_type($L, $idx) {
   var label = 0;
@@ -7802,7 +7802,7 @@ function _lua_getglobal($L, $var) {
 
   return;
 }
-_lua_getglobal["X"]=1;
+Module["_lua_getglobal"] = _lua_getglobal;_lua_getglobal["X"]=1;
 
 function _lua_gettable($L, $idx) {
   var label = 0;
