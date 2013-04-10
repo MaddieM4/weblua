@@ -39,8 +39,6 @@ Lua functions are automatically wrapped so that you can call them directly:
 
 This function expects expressions, not statements. For defining functions and other such things, use Lua.exec.
 
-**BEHIND THE SCENES MAGIC:** Function wrapping is simply a matter of creating an anonymous function that re-runs the same eval statement, only with "(...arguments...)" appended to the end. This means that if your functions move around, are subject to change, or whatever, then you may get some surprises when function wrapping doesn't work as expected. I think I have a future workaround for this.
-
 #### Lua.exec("x = 5")
 
 Evaluates a block of Lua code. If it encounters a return statement, that value will be returned. This is the function you want to use to manipulate an interpreter's global state, define functions, etc.
@@ -53,6 +51,8 @@ Turns a JS object into a Lua object. If you want to create a global object, call
 
 Call with just one argument if you want a peek into the intermediate storage technique.
 
+**BEHIND THE SCENES MAGIC:** JavaScript doesn't understand the concept of integer keys for objects, and coerces them to strings behind your back. The consequence of this is that you can't create Lua tables with integer keys very conveniently, *except* by providing them as arrays - so if you want to intermix, you can, but it's awfully inconvenient. I make no attempt to fix this failing of JS, because I consider it even more surprising to add a layer of "this key looks like an int so I'll coerce it" to pushStack() object parsing.
+
 #### Lua.anon_lua_object(object)
 
 Return an anonymous Lua object based on the JS object given. Will use Lua.inject for complex structures, or a literal where possible.
@@ -61,7 +61,7 @@ Always returns a string that will be eval-able by the interpreter.
 
 ## Current progress
 
-The only really big thing left to do is a bit of the Lua-to-JS object conversion code, specifically with tables.
+All basic functionality seems done. Work on filesystems code and such will proceed as I try to integrate weblua into [love-webplayer](https://github.com/ghoulsblade/love-webplayer).
 
 While the output is (of course) cross-platform, building weblua.js is currently only supported on Linux, but may work by accident/with a little tuning on other platforms. Likewise, due to API differences between Lua 5.1 and 5.2, currently API.js is only engineered to work with 5.2, and will need tweaking to work with 5.1, for anyone looking for that.
 

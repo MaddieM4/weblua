@@ -111,16 +111,38 @@ this['Lua'] = {
                 ret = buffer.join('');
                 break;
             case 5:  // LUA_TTABLE
-                _lua_pushnil(this.state);
+                var is_array = true;
+                var max_key = 0;
                 ret = {};
                 // Populate with values
+                _lua_pushnil(this.state);
                 _lua_pushnil(this.state);
                 while (_lua_next(this.state, index-2)) {
                     var value = this.popStack();
                     var key = this.peekStack(-1);
                     ret[key] = value;
+
+                    if (is_array && typeof key === "number") {
+                        if (key > max_key)
+                            max_key = key;
+                    } else {
+                        is_array = false;
+                    }
                 }
                 this.popStack(); // Clear out leftover key
+                if (is_array) {
+                    newret = [];
+                    for (var i = 1; i <= max_key; i++) {
+                        if (ret[i] === undefined) {
+                            // Abort
+                            is_array = false;
+                            break;
+                        }
+                        newret.push(ret[i]);
+                    }
+                    if (is_array) // not aborted
+                        ret = newret;
+                }
                 break;
             case 6:  // LUA_TFUNCTION
                 var self = this;
@@ -202,16 +224,18 @@ this['Lua'] = {
                 return 1;
             case "object" :
                 if (object.length === undefined) {
+                    // Object
                     _lua_createtable(this.state, object.length, 0);
                     for (var k in object) {
                         this.pushStack(object[k]);
                         _lua_setfield(this.state, -2, this.allocate_string(k));
                     }
                 } else {
+                    // Array
                     _lua_createtable(this.state, 0, 0);
                     for (var k in object) {
                         k = 1*k;
-                        this.pushStack(k)
+                        this.pushStack(k+1)
                         this.pushStack(object[k]);
                         _lua_settable(this.state, -3);
                     }
