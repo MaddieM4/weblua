@@ -72731,11 +72731,11 @@ this['Lua'] = {
 
         if (this.parse(command, source_name)) {
             // Parse success, now try calling func at top of stack
-            var callFailed = _lua_pcallk(this.state, 0, 1, 0);
+            var callFailed = _lua_pcallk(this.state, 0, -1, 0);
             if (callFailed) {
                 this.report_error("Evaluation failure");
             } else {
-                return _lua_gettop(this.state) > 0 ? this.popStack(source) : null;
+                return this.get_stack_args();
             }
         } else {
             this.report_error("Parsing failure");
@@ -72846,15 +72846,7 @@ this['Lua'] = {
                         this.report_error("Failure calling Lua function");
                     }
                     var num_args = _lua_gettop(self.state) - orig_top ;
-                    var results = self.get_stack_args(num_args);
-                    switch (results.length) {
-                        case 0:
-                            return null;
-                        case 1:
-                            return results[0];
-                        default:
-                            return results;
-                    }
+                    return self.get_stack_args(num_args);
                 }
                 source = source || "";
                 ret.toString = function() { 
@@ -72872,12 +72864,6 @@ this['Lua'] = {
         return ret;
     },
     pushStack: function(object) {
-        if (object && object.type === "MultiReturn") {
-            for (var i = 0; i < object.args.length; i++) {
-                this.pushStack(objects.args[i]);
-            }
-            return object.args.length;
-        }
         if (object === null) {
             object = undefined;
         }
@@ -72898,7 +72884,16 @@ this['Lua'] = {
                 var self = this;
                 var wrapper = function (state) {
                     var result = object.apply(self, self.get_stack_args());
-                    return self.pushStack(result);
+                    if (result == undefined || result == null) {
+                        result = [];
+                    }
+                    if (!( typeof result == 'object' && result.length)) {
+                        throw new Error("Expected array return type from JS function");
+                    }
+                    for (var i = 0; i < result.length; i++) {
+                        self.pushStack(result[i]);
+                    }
+                    return result.length;
                 }
                 var pointer = Runtime.addFunction(wrapper);
                 _lua_pushcclosure(this.state, pointer, 0);
