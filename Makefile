@@ -30,7 +30,7 @@ diagnose:
 build/weblua.js : $(WEBLUA_LOCATION)
 	# Remove old symlink if it exists
 	rm -f build/weblua.js
-	ln -s `pwd`/$(WEBLUA_LOCATION) build/weblua.js
+	ln -s $(WEBLUA_LOCATION) build/weblua.js
 
 $(WEBLUA_LOCATION) : build/liblua.js $(CLOSURE_UNPACK_LOCATION)
 	$(CLOSURE_COMMAND) \

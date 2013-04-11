@@ -1,1 +1,1 @@
-/home/philip/projects/weblua/build/weblua-0.1.0.js
+build/weblua-0.1.0.js
