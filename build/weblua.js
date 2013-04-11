@@ -1,1 +1,1 @@
-build/weblua-0.1.0.js
+weblua-0.1.0.js

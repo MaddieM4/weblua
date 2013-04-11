@@ -14,7 +14,8 @@ CLOSURE_COMMAND=java -jar $(CLOSURE_UNPACK_LOCATION)/compiler.jar
 COMPILED_LIB=liblua.so.ll
 COMPILED_LIB_LOCATION=$(LUA_ROOT)/src/$(COMPILED_LIB)
 
-WEBLUA_LOCATION=build/weblua-$(WEBLUA_VERSION).js
+WEBLUA_NAME=weblua-$(WEBLUA_VERSION).js
+WEBLUA_LOCATION=build/$(WEBLUA_NAME)
 
 REQUIRED_FUNCTIONS=$(shell grep -oP '_lua[a-zA-Z_0-9]+' src/API.js | uniq)
 REQUIRED_FUNCTION_STRING="[$(foreach func,$(REQUIRED_FUNCTIONS),\"$(func)\",)]"
@@ -30,7 +31,7 @@ diagnose:
 build/weblua.js : $(WEBLUA_LOCATION)
 	# Remove old symlink if it exists
 	rm -f build/weblua.js
-	ln -s $(WEBLUA_LOCATION) build/weblua.js
+	ln -s $(WEBLUA_NAME) build/weblua.js
 
 $(WEBLUA_LOCATION) : build/liblua.js $(CLOSURE_UNPACK_LOCATION)
 	$(CLOSURE_COMMAND) \
