@@ -162,7 +162,7 @@ this['Lua'] = {
                     // Call
                     var failure = _lua_pcallk(self.state, arguments.length, -1, 0) // LUA_MULTRET
                     if (failure) {
-                        this.report_error("Failure calling Lua function");
+                        self.report_error("Failure calling Lua function");
                     }
                     var num_args = _lua_gettop(self.state) - orig_top ;
                     return self.get_stack_args(num_args);
