@@ -222,8 +222,11 @@ this['Lua'] = {
                     // Object
                     _lua_createtable(this.state, object.length, 0);
                     for (var k in object) {
-                        this.pushStack(object[k]);
-                        _lua_setfield(this.state, -2, this.allocate_string(k));
+                        // Ignore fields starting with underscores
+                        if (!k.match(/^_/)) {
+                            this.pushStack(object[k]);
+                            _lua_setfield(this.state, -2, this.allocate_string(k));
+                        }
                     }
                 } else {
                     // Array
