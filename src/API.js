@@ -60,14 +60,27 @@ this['Lua'] = {
             this.report_error("Parsing failure");
         }
     },
-    inject: function (object, name, final_location) {
+    inject: function (object, name, final_location, metatable) {
         name = name || this.get_tmp_name();
         this.pushStack(object);
+        if (metatable) {
+            this.pushStack(metatable);
+            _lua_setmetatable(this.state, -2);
+        }
         _lua_setglobal(this.state, this.allocate_string(name));
         if (final_location) {
             this.exec(final_location + " = " + name + "\n" + name + " = nil");
         }
         return (final_location || name);
+    },
+    inject_handle: function (object, name, final_location) {
+        var metatable = {
+            "__index": function (table, key) {
+                return [object[key]];
+            }
+        }
+        
+        return this.inject({}, name, final_location, metatable);
     },
     allocate_string: function(str) {
         var arr = intArrayFromString(str);
@@ -223,10 +236,10 @@ this['Lua'] = {
                     _lua_createtable(this.state, object.length, 0);
                     for (var k in object) {
                         // Ignore fields starting with underscores
-                        if (!k.match(/^_/)) {
+                        //if (!k.match(/^_/)) {
                             this.pushStack(object[k]);
                             _lua_setfield(this.state, -2, this.allocate_string(k));
-                        }
+                        //}
                     }
                 } else {
                     // Array
@@ -290,3 +303,4 @@ this['Lua']['eval'] = this['Lua'].eval;
 this['Lua']['exec'] = this['Lua'].exec;
 this['Lua']['anon_lua_object'] = this['Lua'].anon_lua_object;
 this['Lua']['inject'] = this['Lua'].inject;
+this['Lua']['inject_handle'] = this['Lua'].inject_handle;

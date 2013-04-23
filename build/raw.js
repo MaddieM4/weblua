@@ -8863,7 +8863,7 @@ function _lua_setmetatable($L, $objindex) {
   }
 
 }
-_lua_setmetatable["X"]=1;
+Module["_lua_setmetatable"] = _lua_setmetatable;_lua_setmetatable["X"]=1;
 
 function _lua_setuservalue($L, $idx) {
   var label = 0;
