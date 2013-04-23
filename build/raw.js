@@ -6287,7 +6287,7 @@ function _lua_iscfunction($L, $idx) {
   }
 
 }
-
+Module["_lua_iscfunction"] = _lua_iscfunction;
 
 function _lua_isnumber($L, $idx) {
   var label = 0;
@@ -7941,7 +7941,7 @@ function _lua_rawget($L, $idx) {
 
   return;
 }
-
+Module["_lua_rawget"] = _lua_rawget;
 
 function _lua_rawgeti($L, $idx, $n) {
   var label = 0;
@@ -51131,7 +51131,7 @@ function _luaL_getmetafield($L, $obj, $event) {
   }
 
 }
-
+Module["_luaL_getmetafield"] = _luaL_getmetafield;
 
 function _luaL_callmeta($L, $obj, $event) {
   var label = 0;

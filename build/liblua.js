@@ -6287,7 +6287,7 @@ function _lua_iscfunction($L, $idx) {
   }
 
 }
-
+Module["_lua_iscfunction"] = _lua_iscfunction;
 
 function _lua_isnumber($L, $idx) {
   var label = 0;
@@ -7941,7 +7941,7 @@ function _lua_rawget($L, $idx) {
 
   return;
 }
-
+Module["_lua_rawget"] = _lua_rawget;
 
 function _lua_rawgeti($L, $idx, $n) {
   var label = 0;
@@ -51131,7 +51131,7 @@ function _luaL_getmetafield($L, $obj, $event) {
   }
 
 }
-
+Module["_luaL_getmetafield"] = _luaL_getmetafield;
 
 function _luaL_callmeta($L, $obj, $event) {
   var label = 0;
@@ -72756,12 +72756,13 @@ this['Lua'] = {
     },
     inject_handle: function (object, name, final_location) {
         var metatable = {
-            "__index": function (table, key) {
+            '__index': function (table, key) {
                 return [object[key]];
             }
         }
+        metatable['__index'].source = object;
         
-        return this.inject({}, name, final_location, metatable);
+        return this.inject({"__handle":object.toString()}, name, final_location, metatable);
     },
     allocate_string: function(str) {
         var arr = intArrayFromString(str);
@@ -72807,6 +72808,19 @@ this['Lua'] = {
             case 5:  // LUA_TTABLE
                 var is_array = true;
                 var max_key = 0;
+
+                // Check for handle
+                this.pushStack("__handle")
+                _lua_rawget(this.state, index-1);
+                var handle = this.popStack();
+                if (handle) {
+                    // Return original value
+                    _luaL_getmetafield(this.state, index, this.allocate_string("__index"))
+                    var __indexfunc = this.popStack();
+                    var source = __indexfunc.source;
+                    return source;
+                }
+
                 ret = {};
                 // Populate with values
                 _lua_pushnil(this.state);
@@ -72843,6 +72857,13 @@ this['Lua'] = {
                 var name = this.get_tmp_name();
                 var aname = this.allocate_string(name);
                 var address = _lua_topointer(this.state, index);
+
+                if (_lua_iscfunction(this.state, index)) {
+                    var func = FUNCTION_TABLE[address];
+                    if (func.unwrapped) {
+                        return func.unwrapped;
+                    }
+                }
                 _lua_pushvalue(this.state, index); // For non-destructive pop
                 _lua_setglobal(this.state, aname);
                 ret = function () {
@@ -72908,6 +72929,7 @@ this['Lua'] = {
                     }
                     return result.length;
                 }
+                wrapper.unwrapped = object;
                 var pointer = Runtime.addFunction(wrapper);
                 _lua_pushcclosure(this.state, pointer, 0);
                 return 1;
