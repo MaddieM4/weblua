@@ -73,16 +73,6 @@ this['Lua'] = {
         }
         return (final_location || name);
     },
-    inject_handle: function (object, name, final_location) {
-        var metatable = {
-            '__index': function (table, key) {
-                return [object[key]];
-            }
-        }
-        metatable['__index'].source = object;
-        
-        return this.inject({"__handle":object.toString()}, name, final_location, metatable);
-    },
     allocate_string: function(str) {
         var arr = intArrayFromString(str);
         return allocate(arr, 'i8', 0);  // ALLOC_NORMAL
@@ -134,7 +124,11 @@ this['Lua'] = {
                 var handle = this.popStack();
                 if (handle) {
                     // Return original value
-                    _luaL_getmetafield(this.state, index, this.allocate_string("__index"))
+                    var success = _luaL_getmetafield(
+                        this.state,
+                        index,
+                        this.allocate_string("__index")
+                    );
                     var __indexfunc = this.popStack();
                     var source = __indexfunc.source;
                     return source;
@@ -255,17 +249,28 @@ this['Lua'] = {
             case "object" :
                 if (object.length === undefined) {
                     // Object
-                    _lua_createtable(this.state, object.length, 0);
+                    _lua_createtable(this.state, 0, 0);
+                    if (object['__handle']) {
+                        // Handled object
+                        var metatable = {
+                            '__index': function (table, key) {
+                                return [object[key]];
+                            }
+                        }
+                        metatable['__index'].source = object;
+
+                        this.pushStack(metatable);
+                        _lua_setmetatable(this.state, -2);
+
+                        object = {'__handle': object.toString()};
+                    }
                     for (var k in object) {
-                        // Ignore fields starting with underscores
-                        //if (!k.match(/^_/)) {
-                            this.pushStack(object[k]);
-                            _lua_setfield(this.state, -2, this.allocate_string(k));
-                        //}
+                        this.pushStack(object[k]);
+                        _lua_setfield(this.state, -2, this.allocate_string(k));
                     }
                 } else {
                     // Array
-                    _lua_createtable(this.state, 0, 0);
+                    _lua_createtable(this.state, object.length, 0);
                     for (var k in object) {
                         k = 1*k;
                         this.pushStack(k+1)
@@ -325,4 +330,3 @@ this['Lua']['eval'] = this['Lua'].eval;
 this['Lua']['exec'] = this['Lua'].exec;
 this['Lua']['anon_lua_object'] = this['Lua'].anon_lua_object;
 this['Lua']['inject'] = this['Lua'].inject;
-this['Lua']['inject_handle'] = this['Lua'].inject_handle;

@@ -1,5 +1,5 @@
 LUA_VERSION=5.2.1
-WEBLUA_VERSION=0.1.2
+WEBLUA_VERSION=0.1.3
 
 DOWNLOAD_PROGRAM=wget
 LUA_SRC_URL=http://www.lua.org/ftp/lua-$(LUA_VERSION).tar.gz
