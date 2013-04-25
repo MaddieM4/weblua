@@ -72748,7 +72748,9 @@ this['Lua'] = {
             this.pushStack(metatable);
             _lua_setmetatable(this.state, -2);
         }
-        _lua_setglobal(this.state, this.allocate_string(name));
+        var strptr = this.allocate_string(name);
+        _lua_setglobal(this.state, strptr);
+        _free(strptr);
         if (final_location) {
             this.exec(final_location + " = " + name + "\n" + name + " = nil");
         }
@@ -72815,11 +72817,13 @@ this['Lua'] = {
                 var handle = this.popStack();
                 if (handle) {
                     // Return original value
+                    var ptr = this.allocate_string("__index")
                     var success = _luaL_getmetafield(
                         this.state,
                         index,
-                        this.allocate_string("__index")
+                        ptr
                     );
+                    _free(ptr)
                     var __indexfunc = this.popStack();
                     var source = __indexfunc.source;
                     return source;
@@ -72873,14 +72877,20 @@ this['Lua'] = {
 
                 _lua_pushvalue(this.state, index); // For non-destructive pop
                 _lua_setglobal(this.state, aname);
+                _free(aname);
                 ret = function () {
                     var orig_top = _lua_gettop(self.state);
+
                     // Push function to stack
+                    var aname = self.allocate_string(name);
                     _lua_getglobal(self.state, aname);
+                    _free(aname);
+
                     // Convert arguments to Lua
                     for (var i = 0; i < arguments.length; i++) {
                         self.pushStack(arguments[i])
                     }
+
                     // Call
                     var failure = _lua_pcallk(self.state, arguments.length, -1, 0) // LUA_MULTRET
                     if (failure) {
@@ -72922,7 +72932,9 @@ this['Lua'] = {
                 _lua_pushnumber(this.state, object);
                 return 1;
             case "string" :
-                _lua_pushstring(this.state, this.allocate_string(object));
+                var strptr = this.allocate_string(object);
+                _lua_pushstring(this.state, strptr);
+                _free(strptr);
                 return 1;
             case "function" :
                 var self = this;
@@ -72963,7 +72975,9 @@ this['Lua'] = {
                     }
                     for (var k in object) {
                         this.pushStack(object[k]);
-                        _lua_setfield(this.state, -2, this.allocate_string(k));
+                        var strptr = this.allocate_string(k);
+                        _lua_setfield(this.state, -2, strptr);
+                        _free(strptr);
                     }
                 } else {
                     // Array
@@ -73013,7 +73027,9 @@ this['Lua'] = {
         }
         // Set global to nil
         _lua_pushnil(this.state);
-        _lua_setglobal(this.state, this.allocate_string(name));
+        var strptr = this.allocate_string(name);
+        _lua_setglobal(this.state, strptr);
+        _free(strptr);
     },
     stdout: function (str) {console.log("stdout: " +str)},
     stderr: function (str) {console.log("stderr: " +str)},
