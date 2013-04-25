@@ -72858,8 +72858,6 @@ this['Lua'] = {
                 break;
             case 6:  // LUA_TFUNCTION
                 var self = this;
-                var name = this.get_tmp_name();
-                var aname = this.allocate_string(name);
                 var address = _lua_topointer(this.state, index);
 
                 if (_lua_iscfunction(this.state, index)) {
@@ -72868,6 +72866,11 @@ this['Lua'] = {
                         return func.unwrapped;
                     }
                 }
+
+                // Don't allocate this stuff for wrapped funcs
+                var name = this.get_tmp_name();
+                var aname = this.allocate_string(name);
+
                 _lua_pushvalue(this.state, index); // For non-destructive pop
                 _lua_setglobal(this.state, aname);
                 ret = function () {
@@ -72890,6 +72893,9 @@ this['Lua'] = {
                 ret.toString = function() { 
                     return "Lua function " + source + ": " + name + " at " + address;
                 };
+                ret.source = source;
+                ret.name = name;
+                ret.address = address;
                 break;
             default: // Other Lua type
                 ret = inspection.typename + " (typecode "+type+"): 0x" + inspection.addrstr;
@@ -72999,6 +73005,15 @@ this['Lua'] = {
     },
     get_tmp_name: function() {
         return "_weblua_tmp_" + this.tmp_id++;
+    },
+    cleanup_tmp: function(name) {
+        if (name == "_weblua_tmp_" + (this.tmp_id-1)) {
+            // Latest tmp_id, can safely decrement
+            tmp_id--;
+        }
+        // Set global to nil
+        _lua_pushnil(this.state);
+        _lua_setglobal(this.state, this.allocate_string(name));
     },
     stdout: function (str) {console.log("stdout: " +str)},
     stderr: function (str) {console.log("stderr: " +str)},
