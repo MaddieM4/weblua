@@ -72754,6 +72754,16 @@ this['Lua'] = {
         }
         return (final_location || name);
     },
+    cache: function (evalstring) {
+        if (!(evalstring in this.cache['items'])) {
+            this.cache['items'][evalstring] = this.eval(evalstring)
+        }
+        return this.cache['items'][evalstring];
+    },
+    call: function (evalstring, args) {
+        var func = this.cache(evalstring)[0];
+        return func.apply(null, args);
+    },
     allocate_string: function(str) {
         var arr = intArrayFromString(str);
         return allocate(arr, 'i8', 0);  // ALLOC_NORMAL
@@ -73011,3 +73021,7 @@ this['Lua']['eval'] = this['Lua'].eval;
 this['Lua']['exec'] = this['Lua'].exec;
 this['Lua']['anon_lua_object'] = this['Lua'].anon_lua_object;
 this['Lua']['inject'] = this['Lua'].inject;
+this['Lua']['cache'] = this['Lua'].cache;
+
+Lua.cache['items'] = {};
+Lua.cache['clear'] = function (evalstring) { delete Lua.cache['items'][evalstring] }
