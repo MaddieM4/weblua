@@ -36,13 +36,15 @@ this['Lua'] = {
         // Put new function, from buffer, at the top of the stack
         this.require_initialization();
         var commandPtr = this.allocate_string(command);
+        var namePtr    = this.allocate_string(source_name);
         var parseFailed = _luaL_loadbufferx(
-            this.state, commandPtr, command.length, source_name
+            this.state, commandPtr, command.length, namePtr
         );
         if (parseFailed) {
             this.report_error("Parsing failure");
         }
         _free(commandPtr);
+        _free(namePtr);
         return !parseFailed;
     },
     eval: function (command, source_name, source) {

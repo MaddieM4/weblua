@@ -8306,40 +8306,6 @@ function _lua_setglobal($L, $var) {
 }
 Module["_lua_setglobal"] = _lua_setglobal;_lua_setglobal["X"]=1;
 
-function _lua_settable($L, $idx) {
-  var label = 0;
-
-
-  var $L_addr;
-  var $idx_addr;
-  var $t;
-  $L_addr=$L;
-  $idx_addr=$idx;
-  var $0=$L_addr;
-  var $1=$idx_addr;
-  var $call=_index2addr($0, $1);
-  $t=$call;
-  var $2=$L_addr;
-  var $3=$t;
-  var $4=$L_addr;
-  var $top=(($4+8)|0);
-  var $5=HEAP32[(($top)>>2)];
-  var $add_ptr=((($5)-(24))|0);
-  var $6=$L_addr;
-  var $top1=(($6+8)|0);
-  var $7=HEAP32[(($top1)>>2)];
-  var $add_ptr2=((($7)-(12))|0);
-  _luaV_settable($2, $3, $add_ptr, $add_ptr2);
-  var $8=$L_addr;
-  var $top3=(($8+8)|0);
-  var $9=HEAP32[(($top3)>>2)];
-  var $add_ptr4=((($9)-(24))|0);
-  HEAP32[(($top3)>>2)]=$add_ptr4;
-
-  return;
-}
-Module["_lua_settable"] = _lua_settable;
-
 function _lua_setfield($L, $idx, $k) {
   var label = 0;
 
@@ -8401,7 +8367,7 @@ function _lua_setfield($L, $idx, $k) {
 
   return;
 }
-Module["_lua_setfield"] = _lua_setfield;_lua_setfield["X"]=1;
+_lua_setfield["X"]=1;
 
 function _lua_rawset($L, $idx) {
   var label = 0;
@@ -8512,80 +8478,7 @@ function _lua_rawset($L, $idx) {
   }
 
 }
-_lua_rawset["X"]=1;
-
-function _lua_getctx($L, $ctx) {
-  var label = 0;
-
-  label = 2; 
-  while(1) switch(label) {
-    case 2: 
-      var $retval;
-      var $L_addr;
-      var $ctx_addr;
-      $L_addr=$L;
-      $ctx_addr=$ctx;
-      var $0=$L_addr;
-      var $ci=(($0+16)|0);
-      var $1=HEAP32[(($ci)>>2)];
-      var $callstatus=(($1+18)|0);
-      var $2=HEAP8[($callstatus)];
-      var $conv=(($2)&255);
-      var $and=$conv & 8;
-      var $tobool=(($and)|0)!=0;
-      if ($tobool) { label = 3; break; } else { label = 6; break; }
-    case 3: 
-      var $3=$ctx_addr;
-      var $tobool1=(($3)|0)!=0;
-      if ($tobool1) { label = 4; break; } else { label = 5; break; }
-    case 4: 
-      var $4=$L_addr;
-      var $ci3=(($4+16)|0);
-      var $5=HEAP32[(($ci3)>>2)];
-      var $u=(($5+24)|0);
-      var $c=$u;
-      var $ctx4=(($c)|0);
-      var $6=HEAP32[(($ctx4)>>2)];
-      var $7=$ctx_addr;
-      HEAP32[(($7)>>2)]=$6;
-      label = 5; break;
-    case 5: 
-      var $8=$L_addr;
-      var $ci5=(($8+16)|0);
-      var $9=HEAP32[(($ci5)>>2)];
-      var $u6=(($9+24)|0);
-      var $c7=$u6;
-      var $status=(($c7+13)|0);
-      var $10=HEAP8[($status)];
-      var $conv8=(($10)&255);
-      $retval=$conv8;
-      label = 7; break;
-    case 6: 
-      $retval=0;
-      label = 7; break;
-    case 7: 
-      var $11=$retval;
-
-      return $11;
-  }
-
-}
-
-
-function _lua_status($L) {
-  var label = 0;
-
-
-  var $L_addr;
-  $L_addr=$L;
-  var $0=$L_addr;
-  var $status=(($0+6)|0);
-  var $1=HEAP8[($status)];
-  var $conv=(($1)&255);
-
-  return $conv;
-}
-
+Module["_lua_rawset"] = _lua_rawset;_lua_rawset["X"]=1;
 
 function _lua_rawseti($L, $idx, $n) {
   var label = 0;
@@ -8672,6 +8565,79 @@ function _lua_rawseti($L, $idx, $n) {
 
 }
 _lua_rawseti["X"]=1;
+
+function _lua_getctx($L, $ctx) {
+  var label = 0;
+
+  label = 2; 
+  while(1) switch(label) {
+    case 2: 
+      var $retval;
+      var $L_addr;
+      var $ctx_addr;
+      $L_addr=$L;
+      $ctx_addr=$ctx;
+      var $0=$L_addr;
+      var $ci=(($0+16)|0);
+      var $1=HEAP32[(($ci)>>2)];
+      var $callstatus=(($1+18)|0);
+      var $2=HEAP8[($callstatus)];
+      var $conv=(($2)&255);
+      var $and=$conv & 8;
+      var $tobool=(($and)|0)!=0;
+      if ($tobool) { label = 3; break; } else { label = 6; break; }
+    case 3: 
+      var $3=$ctx_addr;
+      var $tobool1=(($3)|0)!=0;
+      if ($tobool1) { label = 4; break; } else { label = 5; break; }
+    case 4: 
+      var $4=$L_addr;
+      var $ci3=(($4+16)|0);
+      var $5=HEAP32[(($ci3)>>2)];
+      var $u=(($5+24)|0);
+      var $c=$u;
+      var $ctx4=(($c)|0);
+      var $6=HEAP32[(($ctx4)>>2)];
+      var $7=$ctx_addr;
+      HEAP32[(($7)>>2)]=$6;
+      label = 5; break;
+    case 5: 
+      var $8=$L_addr;
+      var $ci5=(($8+16)|0);
+      var $9=HEAP32[(($ci5)>>2)];
+      var $u6=(($9+24)|0);
+      var $c7=$u6;
+      var $status=(($c7+13)|0);
+      var $10=HEAP8[($status)];
+      var $conv8=(($10)&255);
+      $retval=$conv8;
+      label = 7; break;
+    case 6: 
+      $retval=0;
+      label = 7; break;
+    case 7: 
+      var $11=$retval;
+
+      return $11;
+  }
+
+}
+
+
+function _lua_status($L) {
+  var label = 0;
+
+
+  var $L_addr;
+  $L_addr=$L;
+  var $0=$L_addr;
+  var $status=(($0+6)|0);
+  var $1=HEAP8[($status)];
+  var $conv=(($1)&255);
+
+  return $conv;
+}
+
 
 function _lua_setmetatable($L, $objindex) {
   var label = 0;
@@ -28648,6 +28614,193 @@ function _read_string($ls, $del, $seminfo) {
 }
 _read_string["X"]=1;
 
+function _save($ls, $c) {
+  var label = 0;
+
+  label = 2; 
+  while(1) switch(label) {
+    case 2: 
+      var $ls_addr;
+      var $c_addr;
+      var $b;
+      var $newsize;
+      $ls_addr=$ls;
+      $c_addr=$c;
+      var $0=$ls_addr;
+      var $buff=(($0+48)|0);
+      var $1=HEAP32[(($buff)>>2)];
+      $b=$1;
+      var $2=$b;
+      var $n=(($2+4)|0);
+      var $3=HEAP32[(($n)>>2)];
+      var $add=((($3)+(1))|0);
+      var $4=$b;
+      var $buffsize=(($4+8)|0);
+      var $5=HEAP32[(($buffsize)>>2)];
+      var $cmp=(($add)>>>0) > (($5)>>>0);
+      if ($cmp) { label = 3; break; } else { label = 9; break; }
+    case 3: 
+      var $6=$b;
+      var $buffsize1=(($6+8)|0);
+      var $7=HEAP32[(($buffsize1)>>2)];
+      var $cmp2=(($7)>>>0) >= 2147483646;
+      if ($cmp2) { label = 4; break; } else { label = 5; break; }
+    case 4: 
+      var $8=$ls_addr;
+      _lexerror($8, ((5253080)|0), 0);
+
+    case 5: 
+      var $9=$b;
+      var $buffsize4=(($9+8)|0);
+      var $10=HEAP32[(($buffsize4)>>2)];
+      var $mul=($10<<1);
+      $newsize=$mul;
+      var $11=$newsize;
+      var $add5=((($11)+(1))|0);
+      var $cmp6=(($add5)>>>0) > 4294967293;
+      if ($cmp6) { label = 6; break; } else { label = 7; break; }
+    case 6: 
+      var $12=$ls_addr;
+      var $L=(($12+40)|0);
+      var $13=HEAP32[(($L)>>2)];
+      _luaM_toobig($13);
+
+      label = 8; break;
+    case 7: 
+      var $15=$ls_addr;
+      var $L7=(($15+40)|0);
+      var $16=HEAP32[(($L7)>>2)];
+      var $17=$b;
+      var $buffer=(($17)|0);
+      var $18=HEAP32[(($buffer)>>2)];
+      var $19=$b;
+      var $buffsize8=(($19+8)|0);
+      var $20=HEAP32[(($buffsize8)>>2)];
+      var $mul9=$20;
+      var $21=$newsize;
+      var $mul10=$21;
+      var $call=_luaM_realloc_($16, $18, $mul9, $mul10);
+      var $cond = $call;label = 8; break;
+    case 8: 
+      var $cond;
+      var $22=$b;
+      var $buffer11=(($22)|0);
+      HEAP32[(($buffer11)>>2)]=$cond;
+      var $23=$newsize;
+      var $24=$b;
+      var $buffsize12=(($24+8)|0);
+      HEAP32[(($buffsize12)>>2)]=$23;
+      label = 9; break;
+    case 9: 
+      var $25=$c_addr;
+      var $conv=(($25) & 255);
+      var $26=$b;
+      var $n14=(($26+4)|0);
+      var $27=HEAP32[(($n14)>>2)];
+      var $inc=((($27)+(1))|0);
+      HEAP32[(($n14)>>2)]=$inc;
+      var $28=$b;
+      var $buffer15=(($28)|0);
+      var $29=HEAP32[(($buffer15)>>2)];
+      var $arrayidx=(($29+$27)|0);
+      HEAP8[($arrayidx)]=$conv;
+
+      return;
+  }
+
+}
+_save["X"]=1;
+
+
+function _luaO_int2fb($x) {
+  var label = 0;
+
+  label = 2; 
+  while(1) switch(label) {
+    case 2: 
+      var $retval;
+      var $x_addr;
+      var $e;
+      $x_addr=$x;
+      $e=0;
+      var $0=$x_addr;
+      var $cmp=(($0)>>>0) < 8;
+      if ($cmp) { label = 3; break; } else { label = 4; break; }
+    case 3: 
+      var $1=$x_addr;
+      $retval=$1;
+      label = 8; break;
+    case 4: 
+      label = 5; break;
+    case 5: 
+      var $2=$x_addr;
+      var $cmp1=(($2)>>>0) >= 16;
+      if ($cmp1) { label = 6; break; } else { label = 7; break; }
+    case 6: 
+      var $3=$x_addr;
+      var $add=((($3)+(1))|0);
+      var $shr=$add >>> 1;
+      $x_addr=$shr;
+      var $4=$e;
+      var $inc=((($4)+(1))|0);
+      $e=$inc;
+      label = 5; break;
+    case 7: 
+      var $5=$e;
+      var $add2=((($5)+(1))|0);
+      var $shl=$add2 << 3;
+      var $6=$x_addr;
+      var $sub=((($6)-(8))|0);
+      var $or=$shl | $sub;
+      $retval=$or;
+      label = 8; break;
+    case 8: 
+      var $7=$retval;
+
+      return $7;
+  }
+
+}
+
+
+function _luaO_fb2int($x) {
+  var label = 0;
+
+  label = 2; 
+  while(1) switch(label) {
+    case 2: 
+      var $retval;
+      var $x_addr;
+      var $e;
+      $x_addr=$x;
+      var $0=$x_addr;
+      var $shr=$0 >> 3;
+      var $and=$shr & 31;
+      $e=$and;
+      var $1=$e;
+      var $cmp=(($1)|0)==0;
+      if ($cmp) { label = 3; break; } else { label = 4; break; }
+    case 3: 
+      var $2=$x_addr;
+      $retval=$2;
+      label = 5; break;
+    case 4: 
+      var $3=$x_addr;
+      var $and1=$3 & 7;
+      var $add=((($and1)+(8))|0);
+      var $4=$e;
+      var $sub=((($4)-(1))|0);
+      var $shl=$add << $sub;
+      $retval=$shl;
+      label = 5; break;
+    case 5: 
+      var $5=$retval;
+
+      return $5;
+  }
+
+}
+
 
 function _buffreplace($ls, $from, $to) {
   var label = 0;
@@ -28704,6 +28857,46 @@ function _buffreplace($ls, $from, $to) {
     case 7: 
 
       return;
+  }
+
+}
+
+
+function _luaO_ceillog2($x) {
+  var label = 0;
+
+  label = 2; 
+  while(1) switch(label) {
+    case 2: 
+      var $x_addr;
+      var $l;
+      $x_addr=$x;
+      $l=0;
+      var $0=$x_addr;
+      var $dec=((($0)-(1))|0);
+      $x_addr=$dec;
+      label = 3; break;
+    case 3: 
+      var $1=$x_addr;
+      var $cmp=(($1)>>>0) >= 256;
+      if ($cmp) { label = 4; break; } else { label = 5; break; }
+    case 4: 
+      var $2=$l;
+      var $add=((($2)+(8))|0);
+      $l=$add;
+      var $3=$x_addr;
+      var $shr=$3 >>> 8;
+      $x_addr=$shr;
+      label = 3; break;
+    case 5: 
+      var $4=$l;
+      var $5=$x_addr;
+      var $arrayidx=((5244104+$5)|0);
+      var $6=HEAP8[($arrayidx)];
+      var $conv=(($6)&255);
+      var $add1=((($4)+($conv))|0);
+
+      return $add1;
   }
 
 }
@@ -29203,103 +29396,6 @@ function _txtToken($ls, $token) {
 }
 
 
-function _save($ls, $c) {
-  var label = 0;
-
-  label = 2; 
-  while(1) switch(label) {
-    case 2: 
-      var $ls_addr;
-      var $c_addr;
-      var $b;
-      var $newsize;
-      $ls_addr=$ls;
-      $c_addr=$c;
-      var $0=$ls_addr;
-      var $buff=(($0+48)|0);
-      var $1=HEAP32[(($buff)>>2)];
-      $b=$1;
-      var $2=$b;
-      var $n=(($2+4)|0);
-      var $3=HEAP32[(($n)>>2)];
-      var $add=((($3)+(1))|0);
-      var $4=$b;
-      var $buffsize=(($4+8)|0);
-      var $5=HEAP32[(($buffsize)>>2)];
-      var $cmp=(($add)>>>0) > (($5)>>>0);
-      if ($cmp) { label = 3; break; } else { label = 9; break; }
-    case 3: 
-      var $6=$b;
-      var $buffsize1=(($6+8)|0);
-      var $7=HEAP32[(($buffsize1)>>2)];
-      var $cmp2=(($7)>>>0) >= 2147483646;
-      if ($cmp2) { label = 4; break; } else { label = 5; break; }
-    case 4: 
-      var $8=$ls_addr;
-      _lexerror($8, ((5253080)|0), 0);
-
-    case 5: 
-      var $9=$b;
-      var $buffsize4=(($9+8)|0);
-      var $10=HEAP32[(($buffsize4)>>2)];
-      var $mul=($10<<1);
-      $newsize=$mul;
-      var $11=$newsize;
-      var $add5=((($11)+(1))|0);
-      var $cmp6=(($add5)>>>0) > 4294967293;
-      if ($cmp6) { label = 6; break; } else { label = 7; break; }
-    case 6: 
-      var $12=$ls_addr;
-      var $L=(($12+40)|0);
-      var $13=HEAP32[(($L)>>2)];
-      _luaM_toobig($13);
-
-      label = 8; break;
-    case 7: 
-      var $15=$ls_addr;
-      var $L7=(($15+40)|0);
-      var $16=HEAP32[(($L7)>>2)];
-      var $17=$b;
-      var $buffer=(($17)|0);
-      var $18=HEAP32[(($buffer)>>2)];
-      var $19=$b;
-      var $buffsize8=(($19+8)|0);
-      var $20=HEAP32[(($buffsize8)>>2)];
-      var $mul9=$20;
-      var $21=$newsize;
-      var $mul10=$21;
-      var $call=_luaM_realloc_($16, $18, $mul9, $mul10);
-      var $cond = $call;label = 8; break;
-    case 8: 
-      var $cond;
-      var $22=$b;
-      var $buffer11=(($22)|0);
-      HEAP32[(($buffer11)>>2)]=$cond;
-      var $23=$newsize;
-      var $24=$b;
-      var $buffsize12=(($24+8)|0);
-      HEAP32[(($buffsize12)>>2)]=$23;
-      label = 9; break;
-    case 9: 
-      var $25=$c_addr;
-      var $conv=(($25) & 255);
-      var $26=$b;
-      var $n14=(($26+4)|0);
-      var $27=HEAP32[(($n14)>>2)];
-      var $inc=((($27)+(1))|0);
-      HEAP32[(($n14)>>2)]=$inc;
-      var $28=$b;
-      var $buffer15=(($28)|0);
-      var $29=HEAP32[(($buffer15)>>2)];
-      var $arrayidx=(($29+$27)|0);
-      HEAP8[($arrayidx)]=$conv;
-
-      return;
-  }
-
-}
-_save["X"]=1;
-
 function _trydecpoint($ls, $seminfo) {
   var label = 0;
 
@@ -29638,136 +29734,6 @@ function _luaM_realloc_($L, $block, $osize, $nsize) {
 
 }
 _luaM_realloc_["X"]=1;
-
-function _luaO_int2fb($x) {
-  var label = 0;
-
-  label = 2; 
-  while(1) switch(label) {
-    case 2: 
-      var $retval;
-      var $x_addr;
-      var $e;
-      $x_addr=$x;
-      $e=0;
-      var $0=$x_addr;
-      var $cmp=(($0)>>>0) < 8;
-      if ($cmp) { label = 3; break; } else { label = 4; break; }
-    case 3: 
-      var $1=$x_addr;
-      $retval=$1;
-      label = 8; break;
-    case 4: 
-      label = 5; break;
-    case 5: 
-      var $2=$x_addr;
-      var $cmp1=(($2)>>>0) >= 16;
-      if ($cmp1) { label = 6; break; } else { label = 7; break; }
-    case 6: 
-      var $3=$x_addr;
-      var $add=((($3)+(1))|0);
-      var $shr=$add >>> 1;
-      $x_addr=$shr;
-      var $4=$e;
-      var $inc=((($4)+(1))|0);
-      $e=$inc;
-      label = 5; break;
-    case 7: 
-      var $5=$e;
-      var $add2=((($5)+(1))|0);
-      var $shl=$add2 << 3;
-      var $6=$x_addr;
-      var $sub=((($6)-(8))|0);
-      var $or=$shl | $sub;
-      $retval=$or;
-      label = 8; break;
-    case 8: 
-      var $7=$retval;
-
-      return $7;
-  }
-
-}
-
-
-function _luaO_fb2int($x) {
-  var label = 0;
-
-  label = 2; 
-  while(1) switch(label) {
-    case 2: 
-      var $retval;
-      var $x_addr;
-      var $e;
-      $x_addr=$x;
-      var $0=$x_addr;
-      var $shr=$0 >> 3;
-      var $and=$shr & 31;
-      $e=$and;
-      var $1=$e;
-      var $cmp=(($1)|0)==0;
-      if ($cmp) { label = 3; break; } else { label = 4; break; }
-    case 3: 
-      var $2=$x_addr;
-      $retval=$2;
-      label = 5; break;
-    case 4: 
-      var $3=$x_addr;
-      var $and1=$3 & 7;
-      var $add=((($and1)+(8))|0);
-      var $4=$e;
-      var $sub=((($4)-(1))|0);
-      var $shl=$add << $sub;
-      $retval=$shl;
-      label = 5; break;
-    case 5: 
-      var $5=$retval;
-
-      return $5;
-  }
-
-}
-
-
-function _luaO_ceillog2($x) {
-  var label = 0;
-
-  label = 2; 
-  while(1) switch(label) {
-    case 2: 
-      var $x_addr;
-      var $l;
-      $x_addr=$x;
-      $l=0;
-      var $0=$x_addr;
-      var $dec=((($0)-(1))|0);
-      $x_addr=$dec;
-      label = 3; break;
-    case 3: 
-      var $1=$x_addr;
-      var $cmp=(($1)>>>0) >= 256;
-      if ($cmp) { label = 4; break; } else { label = 5; break; }
-    case 4: 
-      var $2=$l;
-      var $add=((($2)+(8))|0);
-      $l=$add;
-      var $3=$x_addr;
-      var $shr=$3 >>> 8;
-      $x_addr=$shr;
-      label = 3; break;
-    case 5: 
-      var $4=$l;
-      var $5=$x_addr;
-      var $arrayidx=((5244104+$5)|0);
-      var $6=HEAP8[($arrayidx)];
-      var $conv=(($6)&255);
-      var $add1=((($4)+($conv))|0);
-
-      return $add1;
-  }
-
-}
-
 
 function _luaO_hexavalue($c) {
   var label = 0;
@@ -30285,6 +30251,185 @@ function _luaO_pushfstring($L, $fmt, varrp) {
 }
 
 
+function _luaO_chunkid($out, $source, $bufflen) {
+  var label = 0;
+
+  label = 2; 
+  while(1) switch(label) {
+    case 2: 
+      var $out_addr;
+      var $source_addr;
+      var $bufflen_addr;
+      var $l;
+      var $nl;
+      $out_addr=$out;
+      $source_addr=$source;
+      $bufflen_addr=$bufflen;
+      var $0=$source_addr;
+      var $call=_strlen($0);
+      $l=$call;
+      var $1=$source_addr;
+      var $2=HEAP8[($1)];
+      var $conv=(($2 << 24) >> 24);
+      var $cmp=(($conv)|0)==61;
+      if ($cmp) { label = 3; break; } else { label = 7; break; }
+    case 3: 
+      var $3=$l;
+      var $4=$bufflen_addr;
+      var $cmp2=(($3)>>>0) <= (($4)>>>0);
+      if ($cmp2) { label = 4; break; } else { label = 5; break; }
+    case 4: 
+      var $5=$out_addr;
+      var $6=$source_addr;
+      var $add_ptr=(($6+1)|0);
+      var $7=$l;
+      var $mul=$7;
+      _memcpy($5, $add_ptr, $mul);
+      label = 6; break;
+    case 5: 
+      var $8=$out_addr;
+      var $9=$source_addr;
+      var $add_ptr5=(($9+1)|0);
+      var $10=$bufflen_addr;
+      var $sub=((($10)-(1))|0);
+      var $mul6=$sub;
+      _memcpy($8, $add_ptr5, $mul6);
+      var $11=$bufflen_addr;
+      var $sub7=((($11)-(1))|0);
+      var $12=$out_addr;
+      var $add_ptr8=(($12+$sub7)|0);
+      $out_addr=$add_ptr8;
+      var $13=$out_addr;
+      HEAP8[($13)]=0;
+      label = 6; break;
+    case 6: 
+      label = 22; break;
+    case 7: 
+      var $14=$source_addr;
+      var $15=HEAP8[($14)];
+      var $conv10=(($15 << 24) >> 24);
+      var $cmp11=(($conv10)|0)==64;
+      if ($cmp11) { label = 8; break; } else { label = 12; break; }
+    case 8: 
+      var $16=$l;
+      var $17=$bufflen_addr;
+      var $cmp14=(($16)>>>0) <= (($17)>>>0);
+      if ($cmp14) { label = 9; break; } else { label = 10; break; }
+    case 9: 
+      var $18=$out_addr;
+      var $19=$source_addr;
+      var $add_ptr17=(($19+1)|0);
+      var $20=$l;
+      var $mul18=$20;
+      _memcpy($18, $add_ptr17, $mul18);
+      label = 11; break;
+    case 10: 
+      var $21=$out_addr;
+      HEAP8[($21)]=HEAP8[((((5246592)|0))|0)];HEAP8[((($21)+(1))|0)]=HEAP8[(((((5246592)|0))+(1))|0)];HEAP8[((($21)+(2))|0)]=HEAP8[(((((5246592)|0))+(2))|0)];
+      var $22=$out_addr;
+      var $add_ptr20=(($22+3)|0);
+      $out_addr=$add_ptr20;
+      var $23=$bufflen_addr;
+      var $sub21=((($23)-(3))|0);
+      $bufflen_addr=$sub21;
+      var $24=$out_addr;
+      var $25=$source_addr;
+      var $add_ptr22=(($25+1)|0);
+      var $26=$l;
+      var $add_ptr23=(($add_ptr22+$26)|0);
+      var $27=$bufflen_addr;
+      var $idx_neg=(((-$27))|0);
+      var $add_ptr24=(($add_ptr23+$idx_neg)|0);
+      var $28=$bufflen_addr;
+      var $mul25=$28;
+      _memcpy($24, $add_ptr24, $mul25);
+      label = 11; break;
+    case 11: 
+      label = 21; break;
+    case 12: 
+      var $29=$source_addr;
+      var $call28=_strchr($29, 10);
+      $nl=$call28;
+      var $30=$out_addr;
+      for (var $$src = ((5246164)|0), $$dest = $30, $$stop = $$src + 9; $$src < $$stop; $$src++, $$dest++) {
+        HEAP8[$$dest] = HEAP8[$$src]
+      };
+      var $31=$out_addr;
+      var $add_ptr29=(($31+9)|0);
+      $out_addr=$add_ptr29;
+      var $32=$bufflen_addr;
+      var $sub30=((($32)-(15))|0);
+      $bufflen_addr=$sub30;
+      var $33=$l;
+      var $34=$bufflen_addr;
+      var $cmp31=(($33)>>>0) < (($34)>>>0);
+      if ($cmp31) { label = 13; break; } else { label = 15; break; }
+    case 13: 
+      var $35=$nl;
+      var $cmp33=(($35)|0)==0;
+      if ($cmp33) { label = 14; break; } else { label = 15; break; }
+    case 14: 
+      var $36=$out_addr;
+      var $37=$source_addr;
+      var $38=$l;
+      var $mul36=$38;
+      _memcpy($36, $37, $mul36);
+      var $39=$l;
+      var $40=$out_addr;
+      var $add_ptr37=(($40+$39)|0);
+      $out_addr=$add_ptr37;
+      label = 20; break;
+    case 15: 
+      var $41=$nl;
+      var $cmp39=(($41)|0)!=0;
+      if ($cmp39) { label = 16; break; } else { label = 17; break; }
+    case 16: 
+      var $42=$nl;
+      var $43=$source_addr;
+      var $sub_ptr_lhs_cast=$42;
+      var $sub_ptr_rhs_cast=$43;
+      var $sub_ptr_sub=((($sub_ptr_lhs_cast)-($sub_ptr_rhs_cast))|0);
+      $l=$sub_ptr_sub;
+      label = 17; break;
+    case 17: 
+      var $44=$l;
+      var $45=$bufflen_addr;
+      var $cmp43=(($44)>>>0) > (($45)>>>0);
+      if ($cmp43) { label = 18; break; } else { label = 19; break; }
+    case 18: 
+      var $46=$bufflen_addr;
+      $l=$46;
+      label = 19; break;
+    case 19: 
+      var $47=$out_addr;
+      var $48=$source_addr;
+      var $49=$l;
+      var $mul47=$49;
+      _memcpy($47, $48, $mul47);
+      var $50=$l;
+      var $51=$out_addr;
+      var $add_ptr48=(($51+$50)|0);
+      $out_addr=$add_ptr48;
+      var $52=$out_addr;
+      HEAP8[($52)]=HEAP8[((((5246592)|0))|0)];HEAP8[((($52)+(1))|0)]=HEAP8[(((((5246592)|0))+(1))|0)];HEAP8[((($52)+(2))|0)]=HEAP8[(((((5246592)|0))+(2))|0)];
+      var $53=$out_addr;
+      var $add_ptr49=(($53+3)|0);
+      $out_addr=$add_ptr49;
+      label = 20; break;
+    case 20: 
+      var $54=$out_addr;
+      HEAP8[($54)]=HEAP8[((((5245844)|0))|0)];HEAP8[((($54)+(1))|0)]=HEAP8[(((((5245844)|0))+(1))|0)];HEAP8[((($54)+(2))|0)]=HEAP8[(((((5245844)|0))+(2))|0)];
+      label = 21; break;
+    case 21: 
+      label = 22; break;
+    case 22: 
+
+      return;
+  }
+
+}
+_luaO_chunkid["X"]=1;
+
 function _luaO_pushvfstring($L, $fmt, $argp) {
   var label = 0;
   var __stackBase__  = STACKTOP; STACKTOP = (STACKTOP + 28)|0; _memset(__stackBase__, 0, 28);
@@ -30658,185 +30803,6 @@ function _init_exp($e, $k, $i) {
   return;
 }
 
-
-function _luaO_chunkid($out, $source, $bufflen) {
-  var label = 0;
-
-  label = 2; 
-  while(1) switch(label) {
-    case 2: 
-      var $out_addr;
-      var $source_addr;
-      var $bufflen_addr;
-      var $l;
-      var $nl;
-      $out_addr=$out;
-      $source_addr=$source;
-      $bufflen_addr=$bufflen;
-      var $0=$source_addr;
-      var $call=_strlen($0);
-      $l=$call;
-      var $1=$source_addr;
-      var $2=HEAP8[($1)];
-      var $conv=(($2 << 24) >> 24);
-      var $cmp=(($conv)|0)==61;
-      if ($cmp) { label = 3; break; } else { label = 7; break; }
-    case 3: 
-      var $3=$l;
-      var $4=$bufflen_addr;
-      var $cmp2=(($3)>>>0) <= (($4)>>>0);
-      if ($cmp2) { label = 4; break; } else { label = 5; break; }
-    case 4: 
-      var $5=$out_addr;
-      var $6=$source_addr;
-      var $add_ptr=(($6+1)|0);
-      var $7=$l;
-      var $mul=$7;
-      _memcpy($5, $add_ptr, $mul);
-      label = 6; break;
-    case 5: 
-      var $8=$out_addr;
-      var $9=$source_addr;
-      var $add_ptr5=(($9+1)|0);
-      var $10=$bufflen_addr;
-      var $sub=((($10)-(1))|0);
-      var $mul6=$sub;
-      _memcpy($8, $add_ptr5, $mul6);
-      var $11=$bufflen_addr;
-      var $sub7=((($11)-(1))|0);
-      var $12=$out_addr;
-      var $add_ptr8=(($12+$sub7)|0);
-      $out_addr=$add_ptr8;
-      var $13=$out_addr;
-      HEAP8[($13)]=0;
-      label = 6; break;
-    case 6: 
-      label = 22; break;
-    case 7: 
-      var $14=$source_addr;
-      var $15=HEAP8[($14)];
-      var $conv10=(($15 << 24) >> 24);
-      var $cmp11=(($conv10)|0)==64;
-      if ($cmp11) { label = 8; break; } else { label = 12; break; }
-    case 8: 
-      var $16=$l;
-      var $17=$bufflen_addr;
-      var $cmp14=(($16)>>>0) <= (($17)>>>0);
-      if ($cmp14) { label = 9; break; } else { label = 10; break; }
-    case 9: 
-      var $18=$out_addr;
-      var $19=$source_addr;
-      var $add_ptr17=(($19+1)|0);
-      var $20=$l;
-      var $mul18=$20;
-      _memcpy($18, $add_ptr17, $mul18);
-      label = 11; break;
-    case 10: 
-      var $21=$out_addr;
-      HEAP8[($21)]=HEAP8[((((5246592)|0))|0)];HEAP8[((($21)+(1))|0)]=HEAP8[(((((5246592)|0))+(1))|0)];HEAP8[((($21)+(2))|0)]=HEAP8[(((((5246592)|0))+(2))|0)];
-      var $22=$out_addr;
-      var $add_ptr20=(($22+3)|0);
-      $out_addr=$add_ptr20;
-      var $23=$bufflen_addr;
-      var $sub21=((($23)-(3))|0);
-      $bufflen_addr=$sub21;
-      var $24=$out_addr;
-      var $25=$source_addr;
-      var $add_ptr22=(($25+1)|0);
-      var $26=$l;
-      var $add_ptr23=(($add_ptr22+$26)|0);
-      var $27=$bufflen_addr;
-      var $idx_neg=(((-$27))|0);
-      var $add_ptr24=(($add_ptr23+$idx_neg)|0);
-      var $28=$bufflen_addr;
-      var $mul25=$28;
-      _memcpy($24, $add_ptr24, $mul25);
-      label = 11; break;
-    case 11: 
-      label = 21; break;
-    case 12: 
-      var $29=$source_addr;
-      var $call28=_strchr($29, 10);
-      $nl=$call28;
-      var $30=$out_addr;
-      for (var $$src = ((5246164)|0), $$dest = $30, $$stop = $$src + 9; $$src < $$stop; $$src++, $$dest++) {
-        HEAP8[$$dest] = HEAP8[$$src]
-      };
-      var $31=$out_addr;
-      var $add_ptr29=(($31+9)|0);
-      $out_addr=$add_ptr29;
-      var $32=$bufflen_addr;
-      var $sub30=((($32)-(15))|0);
-      $bufflen_addr=$sub30;
-      var $33=$l;
-      var $34=$bufflen_addr;
-      var $cmp31=(($33)>>>0) < (($34)>>>0);
-      if ($cmp31) { label = 13; break; } else { label = 15; break; }
-    case 13: 
-      var $35=$nl;
-      var $cmp33=(($35)|0)==0;
-      if ($cmp33) { label = 14; break; } else { label = 15; break; }
-    case 14: 
-      var $36=$out_addr;
-      var $37=$source_addr;
-      var $38=$l;
-      var $mul36=$38;
-      _memcpy($36, $37, $mul36);
-      var $39=$l;
-      var $40=$out_addr;
-      var $add_ptr37=(($40+$39)|0);
-      $out_addr=$add_ptr37;
-      label = 20; break;
-    case 15: 
-      var $41=$nl;
-      var $cmp39=(($41)|0)!=0;
-      if ($cmp39) { label = 16; break; } else { label = 17; break; }
-    case 16: 
-      var $42=$nl;
-      var $43=$source_addr;
-      var $sub_ptr_lhs_cast=$42;
-      var $sub_ptr_rhs_cast=$43;
-      var $sub_ptr_sub=((($sub_ptr_lhs_cast)-($sub_ptr_rhs_cast))|0);
-      $l=$sub_ptr_sub;
-      label = 17; break;
-    case 17: 
-      var $44=$l;
-      var $45=$bufflen_addr;
-      var $cmp43=(($44)>>>0) > (($45)>>>0);
-      if ($cmp43) { label = 18; break; } else { label = 19; break; }
-    case 18: 
-      var $46=$bufflen_addr;
-      $l=$46;
-      label = 19; break;
-    case 19: 
-      var $47=$out_addr;
-      var $48=$source_addr;
-      var $49=$l;
-      var $mul47=$49;
-      _memcpy($47, $48, $mul47);
-      var $50=$l;
-      var $51=$out_addr;
-      var $add_ptr48=(($51+$50)|0);
-      $out_addr=$add_ptr48;
-      var $52=$out_addr;
-      HEAP8[($52)]=HEAP8[((((5246592)|0))|0)];HEAP8[((($52)+(1))|0)]=HEAP8[(((((5246592)|0))+(1))|0)];HEAP8[((($52)+(2))|0)]=HEAP8[(((((5246592)|0))+(2))|0)];
-      var $53=$out_addr;
-      var $add_ptr49=(($53+3)|0);
-      $out_addr=$add_ptr49;
-      label = 20; break;
-    case 20: 
-      var $54=$out_addr;
-      HEAP8[($54)]=HEAP8[((((5245844)|0))|0)];HEAP8[((($54)+(1))|0)]=HEAP8[(((((5245844)|0))+(1))|0)];HEAP8[((($54)+(2))|0)]=HEAP8[(((((5245844)|0))+(2))|0)];
-      label = 21; break;
-    case 21: 
-      label = 22; break;
-    case 22: 
-
-      return;
-  }
-
-}
-_luaO_chunkid["X"]=1;
 
 function _readhexa($s, $r, $count) {
   var label = 0;
@@ -31415,6 +31381,388 @@ function _check($ls, $c) {
 }
 
 
+function _close_func($ls) {
+  var label = 0;
+
+  label = 2; 
+  while(1) switch(label) {
+    case 2: 
+      var $ls_addr;
+      var $L;
+      var $fs;
+      var $f;
+      $ls_addr=$ls;
+      var $0=$ls_addr;
+      var $L1=(($0+40)|0);
+      var $1=HEAP32[(($L1)>>2)];
+      $L=$1;
+      var $2=$ls_addr;
+      var $fs2=(($2+36)|0);
+      var $3=HEAP32[(($fs2)>>2)];
+      $fs=$3;
+      var $4=$fs;
+      var $f3=(($4)|0);
+      var $5=HEAP32[(($f3)>>2)];
+      $f=$5;
+      var $6=$fs;
+      _luaK_ret($6, 0, 0);
+      var $7=$fs;
+      _leaveblock($7);
+      var $8=$fs;
+      var $pc=(($8+20)|0);
+      var $9=HEAP32[(($pc)>>2)];
+      var $add=((($9)+(1))|0);
+      var $cmp=(($add)>>>0) > 1073741823;
+      if ($cmp) { label = 3; break; } else { label = 4; break; }
+    case 3: 
+      var $10=$L;
+      _luaM_toobig($10);
+
+      label = 5; break;
+    case 4: 
+      var $12=$L;
+      var $13=$f;
+      var $code=(($13+12)|0);
+      var $14=HEAP32[(($code)>>2)];
+      var $15=$14;
+      var $16=$f;
+      var $sizecode=(($16+48)|0);
+      var $17=HEAP32[(($sizecode)>>2)];
+      var $mul=($17<<2);
+      var $18=$fs;
+      var $pc4=(($18+20)|0);
+      var $19=HEAP32[(($pc4)>>2)];
+      var $mul5=($19<<2);
+      var $call=_luaM_realloc_($12, $15, $mul, $mul5);
+      var $cond = $call;label = 5; break;
+    case 5: 
+      var $cond;
+      var $20=$cond;
+      var $21=$f;
+      var $code6=(($21+12)|0);
+      HEAP32[(($code6)>>2)]=$20;
+      var $22=$fs;
+      var $pc7=(($22+20)|0);
+      var $23=HEAP32[(($pc7)>>2)];
+      var $24=$f;
+      var $sizecode8=(($24+48)|0);
+      HEAP32[(($sizecode8)>>2)]=$23;
+      var $25=$fs;
+      var $pc9=(($25+20)|0);
+      var $26=HEAP32[(($pc9)>>2)];
+      var $add10=((($26)+(1))|0);
+      var $cmp11=(($add10)>>>0) > 1073741823;
+      if ($cmp11) { label = 6; break; } else { label = 7; break; }
+    case 6: 
+      var $27=$L;
+      _luaM_toobig($27);
+
+      label = 8; break;
+    case 7: 
+      var $29=$L;
+      var $30=$f;
+      var $lineinfo=(($30+20)|0);
+      var $31=HEAP32[(($lineinfo)>>2)];
+      var $32=$31;
+      var $33=$f;
+      var $sizelineinfo=(($33+52)|0);
+      var $34=HEAP32[(($sizelineinfo)>>2)];
+      var $mul14=($34<<2);
+      var $35=$fs;
+      var $pc15=(($35+20)|0);
+      var $36=HEAP32[(($pc15)>>2)];
+      var $mul16=($36<<2);
+      var $call17=_luaM_realloc_($29, $32, $mul14, $mul16);
+      var $cond19 = $call17;label = 8; break;
+    case 8: 
+      var $cond19;
+      var $37=$cond19;
+      var $38=$f;
+      var $lineinfo20=(($38+20)|0);
+      HEAP32[(($lineinfo20)>>2)]=$37;
+      var $39=$fs;
+      var $pc21=(($39+20)|0);
+      var $40=HEAP32[(($pc21)>>2)];
+      var $41=$f;
+      var $sizelineinfo22=(($41+52)|0);
+      HEAP32[(($sizelineinfo22)>>2)]=$40;
+      var $42=$fs;
+      var $nk=(($42+32)|0);
+      var $43=HEAP32[(($nk)>>2)];
+      var $add23=((($43)+(1))|0);
+      var $cmp24=(($add23)>>>0) > 357913941;
+      if ($cmp24) { label = 9; break; } else { label = 10; break; }
+    case 9: 
+      var $44=$L;
+      _luaM_toobig($44);
+
+      label = 11; break;
+    case 10: 
+      var $46=$L;
+      var $47=$f;
+      var $k=(($47+8)|0);
+      var $48=HEAP32[(($k)>>2)];
+      var $49=$48;
+      var $50=$f;
+      var $sizek=(($50+44)|0);
+      var $51=HEAP32[(($sizek)>>2)];
+      var $mul27=((($51)*(12))&-1);
+      var $52=$fs;
+      var $nk28=(($52+32)|0);
+      var $53=HEAP32[(($nk28)>>2)];
+      var $mul29=((($53)*(12))&-1);
+      var $call30=_luaM_realloc_($46, $49, $mul27, $mul29);
+      var $cond32 = $call30;label = 11; break;
+    case 11: 
+      var $cond32;
+      var $54=$cond32;
+      var $55=$f;
+      var $k33=(($55+8)|0);
+      HEAP32[(($k33)>>2)]=$54;
+      var $56=$fs;
+      var $nk34=(($56+32)|0);
+      var $57=HEAP32[(($nk34)>>2)];
+      var $58=$f;
+      var $sizek35=(($58+44)|0);
+      HEAP32[(($sizek35)>>2)]=$57;
+      var $59=$fs;
+      var $np=(($59+36)|0);
+      var $60=HEAP32[(($np)>>2)];
+      var $add36=((($60)+(1))|0);
+      var $cmp37=(($add36)>>>0) > 1073741823;
+      if ($cmp37) { label = 12; break; } else { label = 13; break; }
+    case 12: 
+      var $61=$L;
+      _luaM_toobig($61);
+
+      label = 14; break;
+    case 13: 
+      var $63=$L;
+      var $64=$f;
+      var $p=(($64+16)|0);
+      var $65=HEAP32[(($p)>>2)];
+      var $66=$65;
+      var $67=$f;
+      var $sizep=(($67+56)|0);
+      var $68=HEAP32[(($sizep)>>2)];
+      var $mul40=($68<<2);
+      var $69=$fs;
+      var $np41=(($69+36)|0);
+      var $70=HEAP32[(($np41)>>2)];
+      var $mul42=($70<<2);
+      var $call43=_luaM_realloc_($63, $66, $mul40, $mul42);
+      var $cond45 = $call43;label = 14; break;
+    case 14: 
+      var $cond45;
+      var $71=$cond45;
+      var $72=$f;
+      var $p46=(($72+16)|0);
+      HEAP32[(($p46)>>2)]=$71;
+      var $73=$fs;
+      var $np47=(($73+36)|0);
+      var $74=HEAP32[(($np47)>>2)];
+      var $75=$f;
+      var $sizep48=(($75+56)|0);
+      HEAP32[(($sizep48)>>2)]=$74;
+      var $76=$fs;
+      var $nlocvars=(($76+44)|0);
+      var $77=HEAP16[(($nlocvars)>>1)];
+      var $conv=(($77 << 16) >> 16);
+      var $add49=((($conv)+(1))|0);
+      var $cmp50=(($add49)>>>0) > 357913941;
+      if ($cmp50) { label = 15; break; } else { label = 16; break; }
+    case 15: 
+      var $78=$L;
+      _luaM_toobig($78);
+
+      label = 17; break;
+    case 16: 
+      var $80=$L;
+      var $81=$f;
+      var $locvars=(($81+24)|0);
+      var $82=HEAP32[(($locvars)>>2)];
+      var $83=$82;
+      var $84=$f;
+      var $sizelocvars=(($84+60)|0);
+      var $85=HEAP32[(($sizelocvars)>>2)];
+      var $mul54=((($85)*(12))&-1);
+      var $86=$fs;
+      var $nlocvars55=(($86+44)|0);
+      var $87=HEAP16[(($nlocvars55)>>1)];
+      var $conv56=(($87 << 16) >> 16);
+      var $mul57=((($conv56)*(12))&-1);
+      var $call58=_luaM_realloc_($80, $83, $mul54, $mul57);
+      var $cond60 = $call58;label = 17; break;
+    case 17: 
+      var $cond60;
+      var $88=$cond60;
+      var $89=$f;
+      var $locvars61=(($89+24)|0);
+      HEAP32[(($locvars61)>>2)]=$88;
+      var $90=$fs;
+      var $nlocvars62=(($90+44)|0);
+      var $91=HEAP16[(($nlocvars62)>>1)];
+      var $conv63=(($91 << 16) >> 16);
+      var $92=$f;
+      var $sizelocvars64=(($92+60)|0);
+      HEAP32[(($sizelocvars64)>>2)]=$conv63;
+      var $93=$fs;
+      var $nups=(($93+47)|0);
+      var $94=HEAP8[($nups)];
+      var $conv65=(($94)&255);
+      var $add66=((($conv65)+(1))|0);
+      var $cmp67=(($add66)>>>0) > 536870911;
+      if ($cmp67) { label = 18; break; } else { label = 19; break; }
+    case 18: 
+      var $95=$L;
+      _luaM_toobig($95);
+
+      label = 20; break;
+    case 19: 
+      var $97=$L;
+      var $98=$f;
+      var $upvalues=(($98+28)|0);
+      var $99=HEAP32[(($upvalues)>>2)];
+      var $100=$99;
+      var $101=$f;
+      var $sizeupvalues=(($101+40)|0);
+      var $102=HEAP32[(($sizeupvalues)>>2)];
+      var $mul71=($102<<3);
+      var $103=$fs;
+      var $nups72=(($103+47)|0);
+      var $104=HEAP8[($nups72)];
+      var $conv73=(($104)&255);
+      var $mul74=($conv73<<3);
+      var $call75=_luaM_realloc_($97, $100, $mul71, $mul74);
+      var $cond77 = $call75;label = 20; break;
+    case 20: 
+      var $cond77;
+      var $105=$cond77;
+      var $106=$f;
+      var $upvalues78=(($106+28)|0);
+      HEAP32[(($upvalues78)>>2)]=$105;
+      var $107=$fs;
+      var $nups79=(($107+47)|0);
+      var $108=HEAP8[($nups79)];
+      var $conv80=(($108)&255);
+      var $109=$f;
+      var $sizeupvalues81=(($109+40)|0);
+      HEAP32[(($sizeupvalues81)>>2)]=$conv80;
+      var $110=$fs;
+      var $prev=(($110+8)|0);
+      var $111=HEAP32[(($prev)>>2)];
+      var $112=$ls_addr;
+      var $fs82=(($112+36)|0);
+      HEAP32[(($fs82)>>2)]=$111;
+      var $113=$ls_addr;
+      _anchor_token($113);
+      var $114=$L;
+      var $top=(($114+8)|0);
+      var $115=HEAP32[(($top)>>2)];
+      var $incdec_ptr=((($115)-(12))|0);
+      HEAP32[(($top)>>2)]=$incdec_ptr;
+      var $116=$L;
+      var $l_G=(($116+12)|0);
+      var $117=HEAP32[(($l_G)>>2)];
+      var $GCdebt=(($117+12)|0);
+      var $118=HEAP32[(($GCdebt)>>2)];
+      var $cmp83=(($118)|0) > 0;
+      if ($cmp83) { label = 21; break; } else { label = 22; break; }
+    case 21: 
+      var $119=$L;
+      _luaC_step($119);
+      label = 22; break;
+    case 22: 
+
+      return;
+  }
+
+}
+_close_func["X"]=1;
+
+function _getlocvar($fs, $i) {
+  var label = 0;
+
+
+  var $fs_addr;
+  var $i_addr;
+  var $idx;
+  $fs_addr=$fs;
+  $i_addr=$i;
+  var $0=$fs_addr;
+  var $firstlocal=(($0+40)|0);
+  var $1=HEAP32[(($firstlocal)>>2)];
+  var $2=$i_addr;
+  var $add=((($1)+($2))|0);
+  var $3=$fs_addr;
+  var $ls=(($3+12)|0);
+  var $4=HEAP32[(($ls)>>2)];
+  var $dyd=(($4+52)|0);
+  var $5=HEAP32[(($dyd)>>2)];
+  var $actvar=(($5)|0);
+  var $arr=(($actvar)|0);
+  var $6=HEAP32[(($arr)>>2)];
+  var $arrayidx=(($6+($add<<1))|0);
+  var $idx1=(($arrayidx)|0);
+  var $7=HEAP16[(($idx1)>>1)];
+  var $conv=(($7 << 16) >> 16);
+  $idx=$conv;
+  var $8=$idx;
+  var $9=$fs_addr;
+  var $f=(($9)|0);
+  var $10=HEAP32[(($f)>>2)];
+  var $locvars=(($10+24)|0);
+  var $11=HEAP32[(($locvars)>>2)];
+  var $arrayidx2=(($11+((($8)*(12))&-1))|0);
+
+  return $arrayidx2;
+}
+
+
+function _block_follow($ls, $withuntil) {
+  var label = 0;
+
+  label = 2; 
+  while(1) switch(label) {
+    case 2: 
+      var $retval;
+      var $ls_addr;
+      var $withuntil_addr;
+      $ls_addr=$ls;
+      $withuntil_addr=$withuntil;
+      var $0=$ls_addr;
+      var $t=(($0+12)|0);
+      var $token=(($t)|0);
+      var $1=HEAP32[(($token)>>2)];
+      if ((($1)|0)==260 | (($1)|0)==261 | (($1)|0)==262 | (($1)|0)==286) {
+        label = 3; break;
+      }
+      else if ((($1)|0)==277) {
+        label = 4; break;
+      }
+      else {
+      label = 5; break;
+      }
+      
+    case 3: 
+      $retval=1;
+      label = 6; break;
+    case 4: 
+      var $2=$withuntil_addr;
+      $retval=$2;
+      label = 6; break;
+    case 5: 
+      $retval=0;
+      label = 6; break;
+    case 6: 
+      var $3=$retval;
+
+      return $3;
+  }
+
+}
+
+
 function _anchor_token($ls) {
   var label = 0;
 
@@ -31791,304 +32139,168 @@ function _findlabel($ls, $g) {
 }
 _findlabel["X"]=1;
 
-function _close_func($ls) {
+function _newlabelentry($ls, $l, $name, $line, $pc) {
   var label = 0;
 
   label = 2; 
   while(1) switch(label) {
     case 2: 
       var $ls_addr;
-      var $L;
-      var $fs;
-      var $f;
+      var $l_addr;
+      var $name_addr;
+      var $line_addr;
+      var $pc_addr;
+      var $n;
       $ls_addr=$ls;
-      var $0=$ls_addr;
-      var $L1=(($0+40)|0);
-      var $1=HEAP32[(($L1)>>2)];
-      $L=$1;
-      var $2=$ls_addr;
-      var $fs2=(($2+36)|0);
-      var $3=HEAP32[(($fs2)>>2)];
-      $fs=$3;
-      var $4=$fs;
-      var $f3=(($4)|0);
-      var $5=HEAP32[(($f3)>>2)];
-      $f=$5;
-      var $6=$fs;
-      _luaK_ret($6, 0, 0);
-      var $7=$fs;
-      _leaveblock($7);
-      var $8=$fs;
-      var $pc=(($8+20)|0);
-      var $9=HEAP32[(($pc)>>2)];
-      var $add=((($9)+(1))|0);
-      var $cmp=(($add)>>>0) > 1073741823;
+      $l_addr=$l;
+      $name_addr=$name;
+      $line_addr=$line;
+      $pc_addr=$pc;
+      var $0=$l_addr;
+      var $n1=(($0+4)|0);
+      var $1=HEAP32[(($n1)>>2)];
+      $n=$1;
+      var $2=$n;
+      var $add=((($2)+(1))|0);
+      var $3=$l_addr;
+      var $size=(($3+8)|0);
+      var $4=HEAP32[(($size)>>2)];
+      var $cmp=(($add)|0) > (($4)|0);
       if ($cmp) { label = 3; break; } else { label = 4; break; }
     case 3: 
-      var $10=$L;
-      _luaM_toobig($10);
-
-      label = 5; break;
+      var $5=$ls_addr;
+      var $L=(($5+40)|0);
+      var $6=HEAP32[(($L)>>2)];
+      var $7=$l_addr;
+      var $arr=(($7)|0);
+      var $8=HEAP32[(($arr)>>2)];
+      var $9=$8;
+      var $10=$l_addr;
+      var $size2=(($10+8)|0);
+      var $call=_luaM_growaux_($6, $9, $size2, 16, 32767, ((5247948)|0));
+      var $11=$call;
+      var $12=$l_addr;
+      var $arr3=(($12)|0);
+      HEAP32[(($arr3)>>2)]=$11;
+      label = 4; break;
     case 4: 
-      var $12=$L;
-      var $13=$f;
-      var $code=(($13+12)|0);
-      var $14=HEAP32[(($code)>>2)];
-      var $15=$14;
-      var $16=$f;
-      var $sizecode=(($16+48)|0);
-      var $17=HEAP32[(($sizecode)>>2)];
-      var $mul=($17<<2);
-      var $18=$fs;
-      var $pc4=(($18+20)|0);
-      var $19=HEAP32[(($pc4)>>2)];
-      var $mul5=($19<<2);
-      var $call=_luaM_realloc_($12, $15, $mul, $mul5);
-      var $cond = $call;label = 5; break;
+      var $13=$name_addr;
+      var $14=$n;
+      var $15=$l_addr;
+      var $arr4=(($15)|0);
+      var $16=HEAP32[(($arr4)>>2)];
+      var $arrayidx=(($16+($14<<4))|0);
+      var $name5=(($arrayidx)|0);
+      HEAP32[(($name5)>>2)]=$13;
+      var $17=$line_addr;
+      var $18=$n;
+      var $19=$l_addr;
+      var $arr6=(($19)|0);
+      var $20=HEAP32[(($arr6)>>2)];
+      var $arrayidx7=(($20+($18<<4))|0);
+      var $line8=(($arrayidx7+8)|0);
+      HEAP32[(($line8)>>2)]=$17;
+      var $21=$ls_addr;
+      var $fs=(($21+36)|0);
+      var $22=HEAP32[(($fs)>>2)];
+      var $nactvar=(($22+46)|0);
+      var $23=HEAP8[($nactvar)];
+      var $24=$n;
+      var $25=$l_addr;
+      var $arr9=(($25)|0);
+      var $26=HEAP32[(($arr9)>>2)];
+      var $arrayidx10=(($26+($24<<4))|0);
+      var $nactvar11=(($arrayidx10+12)|0);
+      HEAP8[($nactvar11)]=$23;
+      var $27=$pc_addr;
+      var $28=$n;
+      var $29=$l_addr;
+      var $arr12=(($29)|0);
+      var $30=HEAP32[(($arr12)>>2)];
+      var $arrayidx13=(($30+($28<<4))|0);
+      var $pc14=(($arrayidx13+4)|0);
+      HEAP32[(($pc14)>>2)]=$27;
+      var $31=$l_addr;
+      var $n15=(($31+4)|0);
+      var $32=HEAP32[(($n15)>>2)];
+      var $inc=((($32)+(1))|0);
+      HEAP32[(($n15)>>2)]=$inc;
+      var $33=$n;
+
+      return $33;
+  }
+
+}
+_newlabelentry["X"]=1;
+
+function _findgotos($ls, $lb) {
+  var label = 0;
+
+  label = 2; 
+  while(1) switch(label) {
+    case 2: 
+      var $ls_addr;
+      var $lb_addr;
+      var $gl;
+      var $i;
+      $ls_addr=$ls;
+      $lb_addr=$lb;
+      var $0=$ls_addr;
+      var $dyd=(($0+52)|0);
+      var $1=HEAP32[(($dyd)>>2)];
+      var $gt=(($1+12)|0);
+      $gl=$gt;
+      var $2=$ls_addr;
+      var $fs=(($2+36)|0);
+      var $3=HEAP32[(($fs)>>2)];
+      var $bl=(($3+16)|0);
+      var $4=HEAP32[(($bl)>>2)];
+      var $firstgoto=(($4+6)|0);
+      var $5=HEAP16[(($firstgoto)>>1)];
+      var $conv=(($5 << 16) >> 16);
+      $i=$conv;
+      label = 3; break;
+    case 3: 
+      var $6=$i;
+      var $7=$gl;
+      var $n=(($7+4)|0);
+      var $8=HEAP32[(($n)>>2)];
+      var $cmp=(($6)|0) < (($8)|0);
+      if ($cmp) { label = 4; break; } else { label = 8; break; }
+    case 4: 
+      var $9=$i;
+      var $10=$gl;
+      var $arr=(($10)|0);
+      var $11=HEAP32[(($arr)>>2)];
+      var $arrayidx=(($11+($9<<4))|0);
+      var $name=(($arrayidx)|0);
+      var $12=HEAP32[(($name)>>2)];
+      var $13=$lb_addr;
+      var $name2=(($13)|0);
+      var $14=HEAP32[(($name2)>>2)];
+      var $call=_luaS_eqstr($12, $14);
+      var $tobool=(($call)|0)!=0;
+      if ($tobool) { label = 5; break; } else { label = 6; break; }
     case 5: 
-      var $cond;
-      var $20=$cond;
-      var $21=$f;
-      var $code6=(($21+12)|0);
-      HEAP32[(($code6)>>2)]=$20;
-      var $22=$fs;
-      var $pc7=(($22+20)|0);
-      var $23=HEAP32[(($pc7)>>2)];
-      var $24=$f;
-      var $sizecode8=(($24+48)|0);
-      HEAP32[(($sizecode8)>>2)]=$23;
-      var $25=$fs;
-      var $pc9=(($25+20)|0);
-      var $26=HEAP32[(($pc9)>>2)];
-      var $add10=((($26)+(1))|0);
-      var $cmp11=(($add10)>>>0) > 1073741823;
-      if ($cmp11) { label = 6; break; } else { label = 7; break; }
+      var $15=$ls_addr;
+      var $16=$i;
+      var $17=$lb_addr;
+      _closegoto($15, $16, $17);
+      label = 7; break;
     case 6: 
-      var $27=$L;
-      _luaM_toobig($27);
-
-      label = 8; break;
+      var $18=$i;
+      var $inc=((($18)+(1))|0);
+      $i=$inc;
+      label = 7; break;
     case 7: 
-      var $29=$L;
-      var $30=$f;
-      var $lineinfo=(($30+20)|0);
-      var $31=HEAP32[(($lineinfo)>>2)];
-      var $32=$31;
-      var $33=$f;
-      var $sizelineinfo=(($33+52)|0);
-      var $34=HEAP32[(($sizelineinfo)>>2)];
-      var $mul14=($34<<2);
-      var $35=$fs;
-      var $pc15=(($35+20)|0);
-      var $36=HEAP32[(($pc15)>>2)];
-      var $mul16=($36<<2);
-      var $call17=_luaM_realloc_($29, $32, $mul14, $mul16);
-      var $cond19 = $call17;label = 8; break;
+      label = 3; break;
     case 8: 
-      var $cond19;
-      var $37=$cond19;
-      var $38=$f;
-      var $lineinfo20=(($38+20)|0);
-      HEAP32[(($lineinfo20)>>2)]=$37;
-      var $39=$fs;
-      var $pc21=(($39+20)|0);
-      var $40=HEAP32[(($pc21)>>2)];
-      var $41=$f;
-      var $sizelineinfo22=(($41+52)|0);
-      HEAP32[(($sizelineinfo22)>>2)]=$40;
-      var $42=$fs;
-      var $nk=(($42+32)|0);
-      var $43=HEAP32[(($nk)>>2)];
-      var $add23=((($43)+(1))|0);
-      var $cmp24=(($add23)>>>0) > 357913941;
-      if ($cmp24) { label = 9; break; } else { label = 10; break; }
-    case 9: 
-      var $44=$L;
-      _luaM_toobig($44);
-
-      label = 11; break;
-    case 10: 
-      var $46=$L;
-      var $47=$f;
-      var $k=(($47+8)|0);
-      var $48=HEAP32[(($k)>>2)];
-      var $49=$48;
-      var $50=$f;
-      var $sizek=(($50+44)|0);
-      var $51=HEAP32[(($sizek)>>2)];
-      var $mul27=((($51)*(12))&-1);
-      var $52=$fs;
-      var $nk28=(($52+32)|0);
-      var $53=HEAP32[(($nk28)>>2)];
-      var $mul29=((($53)*(12))&-1);
-      var $call30=_luaM_realloc_($46, $49, $mul27, $mul29);
-      var $cond32 = $call30;label = 11; break;
-    case 11: 
-      var $cond32;
-      var $54=$cond32;
-      var $55=$f;
-      var $k33=(($55+8)|0);
-      HEAP32[(($k33)>>2)]=$54;
-      var $56=$fs;
-      var $nk34=(($56+32)|0);
-      var $57=HEAP32[(($nk34)>>2)];
-      var $58=$f;
-      var $sizek35=(($58+44)|0);
-      HEAP32[(($sizek35)>>2)]=$57;
-      var $59=$fs;
-      var $np=(($59+36)|0);
-      var $60=HEAP32[(($np)>>2)];
-      var $add36=((($60)+(1))|0);
-      var $cmp37=(($add36)>>>0) > 1073741823;
-      if ($cmp37) { label = 12; break; } else { label = 13; break; }
-    case 12: 
-      var $61=$L;
-      _luaM_toobig($61);
-
-      label = 14; break;
-    case 13: 
-      var $63=$L;
-      var $64=$f;
-      var $p=(($64+16)|0);
-      var $65=HEAP32[(($p)>>2)];
-      var $66=$65;
-      var $67=$f;
-      var $sizep=(($67+56)|0);
-      var $68=HEAP32[(($sizep)>>2)];
-      var $mul40=($68<<2);
-      var $69=$fs;
-      var $np41=(($69+36)|0);
-      var $70=HEAP32[(($np41)>>2)];
-      var $mul42=($70<<2);
-      var $call43=_luaM_realloc_($63, $66, $mul40, $mul42);
-      var $cond45 = $call43;label = 14; break;
-    case 14: 
-      var $cond45;
-      var $71=$cond45;
-      var $72=$f;
-      var $p46=(($72+16)|0);
-      HEAP32[(($p46)>>2)]=$71;
-      var $73=$fs;
-      var $np47=(($73+36)|0);
-      var $74=HEAP32[(($np47)>>2)];
-      var $75=$f;
-      var $sizep48=(($75+56)|0);
-      HEAP32[(($sizep48)>>2)]=$74;
-      var $76=$fs;
-      var $nlocvars=(($76+44)|0);
-      var $77=HEAP16[(($nlocvars)>>1)];
-      var $conv=(($77 << 16) >> 16);
-      var $add49=((($conv)+(1))|0);
-      var $cmp50=(($add49)>>>0) > 357913941;
-      if ($cmp50) { label = 15; break; } else { label = 16; break; }
-    case 15: 
-      var $78=$L;
-      _luaM_toobig($78);
-
-      label = 17; break;
-    case 16: 
-      var $80=$L;
-      var $81=$f;
-      var $locvars=(($81+24)|0);
-      var $82=HEAP32[(($locvars)>>2)];
-      var $83=$82;
-      var $84=$f;
-      var $sizelocvars=(($84+60)|0);
-      var $85=HEAP32[(($sizelocvars)>>2)];
-      var $mul54=((($85)*(12))&-1);
-      var $86=$fs;
-      var $nlocvars55=(($86+44)|0);
-      var $87=HEAP16[(($nlocvars55)>>1)];
-      var $conv56=(($87 << 16) >> 16);
-      var $mul57=((($conv56)*(12))&-1);
-      var $call58=_luaM_realloc_($80, $83, $mul54, $mul57);
-      var $cond60 = $call58;label = 17; break;
-    case 17: 
-      var $cond60;
-      var $88=$cond60;
-      var $89=$f;
-      var $locvars61=(($89+24)|0);
-      HEAP32[(($locvars61)>>2)]=$88;
-      var $90=$fs;
-      var $nlocvars62=(($90+44)|0);
-      var $91=HEAP16[(($nlocvars62)>>1)];
-      var $conv63=(($91 << 16) >> 16);
-      var $92=$f;
-      var $sizelocvars64=(($92+60)|0);
-      HEAP32[(($sizelocvars64)>>2)]=$conv63;
-      var $93=$fs;
-      var $nups=(($93+47)|0);
-      var $94=HEAP8[($nups)];
-      var $conv65=(($94)&255);
-      var $add66=((($conv65)+(1))|0);
-      var $cmp67=(($add66)>>>0) > 536870911;
-      if ($cmp67) { label = 18; break; } else { label = 19; break; }
-    case 18: 
-      var $95=$L;
-      _luaM_toobig($95);
-
-      label = 20; break;
-    case 19: 
-      var $97=$L;
-      var $98=$f;
-      var $upvalues=(($98+28)|0);
-      var $99=HEAP32[(($upvalues)>>2)];
-      var $100=$99;
-      var $101=$f;
-      var $sizeupvalues=(($101+40)|0);
-      var $102=HEAP32[(($sizeupvalues)>>2)];
-      var $mul71=($102<<3);
-      var $103=$fs;
-      var $nups72=(($103+47)|0);
-      var $104=HEAP8[($nups72)];
-      var $conv73=(($104)&255);
-      var $mul74=($conv73<<3);
-      var $call75=_luaM_realloc_($97, $100, $mul71, $mul74);
-      var $cond77 = $call75;label = 20; break;
-    case 20: 
-      var $cond77;
-      var $105=$cond77;
-      var $106=$f;
-      var $upvalues78=(($106+28)|0);
-      HEAP32[(($upvalues78)>>2)]=$105;
-      var $107=$fs;
-      var $nups79=(($107+47)|0);
-      var $108=HEAP8[($nups79)];
-      var $conv80=(($108)&255);
-      var $109=$f;
-      var $sizeupvalues81=(($109+40)|0);
-      HEAP32[(($sizeupvalues81)>>2)]=$conv80;
-      var $110=$fs;
-      var $prev=(($110+8)|0);
-      var $111=HEAP32[(($prev)>>2)];
-      var $112=$ls_addr;
-      var $fs82=(($112+36)|0);
-      HEAP32[(($fs82)>>2)]=$111;
-      var $113=$ls_addr;
-      _anchor_token($113);
-      var $114=$L;
-      var $top=(($114+8)|0);
-      var $115=HEAP32[(($top)>>2)];
-      var $incdec_ptr=((($115)-(12))|0);
-      HEAP32[(($top)>>2)]=$incdec_ptr;
-      var $116=$L;
-      var $l_G=(($116+12)|0);
-      var $117=HEAP32[(($l_G)>>2)];
-      var $GCdebt=(($117+12)|0);
-      var $118=HEAP32[(($GCdebt)>>2)];
-      var $cmp83=(($118)|0) > 0;
-      if ($cmp83) { label = 21; break; } else { label = 22; break; }
-    case 21: 
-      var $119=$L;
-      _luaC_step($119);
-      label = 22; break;
-    case 22: 
 
       return;
   }
 
 }
-_close_func["X"]=1;
+_findgotos["X"]=1;
 
 function _leaveblock($fs) {
   var label = 0;
@@ -32309,251 +32521,160 @@ function _semerror($ls, $msg) {
 }
 
 
-function _getlocvar($fs, $i) {
+function _closegoto($ls, $g, $label) {
   var label = 0;
-
-
-  var $fs_addr;
-  var $i_addr;
-  var $idx;
-  $fs_addr=$fs;
-  $i_addr=$i;
-  var $0=$fs_addr;
-  var $firstlocal=(($0+40)|0);
-  var $1=HEAP32[(($firstlocal)>>2)];
-  var $2=$i_addr;
-  var $add=((($1)+($2))|0);
-  var $3=$fs_addr;
-  var $ls=(($3+12)|0);
-  var $4=HEAP32[(($ls)>>2)];
-  var $dyd=(($4+52)|0);
-  var $5=HEAP32[(($dyd)>>2)];
-  var $actvar=(($5)|0);
-  var $arr=(($actvar)|0);
-  var $6=HEAP32[(($arr)>>2)];
-  var $arrayidx=(($6+($add<<1))|0);
-  var $idx1=(($arrayidx)|0);
-  var $7=HEAP16[(($idx1)>>1)];
-  var $conv=(($7 << 16) >> 16);
-  $idx=$conv;
-  var $8=$idx;
-  var $9=$fs_addr;
-  var $f=(($9)|0);
-  var $10=HEAP32[(($f)>>2)];
-  var $locvars=(($10+24)|0);
-  var $11=HEAP32[(($locvars)>>2)];
-  var $arrayidx2=(($11+((($8)*(12))&-1))|0);
-
-  return $arrayidx2;
-}
-
-
-function _block_follow($ls, $withuntil) {
-  var label = 0;
-
+  var __stackBase__  = STACKTOP; _memset(__stackBase__, 0, 0);
   label = 2; 
   while(1) switch(label) {
     case 2: 
-      var $retval;
       var $ls_addr;
-      var $withuntil_addr;
+      var $g_addr;
+      var $label_addr;
+      var $i;
+      var $fs;
+      var $gl;
+      var $gt2;
+      var $vname;
+      var $msg;
       $ls_addr=$ls;
-      $withuntil_addr=$withuntil;
+      $g_addr=$g;
+      $label_addr=$label;
       var $0=$ls_addr;
-      var $t=(($0+12)|0);
-      var $token=(($t)|0);
-      var $1=HEAP32[(($token)>>2)];
-      if ((($1)|0)==260 | (($1)|0)==261 | (($1)|0)==262 | (($1)|0)==286) {
-        label = 3; break;
-      }
-      else if ((($1)|0)==277) {
-        label = 4; break;
-      }
-      else {
-      label = 5; break;
-      }
-      
-    case 3: 
-      $retval=1;
-      label = 6; break;
-    case 4: 
-      var $2=$withuntil_addr;
-      $retval=$2;
-      label = 6; break;
-    case 5: 
-      $retval=0;
-      label = 6; break;
-    case 6: 
-      var $3=$retval;
-
-      return $3;
-  }
-
-}
-
-
-function _newlabelentry($ls, $l, $name, $line, $pc) {
-  var label = 0;
-
-  label = 2; 
-  while(1) switch(label) {
-    case 2: 
-      var $ls_addr;
-      var $l_addr;
-      var $name_addr;
-      var $line_addr;
-      var $pc_addr;
-      var $n;
-      $ls_addr=$ls;
-      $l_addr=$l;
-      $name_addr=$name;
-      $line_addr=$line;
-      $pc_addr=$pc;
-      var $0=$l_addr;
-      var $n1=(($0+4)|0);
-      var $1=HEAP32[(($n1)>>2)];
-      $n=$1;
-      var $2=$n;
-      var $add=((($2)+(1))|0);
-      var $3=$l_addr;
-      var $size=(($3+8)|0);
-      var $4=HEAP32[(($size)>>2)];
-      var $cmp=(($add)|0) > (($4)|0);
+      var $fs1=(($0+36)|0);
+      var $1=HEAP32[(($fs1)>>2)];
+      $fs=$1;
+      var $2=$ls_addr;
+      var $dyd=(($2+52)|0);
+      var $3=HEAP32[(($dyd)>>2)];
+      var $gt=(($3+12)|0);
+      $gl=$gt;
+      var $4=$g_addr;
+      var $5=$gl;
+      var $arr=(($5)|0);
+      var $6=HEAP32[(($arr)>>2)];
+      var $arrayidx=(($6+($4<<4))|0);
+      $gt2=$arrayidx;
+      var $7=$gt2;
+      var $nactvar=(($7+12)|0);
+      var $8=HEAP8[($nactvar)];
+      var $conv=(($8)&255);
+      var $9=$label_addr;
+      var $nactvar3=(($9+12)|0);
+      var $10=HEAP8[($nactvar3)];
+      var $conv4=(($10)&255);
+      var $cmp=(($conv)|0) < (($conv4)|0);
       if ($cmp) { label = 3; break; } else { label = 4; break; }
     case 3: 
-      var $5=$ls_addr;
-      var $L=(($5+40)|0);
-      var $6=HEAP32[(($L)>>2)];
-      var $7=$l_addr;
-      var $arr=(($7)|0);
-      var $8=HEAP32[(($arr)>>2)];
-      var $9=$8;
-      var $10=$l_addr;
-      var $size2=(($10+8)|0);
-      var $call=_luaM_growaux_($6, $9, $size2, 16, 32767, ((5247948)|0));
-      var $11=$call;
-      var $12=$l_addr;
-      var $arr3=(($12)|0);
-      HEAP32[(($arr3)>>2)]=$11;
-      label = 4; break;
-    case 4: 
-      var $13=$name_addr;
-      var $14=$n;
-      var $15=$l_addr;
-      var $arr4=(($15)|0);
-      var $16=HEAP32[(($arr4)>>2)];
-      var $arrayidx=(($16+($14<<4))|0);
-      var $name5=(($arrayidx)|0);
-      HEAP32[(($name5)>>2)]=$13;
-      var $17=$line_addr;
-      var $18=$n;
-      var $19=$l_addr;
-      var $arr6=(($19)|0);
-      var $20=HEAP32[(($arr6)>>2)];
-      var $arrayidx7=(($20+($18<<4))|0);
-      var $line8=(($arrayidx7+8)|0);
-      HEAP32[(($line8)>>2)]=$17;
-      var $21=$ls_addr;
-      var $fs=(($21+36)|0);
-      var $22=HEAP32[(($fs)>>2)];
-      var $nactvar=(($22+46)|0);
-      var $23=HEAP8[($nactvar)];
-      var $24=$n;
-      var $25=$l_addr;
-      var $arr9=(($25)|0);
-      var $26=HEAP32[(($arr9)>>2)];
-      var $arrayidx10=(($26+($24<<4))|0);
-      var $nactvar11=(($arrayidx10+12)|0);
-      HEAP8[($nactvar11)]=$23;
-      var $27=$pc_addr;
-      var $28=$n;
-      var $29=$l_addr;
-      var $arr12=(($29)|0);
-      var $30=HEAP32[(($arr12)>>2)];
-      var $arrayidx13=(($30+($28<<4))|0);
-      var $pc14=(($arrayidx13+4)|0);
-      HEAP32[(($pc14)>>2)]=$27;
-      var $31=$l_addr;
-      var $n15=(($31+4)|0);
-      var $32=HEAP32[(($n15)>>2)];
-      var $inc=((($32)+(1))|0);
-      HEAP32[(($n15)>>2)]=$inc;
-      var $33=$n;
-
-      return $33;
-  }
-
-}
-_newlabelentry["X"]=1;
-
-function _findgotos($ls, $lb) {
-  var label = 0;
-
-  label = 2; 
-  while(1) switch(label) {
-    case 2: 
-      var $ls_addr;
-      var $lb_addr;
-      var $gl;
-      var $i;
-      $ls_addr=$ls;
-      $lb_addr=$lb;
-      var $0=$ls_addr;
-      var $dyd=(($0+52)|0);
-      var $1=HEAP32[(($dyd)>>2)];
-      var $gt=(($1+12)|0);
-      $gl=$gt;
-      var $2=$ls_addr;
-      var $fs=(($2+36)|0);
-      var $3=HEAP32[(($fs)>>2)];
-      var $bl=(($3+16)|0);
-      var $4=HEAP32[(($bl)>>2)];
-      var $firstgoto=(($4+6)|0);
-      var $5=HEAP16[(($firstgoto)>>1)];
-      var $conv=(($5 << 16) >> 16);
-      $i=$conv;
-      label = 3; break;
-    case 3: 
-      var $6=$i;
-      var $7=$gl;
-      var $n=(($7+4)|0);
-      var $8=HEAP32[(($n)>>2)];
-      var $cmp=(($6)|0) < (($8)|0);
-      if ($cmp) { label = 4; break; } else { label = 8; break; }
-    case 4: 
-      var $9=$i;
-      var $10=$gl;
-      var $arr=(($10)|0);
-      var $11=HEAP32[(($arr)>>2)];
-      var $arrayidx=(($11+($9<<4))|0);
-      var $name=(($arrayidx)|0);
-      var $12=HEAP32[(($name)>>2)];
-      var $13=$lb_addr;
-      var $name2=(($13)|0);
-      var $14=HEAP32[(($name2)>>2)];
-      var $call=_luaS_eqstr($12, $14);
-      var $tobool=(($call)|0)!=0;
-      if ($tobool) { label = 5; break; } else { label = 6; break; }
-    case 5: 
+      var $11=$fs;
+      var $12=$gt2;
+      var $nactvar6=(($12+12)|0);
+      var $13=HEAP8[($nactvar6)];
+      var $conv7=(($13)&255);
+      var $call=_getlocvar($11, $conv7);
+      var $varname=(($call)|0);
+      var $14=HEAP32[(($varname)>>2)];
+      $vname=$14;
       var $15=$ls_addr;
-      var $16=$i;
-      var $17=$lb_addr;
-      _closegoto($15, $16, $17);
-      label = 7; break;
+      var $L=(($15+40)|0);
+      var $16=HEAP32[(($L)>>2)];
+      var $17=$gt2;
+      var $name=(($17)|0);
+      var $18=HEAP32[(($name)>>2)];
+      var $add_ptr=(($18+16)|0);
+      var $19=$add_ptr;
+      var $20=$gt2;
+      var $line=(($20+8)|0);
+      var $21=HEAP32[(($line)>>2)];
+      var $22=$vname;
+      var $add_ptr8=(($22+16)|0);
+      var $23=$add_ptr8;
+      var $call9=_luaO_pushfstring($16, ((5251048)|0), (tempInt=STACKTOP,_memset(STACKTOP, 0, 12),STACKTOP = (STACKTOP + 12)|0,HEAP32[((tempInt)>>2)]=$19,HEAP32[(((tempInt)+(4))>>2)]=$21,HEAP32[(((tempInt)+(8))>>2)]=$23,tempInt));
+      $msg=$call9;
+      var $24=$ls_addr;
+      var $25=$msg;
+      _semerror($24, $25);
+
+    case 4: 
+      var $26=$fs;
+      var $27=$gt2;
+      var $pc=(($27+4)|0);
+      var $28=HEAP32[(($pc)>>2)];
+      var $29=$label_addr;
+      var $pc10=(($29+4)|0);
+      var $30=HEAP32[(($pc10)>>2)];
+      _luaK_patchlist($26, $28, $30);
+      var $31=$g_addr;
+      $i=$31;
+      label = 5; break;
+    case 5: 
+      var $32=$i;
+      var $33=$gl;
+      var $n=(($33+4)|0);
+      var $34=HEAP32[(($n)>>2)];
+      var $sub=((($34)-(1))|0);
+      var $cmp11=(($32)|0) < (($sub)|0);
+      if ($cmp11) { label = 6; break; } else { label = 8; break; }
     case 6: 
-      var $18=$i;
-      var $inc=((($18)+(1))|0);
-      $i=$inc;
+      var $35=$i;
+      var $36=$gl;
+      var $arr13=(($36)|0);
+      var $37=HEAP32[(($arr13)>>2)];
+      var $arrayidx14=(($37+($35<<4))|0);
+      var $38=$i;
+      var $add=((($38)+(1))|0);
+      var $39=$gl;
+      var $arr15=(($39)|0);
+      var $40=HEAP32[(($arr15)>>2)];
+      var $arrayidx16=(($40+($add<<4))|0);
+      var $41=$arrayidx14;
+      var $42=$arrayidx16;
+      HEAP32[(($41)>>2)]=HEAP32[(($42)>>2)];HEAP32[((($41)+(4))>>2)]=HEAP32[((($42)+(4))>>2)];HEAP32[((($41)+(8))>>2)]=HEAP32[((($42)+(8))>>2)];HEAP32[((($41)+(12))>>2)]=HEAP32[((($42)+(12))>>2)];
       label = 7; break;
     case 7: 
-      label = 3; break;
+      var $43=$i;
+      var $inc=((($43)+(1))|0);
+      $i=$inc;
+      label = 5; break;
     case 8: 
-
+      var $44=$gl;
+      var $n17=(($44+4)|0);
+      var $45=HEAP32[(($n17)>>2)];
+      var $dec=((($45)-(1))|0);
+      HEAP32[(($n17)>>2)]=$dec;
+      STACKTOP = __stackBase__;
       return;
   }
 
 }
-_findgotos["X"]=1;
+_closegoto["X"]=1;
+
+function _error_expected($ls, $token) {
+  var label = 0;
+  var __stackBase__  = STACKTOP; _memset(__stackBase__, 0, 0);
+  label = 2; 
+  while(1) switch(label) {
+    case 2: 
+      var $ls_addr;
+      var $token_addr;
+      $ls_addr=$ls;
+      $token_addr=$token;
+      var $0=$ls_addr;
+      var $1=$ls_addr;
+      var $L=(($1+40)|0);
+      var $2=HEAP32[(($L)>>2)];
+      var $3=$ls_addr;
+      var $4=$token_addr;
+      var $call=_luaX_token2str($3, $4);
+      var $call1=_luaO_pushfstring($2, ((5246896)|0), (tempInt=STACKTOP,_memset(STACKTOP, 0, 4),STACKTOP = (STACKTOP + 4)|0,HEAP32[((tempInt)>>2)]=$call,tempInt));
+      _luaX_syntaxerror($0, $call1);
+
+    case 3: 
+      STACKTOP = __stackBase__;
+      return;
+  }
+
+}
+
 
 function _statement($ls) {
   var label = 0;
@@ -33100,281 +33221,6 @@ function _localstat($ls) {
 }
 
 
-function _closegoto($ls, $g, $label) {
-  var label = 0;
-  var __stackBase__  = STACKTOP; _memset(__stackBase__, 0, 0);
-  label = 2; 
-  while(1) switch(label) {
-    case 2: 
-      var $ls_addr;
-      var $g_addr;
-      var $label_addr;
-      var $i;
-      var $fs;
-      var $gl;
-      var $gt2;
-      var $vname;
-      var $msg;
-      $ls_addr=$ls;
-      $g_addr=$g;
-      $label_addr=$label;
-      var $0=$ls_addr;
-      var $fs1=(($0+36)|0);
-      var $1=HEAP32[(($fs1)>>2)];
-      $fs=$1;
-      var $2=$ls_addr;
-      var $dyd=(($2+52)|0);
-      var $3=HEAP32[(($dyd)>>2)];
-      var $gt=(($3+12)|0);
-      $gl=$gt;
-      var $4=$g_addr;
-      var $5=$gl;
-      var $arr=(($5)|0);
-      var $6=HEAP32[(($arr)>>2)];
-      var $arrayidx=(($6+($4<<4))|0);
-      $gt2=$arrayidx;
-      var $7=$gt2;
-      var $nactvar=(($7+12)|0);
-      var $8=HEAP8[($nactvar)];
-      var $conv=(($8)&255);
-      var $9=$label_addr;
-      var $nactvar3=(($9+12)|0);
-      var $10=HEAP8[($nactvar3)];
-      var $conv4=(($10)&255);
-      var $cmp=(($conv)|0) < (($conv4)|0);
-      if ($cmp) { label = 3; break; } else { label = 4; break; }
-    case 3: 
-      var $11=$fs;
-      var $12=$gt2;
-      var $nactvar6=(($12+12)|0);
-      var $13=HEAP8[($nactvar6)];
-      var $conv7=(($13)&255);
-      var $call=_getlocvar($11, $conv7);
-      var $varname=(($call)|0);
-      var $14=HEAP32[(($varname)>>2)];
-      $vname=$14;
-      var $15=$ls_addr;
-      var $L=(($15+40)|0);
-      var $16=HEAP32[(($L)>>2)];
-      var $17=$gt2;
-      var $name=(($17)|0);
-      var $18=HEAP32[(($name)>>2)];
-      var $add_ptr=(($18+16)|0);
-      var $19=$add_ptr;
-      var $20=$gt2;
-      var $line=(($20+8)|0);
-      var $21=HEAP32[(($line)>>2)];
-      var $22=$vname;
-      var $add_ptr8=(($22+16)|0);
-      var $23=$add_ptr8;
-      var $call9=_luaO_pushfstring($16, ((5251048)|0), (tempInt=STACKTOP,_memset(STACKTOP, 0, 12),STACKTOP = (STACKTOP + 12)|0,HEAP32[((tempInt)>>2)]=$19,HEAP32[(((tempInt)+(4))>>2)]=$21,HEAP32[(((tempInt)+(8))>>2)]=$23,tempInt));
-      $msg=$call9;
-      var $24=$ls_addr;
-      var $25=$msg;
-      _semerror($24, $25);
-
-    case 4: 
-      var $26=$fs;
-      var $27=$gt2;
-      var $pc=(($27+4)|0);
-      var $28=HEAP32[(($pc)>>2)];
-      var $29=$label_addr;
-      var $pc10=(($29+4)|0);
-      var $30=HEAP32[(($pc10)>>2)];
-      _luaK_patchlist($26, $28, $30);
-      var $31=$g_addr;
-      $i=$31;
-      label = 5; break;
-    case 5: 
-      var $32=$i;
-      var $33=$gl;
-      var $n=(($33+4)|0);
-      var $34=HEAP32[(($n)>>2)];
-      var $sub=((($34)-(1))|0);
-      var $cmp11=(($32)|0) < (($sub)|0);
-      if ($cmp11) { label = 6; break; } else { label = 8; break; }
-    case 6: 
-      var $35=$i;
-      var $36=$gl;
-      var $arr13=(($36)|0);
-      var $37=HEAP32[(($arr13)>>2)];
-      var $arrayidx14=(($37+($35<<4))|0);
-      var $38=$i;
-      var $add=((($38)+(1))|0);
-      var $39=$gl;
-      var $arr15=(($39)|0);
-      var $40=HEAP32[(($arr15)>>2)];
-      var $arrayidx16=(($40+($add<<4))|0);
-      var $41=$arrayidx14;
-      var $42=$arrayidx16;
-      HEAP32[(($41)>>2)]=HEAP32[(($42)>>2)];HEAP32[((($41)+(4))>>2)]=HEAP32[((($42)+(4))>>2)];HEAP32[((($41)+(8))>>2)]=HEAP32[((($42)+(8))>>2)];HEAP32[((($41)+(12))>>2)]=HEAP32[((($42)+(12))>>2)];
-      label = 7; break;
-    case 7: 
-      var $43=$i;
-      var $inc=((($43)+(1))|0);
-      $i=$inc;
-      label = 5; break;
-    case 8: 
-      var $44=$gl;
-      var $n17=(($44+4)|0);
-      var $45=HEAP32[(($n17)>>2)];
-      var $dec=((($45)-(1))|0);
-      HEAP32[(($n17)>>2)]=$dec;
-      STACKTOP = __stackBase__;
-      return;
-  }
-
-}
-_closegoto["X"]=1;
-
-function _error_expected($ls, $token) {
-  var label = 0;
-  var __stackBase__  = STACKTOP; _memset(__stackBase__, 0, 0);
-  label = 2; 
-  while(1) switch(label) {
-    case 2: 
-      var $ls_addr;
-      var $token_addr;
-      $ls_addr=$ls;
-      $token_addr=$token;
-      var $0=$ls_addr;
-      var $1=$ls_addr;
-      var $L=(($1+40)|0);
-      var $2=HEAP32[(($L)>>2)];
-      var $3=$ls_addr;
-      var $4=$token_addr;
-      var $call=_luaX_token2str($3, $4);
-      var $call1=_luaO_pushfstring($2, ((5246896)|0), (tempInt=STACKTOP,_memset(STACKTOP, 0, 4),STACKTOP = (STACKTOP + 4)|0,HEAP32[((tempInt)>>2)]=$call,tempInt));
-      _luaX_syntaxerror($0, $call1);
-
-    case 3: 
-      STACKTOP = __stackBase__;
-      return;
-  }
-
-}
-
-
-function _check_match($ls, $what, $who, $where) {
-  var label = 0;
-  var __stackBase__  = STACKTOP; _memset(__stackBase__, 0, 0);
-  label = 2; 
-  while(1) switch(label) {
-    case 2: 
-      var $ls_addr;
-      var $what_addr;
-      var $who_addr;
-      var $where_addr;
-      $ls_addr=$ls;
-      $what_addr=$what;
-      $who_addr=$who;
-      $where_addr=$where;
-      var $0=$ls_addr;
-      var $1=$what_addr;
-      var $call=_testnext($0, $1);
-      var $tobool=(($call)|0)!=0;
-      if ($tobool) { label = 6; break; } else { label = 3; break; }
-    case 3: 
-      var $2=$where_addr;
-      var $3=$ls_addr;
-      var $linenumber=(($3+4)|0);
-      var $4=HEAP32[(($linenumber)>>2)];
-      var $cmp=(($2)|0)==(($4)|0);
-      if ($cmp) { label = 4; break; } else { label = 5; break; }
-    case 4: 
-      var $5=$ls_addr;
-      var $6=$what_addr;
-      _error_expected($5, $6);
-
-    case 5: 
-      var $7=$ls_addr;
-      var $8=$ls_addr;
-      var $L=(($8+40)|0);
-      var $9=HEAP32[(($L)>>2)];
-      var $10=$ls_addr;
-      var $11=$what_addr;
-      var $call2=_luaX_token2str($10, $11);
-      var $12=$ls_addr;
-      var $13=$who_addr;
-      var $call3=_luaX_token2str($12, $13);
-      var $14=$where_addr;
-      var $call4=_luaO_pushfstring($9, ((5249996)|0), (tempInt=STACKTOP,_memset(STACKTOP, 0, 12),STACKTOP = (STACKTOP + 12)|0,HEAP32[((tempInt)>>2)]=$call2,HEAP32[(((tempInt)+(4))>>2)]=$call3,HEAP32[(((tempInt)+(8))>>2)]=$14,tempInt));
-      _luaX_syntaxerror($7, $call4);
-
-    case 6: 
-      STACKTOP = __stackBase__;
-      return;
-  }
-
-}
-
-
-function _forstat($ls, $line) {
-  var label = 0;
-  var __stackBase__  = STACKTOP; STACKTOP = (STACKTOP + 12)|0; _memset(__stackBase__, 0, 12);
-  label = 2; 
-  while(1) switch(label) {
-    case 2: 
-      var $ls_addr;
-      var $line_addr;
-      var $fs;
-      var $varname;
-      var $bl=__stackBase__;
-      $ls_addr=$ls;
-      $line_addr=$line;
-      var $0=$ls_addr;
-      var $fs1=(($0+36)|0);
-      var $1=HEAP32[(($fs1)>>2)];
-      $fs=$1;
-      var $2=$fs;
-      _enterblock($2, $bl, 1);
-      var $3=$ls_addr;
-      _luaX_next($3);
-      var $4=$ls_addr;
-      var $call=_str_checkname($4);
-      $varname=$call;
-      var $5=$ls_addr;
-      var $t=(($5+12)|0);
-      var $token=(($t)|0);
-      var $6=HEAP32[(($token)>>2)];
-      if ((($6)|0)==61) {
-        label = 3; break;
-      }
-      else if ((($6)|0)==44 | (($6)|0)==268) {
-        label = 4; break;
-      }
-      else {
-      label = 5; break;
-      }
-      
-    case 3: 
-      var $7=$ls_addr;
-      var $8=$varname;
-      var $9=$line_addr;
-      _fornum($7, $8, $9);
-      label = 6; break;
-    case 4: 
-      var $10=$ls_addr;
-      var $11=$varname;
-      _forlist($10, $11);
-      label = 6; break;
-    case 5: 
-      var $12=$ls_addr;
-      _luaX_syntaxerror($12, ((5251400)|0));
-
-    case 6: 
-      var $13=$ls_addr;
-      var $14=$line_addr;
-      _check_match($13, 262, 264, $14);
-      var $15=$fs;
-      _leaveblock($15);
-      STACKTOP = __stackBase__;
-      return;
-  }
-
-}
-
-
 function _labelstat($ls, $label, $line) {
   var label = 0;
 
@@ -33646,6 +33492,366 @@ function _gotostat($ls, $pc) {
       var $call4=_findlabel($13, $14);
 
       return;
+  }
+
+}
+
+
+function _check_match($ls, $what, $who, $where) {
+  var label = 0;
+  var __stackBase__  = STACKTOP; _memset(__stackBase__, 0, 0);
+  label = 2; 
+  while(1) switch(label) {
+    case 2: 
+      var $ls_addr;
+      var $what_addr;
+      var $who_addr;
+      var $where_addr;
+      $ls_addr=$ls;
+      $what_addr=$what;
+      $who_addr=$who;
+      $where_addr=$where;
+      var $0=$ls_addr;
+      var $1=$what_addr;
+      var $call=_testnext($0, $1);
+      var $tobool=(($call)|0)!=0;
+      if ($tobool) { label = 6; break; } else { label = 3; break; }
+    case 3: 
+      var $2=$where_addr;
+      var $3=$ls_addr;
+      var $linenumber=(($3+4)|0);
+      var $4=HEAP32[(($linenumber)>>2)];
+      var $cmp=(($2)|0)==(($4)|0);
+      if ($cmp) { label = 4; break; } else { label = 5; break; }
+    case 4: 
+      var $5=$ls_addr;
+      var $6=$what_addr;
+      _error_expected($5, $6);
+
+    case 5: 
+      var $7=$ls_addr;
+      var $8=$ls_addr;
+      var $L=(($8+40)|0);
+      var $9=HEAP32[(($L)>>2)];
+      var $10=$ls_addr;
+      var $11=$what_addr;
+      var $call2=_luaX_token2str($10, $11);
+      var $12=$ls_addr;
+      var $13=$who_addr;
+      var $call3=_luaX_token2str($12, $13);
+      var $14=$where_addr;
+      var $call4=_luaO_pushfstring($9, ((5249996)|0), (tempInt=STACKTOP,_memset(STACKTOP, 0, 12),STACKTOP = (STACKTOP + 12)|0,HEAP32[((tempInt)>>2)]=$call2,HEAP32[(((tempInt)+(4))>>2)]=$call3,HEAP32[(((tempInt)+(8))>>2)]=$14,tempInt));
+      _luaX_syntaxerror($7, $call4);
+
+    case 6: 
+      STACKTOP = __stackBase__;
+      return;
+  }
+
+}
+
+
+function _forstat($ls, $line) {
+  var label = 0;
+  var __stackBase__  = STACKTOP; STACKTOP = (STACKTOP + 12)|0; _memset(__stackBase__, 0, 12);
+  label = 2; 
+  while(1) switch(label) {
+    case 2: 
+      var $ls_addr;
+      var $line_addr;
+      var $fs;
+      var $varname;
+      var $bl=__stackBase__;
+      $ls_addr=$ls;
+      $line_addr=$line;
+      var $0=$ls_addr;
+      var $fs1=(($0+36)|0);
+      var $1=HEAP32[(($fs1)>>2)];
+      $fs=$1;
+      var $2=$fs;
+      _enterblock($2, $bl, 1);
+      var $3=$ls_addr;
+      _luaX_next($3);
+      var $4=$ls_addr;
+      var $call=_str_checkname($4);
+      $varname=$call;
+      var $5=$ls_addr;
+      var $t=(($5+12)|0);
+      var $token=(($t)|0);
+      var $6=HEAP32[(($token)>>2)];
+      if ((($6)|0)==61) {
+        label = 3; break;
+      }
+      else if ((($6)|0)==44 | (($6)|0)==268) {
+        label = 4; break;
+      }
+      else {
+      label = 5; break;
+      }
+      
+    case 3: 
+      var $7=$ls_addr;
+      var $8=$varname;
+      var $9=$line_addr;
+      _fornum($7, $8, $9);
+      label = 6; break;
+    case 4: 
+      var $10=$ls_addr;
+      var $11=$varname;
+      _forlist($10, $11);
+      label = 6; break;
+    case 5: 
+      var $12=$ls_addr;
+      _luaX_syntaxerror($12, ((5251400)|0));
+
+    case 6: 
+      var $13=$ls_addr;
+      var $14=$line_addr;
+      _check_match($13, 262, 264, $14);
+      var $15=$fs;
+      _leaveblock($15);
+      STACKTOP = __stackBase__;
+      return;
+  }
+
+}
+
+
+function _exprstat($ls) {
+  var label = 0;
+  var __stackBase__  = STACKTOP; STACKTOP = (STACKTOP + 24)|0; _memset(__stackBase__, 0, 24);
+  label = 2; 
+  while(1) switch(label) {
+    case 2: 
+      var $ls_addr;
+      var $fs;
+      var $v=__stackBase__;
+      $ls_addr=$ls;
+      var $0=$ls_addr;
+      var $fs1=(($0+36)|0);
+      var $1=HEAP32[(($fs1)>>2)];
+      $fs=$1;
+      var $2=$ls_addr;
+      var $v2=(($v+4)|0);
+      _suffixedexp($2, $v2);
+      var $3=$ls_addr;
+      var $t=(($3+12)|0);
+      var $token=(($t)|0);
+      var $4=HEAP32[(($token)>>2)];
+      var $cmp=(($4)|0)==61;
+      if ($cmp) { label = 4; break; } else { label = 3; break; }
+    case 3: 
+      var $5=$ls_addr;
+      var $t3=(($5+12)|0);
+      var $token4=(($t3)|0);
+      var $6=HEAP32[(($token4)>>2)];
+      var $cmp5=(($6)|0)==44;
+      if ($cmp5) { label = 4; break; } else { label = 5; break; }
+    case 4: 
+      var $prev=(($v)|0);
+      HEAP32[(($prev)>>2)]=0;
+      var $7=$ls_addr;
+      _assignment($7, $v, 1);
+      label = 8; break;
+    case 5: 
+      var $v6=(($v+4)|0);
+      var $k=(($v6)|0);
+      var $8=HEAP32[(($k)>>2)];
+      var $cmp7=(($8)|0)==12;
+      if ($cmp7) { label = 7; break; } else { label = 6; break; }
+    case 6: 
+      var $9=$ls_addr;
+      _luaX_syntaxerror($9, ((5246576)|0));
+
+    case 7: 
+      var $v9=(($v+4)|0);
+      var $u=(($v9+4)|0);
+      var $info=$u;
+      var $10=HEAP32[(($info)>>2)];
+      var $11=$fs;
+      var $f=(($11)|0);
+      var $12=HEAP32[(($f)>>2)];
+      var $code=(($12+12)|0);
+      var $13=HEAP32[(($code)>>2)];
+      var $arrayidx=(($13+($10<<2))|0);
+      var $14=HEAP32[(($arrayidx)>>2)];
+      var $and=$14 & -8372225;
+      var $or=$and | 16384;
+      var $v10=(($v+4)|0);
+      var $u11=(($v10+4)|0);
+      var $info12=$u11;
+      var $15=HEAP32[(($info12)>>2)];
+      var $16=$fs;
+      var $f13=(($16)|0);
+      var $17=HEAP32[(($f13)>>2)];
+      var $code14=(($17+12)|0);
+      var $18=HEAP32[(($code14)>>2)];
+      var $arrayidx15=(($18+($15<<2))|0);
+      HEAP32[(($arrayidx15)>>2)]=$or;
+      label = 8; break;
+    case 8: 
+      STACKTOP = __stackBase__;
+      return;
+  }
+
+}
+_exprstat["X"]=1;
+
+function _getunopr($op) {
+  var label = 0;
+
+  label = 2; 
+  while(1) switch(label) {
+    case 2: 
+      var $retval;
+      var $op_addr;
+      $op_addr=$op;
+      var $0=$op_addr;
+      if ((($0)|0)==271) {
+        label = 3; break;
+      }
+      else if ((($0)|0)==45) {
+        label = 4; break;
+      }
+      else if ((($0)|0)==35) {
+        label = 5; break;
+      }
+      else {
+      label = 6; break;
+      }
+      
+    case 3: 
+      $retval=1;
+      label = 7; break;
+    case 4: 
+      $retval=0;
+      label = 7; break;
+    case 5: 
+      $retval=2;
+      label = 7; break;
+    case 6: 
+      $retval=3;
+      label = 7; break;
+    case 7: 
+      var $1=$retval;
+
+      return $1;
+  }
+
+}
+
+
+function _getbinopr($op) {
+  var label = 0;
+
+  label = 2; 
+  while(1) switch(label) {
+    case 2: 
+      var $retval;
+      var $op_addr;
+      $op_addr=$op;
+      var $0=$op_addr;
+      if ((($0)|0)==43) {
+        label = 3; break;
+      }
+      else if ((($0)|0)==45) {
+        label = 4; break;
+      }
+      else if ((($0)|0)==42) {
+        label = 5; break;
+      }
+      else if ((($0)|0)==47) {
+        label = 6; break;
+      }
+      else if ((($0)|0)==37) {
+        label = 7; break;
+      }
+      else if ((($0)|0)==94) {
+        label = 8; break;
+      }
+      else if ((($0)|0)==279) {
+        label = 9; break;
+      }
+      else if ((($0)|0)==284) {
+        label = 10; break;
+      }
+      else if ((($0)|0)==281) {
+        label = 11; break;
+      }
+      else if ((($0)|0)==60) {
+        label = 12; break;
+      }
+      else if ((($0)|0)==283) {
+        label = 13; break;
+      }
+      else if ((($0)|0)==62) {
+        label = 14; break;
+      }
+      else if ((($0)|0)==282) {
+        label = 15; break;
+      }
+      else if ((($0)|0)==257) {
+        label = 16; break;
+      }
+      else if ((($0)|0)==272) {
+        label = 17; break;
+      }
+      else {
+      label = 18; break;
+      }
+      
+    case 3: 
+      $retval=0;
+      label = 19; break;
+    case 4: 
+      $retval=1;
+      label = 19; break;
+    case 5: 
+      $retval=2;
+      label = 19; break;
+    case 6: 
+      $retval=3;
+      label = 19; break;
+    case 7: 
+      $retval=4;
+      label = 19; break;
+    case 8: 
+      $retval=5;
+      label = 19; break;
+    case 9: 
+      $retval=6;
+      label = 19; break;
+    case 10: 
+      $retval=10;
+      label = 19; break;
+    case 11: 
+      $retval=7;
+      label = 19; break;
+    case 12: 
+      $retval=8;
+      label = 19; break;
+    case 13: 
+      $retval=9;
+      label = 19; break;
+    case 14: 
+      $retval=11;
+      label = 19; break;
+    case 15: 
+      $retval=12;
+      label = 19; break;
+    case 16: 
+      $retval=13;
+      label = 19; break;
+    case 17: 
+      $retval=14;
+      label = 19; break;
+    case 18: 
+      $retval=15;
+      label = 19; break;
+    case 19: 
+      var $1=$retval;
+
+      return $1;
   }
 
 }
@@ -34076,85 +34282,150 @@ function _expr($ls, $v) {
 }
 
 
-function _exprstat($ls) {
+function _subexpr($ls, $v, $limit) {
   var label = 0;
-  var __stackBase__  = STACKTOP; STACKTOP = (STACKTOP + 24)|0; _memset(__stackBase__, 0, 24);
+  var __stackBase__  = STACKTOP; STACKTOP = (STACKTOP + 20)|0; _memset(__stackBase__, 0, 20);
   label = 2; 
   while(1) switch(label) {
     case 2: 
       var $ls_addr;
-      var $fs;
-      var $v=__stackBase__;
+      var $v_addr;
+      var $limit_addr;
+      var $op;
+      var $uop;
+      var $line;
+      var $v2=__stackBase__;
+      var $nextop;
+      var $line8;
       $ls_addr=$ls;
+      $v_addr=$v;
+      $limit_addr=$limit;
       var $0=$ls_addr;
-      var $fs1=(($0+36)|0);
-      var $1=HEAP32[(($fs1)>>2)];
-      $fs=$1;
-      var $2=$ls_addr;
-      var $v2=(($v+4)|0);
-      _suffixedexp($2, $v2);
-      var $3=$ls_addr;
-      var $t=(($3+12)|0);
+      _enterlevel($0);
+      var $1=$ls_addr;
+      var $t=(($1+12)|0);
       var $token=(($t)|0);
-      var $4=HEAP32[(($token)>>2)];
-      var $cmp=(($4)|0)==61;
-      if ($cmp) { label = 4; break; } else { label = 3; break; }
+      var $2=HEAP32[(($token)>>2)];
+      var $call=_getunopr($2);
+      $uop=$call;
+      var $3=$uop;
+      var $cmp=(($3)|0)!=3;
+      if ($cmp) { label = 3; break; } else { label = 4; break; }
     case 3: 
-      var $5=$ls_addr;
-      var $t3=(($5+12)|0);
-      var $token4=(($t3)|0);
-      var $6=HEAP32[(($token4)>>2)];
-      var $cmp5=(($6)|0)==44;
-      if ($cmp5) { label = 4; break; } else { label = 5; break; }
-    case 4: 
-      var $prev=(($v)|0);
-      HEAP32[(($prev)>>2)]=0;
+      var $4=$ls_addr;
+      var $linenumber=(($4+4)|0);
+      var $5=HEAP32[(($linenumber)>>2)];
+      $line=$5;
+      var $6=$ls_addr;
+      _luaX_next($6);
       var $7=$ls_addr;
-      _assignment($7, $v, 1);
-      label = 8; break;
-    case 5: 
-      var $v6=(($v+4)|0);
-      var $k=(($v6)|0);
-      var $8=HEAP32[(($k)>>2)];
-      var $cmp7=(($8)|0)==12;
-      if ($cmp7) { label = 7; break; } else { label = 6; break; }
-    case 6: 
+      var $8=$v_addr;
+      var $call1=_subexpr($7, $8, 8);
       var $9=$ls_addr;
-      _luaX_syntaxerror($9, ((5246576)|0));
-
+      var $fs=(($9+36)|0);
+      var $10=HEAP32[(($fs)>>2)];
+      var $11=$uop;
+      var $12=$v_addr;
+      var $13=$line;
+      _luaK_prefix($10, $11, $12, $13);
+      label = 5; break;
+    case 4: 
+      var $14=$ls_addr;
+      var $15=$v_addr;
+      _simpleexp($14, $15);
+      label = 5; break;
+    case 5: 
+      var $16=$ls_addr;
+      var $t2=(($16+12)|0);
+      var $token3=(($t2)|0);
+      var $17=HEAP32[(($token3)>>2)];
+      var $call4=_getbinopr($17);
+      $op=$call4;
+      label = 6; break;
+    case 6: 
+      var $18=$op;
+      var $cmp5=(($18)|0)!=15;
+      if ($cmp5) { label = 7; break; } else { var $22 = 0;label = 8; break; }
     case 7: 
-      var $v9=(($v+4)|0);
-      var $u=(($v9+4)|0);
-      var $info=$u;
-      var $10=HEAP32[(($info)>>2)];
-      var $11=$fs;
-      var $f=(($11)|0);
-      var $12=HEAP32[(($f)>>2)];
-      var $code=(($12+12)|0);
-      var $13=HEAP32[(($code)>>2)];
-      var $arrayidx=(($13+($10<<2))|0);
-      var $14=HEAP32[(($arrayidx)>>2)];
-      var $and=$14 & -8372225;
-      var $or=$and | 16384;
-      var $v10=(($v+4)|0);
-      var $u11=(($v10+4)|0);
-      var $info12=$u11;
-      var $15=HEAP32[(($info12)>>2)];
-      var $16=$fs;
-      var $f13=(($16)|0);
-      var $17=HEAP32[(($f13)>>2)];
-      var $code14=(($17+12)|0);
-      var $18=HEAP32[(($code14)>>2)];
-      var $arrayidx15=(($18+($15<<2))|0);
-      HEAP32[(($arrayidx15)>>2)]=$or;
-      label = 8; break;
+      var $19=$op;
+      var $arrayidx=((5243164+($19<<1))|0);
+      var $left=(($arrayidx)|0);
+      var $20=HEAP8[($left)];
+      var $conv=(($20)&255);
+      var $21=$limit_addr;
+      var $cmp6=(($conv)|0) > (($21)|0);
+      var $22 = $cmp6;label = 8; break;
     case 8: 
+      var $22;
+      if ($22) { label = 9; break; } else { label = 10; break; }
+    case 9: 
+      var $23=$ls_addr;
+      var $linenumber9=(($23+4)|0);
+      var $24=HEAP32[(($linenumber9)>>2)];
+      $line8=$24;
+      var $25=$ls_addr;
+      _luaX_next($25);
+      var $26=$ls_addr;
+      var $fs10=(($26+36)|0);
+      var $27=HEAP32[(($fs10)>>2)];
+      var $28=$op;
+      var $29=$v_addr;
+      _luaK_infix($27, $28, $29);
+      var $30=$ls_addr;
+      var $31=$op;
+      var $arrayidx11=((5243164+($31<<1))|0);
+      var $right=(($arrayidx11+1)|0);
+      var $32=HEAP8[($right)];
+      var $conv12=(($32)&255);
+      var $call13=_subexpr($30, $v2, $conv12);
+      $nextop=$call13;
+      var $33=$ls_addr;
+      var $fs14=(($33+36)|0);
+      var $34=HEAP32[(($fs14)>>2)];
+      var $35=$op;
+      var $36=$v_addr;
+      var $37=$line8;
+      _luaK_posfix($34, $35, $36, $v2, $37);
+      var $38=$nextop;
+      $op=$38;
+      label = 6; break;
+    case 10: 
+      var $39=$ls_addr;
+      var $L=(($39+40)|0);
+      var $40=HEAP32[(($L)>>2)];
+      var $nCcalls=(($40+38)|0);
+      var $41=HEAP16[(($nCcalls)>>1)];
+      var $dec=((($41)-(1))&65535);
+      HEAP16[(($nCcalls)>>1)]=$dec;
+      var $42=$op;
       STACKTOP = __stackBase__;
-      return;
+      return $42;
   }
 
 }
-_exprstat["X"]=1;
+_subexpr["X"]=1;
+
+function _codestring($ls, $e, $s) {
+  var label = 0;
+
+
+  var $ls_addr;
+  var $e_addr;
+  var $s_addr;
+  $ls_addr=$ls;
+  $e_addr=$e;
+  $s_addr=$s;
+  var $0=$e_addr;
+  var $1=$ls_addr;
+  var $fs=(($1+36)|0);
+  var $2=HEAP32[(($fs)>>2)];
+  var $3=$s_addr;
+  var $call=_luaK_stringK($2, $3);
+  _init_exp($0, 4, $call);
+
+  return;
+}
+
 
 function _assignment($ls, $lh, $nvars) {
   var label = 0;
@@ -34334,310 +34605,137 @@ function _checklimit($fs, $v, $l, $what) {
 }
 
 
-function _getunopr($op) {
+function _simpleexp($ls, $v) {
   var label = 0;
 
-  label = 2; 
-  while(1) switch(label) {
-    case 2: 
-      var $retval;
-      var $op_addr;
-      $op_addr=$op;
-      var $0=$op_addr;
-      if ((($0)|0)==271) {
-        label = 3; break;
-      }
-      else if ((($0)|0)==45) {
-        label = 4; break;
-      }
-      else if ((($0)|0)==35) {
-        label = 5; break;
-      }
-      else {
-      label = 6; break;
-      }
-      
-    case 3: 
-      $retval=1;
-      label = 7; break;
-    case 4: 
-      $retval=0;
-      label = 7; break;
-    case 5: 
-      $retval=2;
-      label = 7; break;
-    case 6: 
-      $retval=3;
-      label = 7; break;
-    case 7: 
-      var $1=$retval;
-
-      return $1;
-  }
-
-}
-
-
-function _getbinopr($op) {
-  var label = 0;
-
-  label = 2; 
-  while(1) switch(label) {
-    case 2: 
-      var $retval;
-      var $op_addr;
-      $op_addr=$op;
-      var $0=$op_addr;
-      if ((($0)|0)==43) {
-        label = 3; break;
-      }
-      else if ((($0)|0)==45) {
-        label = 4; break;
-      }
-      else if ((($0)|0)==42) {
-        label = 5; break;
-      }
-      else if ((($0)|0)==47) {
-        label = 6; break;
-      }
-      else if ((($0)|0)==37) {
-        label = 7; break;
-      }
-      else if ((($0)|0)==94) {
-        label = 8; break;
-      }
-      else if ((($0)|0)==279) {
-        label = 9; break;
-      }
-      else if ((($0)|0)==284) {
-        label = 10; break;
-      }
-      else if ((($0)|0)==281) {
-        label = 11; break;
-      }
-      else if ((($0)|0)==60) {
-        label = 12; break;
-      }
-      else if ((($0)|0)==283) {
-        label = 13; break;
-      }
-      else if ((($0)|0)==62) {
-        label = 14; break;
-      }
-      else if ((($0)|0)==282) {
-        label = 15; break;
-      }
-      else if ((($0)|0)==257) {
-        label = 16; break;
-      }
-      else if ((($0)|0)==272) {
-        label = 17; break;
-      }
-      else {
-      label = 18; break;
-      }
-      
-    case 3: 
-      $retval=0;
-      label = 19; break;
-    case 4: 
-      $retval=1;
-      label = 19; break;
-    case 5: 
-      $retval=2;
-      label = 19; break;
-    case 6: 
-      $retval=3;
-      label = 19; break;
-    case 7: 
-      $retval=4;
-      label = 19; break;
-    case 8: 
-      $retval=5;
-      label = 19; break;
-    case 9: 
-      $retval=6;
-      label = 19; break;
-    case 10: 
-      $retval=10;
-      label = 19; break;
-    case 11: 
-      $retval=7;
-      label = 19; break;
-    case 12: 
-      $retval=8;
-      label = 19; break;
-    case 13: 
-      $retval=9;
-      label = 19; break;
-    case 14: 
-      $retval=11;
-      label = 19; break;
-    case 15: 
-      $retval=12;
-      label = 19; break;
-    case 16: 
-      $retval=13;
-      label = 19; break;
-    case 17: 
-      $retval=14;
-      label = 19; break;
-    case 18: 
-      $retval=15;
-      label = 19; break;
-    case 19: 
-      var $1=$retval;
-
-      return $1;
-  }
-
-}
-
-
-function _subexpr($ls, $v, $limit) {
-  var label = 0;
-  var __stackBase__  = STACKTOP; STACKTOP = (STACKTOP + 20)|0; _memset(__stackBase__, 0, 20);
   label = 2; 
   while(1) switch(label) {
     case 2: 
       var $ls_addr;
       var $v_addr;
-      var $limit_addr;
-      var $op;
-      var $uop;
-      var $line;
-      var $v2=__stackBase__;
-      var $nextop;
-      var $line8;
+      var $fs;
       $ls_addr=$ls;
       $v_addr=$v;
-      $limit_addr=$limit;
       var $0=$ls_addr;
-      _enterlevel($0);
-      var $1=$ls_addr;
-      var $t=(($1+12)|0);
+      var $t=(($0+12)|0);
       var $token=(($t)|0);
-      var $2=HEAP32[(($token)>>2)];
-      var $call=_getunopr($2);
-      $uop=$call;
-      var $3=$uop;
-      var $cmp=(($3)|0)!=3;
-      if ($cmp) { label = 3; break; } else { label = 4; break; }
+      var $1=HEAP32[(($token)>>2)];
+      if ((($1)|0)==287) {
+        label = 3; break;
+      }
+      else if ((($1)|0)==289) {
+        label = 4; break;
+      }
+      else if ((($1)|0)==270) {
+        label = 5; break;
+      }
+      else if ((($1)|0)==276) {
+        label = 6; break;
+      }
+      else if ((($1)|0)==263) {
+        label = 7; break;
+      }
+      else if ((($1)|0)==280) {
+        label = 8; break;
+      }
+      else if ((($1)|0)==123) {
+        label = 11; break;
+      }
+      else if ((($1)|0)==265) {
+        label = 12; break;
+      }
+      else {
+      label = 13; break;
+      }
+      
     case 3: 
-      var $4=$ls_addr;
-      var $linenumber=(($4+4)|0);
-      var $5=HEAP32[(($linenumber)>>2)];
-      $line=$5;
-      var $6=$ls_addr;
-      _luaX_next($6);
-      var $7=$ls_addr;
-      var $8=$v_addr;
-      var $call1=_subexpr($7, $8, 8);
-      var $9=$ls_addr;
-      var $fs=(($9+36)|0);
-      var $10=HEAP32[(($fs)>>2)];
-      var $11=$uop;
-      var $12=$v_addr;
-      var $13=$line;
-      _luaK_prefix($10, $11, $12, $13);
-      label = 5; break;
+      var $2=$v_addr;
+      _init_exp($2, 5, 0);
+      var $3=$ls_addr;
+      var $t1=(($3+12)|0);
+      var $seminfo=(($t1+4)|0);
+      var $r=$seminfo;
+      var $4=(HEAP32[((tempDoublePtr)>>2)]=HEAP32[(($r)>>2)],HEAP32[(((tempDoublePtr)+(4))>>2)]=HEAP32[((($r)+(4))>>2)],HEAPF64[(tempDoublePtr)>>3]);
+      var $5=$v_addr;
+      var $u=(($5+4)|0);
+      var $nval=$u;
+      (HEAPF64[(tempDoublePtr)>>3]=$4,HEAP32[(($nval)>>2)]=HEAP32[((tempDoublePtr)>>2)],HEAP32[((($nval)+(4))>>2)]=HEAP32[(((tempDoublePtr)+(4))>>2)]);
+      label = 14; break;
     case 4: 
-      var $14=$ls_addr;
-      var $15=$v_addr;
-      _simpleexp($14, $15);
-      label = 5; break;
+      var $6=$ls_addr;
+      var $7=$v_addr;
+      var $8=$ls_addr;
+      var $t3=(($8+12)|0);
+      var $seminfo4=(($t3+4)|0);
+      var $ts=$seminfo4;
+      var $9=HEAP32[(($ts)>>2)];
+      _codestring($6, $7, $9);
+      label = 14; break;
     case 5: 
-      var $16=$ls_addr;
-      var $t2=(($16+12)|0);
-      var $token3=(($t2)|0);
-      var $17=HEAP32[(($token3)>>2)];
-      var $call4=_getbinopr($17);
-      $op=$call4;
-      label = 6; break;
+      var $10=$v_addr;
+      _init_exp($10, 1, 0);
+      label = 14; break;
     case 6: 
-      var $18=$op;
-      var $cmp5=(($18)|0)!=15;
-      if ($cmp5) { label = 7; break; } else { var $22 = 0;label = 8; break; }
+      var $11=$v_addr;
+      _init_exp($11, 2, 0);
+      label = 14; break;
     case 7: 
-      var $19=$op;
-      var $arrayidx=((5243164+($19<<1))|0);
-      var $left=(($arrayidx)|0);
-      var $20=HEAP8[($left)];
-      var $conv=(($20)&255);
-      var $21=$limit_addr;
-      var $cmp6=(($conv)|0) > (($21)|0);
-      var $22 = $cmp6;label = 8; break;
+      var $12=$v_addr;
+      _init_exp($12, 3, 0);
+      label = 14; break;
     case 8: 
-      var $22;
-      if ($22) { label = 9; break; } else { label = 10; break; }
+      var $13=$ls_addr;
+      var $fs9=(($13+36)|0);
+      var $14=HEAP32[(($fs9)>>2)];
+      $fs=$14;
+      var $15=$fs;
+      var $f=(($15)|0);
+      var $16=HEAP32[(($f)>>2)];
+      var $is_vararg=(($16+77)|0);
+      var $17=HEAP8[($is_vararg)];
+      var $tobool=(($17 << 24) >> 24)!=0;
+      if ($tobool) { label = 10; break; } else { label = 9; break; }
     case 9: 
-      var $23=$ls_addr;
-      var $linenumber9=(($23+4)|0);
-      var $24=HEAP32[(($linenumber9)>>2)];
-      $line8=$24;
-      var $25=$ls_addr;
-      _luaX_next($25);
-      var $26=$ls_addr;
-      var $fs10=(($26+36)|0);
-      var $27=HEAP32[(($fs10)>>2)];
-      var $28=$op;
-      var $29=$v_addr;
-      _luaK_infix($27, $28, $29);
-      var $30=$ls_addr;
-      var $31=$op;
-      var $arrayidx11=((5243164+($31<<1))|0);
-      var $right=(($arrayidx11+1)|0);
-      var $32=HEAP8[($right)];
-      var $conv12=(($32)&255);
-      var $call13=_subexpr($30, $v2, $conv12);
-      $nextop=$call13;
-      var $33=$ls_addr;
-      var $fs14=(($33+36)|0);
-      var $34=HEAP32[(($fs14)>>2)];
-      var $35=$op;
-      var $36=$v_addr;
-      var $37=$line8;
-      _luaK_posfix($34, $35, $36, $v2, $37);
-      var $38=$nextop;
-      $op=$38;
-      label = 6; break;
+      var $18=$ls_addr;
+      _luaX_syntaxerror($18, ((5245800)|0));
+
     case 10: 
-      var $39=$ls_addr;
-      var $L=(($39+40)|0);
-      var $40=HEAP32[(($L)>>2)];
-      var $nCcalls=(($40+38)|0);
-      var $41=HEAP16[(($nCcalls)>>1)];
-      var $dec=((($41)-(1))&65535);
-      HEAP16[(($nCcalls)>>1)]=$dec;
-      var $42=$op;
-      STACKTOP = __stackBase__;
-      return $42;
+      var $19=$v_addr;
+      var $20=$fs;
+      var $call=_luaK_codeABC($20, 38, 0, 1, 0);
+      _init_exp($19, 13, $call);
+      label = 14; break;
+    case 11: 
+      var $21=$ls_addr;
+      var $22=$v_addr;
+      _constructor($21, $22);
+      label = 15; break;
+    case 12: 
+      var $23=$ls_addr;
+      _luaX_next($23);
+      var $24=$ls_addr;
+      var $25=$v_addr;
+      var $26=$ls_addr;
+      var $linenumber=(($26+4)|0);
+      var $27=HEAP32[(($linenumber)>>2)];
+      _body($24, $25, 0, $27);
+      label = 15; break;
+    case 13: 
+      var $28=$ls_addr;
+      var $29=$v_addr;
+      _suffixedexp($28, $29);
+      label = 15; break;
+    case 14: 
+      var $30=$ls_addr;
+      _luaX_next($30);
+      label = 15; break;
+    case 15: 
+
+      return;
   }
 
 }
-_subexpr["X"]=1;
-
-function _codestring($ls, $e, $s) {
-  var label = 0;
-
-
-  var $ls_addr;
-  var $e_addr;
-  var $s_addr;
-  $ls_addr=$ls;
-  $e_addr=$e;
-  $s_addr=$s;
-  var $0=$e_addr;
-  var $1=$ls_addr;
-  var $fs=(($1+36)|0);
-  var $2=HEAP32[(($fs)>>2)];
-  var $3=$s_addr;
-  var $call=_luaK_stringK($2, $3);
-  _init_exp($0, 4, $call);
-
-  return;
-}
-
+_simpleexp["X"]=1;
 
 function _constructor($ls, $t) {
   var label = 0;
@@ -35172,286 +35270,6 @@ function _new_localvar($ls, $name) {
 }
 _new_localvar["X"]=1;
 
-function _simpleexp($ls, $v) {
-  var label = 0;
-
-  label = 2; 
-  while(1) switch(label) {
-    case 2: 
-      var $ls_addr;
-      var $v_addr;
-      var $fs;
-      $ls_addr=$ls;
-      $v_addr=$v;
-      var $0=$ls_addr;
-      var $t=(($0+12)|0);
-      var $token=(($t)|0);
-      var $1=HEAP32[(($token)>>2)];
-      if ((($1)|0)==287) {
-        label = 3; break;
-      }
-      else if ((($1)|0)==289) {
-        label = 4; break;
-      }
-      else if ((($1)|0)==270) {
-        label = 5; break;
-      }
-      else if ((($1)|0)==276) {
-        label = 6; break;
-      }
-      else if ((($1)|0)==263) {
-        label = 7; break;
-      }
-      else if ((($1)|0)==280) {
-        label = 8; break;
-      }
-      else if ((($1)|0)==123) {
-        label = 11; break;
-      }
-      else if ((($1)|0)==265) {
-        label = 12; break;
-      }
-      else {
-      label = 13; break;
-      }
-      
-    case 3: 
-      var $2=$v_addr;
-      _init_exp($2, 5, 0);
-      var $3=$ls_addr;
-      var $t1=(($3+12)|0);
-      var $seminfo=(($t1+4)|0);
-      var $r=$seminfo;
-      var $4=(HEAP32[((tempDoublePtr)>>2)]=HEAP32[(($r)>>2)],HEAP32[(((tempDoublePtr)+(4))>>2)]=HEAP32[((($r)+(4))>>2)],HEAPF64[(tempDoublePtr)>>3]);
-      var $5=$v_addr;
-      var $u=(($5+4)|0);
-      var $nval=$u;
-      (HEAPF64[(tempDoublePtr)>>3]=$4,HEAP32[(($nval)>>2)]=HEAP32[((tempDoublePtr)>>2)],HEAP32[((($nval)+(4))>>2)]=HEAP32[(((tempDoublePtr)+(4))>>2)]);
-      label = 14; break;
-    case 4: 
-      var $6=$ls_addr;
-      var $7=$v_addr;
-      var $8=$ls_addr;
-      var $t3=(($8+12)|0);
-      var $seminfo4=(($t3+4)|0);
-      var $ts=$seminfo4;
-      var $9=HEAP32[(($ts)>>2)];
-      _codestring($6, $7, $9);
-      label = 14; break;
-    case 5: 
-      var $10=$v_addr;
-      _init_exp($10, 1, 0);
-      label = 14; break;
-    case 6: 
-      var $11=$v_addr;
-      _init_exp($11, 2, 0);
-      label = 14; break;
-    case 7: 
-      var $12=$v_addr;
-      _init_exp($12, 3, 0);
-      label = 14; break;
-    case 8: 
-      var $13=$ls_addr;
-      var $fs9=(($13+36)|0);
-      var $14=HEAP32[(($fs9)>>2)];
-      $fs=$14;
-      var $15=$fs;
-      var $f=(($15)|0);
-      var $16=HEAP32[(($f)>>2)];
-      var $is_vararg=(($16+77)|0);
-      var $17=HEAP8[($is_vararg)];
-      var $tobool=(($17 << 24) >> 24)!=0;
-      if ($tobool) { label = 10; break; } else { label = 9; break; }
-    case 9: 
-      var $18=$ls_addr;
-      _luaX_syntaxerror($18, ((5245800)|0));
-
-    case 10: 
-      var $19=$v_addr;
-      var $20=$fs;
-      var $call=_luaK_codeABC($20, 38, 0, 1, 0);
-      _init_exp($19, 13, $call);
-      label = 14; break;
-    case 11: 
-      var $21=$ls_addr;
-      var $22=$v_addr;
-      _constructor($21, $22);
-      label = 15; break;
-    case 12: 
-      var $23=$ls_addr;
-      _luaX_next($23);
-      var $24=$ls_addr;
-      var $25=$v_addr;
-      var $26=$ls_addr;
-      var $linenumber=(($26+4)|0);
-      var $27=HEAP32[(($linenumber)>>2)];
-      _body($24, $25, 0, $27);
-      label = 15; break;
-    case 13: 
-      var $28=$ls_addr;
-      var $29=$v_addr;
-      _suffixedexp($28, $29);
-      label = 15; break;
-    case 14: 
-      var $30=$ls_addr;
-      _luaX_next($30);
-      label = 15; break;
-    case 15: 
-
-      return;
-  }
-
-}
-_simpleexp["X"]=1;
-
-function _parlist($ls) {
-  var label = 0;
-
-  label = 2; 
-  while(1) switch(label) {
-    case 2: 
-      var $ls_addr;
-      var $fs;
-      var $f;
-      var $nparams;
-      $ls_addr=$ls;
-      var $0=$ls_addr;
-      var $fs1=(($0+36)|0);
-      var $1=HEAP32[(($fs1)>>2)];
-      $fs=$1;
-      var $2=$fs;
-      var $f2=(($2)|0);
-      var $3=HEAP32[(($f2)>>2)];
-      $f=$3;
-      $nparams=0;
-      var $4=$f;
-      var $is_vararg=(($4+77)|0);
-      HEAP8[($is_vararg)]=0;
-      var $5=$ls_addr;
-      var $t=(($5+12)|0);
-      var $token=(($t)|0);
-      var $6=HEAP32[(($token)>>2)];
-      var $cmp=(($6)|0)!=41;
-      if ($cmp) { label = 3; break; } else { label = 13; break; }
-    case 3: 
-      label = 4; break;
-    case 4: 
-      var $7=$ls_addr;
-      var $t3=(($7+12)|0);
-      var $token4=(($t3)|0);
-      var $8=HEAP32[(($token4)>>2)];
-      if ((($8)|0)==288) {
-        label = 5; break;
-      }
-      else if ((($8)|0)==280) {
-        label = 6; break;
-      }
-      else {
-      label = 7; break;
-      }
-      
-    case 5: 
-      var $9=$ls_addr;
-      var $10=$ls_addr;
-      var $call=_str_checkname($10);
-      _new_localvar($9, $call);
-      var $11=$nparams;
-      var $inc=((($11)+(1))|0);
-      $nparams=$inc;
-      label = 8; break;
-    case 6: 
-      var $12=$ls_addr;
-      _luaX_next($12);
-      var $13=$f;
-      var $is_vararg6=(($13+77)|0);
-      HEAP8[($is_vararg6)]=1;
-      label = 8; break;
-    case 7: 
-      var $14=$ls_addr;
-      _luaX_syntaxerror($14, ((5253732)|0));
-
-    case 8: 
-      label = 9; break;
-    case 9: 
-      var $15=$f;
-      var $is_vararg7=(($15+77)|0);
-      var $16=HEAP8[($is_vararg7)];
-      var $tobool=(($16 << 24) >> 24)!=0;
-      if ($tobool) { var $18 = 0;label = 11; break; } else { label = 10; break; }
-    case 10: 
-      var $17=$ls_addr;
-      var $call8=_testnext($17, 44);
-      var $tobool9=(($call8)|0)!=0;
-      var $18 = $tobool9;label = 11; break;
-    case 11: 
-      var $18;
-      if ($18) { label = 4; break; } else { label = 12; break; }
-    case 12: 
-      label = 13; break;
-    case 13: 
-      var $19=$ls_addr;
-      var $20=$nparams;
-      _adjustlocalvars($19, $20);
-      var $21=$fs;
-      var $nactvar=(($21+46)|0);
-      var $22=HEAP8[($nactvar)];
-      var $23=$f;
-      var $numparams=(($23+76)|0);
-      HEAP8[($numparams)]=$22;
-      var $24=$fs;
-      var $25=$fs;
-      var $nactvar10=(($25+46)|0);
-      var $26=HEAP8[($nactvar10)];
-      var $conv=(($26)&255);
-      _luaK_reserveregs($24, $conv);
-
-      return;
-  }
-
-}
-_parlist["X"]=1;
-
-function _markupval($fs, $level) {
-  var label = 0;
-
-  label = 2; 
-  while(1) switch(label) {
-    case 2: 
-      var $fs_addr;
-      var $level_addr;
-      var $bl;
-      $fs_addr=$fs;
-      $level_addr=$level;
-      var $0=$fs_addr;
-      var $bl1=(($0+16)|0);
-      var $1=HEAP32[(($bl1)>>2)];
-      $bl=$1;
-      label = 3; break;
-    case 3: 
-      var $2=$bl;
-      var $nactvar=(($2+8)|0);
-      var $3=HEAP8[($nactvar)];
-      var $conv=(($3)&255);
-      var $4=$level_addr;
-      var $cmp=(($conv)|0) > (($4)|0);
-      if ($cmp) { label = 4; break; } else { label = 5; break; }
-    case 4: 
-      var $5=$bl;
-      var $previous=(($5)|0);
-      var $6=HEAP32[(($previous)>>2)];
-      $bl=$6;
-      label = 3; break;
-    case 5: 
-      var $7=$bl;
-      var $upval=(($7+9)|0);
-      HEAP8[($upval)]=1;
-
-      return;
-  }
-
-}
-
-
 function _registerlocalvar($ls, $varname) {
   var label = 0;
 
@@ -35820,6 +35638,216 @@ function _listfield($ls, $cc) {
 }
 
 
+function _parlist($ls) {
+  var label = 0;
+
+  label = 2; 
+  while(1) switch(label) {
+    case 2: 
+      var $ls_addr;
+      var $fs;
+      var $f;
+      var $nparams;
+      $ls_addr=$ls;
+      var $0=$ls_addr;
+      var $fs1=(($0+36)|0);
+      var $1=HEAP32[(($fs1)>>2)];
+      $fs=$1;
+      var $2=$fs;
+      var $f2=(($2)|0);
+      var $3=HEAP32[(($f2)>>2)];
+      $f=$3;
+      $nparams=0;
+      var $4=$f;
+      var $is_vararg=(($4+77)|0);
+      HEAP8[($is_vararg)]=0;
+      var $5=$ls_addr;
+      var $t=(($5+12)|0);
+      var $token=(($t)|0);
+      var $6=HEAP32[(($token)>>2)];
+      var $cmp=(($6)|0)!=41;
+      if ($cmp) { label = 3; break; } else { label = 13; break; }
+    case 3: 
+      label = 4; break;
+    case 4: 
+      var $7=$ls_addr;
+      var $t3=(($7+12)|0);
+      var $token4=(($t3)|0);
+      var $8=HEAP32[(($token4)>>2)];
+      if ((($8)|0)==288) {
+        label = 5; break;
+      }
+      else if ((($8)|0)==280) {
+        label = 6; break;
+      }
+      else {
+      label = 7; break;
+      }
+      
+    case 5: 
+      var $9=$ls_addr;
+      var $10=$ls_addr;
+      var $call=_str_checkname($10);
+      _new_localvar($9, $call);
+      var $11=$nparams;
+      var $inc=((($11)+(1))|0);
+      $nparams=$inc;
+      label = 8; break;
+    case 6: 
+      var $12=$ls_addr;
+      _luaX_next($12);
+      var $13=$f;
+      var $is_vararg6=(($13+77)|0);
+      HEAP8[($is_vararg6)]=1;
+      label = 8; break;
+    case 7: 
+      var $14=$ls_addr;
+      _luaX_syntaxerror($14, ((5253732)|0));
+
+    case 8: 
+      label = 9; break;
+    case 9: 
+      var $15=$f;
+      var $is_vararg7=(($15+77)|0);
+      var $16=HEAP8[($is_vararg7)];
+      var $tobool=(($16 << 24) >> 24)!=0;
+      if ($tobool) { var $18 = 0;label = 11; break; } else { label = 10; break; }
+    case 10: 
+      var $17=$ls_addr;
+      var $call8=_testnext($17, 44);
+      var $tobool9=(($call8)|0)!=0;
+      var $18 = $tobool9;label = 11; break;
+    case 11: 
+      var $18;
+      if ($18) { label = 4; break; } else { label = 12; break; }
+    case 12: 
+      label = 13; break;
+    case 13: 
+      var $19=$ls_addr;
+      var $20=$nparams;
+      _adjustlocalvars($19, $20);
+      var $21=$fs;
+      var $nactvar=(($21+46)|0);
+      var $22=HEAP8[($nactvar)];
+      var $23=$f;
+      var $numparams=(($23+76)|0);
+      HEAP8[($numparams)]=$22;
+      var $24=$fs;
+      var $25=$fs;
+      var $nactvar10=(($25+46)|0);
+      var $26=HEAP8[($nactvar10)];
+      var $conv=(($26)&255);
+      _luaK_reserveregs($24, $conv);
+
+      return;
+  }
+
+}
+_parlist["X"]=1;
+
+function _markupval($fs, $level) {
+  var label = 0;
+
+  label = 2; 
+  while(1) switch(label) {
+    case 2: 
+      var $fs_addr;
+      var $level_addr;
+      var $bl;
+      $fs_addr=$fs;
+      $level_addr=$level;
+      var $0=$fs_addr;
+      var $bl1=(($0+16)|0);
+      var $1=HEAP32[(($bl1)>>2)];
+      $bl=$1;
+      label = 3; break;
+    case 3: 
+      var $2=$bl;
+      var $nactvar=(($2+8)|0);
+      var $3=HEAP8[($nactvar)];
+      var $conv=(($3)&255);
+      var $4=$level_addr;
+      var $cmp=(($conv)|0) > (($4)|0);
+      if ($cmp) { label = 4; break; } else { label = 5; break; }
+    case 4: 
+      var $5=$bl;
+      var $previous=(($5)|0);
+      var $6=HEAP32[(($previous)>>2)];
+      $bl=$6;
+      label = 3; break;
+    case 5: 
+      var $7=$bl;
+      var $upval=(($7+9)|0);
+      HEAP8[($upval)]=1;
+
+      return;
+  }
+
+}
+
+
+function _enterblock($fs, $bl, $isloop) {
+  var label = 0;
+
+
+  var $fs_addr;
+  var $bl_addr;
+  var $isloop_addr;
+  $fs_addr=$fs;
+  $bl_addr=$bl;
+  $isloop_addr=$isloop;
+  var $0=$isloop_addr;
+  var $1=$bl_addr;
+  var $isloop1=(($1+10)|0);
+  HEAP8[($isloop1)]=$0;
+  var $2=$fs_addr;
+  var $nactvar=(($2+46)|0);
+  var $3=HEAP8[($nactvar)];
+  var $4=$bl_addr;
+  var $nactvar2=(($4+8)|0);
+  HEAP8[($nactvar2)]=$3;
+  var $5=$fs_addr;
+  var $ls=(($5+12)|0);
+  var $6=HEAP32[(($ls)>>2)];
+  var $dyd=(($6+52)|0);
+  var $7=HEAP32[(($dyd)>>2)];
+  var $label=(($7+24)|0);
+  var $n=(($label+4)|0);
+  var $8=HEAP32[(($n)>>2)];
+  var $conv=(($8) & 65535);
+  var $9=$bl_addr;
+  var $firstlabel=(($9+4)|0);
+  HEAP16[(($firstlabel)>>1)]=$conv;
+  var $10=$fs_addr;
+  var $ls3=(($10+12)|0);
+  var $11=HEAP32[(($ls3)>>2)];
+  var $dyd4=(($11+52)|0);
+  var $12=HEAP32[(($dyd4)>>2)];
+  var $gt=(($12+12)|0);
+  var $n5=(($gt+4)|0);
+  var $13=HEAP32[(($n5)>>2)];
+  var $conv6=(($13) & 65535);
+  var $14=$bl_addr;
+  var $firstgoto=(($14+6)|0);
+  HEAP16[(($firstgoto)>>1)]=$conv6;
+  var $15=$bl_addr;
+  var $upval=(($15+9)|0);
+  HEAP8[($upval)]=0;
+  var $16=$fs_addr;
+  var $bl7=(($16+16)|0);
+  var $17=HEAP32[(($bl7)>>2)];
+  var $18=$bl_addr;
+  var $previous=(($18)|0);
+  HEAP32[(($previous)>>2)]=$17;
+  var $19=$bl_addr;
+  var $20=$fs_addr;
+  var $bl8=(($20+16)|0);
+  HEAP32[(($bl8)>>2)]=$19;
+
+  return;
+}
+_enterblock["X"]=1;
+
 function _recfield($ls, $cc) {
   var label = 0;
   var __stackBase__  = STACKTOP; STACKTOP = (STACKTOP + 40)|0; _memset(__stackBase__, 0, 40);
@@ -36165,6 +36193,261 @@ function _searchvar($fs, $n) {
 }
 
 
+function _searchupvalue($fs, $name) {
+  var label = 0;
+
+  label = 2; 
+  while(1) switch(label) {
+    case 2: 
+      var $retval;
+      var $fs_addr;
+      var $name_addr;
+      var $i;
+      var $up;
+      $fs_addr=$fs;
+      $name_addr=$name;
+      var $0=$fs_addr;
+      var $f=(($0)|0);
+      var $1=HEAP32[(($f)>>2)];
+      var $upvalues=(($1+28)|0);
+      var $2=HEAP32[(($upvalues)>>2)];
+      $up=$2;
+      $i=0;
+      label = 3; break;
+    case 3: 
+      var $3=$i;
+      var $4=$fs_addr;
+      var $nups=(($4+47)|0);
+      var $5=HEAP8[($nups)];
+      var $conv=(($5)&255);
+      var $cmp=(($3)|0) < (($conv)|0);
+      if ($cmp) { label = 4; break; } else { label = 8; break; }
+    case 4: 
+      var $6=$i;
+      var $7=$up;
+      var $arrayidx=(($7+($6<<3))|0);
+      var $name2=(($arrayidx)|0);
+      var $8=HEAP32[(($name2)>>2)];
+      var $9=$name_addr;
+      var $call=_luaS_eqstr($8, $9);
+      var $tobool=(($call)|0)!=0;
+      if ($tobool) { label = 5; break; } else { label = 6; break; }
+    case 5: 
+      var $10=$i;
+      $retval=$10;
+      label = 9; break;
+    case 6: 
+      label = 7; break;
+    case 7: 
+      var $11=$i;
+      var $inc=((($11)+(1))|0);
+      $i=$inc;
+      label = 3; break;
+    case 8: 
+      $retval=-1;
+      label = 9; break;
+    case 9: 
+      var $12=$retval;
+
+      return $12;
+  }
+
+}
+
+
+function _skipnoopstat($ls) {
+  var label = 0;
+
+  label = 2; 
+  while(1) switch(label) {
+    case 2: 
+      var $ls_addr;
+      $ls_addr=$ls;
+      label = 3; break;
+    case 3: 
+      var $0=$ls_addr;
+      var $t=(($0+12)|0);
+      var $token=(($t)|0);
+      var $1=HEAP32[(($token)>>2)];
+      var $cmp=(($1)|0)==59;
+      if ($cmp) { var $4 = 1;label = 5; break; } else { label = 4; break; }
+    case 4: 
+      var $2=$ls_addr;
+      var $t1=(($2+12)|0);
+      var $token2=(($t1)|0);
+      var $3=HEAP32[(($token2)>>2)];
+      var $cmp3=(($3)|0)==285;
+      var $4 = $cmp3;label = 5; break;
+    case 5: 
+      var $4;
+      if ($4) { label = 6; break; } else { label = 7; break; }
+    case 6: 
+      var $5=$ls_addr;
+      _statement($5);
+      label = 3; break;
+    case 7: 
+
+      return;
+  }
+
+}
+
+
+function _funcname($ls, $v) {
+  var label = 0;
+
+  label = 2; 
+  while(1) switch(label) {
+    case 2: 
+      var $ls_addr;
+      var $v_addr;
+      var $ismethod;
+      $ls_addr=$ls;
+      $v_addr=$v;
+      $ismethod=0;
+      var $0=$ls_addr;
+      var $1=$v_addr;
+      _singlevar($0, $1);
+      label = 3; break;
+    case 3: 
+      var $2=$ls_addr;
+      var $t=(($2+12)|0);
+      var $token=(($t)|0);
+      var $3=HEAP32[(($token)>>2)];
+      var $cmp=(($3)|0)==46;
+      if ($cmp) { label = 4; break; } else { label = 5; break; }
+    case 4: 
+      var $4=$ls_addr;
+      var $5=$v_addr;
+      _fieldsel($4, $5);
+      label = 3; break;
+    case 5: 
+      var $6=$ls_addr;
+      var $t1=(($6+12)|0);
+      var $token2=(($t1)|0);
+      var $7=HEAP32[(($token2)>>2)];
+      var $cmp3=(($7)|0)==58;
+      if ($cmp3) { label = 6; break; } else { label = 7; break; }
+    case 6: 
+      $ismethod=1;
+      var $8=$ls_addr;
+      var $9=$v_addr;
+      _fieldsel($8, $9);
+      label = 7; break;
+    case 7: 
+      var $10=$ismethod;
+
+      return $10;
+  }
+
+}
+
+
+function _cond($ls) {
+  var label = 0;
+  var __stackBase__  = STACKTOP; STACKTOP = (STACKTOP + 20)|0; _memset(__stackBase__, 0, 20);
+  label = 2; 
+  while(1) switch(label) {
+    case 2: 
+      var $ls_addr;
+      var $v=__stackBase__;
+      $ls_addr=$ls;
+      var $0=$ls_addr;
+      _expr($0, $v);
+      var $k=(($v)|0);
+      var $1=HEAP32[(($k)>>2)];
+      var $cmp=(($1)|0)==1;
+      if ($cmp) { label = 3; break; } else { label = 4; break; }
+    case 3: 
+      var $k1=(($v)|0);
+      HEAP32[(($k1)>>2)]=3;
+      label = 4; break;
+    case 4: 
+      var $2=$ls_addr;
+      var $fs=(($2+36)|0);
+      var $3=HEAP32[(($fs)>>2)];
+      _luaK_goiftrue($3, $v);
+      var $f=(($v+16)|0);
+      var $4=HEAP32[(($f)>>2)];
+      STACKTOP = __stackBase__;
+      return $4;
+  }
+
+}
+
+
+function _fornum($ls, $varname, $line) {
+  var label = 0;
+
+  label = 2; 
+  while(1) switch(label) {
+    case 2: 
+      var $ls_addr;
+      var $varname_addr;
+      var $line_addr;
+      var $fs;
+      var $base;
+      $ls_addr=$ls;
+      $varname_addr=$varname;
+      $line_addr=$line;
+      var $0=$ls_addr;
+      var $fs1=(($0+36)|0);
+      var $1=HEAP32[(($fs1)>>2)];
+      $fs=$1;
+      var $2=$fs;
+      var $freereg=(($2+48)|0);
+      var $3=HEAP8[($freereg)];
+      var $conv=(($3)&255);
+      $base=$conv;
+      var $4=$ls_addr;
+      _new_localvarliteral_($4, ((5250580)|0), 11);
+      var $5=$ls_addr;
+      _new_localvarliteral_($5, ((5250404)|0), 11);
+      var $6=$ls_addr;
+      _new_localvarliteral_($6, ((5250244)|0), 10);
+      var $7=$ls_addr;
+      var $8=$varname_addr;
+      _new_localvar($7, $8);
+      var $9=$ls_addr;
+      _checknext($9, 61);
+      var $10=$ls_addr;
+      var $call=_exp1($10);
+      var $11=$ls_addr;
+      _checknext($11, 44);
+      var $12=$ls_addr;
+      var $call2=_exp1($12);
+      var $13=$ls_addr;
+      var $call3=_testnext($13, 44);
+      var $tobool=(($call3)|0)!=0;
+      if ($tobool) { label = 3; break; } else { label = 4; break; }
+    case 3: 
+      var $14=$ls_addr;
+      var $call4=_exp1($14);
+      label = 5; break;
+    case 4: 
+      var $15=$fs;
+      var $16=$fs;
+      var $freereg5=(($16+48)|0);
+      var $17=HEAP8[($freereg5)];
+      var $conv6=(($17)&255);
+      var $18=$fs;
+      var $call7=_luaK_numberK($18, 1);
+      var $call8=_luaK_codek($15, $conv6, $call7);
+      var $19=$fs;
+      _luaK_reserveregs($19, 1);
+      label = 5; break;
+    case 5: 
+      var $20=$ls_addr;
+      var $21=$base;
+      var $22=$line_addr;
+      _forbody($20, $21, $22, 1, 1);
+
+      return;
+  }
+
+}
+_fornum["X"]=1;
+
 function _errorlimit($fs, $limit, $what) {
   var label = 0;
   var __stackBase__  = STACKTOP; _memset(__stackBase__, 0, 0);
@@ -36428,67 +36711,85 @@ function _funcargs($ls, $f, $line) {
 }
 _funcargs["X"]=1;
 
-function _enterblock($fs, $bl, $isloop) {
+function _checkrepeated($fs, $ll, $label) {
   var label = 0;
+  var __stackBase__  = STACKTOP; _memset(__stackBase__, 0, 0);
+  label = 2; 
+  while(1) switch(label) {
+    case 2: 
+      var $fs_addr;
+      var $ll_addr;
+      var $label_addr;
+      var $i;
+      var $msg;
+      $fs_addr=$fs;
+      $ll_addr=$ll;
+      $label_addr=$label;
+      var $0=$fs_addr;
+      var $bl=(($0+16)|0);
+      var $1=HEAP32[(($bl)>>2)];
+      var $firstlabel=(($1+4)|0);
+      var $2=HEAP16[(($firstlabel)>>1)];
+      var $conv=(($2 << 16) >> 16);
+      $i=$conv;
+      label = 3; break;
+    case 3: 
+      var $3=$i;
+      var $4=$ll_addr;
+      var $n=(($4+4)|0);
+      var $5=HEAP32[(($n)>>2)];
+      var $cmp=(($3)|0) < (($5)|0);
+      if ($cmp) { label = 4; break; } else { label = 8; break; }
+    case 4: 
+      var $6=$label_addr;
+      var $7=$i;
+      var $8=$ll_addr;
+      var $arr=(($8)|0);
+      var $9=HEAP32[(($arr)>>2)];
+      var $arrayidx=(($9+($7<<4))|0);
+      var $name=(($arrayidx)|0);
+      var $10=HEAP32[(($name)>>2)];
+      var $call=_luaS_eqstr($6, $10);
+      var $tobool=(($call)|0)!=0;
+      if ($tobool) { label = 5; break; } else { label = 6; break; }
+    case 5: 
+      var $11=$fs_addr;
+      var $ls=(($11+12)|0);
+      var $12=HEAP32[(($ls)>>2)];
+      var $L=(($12+40)|0);
+      var $13=HEAP32[(($L)>>2)];
+      var $14=$label_addr;
+      var $add_ptr=(($14+16)|0);
+      var $15=$add_ptr;
+      var $16=$i;
+      var $17=$ll_addr;
+      var $arr2=(($17)|0);
+      var $18=HEAP32[(($arr2)>>2)];
+      var $arrayidx3=(($18+($16<<4))|0);
+      var $line=(($arrayidx3+8)|0);
+      var $19=HEAP32[(($line)>>2)];
+      var $call4=_luaO_pushfstring($13, ((5251604)|0), (tempInt=STACKTOP,_memset(STACKTOP, 0, 8),STACKTOP = (STACKTOP + 8)|0,HEAP32[((tempInt)>>2)]=$15,HEAP32[(((tempInt)+(4))>>2)]=$19,tempInt));
+      $msg=$call4;
+      var $20=$fs_addr;
+      var $ls5=(($20+12)|0);
+      var $21=HEAP32[(($ls5)>>2)];
+      var $22=$msg;
+      _semerror($21, $22);
 
+    case 6: 
+      label = 7; break;
+    case 7: 
+      var $23=$i;
+      var $inc=((($23)+(1))|0);
+      $i=$inc;
+      label = 3; break;
+    case 8: 
+      STACKTOP = __stackBase__;
+      return;
+  }
 
-  var $fs_addr;
-  var $bl_addr;
-  var $isloop_addr;
-  $fs_addr=$fs;
-  $bl_addr=$bl;
-  $isloop_addr=$isloop;
-  var $0=$isloop_addr;
-  var $1=$bl_addr;
-  var $isloop1=(($1+10)|0);
-  HEAP8[($isloop1)]=$0;
-  var $2=$fs_addr;
-  var $nactvar=(($2+46)|0);
-  var $3=HEAP8[($nactvar)];
-  var $4=$bl_addr;
-  var $nactvar2=(($4+8)|0);
-  HEAP8[($nactvar2)]=$3;
-  var $5=$fs_addr;
-  var $ls=(($5+12)|0);
-  var $6=HEAP32[(($ls)>>2)];
-  var $dyd=(($6+52)|0);
-  var $7=HEAP32[(($dyd)>>2)];
-  var $label=(($7+24)|0);
-  var $n=(($label+4)|0);
-  var $8=HEAP32[(($n)>>2)];
-  var $conv=(($8) & 65535);
-  var $9=$bl_addr;
-  var $firstlabel=(($9+4)|0);
-  HEAP16[(($firstlabel)>>1)]=$conv;
-  var $10=$fs_addr;
-  var $ls3=(($10+12)|0);
-  var $11=HEAP32[(($ls3)>>2)];
-  var $dyd4=(($11+52)|0);
-  var $12=HEAP32[(($dyd4)>>2)];
-  var $gt=(($12+12)|0);
-  var $n5=(($gt+4)|0);
-  var $13=HEAP32[(($n5)>>2)];
-  var $conv6=(($13) & 65535);
-  var $14=$bl_addr;
-  var $firstgoto=(($14+6)|0);
-  HEAP16[(($firstgoto)>>1)]=$conv6;
-  var $15=$bl_addr;
-  var $upval=(($15+9)|0);
-  HEAP8[($upval)]=0;
-  var $16=$fs_addr;
-  var $bl7=(($16+16)|0);
-  var $17=HEAP32[(($bl7)>>2)];
-  var $18=$bl_addr;
-  var $previous=(($18)|0);
-  HEAP32[(($previous)>>2)]=$17;
-  var $19=$bl_addr;
-  var $20=$fs_addr;
-  var $bl8=(($20+16)|0);
-  HEAP32[(($bl8)>>2)]=$19;
-
-  return;
 }
-_enterblock["X"]=1;
+_checkrepeated["X"]=1;
 
 function _luaE_setdebt($g, $debt) {
   var label = 0;
@@ -36578,261 +36879,6 @@ function _preinit_state($L, $g) {
   return;
 }
 _preinit_state["X"]=1;
-
-function _searchupvalue($fs, $name) {
-  var label = 0;
-
-  label = 2; 
-  while(1) switch(label) {
-    case 2: 
-      var $retval;
-      var $fs_addr;
-      var $name_addr;
-      var $i;
-      var $up;
-      $fs_addr=$fs;
-      $name_addr=$name;
-      var $0=$fs_addr;
-      var $f=(($0)|0);
-      var $1=HEAP32[(($f)>>2)];
-      var $upvalues=(($1+28)|0);
-      var $2=HEAP32[(($upvalues)>>2)];
-      $up=$2;
-      $i=0;
-      label = 3; break;
-    case 3: 
-      var $3=$i;
-      var $4=$fs_addr;
-      var $nups=(($4+47)|0);
-      var $5=HEAP8[($nups)];
-      var $conv=(($5)&255);
-      var $cmp=(($3)|0) < (($conv)|0);
-      if ($cmp) { label = 4; break; } else { label = 8; break; }
-    case 4: 
-      var $6=$i;
-      var $7=$up;
-      var $arrayidx=(($7+($6<<3))|0);
-      var $name2=(($arrayidx)|0);
-      var $8=HEAP32[(($name2)>>2)];
-      var $9=$name_addr;
-      var $call=_luaS_eqstr($8, $9);
-      var $tobool=(($call)|0)!=0;
-      if ($tobool) { label = 5; break; } else { label = 6; break; }
-    case 5: 
-      var $10=$i;
-      $retval=$10;
-      label = 9; break;
-    case 6: 
-      label = 7; break;
-    case 7: 
-      var $11=$i;
-      var $inc=((($11)+(1))|0);
-      $i=$inc;
-      label = 3; break;
-    case 8: 
-      $retval=-1;
-      label = 9; break;
-    case 9: 
-      var $12=$retval;
-
-      return $12;
-  }
-
-}
-
-
-function _skipnoopstat($ls) {
-  var label = 0;
-
-  label = 2; 
-  while(1) switch(label) {
-    case 2: 
-      var $ls_addr;
-      $ls_addr=$ls;
-      label = 3; break;
-    case 3: 
-      var $0=$ls_addr;
-      var $t=(($0+12)|0);
-      var $token=(($t)|0);
-      var $1=HEAP32[(($token)>>2)];
-      var $cmp=(($1)|0)==59;
-      if ($cmp) { var $4 = 1;label = 5; break; } else { label = 4; break; }
-    case 4: 
-      var $2=$ls_addr;
-      var $t1=(($2+12)|0);
-      var $token2=(($t1)|0);
-      var $3=HEAP32[(($token2)>>2)];
-      var $cmp3=(($3)|0)==285;
-      var $4 = $cmp3;label = 5; break;
-    case 5: 
-      var $4;
-      if ($4) { label = 6; break; } else { label = 7; break; }
-    case 6: 
-      var $5=$ls_addr;
-      _statement($5);
-      label = 3; break;
-    case 7: 
-
-      return;
-  }
-
-}
-
-
-function _funcname($ls, $v) {
-  var label = 0;
-
-  label = 2; 
-  while(1) switch(label) {
-    case 2: 
-      var $ls_addr;
-      var $v_addr;
-      var $ismethod;
-      $ls_addr=$ls;
-      $v_addr=$v;
-      $ismethod=0;
-      var $0=$ls_addr;
-      var $1=$v_addr;
-      _singlevar($0, $1);
-      label = 3; break;
-    case 3: 
-      var $2=$ls_addr;
-      var $t=(($2+12)|0);
-      var $token=(($t)|0);
-      var $3=HEAP32[(($token)>>2)];
-      var $cmp=(($3)|0)==46;
-      if ($cmp) { label = 4; break; } else { label = 5; break; }
-    case 4: 
-      var $4=$ls_addr;
-      var $5=$v_addr;
-      _fieldsel($4, $5);
-      label = 3; break;
-    case 5: 
-      var $6=$ls_addr;
-      var $t1=(($6+12)|0);
-      var $token2=(($t1)|0);
-      var $7=HEAP32[(($token2)>>2)];
-      var $cmp3=(($7)|0)==58;
-      if ($cmp3) { label = 6; break; } else { label = 7; break; }
-    case 6: 
-      $ismethod=1;
-      var $8=$ls_addr;
-      var $9=$v_addr;
-      _fieldsel($8, $9);
-      label = 7; break;
-    case 7: 
-      var $10=$ismethod;
-
-      return $10;
-  }
-
-}
-
-
-function _cond($ls) {
-  var label = 0;
-  var __stackBase__  = STACKTOP; STACKTOP = (STACKTOP + 20)|0; _memset(__stackBase__, 0, 20);
-  label = 2; 
-  while(1) switch(label) {
-    case 2: 
-      var $ls_addr;
-      var $v=__stackBase__;
-      $ls_addr=$ls;
-      var $0=$ls_addr;
-      _expr($0, $v);
-      var $k=(($v)|0);
-      var $1=HEAP32[(($k)>>2)];
-      var $cmp=(($1)|0)==1;
-      if ($cmp) { label = 3; break; } else { label = 4; break; }
-    case 3: 
-      var $k1=(($v)|0);
-      HEAP32[(($k1)>>2)]=3;
-      label = 4; break;
-    case 4: 
-      var $2=$ls_addr;
-      var $fs=(($2+36)|0);
-      var $3=HEAP32[(($fs)>>2)];
-      _luaK_goiftrue($3, $v);
-      var $f=(($v+16)|0);
-      var $4=HEAP32[(($f)>>2)];
-      STACKTOP = __stackBase__;
-      return $4;
-  }
-
-}
-
-
-function _fornum($ls, $varname, $line) {
-  var label = 0;
-
-  label = 2; 
-  while(1) switch(label) {
-    case 2: 
-      var $ls_addr;
-      var $varname_addr;
-      var $line_addr;
-      var $fs;
-      var $base;
-      $ls_addr=$ls;
-      $varname_addr=$varname;
-      $line_addr=$line;
-      var $0=$ls_addr;
-      var $fs1=(($0+36)|0);
-      var $1=HEAP32[(($fs1)>>2)];
-      $fs=$1;
-      var $2=$fs;
-      var $freereg=(($2+48)|0);
-      var $3=HEAP8[($freereg)];
-      var $conv=(($3)&255);
-      $base=$conv;
-      var $4=$ls_addr;
-      _new_localvarliteral_($4, ((5250580)|0), 11);
-      var $5=$ls_addr;
-      _new_localvarliteral_($5, ((5250404)|0), 11);
-      var $6=$ls_addr;
-      _new_localvarliteral_($6, ((5250244)|0), 10);
-      var $7=$ls_addr;
-      var $8=$varname_addr;
-      _new_localvar($7, $8);
-      var $9=$ls_addr;
-      _checknext($9, 61);
-      var $10=$ls_addr;
-      var $call=_exp1($10);
-      var $11=$ls_addr;
-      _checknext($11, 44);
-      var $12=$ls_addr;
-      var $call2=_exp1($12);
-      var $13=$ls_addr;
-      var $call3=_testnext($13, 44);
-      var $tobool=(($call3)|0)!=0;
-      if ($tobool) { label = 3; break; } else { label = 4; break; }
-    case 3: 
-      var $14=$ls_addr;
-      var $call4=_exp1($14);
-      label = 5; break;
-    case 4: 
-      var $15=$fs;
-      var $16=$fs;
-      var $freereg5=(($16+48)|0);
-      var $17=HEAP8[($freereg5)];
-      var $conv6=(($17)&255);
-      var $18=$fs;
-      var $call7=_luaK_numberK($18, 1);
-      var $call8=_luaK_codek($15, $conv6, $call7);
-      var $19=$fs;
-      _luaK_reserveregs($19, 1);
-      label = 5; break;
-    case 5: 
-      var $20=$ls_addr;
-      var $21=$base;
-      var $22=$line_addr;
-      _forbody($20, $21, $22, 1, 1);
-
-      return;
-  }
-
-}
-_fornum["X"]=1;
 
 function _forlist($ls, $indexname) {
   var label = 0;
@@ -37408,149 +37454,6 @@ function _stack_init($L1, $L) {
 }
 _stack_init["X"]=1;
 
-function _checkrepeated($fs, $ll, $label) {
-  var label = 0;
-  var __stackBase__  = STACKTOP; _memset(__stackBase__, 0, 0);
-  label = 2; 
-  while(1) switch(label) {
-    case 2: 
-      var $fs_addr;
-      var $ll_addr;
-      var $label_addr;
-      var $i;
-      var $msg;
-      $fs_addr=$fs;
-      $ll_addr=$ll;
-      $label_addr=$label;
-      var $0=$fs_addr;
-      var $bl=(($0+16)|0);
-      var $1=HEAP32[(($bl)>>2)];
-      var $firstlabel=(($1+4)|0);
-      var $2=HEAP16[(($firstlabel)>>1)];
-      var $conv=(($2 << 16) >> 16);
-      $i=$conv;
-      label = 3; break;
-    case 3: 
-      var $3=$i;
-      var $4=$ll_addr;
-      var $n=(($4+4)|0);
-      var $5=HEAP32[(($n)>>2)];
-      var $cmp=(($3)|0) < (($5)|0);
-      if ($cmp) { label = 4; break; } else { label = 8; break; }
-    case 4: 
-      var $6=$label_addr;
-      var $7=$i;
-      var $8=$ll_addr;
-      var $arr=(($8)|0);
-      var $9=HEAP32[(($arr)>>2)];
-      var $arrayidx=(($9+($7<<4))|0);
-      var $name=(($arrayidx)|0);
-      var $10=HEAP32[(($name)>>2)];
-      var $call=_luaS_eqstr($6, $10);
-      var $tobool=(($call)|0)!=0;
-      if ($tobool) { label = 5; break; } else { label = 6; break; }
-    case 5: 
-      var $11=$fs_addr;
-      var $ls=(($11+12)|0);
-      var $12=HEAP32[(($ls)>>2)];
-      var $L=(($12+40)|0);
-      var $13=HEAP32[(($L)>>2)];
-      var $14=$label_addr;
-      var $add_ptr=(($14+16)|0);
-      var $15=$add_ptr;
-      var $16=$i;
-      var $17=$ll_addr;
-      var $arr2=(($17)|0);
-      var $18=HEAP32[(($arr2)>>2)];
-      var $arrayidx3=(($18+($16<<4))|0);
-      var $line=(($arrayidx3+8)|0);
-      var $19=HEAP32[(($line)>>2)];
-      var $call4=_luaO_pushfstring($13, ((5251604)|0), (tempInt=STACKTOP,_memset(STACKTOP, 0, 8),STACKTOP = (STACKTOP + 8)|0,HEAP32[((tempInt)>>2)]=$15,HEAP32[(((tempInt)+(4))>>2)]=$19,tempInt));
-      $msg=$call4;
-      var $20=$fs_addr;
-      var $ls5=(($20+12)|0);
-      var $21=HEAP32[(($ls5)>>2)];
-      var $22=$msg;
-      _semerror($21, $22);
-
-    case 6: 
-      label = 7; break;
-    case 7: 
-      var $23=$i;
-      var $inc=((($23)+(1))|0);
-      $i=$inc;
-      label = 3; break;
-    case 8: 
-      STACKTOP = __stackBase__;
-      return;
-  }
-
-}
-_checkrepeated["X"]=1;
-
-function _luaS_hash($str, $l, $seed) {
-  var label = 0;
-
-  label = 2; 
-  while(1) switch(label) {
-    case 2: 
-      var $str_addr;
-      var $l_addr;
-      var $seed_addr;
-      var $h;
-      var $l1;
-      var $step;
-      $str_addr=$str;
-      $l_addr=$l;
-      $seed_addr=$seed;
-      var $0=$seed_addr;
-      var $1=$l_addr;
-      var $xor=$0 ^ $1;
-      $h=$xor;
-      var $2=$l_addr;
-      var $shr=$2 >>> 5;
-      var $add=((($shr)+(1))|0);
-      $step=$add;
-      var $3=$l_addr;
-      $l1=$3;
-      label = 3; break;
-    case 3: 
-      var $4=$l1;
-      var $5=$step;
-      var $cmp=(($4)>>>0) >= (($5)>>>0);
-      if ($cmp) { label = 4; break; } else { label = 6; break; }
-    case 4: 
-      var $6=$h;
-      var $7=$h;
-      var $shl=$7 << 5;
-      var $8=$h;
-      var $shr1=$8 >>> 2;
-      var $add2=((($shl)+($shr1))|0);
-      var $9=$l1;
-      var $sub=((($9)-(1))|0);
-      var $10=$str_addr;
-      var $arrayidx=(($10+$sub)|0);
-      var $11=HEAP8[($arrayidx)];
-      var $conv=(($11)&255);
-      var $add3=((($add2)+($conv))|0);
-      var $xor4=$6 ^ $add3;
-      $h=$xor4;
-      label = 5; break;
-    case 5: 
-      var $12=$step;
-      var $13=$l1;
-      var $sub5=((($13)-($12))|0);
-      $l1=$sub5;
-      label = 3; break;
-    case 6: 
-      var $14=$h;
-
-      return $14;
-  }
-
-}
-
-
 function _luaE_freethread($L, $L1) {
   var label = 0;
 
@@ -37908,6 +37811,69 @@ function _makeseed($L) {
 }
 _makeseed["X"]=1;
 
+function _luaS_hash($str, $l, $seed) {
+  var label = 0;
+
+  label = 2; 
+  while(1) switch(label) {
+    case 2: 
+      var $str_addr;
+      var $l_addr;
+      var $seed_addr;
+      var $h;
+      var $l1;
+      var $step;
+      $str_addr=$str;
+      $l_addr=$l;
+      $seed_addr=$seed;
+      var $0=$seed_addr;
+      var $1=$l_addr;
+      var $xor=$0 ^ $1;
+      $h=$xor;
+      var $2=$l_addr;
+      var $shr=$2 >>> 5;
+      var $add=((($shr)+(1))|0);
+      $step=$add;
+      var $3=$l_addr;
+      $l1=$3;
+      label = 3; break;
+    case 3: 
+      var $4=$l1;
+      var $5=$step;
+      var $cmp=(($4)>>>0) >= (($5)>>>0);
+      if ($cmp) { label = 4; break; } else { label = 6; break; }
+    case 4: 
+      var $6=$h;
+      var $7=$h;
+      var $shl=$7 << 5;
+      var $8=$h;
+      var $shr1=$8 >>> 2;
+      var $add2=((($shl)+($shr1))|0);
+      var $9=$l1;
+      var $sub=((($9)-(1))|0);
+      var $10=$str_addr;
+      var $arrayidx=(($10+$sub)|0);
+      var $11=HEAP8[($arrayidx)];
+      var $conv=(($11)&255);
+      var $add3=((($add2)+($conv))|0);
+      var $xor4=$6 ^ $add3;
+      $h=$xor4;
+      label = 5; break;
+    case 5: 
+      var $12=$step;
+      var $13=$l1;
+      var $sub5=((($13)-($12))|0);
+      $l1=$sub5;
+      label = 3; break;
+    case 6: 
+      var $14=$h;
+
+      return $14;
+  }
+
+}
+
+
 function _f_luaopen($L, $ud) {
   var label = 0;
 
@@ -38219,271 +38185,6 @@ function _luaS_eqstr($a, $b) {
 }
 
 
-function _luaS_resize($L, $newsize) {
-  var label = 0;
-
-  label = 2; 
-  while(1) switch(label) {
-    case 2: 
-      var $L_addr;
-      var $newsize_addr;
-      var $i;
-      var $tb;
-      var $p;
-      var $next;
-      var $h;
-      $L_addr=$L;
-      $newsize_addr=$newsize;
-      var $0=$L_addr;
-      var $l_G=(($0+12)|0);
-      var $1=HEAP32[(($l_G)>>2)];
-      var $strt=(($1+24)|0);
-      $tb=$strt;
-      var $2=$L_addr;
-      _luaC_runtilstate($2, -5);
-      var $3=$newsize_addr;
-      var $4=$tb;
-      var $size=(($4+8)|0);
-      var $5=HEAP32[(($size)>>2)];
-      var $cmp=(($3)|0) > (($5)|0);
-      if ($cmp) { label = 3; break; } else { label = 11; break; }
-    case 3: 
-      var $6=$newsize_addr;
-      var $add=((($6)+(1))|0);
-      var $cmp1=(($add)>>>0) > 1073741823;
-      if ($cmp1) { label = 4; break; } else { label = 5; break; }
-    case 4: 
-      var $7=$L_addr;
-      _luaM_toobig($7);
-
-      label = 6; break;
-    case 5: 
-      var $9=$L_addr;
-      var $10=$tb;
-      var $hash=(($10)|0);
-      var $11=HEAP32[(($hash)>>2)];
-      var $12=$11;
-      var $13=$tb;
-      var $size2=(($13+8)|0);
-      var $14=HEAP32[(($size2)>>2)];
-      var $mul=($14<<2);
-      var $15=$newsize_addr;
-      var $mul3=($15<<2);
-      var $call=_luaM_realloc_($9, $12, $mul, $mul3);
-      var $cond = $call;label = 6; break;
-    case 6: 
-      var $cond;
-      var $16=$cond;
-      var $17=$tb;
-      var $hash4=(($17)|0);
-      HEAP32[(($hash4)>>2)]=$16;
-      var $18=$tb;
-      var $size5=(($18+8)|0);
-      var $19=HEAP32[(($size5)>>2)];
-      $i=$19;
-      label = 7; break;
-    case 7: 
-      var $20=$i;
-      var $21=$newsize_addr;
-      var $cmp6=(($20)|0) < (($21)|0);
-      if ($cmp6) { label = 8; break; } else { label = 10; break; }
-    case 8: 
-      var $22=$i;
-      var $23=$tb;
-      var $hash7=(($23)|0);
-      var $24=HEAP32[(($hash7)>>2)];
-      var $arrayidx=(($24+($22<<2))|0);
-      HEAP32[(($arrayidx)>>2)]=0;
-      label = 9; break;
-    case 9: 
-      var $25=$i;
-      var $inc=((($25)+(1))|0);
-      $i=$inc;
-      label = 7; break;
-    case 10: 
-      label = 11; break;
-    case 11: 
-      $i=0;
-      label = 12; break;
-    case 12: 
-      var $26=$i;
-      var $27=$tb;
-      var $size9=(($27+8)|0);
-      var $28=HEAP32[(($size9)>>2)];
-      var $cmp10=(($26)|0) < (($28)|0);
-      if ($cmp10) { label = 13; break; } else { label = 18; break; }
-    case 13: 
-      var $29=$i;
-      var $30=$tb;
-      var $hash12=(($30)|0);
-      var $31=HEAP32[(($hash12)>>2)];
-      var $arrayidx13=(($31+($29<<2))|0);
-      var $32=HEAP32[(($arrayidx13)>>2)];
-      $p=$32;
-      var $33=$i;
-      var $34=$tb;
-      var $hash14=(($34)|0);
-      var $35=HEAP32[(($hash14)>>2)];
-      var $arrayidx15=(($35+($33<<2))|0);
-      HEAP32[(($arrayidx15)>>2)]=0;
-      label = 14; break;
-    case 14: 
-      var $36=$p;
-      var $tobool=(($36)|0)!=0;
-      if ($tobool) { label = 15; break; } else { label = 16; break; }
-    case 15: 
-      var $37=$p;
-      var $gch=$37;
-      var $next16=(($gch)|0);
-      var $38=HEAP32[(($next16)>>2)];
-      $next=$38;
-      var $39=$p;
-      var $ts=$39;
-      var $tsv=$ts;
-      var $hash17=(($tsv+8)|0);
-      var $40=HEAP32[(($hash17)>>2)];
-      var $41=$newsize_addr;
-      var $sub=((($41)-(1))|0);
-      var $and=$40 & $sub;
-      $h=$and;
-      var $42=$h;
-      var $43=$tb;
-      var $hash18=(($43)|0);
-      var $44=HEAP32[(($hash18)>>2)];
-      var $arrayidx19=(($44+($42<<2))|0);
-      var $45=HEAP32[(($arrayidx19)>>2)];
-      var $46=$p;
-      var $gch20=$46;
-      var $next21=(($gch20)|0);
-      HEAP32[(($next21)>>2)]=$45;
-      var $47=$p;
-      var $48=$h;
-      var $49=$tb;
-      var $hash22=(($49)|0);
-      var $50=HEAP32[(($hash22)>>2)];
-      var $arrayidx23=(($50+($48<<2))|0);
-      HEAP32[(($arrayidx23)>>2)]=$47;
-      var $51=$p;
-      var $gch24=$51;
-      var $marked=(($gch24+5)|0);
-      var $52=HEAP8[($marked)];
-      var $conv=(($52)&255);
-      var $and25=$conv & 191;
-      var $conv26=(($and25) & 255);
-      HEAP8[($marked)]=$conv26;
-      var $53=$next;
-      $p=$53;
-      label = 14; break;
-    case 16: 
-      label = 17; break;
-    case 17: 
-      var $54=$i;
-      var $inc28=((($54)+(1))|0);
-      $i=$inc28;
-      label = 12; break;
-    case 18: 
-      var $55=$newsize_addr;
-      var $56=$tb;
-      var $size30=(($56+8)|0);
-      var $57=HEAP32[(($size30)>>2)];
-      var $cmp31=(($55)|0) < (($57)|0);
-      if ($cmp31) { label = 19; break; } else { label = 23; break; }
-    case 19: 
-      var $58=$newsize_addr;
-      var $add34=((($58)+(1))|0);
-      var $cmp35=(($add34)>>>0) > 1073741823;
-      if ($cmp35) { label = 20; break; } else { label = 21; break; }
-    case 20: 
-      var $59=$L_addr;
-      _luaM_toobig($59);
-
-      label = 22; break;
-    case 21: 
-      var $61=$L_addr;
-      var $62=$tb;
-      var $hash39=(($62)|0);
-      var $63=HEAP32[(($hash39)>>2)];
-      var $64=$63;
-      var $65=$tb;
-      var $size40=(($65+8)|0);
-      var $66=HEAP32[(($size40)>>2)];
-      var $mul41=($66<<2);
-      var $67=$newsize_addr;
-      var $mul42=($67<<2);
-      var $call43=_luaM_realloc_($61, $64, $mul41, $mul42);
-      var $cond45 = $call43;label = 22; break;
-    case 22: 
-      var $cond45;
-      var $68=$cond45;
-      var $69=$tb;
-      var $hash46=(($69)|0);
-      HEAP32[(($hash46)>>2)]=$68;
-      label = 23; break;
-    case 23: 
-      var $70=$newsize_addr;
-      var $71=$tb;
-      var $size48=(($71+8)|0);
-      HEAP32[(($size48)>>2)]=$70;
-
-      return;
-  }
-
-}
-_luaS_resize["X"]=1;
-
-function _luaS_newlstr($L, $str, $l) {
-  var label = 0;
-
-  label = 2; 
-  while(1) switch(label) {
-    case 2: 
-      var $retval;
-      var $L_addr;
-      var $str_addr;
-      var $l_addr;
-      $L_addr=$L;
-      $str_addr=$str;
-      $l_addr=$l;
-      var $0=$l_addr;
-      var $cmp=(($0)>>>0) <= 40;
-      if ($cmp) { label = 3; break; } else { label = 4; break; }
-    case 3: 
-      var $1=$L_addr;
-      var $2=$str_addr;
-      var $3=$l_addr;
-      var $call=_internshrstr($1, $2, $3);
-      $retval=$call;
-      label = 7; break;
-    case 4: 
-      var $4=$l_addr;
-      var $add=((($4)+(1))|0);
-      var $cmp1=(($add)>>>0) > 4294967277;
-      if ($cmp1) { label = 5; break; } else { label = 6; break; }
-    case 5: 
-      var $5=$L_addr;
-      _luaM_toobig($5);
-
-    case 6: 
-      var $6=$L_addr;
-      var $7=$str_addr;
-      var $8=$l_addr;
-      var $9=$L_addr;
-      var $l_G=(($9+12)|0);
-      var $10=HEAP32[(($l_G)>>2)];
-      var $seed=(($10+48)|0);
-      var $11=HEAP32[(($seed)>>2)];
-      var $call3=_createstrobj($6, $7, $8, 20, $11, 0);
-      $retval=$call3;
-      label = 7; break;
-    case 7: 
-      var $12=$retval;
-
-      return $12;
-  }
-
-}
-
-
 function _internshrstr($L, $str, $l) {
   var label = 0;
 
@@ -38774,6 +38475,320 @@ function _newshrstr($L, $str, $l, $h) {
 }
 _newshrstr["X"]=1;
 
+function _luaS_resize($L, $newsize) {
+  var label = 0;
+
+  label = 2; 
+  while(1) switch(label) {
+    case 2: 
+      var $L_addr;
+      var $newsize_addr;
+      var $i;
+      var $tb;
+      var $p;
+      var $next;
+      var $h;
+      $L_addr=$L;
+      $newsize_addr=$newsize;
+      var $0=$L_addr;
+      var $l_G=(($0+12)|0);
+      var $1=HEAP32[(($l_G)>>2)];
+      var $strt=(($1+24)|0);
+      $tb=$strt;
+      var $2=$L_addr;
+      _luaC_runtilstate($2, -5);
+      var $3=$newsize_addr;
+      var $4=$tb;
+      var $size=(($4+8)|0);
+      var $5=HEAP32[(($size)>>2)];
+      var $cmp=(($3)|0) > (($5)|0);
+      if ($cmp) { label = 3; break; } else { label = 11; break; }
+    case 3: 
+      var $6=$newsize_addr;
+      var $add=((($6)+(1))|0);
+      var $cmp1=(($add)>>>0) > 1073741823;
+      if ($cmp1) { label = 4; break; } else { label = 5; break; }
+    case 4: 
+      var $7=$L_addr;
+      _luaM_toobig($7);
+
+      label = 6; break;
+    case 5: 
+      var $9=$L_addr;
+      var $10=$tb;
+      var $hash=(($10)|0);
+      var $11=HEAP32[(($hash)>>2)];
+      var $12=$11;
+      var $13=$tb;
+      var $size2=(($13+8)|0);
+      var $14=HEAP32[(($size2)>>2)];
+      var $mul=($14<<2);
+      var $15=$newsize_addr;
+      var $mul3=($15<<2);
+      var $call=_luaM_realloc_($9, $12, $mul, $mul3);
+      var $cond = $call;label = 6; break;
+    case 6: 
+      var $cond;
+      var $16=$cond;
+      var $17=$tb;
+      var $hash4=(($17)|0);
+      HEAP32[(($hash4)>>2)]=$16;
+      var $18=$tb;
+      var $size5=(($18+8)|0);
+      var $19=HEAP32[(($size5)>>2)];
+      $i=$19;
+      label = 7; break;
+    case 7: 
+      var $20=$i;
+      var $21=$newsize_addr;
+      var $cmp6=(($20)|0) < (($21)|0);
+      if ($cmp6) { label = 8; break; } else { label = 10; break; }
+    case 8: 
+      var $22=$i;
+      var $23=$tb;
+      var $hash7=(($23)|0);
+      var $24=HEAP32[(($hash7)>>2)];
+      var $arrayidx=(($24+($22<<2))|0);
+      HEAP32[(($arrayidx)>>2)]=0;
+      label = 9; break;
+    case 9: 
+      var $25=$i;
+      var $inc=((($25)+(1))|0);
+      $i=$inc;
+      label = 7; break;
+    case 10: 
+      label = 11; break;
+    case 11: 
+      $i=0;
+      label = 12; break;
+    case 12: 
+      var $26=$i;
+      var $27=$tb;
+      var $size9=(($27+8)|0);
+      var $28=HEAP32[(($size9)>>2)];
+      var $cmp10=(($26)|0) < (($28)|0);
+      if ($cmp10) { label = 13; break; } else { label = 18; break; }
+    case 13: 
+      var $29=$i;
+      var $30=$tb;
+      var $hash12=(($30)|0);
+      var $31=HEAP32[(($hash12)>>2)];
+      var $arrayidx13=(($31+($29<<2))|0);
+      var $32=HEAP32[(($arrayidx13)>>2)];
+      $p=$32;
+      var $33=$i;
+      var $34=$tb;
+      var $hash14=(($34)|0);
+      var $35=HEAP32[(($hash14)>>2)];
+      var $arrayidx15=(($35+($33<<2))|0);
+      HEAP32[(($arrayidx15)>>2)]=0;
+      label = 14; break;
+    case 14: 
+      var $36=$p;
+      var $tobool=(($36)|0)!=0;
+      if ($tobool) { label = 15; break; } else { label = 16; break; }
+    case 15: 
+      var $37=$p;
+      var $gch=$37;
+      var $next16=(($gch)|0);
+      var $38=HEAP32[(($next16)>>2)];
+      $next=$38;
+      var $39=$p;
+      var $ts=$39;
+      var $tsv=$ts;
+      var $hash17=(($tsv+8)|0);
+      var $40=HEAP32[(($hash17)>>2)];
+      var $41=$newsize_addr;
+      var $sub=((($41)-(1))|0);
+      var $and=$40 & $sub;
+      $h=$and;
+      var $42=$h;
+      var $43=$tb;
+      var $hash18=(($43)|0);
+      var $44=HEAP32[(($hash18)>>2)];
+      var $arrayidx19=(($44+($42<<2))|0);
+      var $45=HEAP32[(($arrayidx19)>>2)];
+      var $46=$p;
+      var $gch20=$46;
+      var $next21=(($gch20)|0);
+      HEAP32[(($next21)>>2)]=$45;
+      var $47=$p;
+      var $48=$h;
+      var $49=$tb;
+      var $hash22=(($49)|0);
+      var $50=HEAP32[(($hash22)>>2)];
+      var $arrayidx23=(($50+($48<<2))|0);
+      HEAP32[(($arrayidx23)>>2)]=$47;
+      var $51=$p;
+      var $gch24=$51;
+      var $marked=(($gch24+5)|0);
+      var $52=HEAP8[($marked)];
+      var $conv=(($52)&255);
+      var $and25=$conv & 191;
+      var $conv26=(($and25) & 255);
+      HEAP8[($marked)]=$conv26;
+      var $53=$next;
+      $p=$53;
+      label = 14; break;
+    case 16: 
+      label = 17; break;
+    case 17: 
+      var $54=$i;
+      var $inc28=((($54)+(1))|0);
+      $i=$inc28;
+      label = 12; break;
+    case 18: 
+      var $55=$newsize_addr;
+      var $56=$tb;
+      var $size30=(($56+8)|0);
+      var $57=HEAP32[(($size30)>>2)];
+      var $cmp31=(($55)|0) < (($57)|0);
+      if ($cmp31) { label = 19; break; } else { label = 23; break; }
+    case 19: 
+      var $58=$newsize_addr;
+      var $add34=((($58)+(1))|0);
+      var $cmp35=(($add34)>>>0) > 1073741823;
+      if ($cmp35) { label = 20; break; } else { label = 21; break; }
+    case 20: 
+      var $59=$L_addr;
+      _luaM_toobig($59);
+
+      label = 22; break;
+    case 21: 
+      var $61=$L_addr;
+      var $62=$tb;
+      var $hash39=(($62)|0);
+      var $63=HEAP32[(($hash39)>>2)];
+      var $64=$63;
+      var $65=$tb;
+      var $size40=(($65+8)|0);
+      var $66=HEAP32[(($size40)>>2)];
+      var $mul41=($66<<2);
+      var $67=$newsize_addr;
+      var $mul42=($67<<2);
+      var $call43=_luaM_realloc_($61, $64, $mul41, $mul42);
+      var $cond45 = $call43;label = 22; break;
+    case 22: 
+      var $cond45;
+      var $68=$cond45;
+      var $69=$tb;
+      var $hash46=(($69)|0);
+      HEAP32[(($hash46)>>2)]=$68;
+      label = 23; break;
+    case 23: 
+      var $70=$newsize_addr;
+      var $71=$tb;
+      var $size48=(($71+8)|0);
+      HEAP32[(($size48)>>2)]=$70;
+
+      return;
+  }
+
+}
+_luaS_resize["X"]=1;
+
+function _luaS_newlstr($L, $str, $l) {
+  var label = 0;
+
+  label = 2; 
+  while(1) switch(label) {
+    case 2: 
+      var $retval;
+      var $L_addr;
+      var $str_addr;
+      var $l_addr;
+      $L_addr=$L;
+      $str_addr=$str;
+      $l_addr=$l;
+      var $0=$l_addr;
+      var $cmp=(($0)>>>0) <= 40;
+      if ($cmp) { label = 3; break; } else { label = 4; break; }
+    case 3: 
+      var $1=$L_addr;
+      var $2=$str_addr;
+      var $3=$l_addr;
+      var $call=_internshrstr($1, $2, $3);
+      $retval=$call;
+      label = 7; break;
+    case 4: 
+      var $4=$l_addr;
+      var $add=((($4)+(1))|0);
+      var $cmp1=(($add)>>>0) > 4294967277;
+      if ($cmp1) { label = 5; break; } else { label = 6; break; }
+    case 5: 
+      var $5=$L_addr;
+      _luaM_toobig($5);
+
+    case 6: 
+      var $6=$L_addr;
+      var $7=$str_addr;
+      var $8=$l_addr;
+      var $9=$L_addr;
+      var $l_G=(($9+12)|0);
+      var $10=HEAP32[(($l_G)>>2)];
+      var $seed=(($10+48)|0);
+      var $11=HEAP32[(($seed)>>2)];
+      var $call3=_createstrobj($6, $7, $8, 20, $11, 0);
+      $retval=$call3;
+      label = 7; break;
+    case 7: 
+      var $12=$retval;
+
+      return $12;
+  }
+
+}
+
+
+function _luaS_newudata($L, $s, $e) {
+  var label = 0;
+
+  label = 2; 
+  while(1) switch(label) {
+    case 2: 
+      var $L_addr;
+      var $s_addr;
+      var $e_addr;
+      var $u;
+      $L_addr=$L;
+      $s_addr=$s;
+      $e_addr=$e;
+      var $0=$s_addr;
+      var $cmp=(($0)>>>0) > 4294967273;
+      if ($cmp) { label = 3; break; } else { label = 4; break; }
+    case 3: 
+      var $1=$L_addr;
+      _luaM_toobig($1);
+
+    case 4: 
+      var $2=$L_addr;
+      var $3=$s_addr;
+      var $add=((($3)+(20))|0);
+      var $call=_luaC_newobj($2, 7, $add, 0, 0);
+      var $u1=$call;
+      $u=$u1;
+      var $4=$s_addr;
+      var $5=$u;
+      var $uv=$5;
+      var $len=(($uv+16)|0);
+      HEAP32[(($len)>>2)]=$4;
+      var $6=$u;
+      var $uv2=$6;
+      var $metatable=(($uv2+8)|0);
+      HEAP32[(($metatable)>>2)]=0;
+      var $7=$e_addr;
+      var $8=$u;
+      var $uv3=$8;
+      var $env=(($uv3+12)|0);
+      HEAP32[(($env)>>2)]=$7;
+      var $9=$u;
+
+      return $9;
+  }
+
+}
+
+
 function _luaH_next($L, $t, $key) {
   var label = 0;
 
@@ -38961,50 +38976,239 @@ function _luaH_next($L, $t, $key) {
 }
 _luaH_next["X"]=1;
 
-function _luaS_newudata($L, $s, $e) {
+function _luaH_setint($L, $t, $key, $value) {
+  var label = 0;
+  var __stackBase__  = STACKTOP; STACKTOP = (STACKTOP + 12)|0; _memset(__stackBase__, 0, 12);
+  label = 2; 
+  while(1) switch(label) {
+    case 2: 
+      var $L_addr;
+      var $t_addr;
+      var $key_addr;
+      var $value_addr;
+      var $p;
+      var $cell;
+      var $k=__stackBase__;
+      var $io;
+      var $io2;
+      var $io1;
+      $L_addr=$L;
+      $t_addr=$t;
+      $key_addr=$key;
+      $value_addr=$value;
+      var $0=$t_addr;
+      var $1=$key_addr;
+      var $call=_luaH_getint($0, $1);
+      $p=$call;
+      var $2=$p;
+      var $cmp=(($2)|0)!=5244092;
+      if ($cmp) { label = 3; break; } else { label = 4; break; }
+    case 3: 
+      var $3=$p;
+      $cell=$3;
+      label = 5; break;
+    case 4: 
+      $io=$k;
+      var $4=$key_addr;
+      var $conv=(($4)|0);
+      var $5=$io;
+      var $value_=(($5)|0);
+      var $n=$value_;
+      (HEAPF64[(tempDoublePtr)>>3]=$conv,HEAP32[(($n)>>2)]=HEAP32[((tempDoublePtr)>>2)],HEAP32[((($n)+(4))>>2)]=HEAP32[(((tempDoublePtr)+(4))>>2)]);
+      var $6=$io;
+      var $tt_=(($6+8)|0);
+      HEAP32[(($tt_)>>2)]=3;
+      var $7=$L_addr;
+      var $8=$t_addr;
+      var $call1=_luaH_newkey($7, $8, $k);
+      $cell=$call1;
+      label = 5; break;
+    case 5: 
+      var $9=$value_addr;
+      $io2=$9;
+      var $10=$cell;
+      $io1=$10;
+      var $11=$io1;
+      var $value_2=(($11)|0);
+      var $12=$io2;
+      var $value_3=(($12)|0);
+      var $13=$value_2;
+      var $14=$value_3;
+      HEAP32[(($13)>>2)]=HEAP32[(($14)>>2)];HEAP32[((($13)+(4))>>2)]=HEAP32[((($14)+(4))>>2)];
+      var $15=$io2;
+      var $tt_4=(($15+8)|0);
+      var $16=HEAP32[(($tt_4)>>2)];
+      var $17=$io1;
+      var $tt_5=(($17+8)|0);
+      HEAP32[(($tt_5)>>2)]=$16;
+      STACKTOP = __stackBase__;
+      return;
+  }
+
+}
+_luaH_setint["X"]=1;
+
+function _luaH_set($L, $t, $key) {
+  var label = 0;
+
+  label = 2; 
+  while(1) switch(label) {
+    case 2: 
+      var $retval;
+      var $L_addr;
+      var $t_addr;
+      var $key_addr;
+      var $p;
+      $L_addr=$L;
+      $t_addr=$t;
+      $key_addr=$key;
+      var $0=$t_addr;
+      var $1=$key_addr;
+      var $call=_luaH_get($0, $1);
+      $p=$call;
+      var $2=$p;
+      var $cmp=(($2)|0)!=5244092;
+      if ($cmp) { label = 3; break; } else { label = 4; break; }
+    case 3: 
+      var $3=$p;
+      $retval=$3;
+      label = 5; break;
+    case 4: 
+      var $4=$L_addr;
+      var $5=$t_addr;
+      var $6=$key_addr;
+      var $call1=_luaH_newkey($4, $5, $6);
+      $retval=$call1;
+      label = 5; break;
+    case 5: 
+      var $7=$retval;
+
+      return $7;
+  }
+
+}
+
+
+function _luaH_resizearray($L, $t, $nasize) {
   var label = 0;
 
   label = 2; 
   while(1) switch(label) {
     case 2: 
       var $L_addr;
-      var $s_addr;
-      var $e_addr;
-      var $u;
+      var $t_addr;
+      var $nasize_addr;
+      var $nsize;
       $L_addr=$L;
-      $s_addr=$s;
-      $e_addr=$e;
-      var $0=$s_addr;
-      var $cmp=(($0)>>>0) > 4294967273;
+      $t_addr=$t;
+      $nasize_addr=$nasize;
+      var $0=$t_addr;
+      var $node=(($0+16)|0);
+      var $1=HEAP32[(($node)>>2)];
+      var $cmp=(($1)|0)==5244816;
       if ($cmp) { label = 3; break; } else { label = 4; break; }
     case 3: 
-      var $1=$L_addr;
-      _luaM_toobig($1);
-
+      var $cond = 0;label = 5; break;
     case 4: 
-      var $2=$L_addr;
-      var $3=$s_addr;
-      var $add=((($3)+(20))|0);
-      var $call=_luaC_newobj($2, 7, $add, 0, 0);
-      var $u1=$call;
-      $u=$u1;
-      var $4=$s_addr;
-      var $5=$u;
-      var $uv=$5;
-      var $len=(($uv+16)|0);
-      HEAP32[(($len)>>2)]=$4;
-      var $6=$u;
-      var $uv2=$6;
-      var $metatable=(($uv2+8)|0);
-      HEAP32[(($metatable)>>2)]=0;
-      var $7=$e_addr;
-      var $8=$u;
-      var $uv3=$8;
-      var $env=(($uv3+12)|0);
-      HEAP32[(($env)>>2)]=$7;
-      var $9=$u;
+      var $2=$t_addr;
+      var $lsizenode=(($2+7)|0);
+      var $3=HEAP8[($lsizenode)];
+      var $conv=(($3)&255);
+      var $shl=1 << $conv;
+      var $cond = $shl;label = 5; break;
+    case 5: 
+      var $cond;
+      $nsize=$cond;
+      var $4=$L_addr;
+      var $5=$t_addr;
+      var $6=$nasize_addr;
+      var $7=$nsize;
+      _luaH_resize($4, $5, $6, $7);
 
-      return $9;
+      return;
+  }
+
+}
+
+
+function _luaH_new($L) {
+  var label = 0;
+
+
+  var $L_addr;
+  var $t;
+  $L_addr=$L;
+  var $0=$L_addr;
+  var $call=_luaC_newobj($0, 5, 32, 0, 0);
+  var $h=$call;
+  $t=$h;
+  var $1=$t;
+  var $metatable=(($1+8)|0);
+  HEAP32[(($metatable)>>2)]=0;
+  var $2=$t;
+  var $flags=(($2+6)|0);
+  HEAP8[($flags)]=-1;
+  var $3=$t;
+  var $array=(($3+12)|0);
+  HEAP32[(($array)>>2)]=0;
+  var $4=$t;
+  var $sizearray=(($4+28)|0);
+  HEAP32[(($sizearray)>>2)]=0;
+  var $5=$L_addr;
+  var $6=$t;
+  _setnodevector($5, $6, 0);
+  var $7=$t;
+
+  return $7;
+}
+
+
+function _luaH_free($L, $t) {
+  var label = 0;
+
+  label = 2; 
+  while(1) switch(label) {
+    case 2: 
+      var $L_addr;
+      var $t_addr;
+      $L_addr=$L;
+      $t_addr=$t;
+      var $0=$t_addr;
+      var $node=(($0+16)|0);
+      var $1=HEAP32[(($node)>>2)];
+      var $cmp=(($1)|0)==5244816;
+      if ($cmp) { label = 4; break; } else { label = 3; break; }
+    case 3: 
+      var $2=$L_addr;
+      var $3=$t_addr;
+      var $node1=(($3+16)|0);
+      var $4=HEAP32[(($node1)>>2)];
+      var $5=$4;
+      var $6=$t_addr;
+      var $lsizenode=(($6+7)|0);
+      var $7=HEAP8[($lsizenode)];
+      var $conv=(($7)&255);
+      var $shl=1 << $conv;
+      var $mul=((($shl)*(28))&-1);
+      var $call=_luaM_realloc_($2, $5, $mul, 0);
+      label = 4; break;
+    case 4: 
+      var $8=$L_addr;
+      var $9=$t_addr;
+      var $array=(($9+12)|0);
+      var $10=HEAP32[(($array)>>2)];
+      var $11=$10;
+      var $12=$t_addr;
+      var $sizearray=(($12+28)|0);
+      var $13=HEAP32[(($sizearray)>>2)];
+      var $mul2=((($13)*(12))&-1);
+      var $call3=_luaM_realloc_($8, $11, $mul2, 0);
+      var $14=$L_addr;
+      var $15=$t_addr;
+      var $16=$15;
+      var $call4=_luaM_realloc_($14, $16, 32, 0);
+
+      return;
   }
 
 }
@@ -39428,6 +39632,123 @@ function _setarrayvector($L, $t, $size) {
 }
 _setarrayvector["X"]=1;
 
+function _setnodevector($L, $t, $size) {
+  var label = 0;
+  var __stackBase__  = STACKTOP; _memset(__stackBase__, 0, 0);
+  label = 2; 
+  while(1) switch(label) {
+    case 2: 
+      var $L_addr;
+      var $t_addr;
+      var $size_addr;
+      var $lsize;
+      var $i;
+      var $n;
+      $L_addr=$L;
+      $t_addr=$t;
+      $size_addr=$size;
+      var $0=$size_addr;
+      var $cmp=(($0)|0)==0;
+      if ($cmp) { label = 3; break; } else { label = 4; break; }
+    case 3: 
+      var $1=$t_addr;
+      var $node=(($1+16)|0);
+      HEAP32[(($node)>>2)]=5244816;
+      $lsize=0;
+      label = 14; break;
+    case 4: 
+      var $2=$size_addr;
+      var $call=_luaO_ceillog2($2);
+      $lsize=$call;
+      var $3=$lsize;
+      var $cmp1=(($3)|0) > 30;
+      if ($cmp1) { label = 5; break; } else { label = 6; break; }
+    case 5: 
+      var $4=$L_addr;
+      _luaG_runerror($4, ((5251000)|0), (tempInt=STACKTOP,_memset(STACKTOP, 0, 1),STACKTOP = (STACKTOP + 1)|0,STACKTOP = ((((STACKTOP)+3)>>2)<<2),HEAP32[((tempInt)>>2)]=0,tempInt));
+
+    case 6: 
+      var $5=$lsize;
+      var $shl=1 << $5;
+      $size_addr=$shl;
+      var $6=$size_addr;
+      var $add=((($6)+(1))|0);
+      var $cmp3=(($add)>>>0) > 153391689;
+      if ($cmp3) { label = 7; break; } else { label = 8; break; }
+    case 7: 
+      var $7=$L_addr;
+      _luaM_toobig($7);
+
+      label = 9; break;
+    case 8: 
+      var $9=$L_addr;
+      var $10=$size_addr;
+      var $mul=((($10)*(28))&-1);
+      var $call4=_luaM_realloc_($9, 0, 0, $mul);
+      var $cond = $call4;label = 9; break;
+    case 9: 
+      var $cond;
+      var $11=$cond;
+      var $12=$t_addr;
+      var $node5=(($12+16)|0);
+      HEAP32[(($node5)>>2)]=$11;
+      $i=0;
+      label = 10; break;
+    case 10: 
+      var $13=$i;
+      var $14=$size_addr;
+      var $cmp6=(($13)|0) < (($14)|0);
+      if ($cmp6) { label = 11; break; } else { label = 13; break; }
+    case 11: 
+      var $15=$i;
+      var $16=$t_addr;
+      var $node7=(($16+16)|0);
+      var $17=HEAP32[(($node7)>>2)];
+      var $arrayidx=(($17+((($15)*(28))&-1))|0);
+      $n=$arrayidx;
+      var $18=$n;
+      var $i_key=(($18+12)|0);
+      var $nk=$i_key;
+      var $next=(($nk+12)|0);
+      HEAP32[(($next)>>2)]=0;
+      var $19=$n;
+      var $i_key8=(($19+12)|0);
+      var $tvk=$i_key8;
+      var $tt_=(($tvk+8)|0);
+      HEAP32[(($tt_)>>2)]=0;
+      var $20=$n;
+      var $i_val=(($20)|0);
+      var $tt_9=(($i_val+8)|0);
+      HEAP32[(($tt_9)>>2)]=0;
+      label = 12; break;
+    case 12: 
+      var $21=$i;
+      var $inc=((($21)+(1))|0);
+      $i=$inc;
+      label = 10; break;
+    case 13: 
+      label = 14; break;
+    case 14: 
+      var $22=$lsize;
+      var $conv=(($22) & 255);
+      var $23=$t_addr;
+      var $lsizenode=(($23+7)|0);
+      HEAP8[($lsizenode)]=$conv;
+      var $24=$size_addr;
+      var $25=$t_addr;
+      var $node11=(($25+16)|0);
+      var $26=HEAP32[(($node11)>>2)];
+      var $arrayidx12=(($26+((($24)*(28))&-1))|0);
+      var $27=$t_addr;
+      var $lastfree=(($27+20)|0);
+      HEAP32[(($lastfree)>>2)]=$arrayidx12;
+      STACKTOP = __stackBase__;
+      return;
+  }
+
+}
+_setnodevector["X"]=1;
+
 function _getfreepos($t) {
   var label = 0;
 
@@ -39482,243 +39803,148 @@ function _getfreepos($t) {
 }
 
 
-function _luaH_setint($L, $t, $key, $value) {
+function _hashnum($t, $n) {
   var label = 0;
-  var __stackBase__  = STACKTOP; STACKTOP = (STACKTOP + 12)|0; _memset(__stackBase__, 0, 12);
+  var __stackBase__  = STACKTOP; STACKTOP = (STACKTOP + 8)|0; _memset(__stackBase__, 0, 8);
   label = 2; 
   while(1) switch(label) {
     case 2: 
-      var $L_addr;
       var $t_addr;
-      var $key_addr;
-      var $value_addr;
-      var $p;
-      var $cell;
-      var $k=__stackBase__;
-      var $io;
-      var $io2;
-      var $io1;
-      $L_addr=$L;
+      var $n_addr;
+      var $i;
+      var $u=__stackBase__;
       $t_addr=$t;
-      $key_addr=$key;
-      $value_addr=$value;
-      var $0=$t_addr;
-      var $1=$key_addr;
-      var $call=_luaH_getint($0, $1);
-      $p=$call;
-      var $2=$p;
-      var $cmp=(($2)|0)!=5244092;
-      if ($cmp) { label = 3; break; } else { label = 4; break; }
+      $n_addr=$n;
+      var $0=$n_addr;
+      var $add=($0)+(1);
+      var $l_d=$u;
+      (HEAPF64[(tempDoublePtr)>>3]=$add,HEAP32[(($l_d)>>2)]=HEAP32[((tempDoublePtr)>>2)],HEAP32[((($l_d)+(4))>>2)]=HEAP32[(((tempDoublePtr)+(4))>>2)]);
+      var $l_p=$u;
+      var $arrayidx=(($l_p)|0);
+      var $1=HEAP32[(($arrayidx)>>2)];
+      $i=$1;
+      var $l_p1=$u;
+      var $arrayidx2=(($l_p1+4)|0);
+      var $2=HEAP32[(($arrayidx2)>>2)];
+      var $3=$i;
+      var $add3=((($3)+($2))|0);
+      $i=$add3;
+      var $4=$i;
+      var $cmp=(($4)|0) < 0;
+      if ($cmp) { label = 3; break; } else { label = 6; break; }
     case 3: 
-      var $3=$p;
-      $cell=$3;
-      label = 5; break;
+      var $5=$i;
+      var $6=$i;
+      var $sub=(((-$6))|0);
+      var $cmp4=(($5)|0)==(($sub)|0);
+      if ($cmp4) { label = 4; break; } else { label = 5; break; }
     case 4: 
-      $io=$k;
-      var $4=$key_addr;
-      var $conv=(($4)|0);
-      var $5=$io;
-      var $value_=(($5)|0);
-      var $n=$value_;
-      (HEAPF64[(tempDoublePtr)>>3]=$conv,HEAP32[(($n)>>2)]=HEAP32[((tempDoublePtr)>>2)],HEAP32[((($n)+(4))>>2)]=HEAP32[(((tempDoublePtr)+(4))>>2)]);
-      var $6=$io;
-      var $tt_=(($6+8)|0);
-      HEAP32[(($tt_)>>2)]=3;
-      var $7=$L_addr;
-      var $8=$t_addr;
-      var $call1=_luaH_newkey($7, $8, $k);
-      $cell=$call1;
+      $i=0;
       label = 5; break;
     case 5: 
-      var $9=$value_addr;
-      $io2=$9;
-      var $10=$cell;
-      $io1=$10;
-      var $11=$io1;
-      var $value_2=(($11)|0);
-      var $12=$io2;
-      var $value_3=(($12)|0);
-      var $13=$value_2;
-      var $14=$value_3;
-      HEAP32[(($13)>>2)]=HEAP32[(($14)>>2)];HEAP32[((($13)+(4))>>2)]=HEAP32[((($14)+(4))>>2)];
-      var $15=$io2;
-      var $tt_4=(($15+8)|0);
-      var $16=HEAP32[(($tt_4)>>2)];
-      var $17=$io1;
-      var $tt_5=(($17+8)|0);
-      HEAP32[(($tt_5)>>2)]=$16;
+      var $7=$i;
+      var $sub6=(((-$7))|0);
+      $i=$sub6;
+      label = 6; break;
+    case 6: 
+      var $8=$i;
+      var $9=$t_addr;
+      var $lsizenode=(($9+7)|0);
+      var $10=HEAP8[($lsizenode)];
+      var $conv=(($10)&255);
+      var $shl=1 << $conv;
+      var $sub8=((($shl)-(1))|0);
+      var $or=$sub8 | 1;
+      var $rem=((($8)|0))%((($or)|0));
+      var $11=$t_addr;
+      var $node=(($11+16)|0);
+      var $12=HEAP32[(($node)>>2)];
+      var $arrayidx9=(($12+((($rem)*(28))&-1))|0);
       STACKTOP = __stackBase__;
-      return;
+      return $arrayidx9;
   }
 
 }
-_luaH_setint["X"]=1;
 
-function _luaH_set($L, $t, $key) {
+
+function _luaH_getstr($t, $key) {
   var label = 0;
 
   label = 2; 
   while(1) switch(label) {
     case 2: 
       var $retval;
-      var $L_addr;
       var $t_addr;
       var $key_addr;
-      var $p;
-      $L_addr=$L;
+      var $n;
       $t_addr=$t;
       $key_addr=$key;
-      var $0=$t_addr;
-      var $1=$key_addr;
-      var $call=_luaH_get($0, $1);
-      $p=$call;
-      var $2=$p;
-      var $cmp=(($2)|0)!=5244092;
-      if ($cmp) { label = 3; break; } else { label = 4; break; }
-    case 3: 
-      var $3=$p;
-      $retval=$3;
-      label = 5; break;
-    case 4: 
-      var $4=$L_addr;
-      var $5=$t_addr;
-      var $6=$key_addr;
-      var $call1=_luaH_newkey($4, $5, $6);
-      $retval=$call1;
-      label = 5; break;
-    case 5: 
-      var $7=$retval;
-
-      return $7;
-  }
-
-}
-
-
-function _luaH_resizearray($L, $t, $nasize) {
-  var label = 0;
-
-  label = 2; 
-  while(1) switch(label) {
-    case 2: 
-      var $L_addr;
-      var $t_addr;
-      var $nasize_addr;
-      var $nsize;
-      $L_addr=$L;
-      $t_addr=$t;
-      $nasize_addr=$nasize;
-      var $0=$t_addr;
-      var $node=(($0+16)|0);
-      var $1=HEAP32[(($node)>>2)];
-      var $cmp=(($1)|0)==5244816;
-      if ($cmp) { label = 3; break; } else { label = 4; break; }
-    case 3: 
-      var $cond = 0;label = 5; break;
-    case 4: 
+      var $0=$key_addr;
+      var $tsv=$0;
+      var $hash=(($tsv+8)|0);
+      var $1=HEAP32[(($hash)>>2)];
       var $2=$t_addr;
       var $lsizenode=(($2+7)|0);
       var $3=HEAP8[($lsizenode)];
       var $conv=(($3)&255);
       var $shl=1 << $conv;
-      var $cond = $shl;label = 5; break;
-    case 5: 
-      var $cond;
-      $nsize=$cond;
-      var $4=$L_addr;
-      var $5=$t_addr;
-      var $6=$nasize_addr;
-      var $7=$nsize;
-      _luaH_resize($4, $5, $6, $7);
-
-      return;
-  }
-
-}
-
-
-function _luaH_new($L) {
-  var label = 0;
-
-
-  var $L_addr;
-  var $t;
-  $L_addr=$L;
-  var $0=$L_addr;
-  var $call=_luaC_newobj($0, 5, 32, 0, 0);
-  var $h=$call;
-  $t=$h;
-  var $1=$t;
-  var $metatable=(($1+8)|0);
-  HEAP32[(($metatable)>>2)]=0;
-  var $2=$t;
-  var $flags=(($2+6)|0);
-  HEAP8[($flags)]=-1;
-  var $3=$t;
-  var $array=(($3+12)|0);
-  HEAP32[(($array)>>2)]=0;
-  var $4=$t;
-  var $sizearray=(($4+28)|0);
-  HEAP32[(($sizearray)>>2)]=0;
-  var $5=$L_addr;
-  var $6=$t;
-  _setnodevector($5, $6, 0);
-  var $7=$t;
-
-  return $7;
-}
-
-
-function _luaH_free($L, $t) {
-  var label = 0;
-
-  label = 2; 
-  while(1) switch(label) {
-    case 2: 
-      var $L_addr;
-      var $t_addr;
-      $L_addr=$L;
-      $t_addr=$t;
-      var $0=$t_addr;
-      var $node=(($0+16)|0);
-      var $1=HEAP32[(($node)>>2)];
-      var $cmp=(($1)|0)==5244816;
-      if ($cmp) { label = 4; break; } else { label = 3; break; }
+      var $sub=((($shl)-(1))|0);
+      var $and=$1 & $sub;
+      var $4=$t_addr;
+      var $node=(($4+16)|0);
+      var $5=HEAP32[(($node)>>2)];
+      var $arrayidx=(($5+((($and)*(28))&-1))|0);
+      $n=$arrayidx;
+      label = 3; break;
     case 3: 
-      var $2=$L_addr;
-      var $3=$t_addr;
-      var $node1=(($3+16)|0);
-      var $4=HEAP32[(($node1)>>2)];
-      var $5=$4;
-      var $6=$t_addr;
-      var $lsizenode=(($6+7)|0);
-      var $7=HEAP8[($lsizenode)];
-      var $conv=(($7)&255);
-      var $shl=1 << $conv;
-      var $mul=((($shl)*(28))&-1);
-      var $call=_luaM_realloc_($2, $5, $mul, 0);
-      label = 4; break;
+      var $6=$n;
+      var $i_key=(($6+12)|0);
+      var $tvk=$i_key;
+      var $tt_=(($tvk+8)|0);
+      var $7=HEAP32[(($tt_)>>2)];
+      var $cmp=(($7)|0)==68;
+      if ($cmp) { label = 4; break; } else { label = 6; break; }
     case 4: 
-      var $8=$L_addr;
-      var $9=$t_addr;
-      var $array=(($9+12)|0);
-      var $10=HEAP32[(($array)>>2)];
-      var $11=$10;
-      var $12=$t_addr;
-      var $sizearray=(($12+28)|0);
-      var $13=HEAP32[(($sizearray)>>2)];
-      var $mul2=((($13)*(12))&-1);
-      var $call3=_luaM_realloc_($8, $11, $mul2, 0);
-      var $14=$L_addr;
-      var $15=$t_addr;
-      var $16=$15;
-      var $call4=_luaM_realloc_($14, $16, 32, 0);
+      var $8=$n;
+      var $i_key2=(($8+12)|0);
+      var $tvk3=$i_key2;
+      var $value_=(($tvk3)|0);
+      var $gc=$value_;
+      var $9=HEAP32[(($gc)>>2)];
+      var $ts=$9;
+      var $10=$key_addr;
+      var $cmp4=(($ts)|0)==(($10)|0);
+      if ($cmp4) { label = 5; break; } else { label = 6; break; }
+    case 5: 
+      var $11=$n;
+      var $i_val=(($11)|0);
+      $retval=$i_val;
+      label = 10; break;
+    case 6: 
+      var $12=$n;
+      var $i_key6=(($12+12)|0);
+      var $nk=$i_key6;
+      var $next=(($nk+12)|0);
+      var $13=HEAP32[(($next)>>2)];
+      $n=$13;
+      label = 7; break;
+    case 7: 
+      label = 8; break;
+    case 8: 
+      var $14=$n;
+      var $tobool=(($14)|0)!=0;
+      if ($tobool) { label = 3; break; } else { label = 9; break; }
+    case 9: 
+      $retval=5244092;
+      label = 10; break;
+    case 10: 
+      var $15=$retval;
 
-      return;
+      return $15;
   }
 
 }
-
+_luaH_getstr["X"]=1;
 
 function _mainposition($t, $key) {
   var label = 0;
@@ -40093,122 +40319,139 @@ function _luaH_getint($t, $key) {
 }
 _luaH_getint["X"]=1;
 
-function _setnodevector($L, $t, $size) {
+function _luaH_get($t, $key) {
   var label = 0;
-  var __stackBase__  = STACKTOP; _memset(__stackBase__, 0, 0);
+  var __stackBase__  = STACKTOP; STACKTOP = (STACKTOP + 8)|0; _memset(__stackBase__, 0, 8);
   label = 2; 
   while(1) switch(label) {
     case 2: 
-      var $L_addr;
+      var $retval;
       var $t_addr;
-      var $size_addr;
-      var $lsize;
-      var $i;
+      var $key_addr;
+      var $k;
       var $n;
-      $L_addr=$L;
+      var $u=__stackBase__;
+      var $n11;
       $t_addr=$t;
-      $size_addr=$size;
-      var $0=$size_addr;
-      var $cmp=(($0)|0)==0;
-      if ($cmp) { label = 3; break; } else { label = 4; break; }
+      $key_addr=$key;
+      var $0=$key_addr;
+      var $tt_=(($0+8)|0);
+      var $1=HEAP32[(($tt_)>>2)];
+      var $and=$1 & 63;
+      if ((($and)|0)==0) {
+        label = 3; break;
+      }
+      else if ((($and)|0)==4) {
+        label = 4; break;
+      }
+      else if ((($and)|0)==3) {
+        label = 5; break;
+      }
+      else {
+      label = 8; break;
+      }
+      
     case 3: 
-      var $1=$t_addr;
-      var $node=(($1+16)|0);
-      HEAP32[(($node)>>2)]=5244816;
-      $lsize=0;
-      label = 14; break;
+      $retval=5244092;
+      label = 16; break;
     case 4: 
-      var $2=$size_addr;
-      var $call=_luaO_ceillog2($2);
-      $lsize=$call;
-      var $3=$lsize;
-      var $cmp1=(($3)|0) > 30;
-      if ($cmp1) { label = 5; break; } else { label = 6; break; }
+      var $2=$t_addr;
+      var $3=$key_addr;
+      var $value_=(($3)|0);
+      var $gc=$value_;
+      var $4=HEAP32[(($gc)>>2)];
+      var $ts=$4;
+      var $call=_luaH_getstr($2, $ts);
+      $retval=$call;
+      label = 16; break;
     case 5: 
-      var $4=$L_addr;
-      _luaG_runerror($4, ((5251000)|0), (tempInt=STACKTOP,_memset(STACKTOP, 0, 1),STACKTOP = (STACKTOP + 1)|0,STACKTOP = ((((STACKTOP)+3)>>2)<<2),HEAP32[((tempInt)>>2)]=0,tempInt));
-
+      var $5=$key_addr;
+      var $value_3=(($5)|0);
+      var $n4=$value_3;
+      var $6=(HEAP32[((tempDoublePtr)>>2)]=HEAP32[(($n4)>>2)],HEAP32[(((tempDoublePtr)+(4))>>2)]=HEAP32[((($n4)+(4))>>2)],HEAPF64[(tempDoublePtr)>>3]);
+      $n=$6;
+      var $7=$n;
+      var $add=($7)+(6755399441055744);
+      var $l_d=$u;
+      (HEAPF64[(tempDoublePtr)>>3]=$add,HEAP32[(($l_d)>>2)]=HEAP32[((tempDoublePtr)>>2)],HEAP32[((($l_d)+(4))>>2)]=HEAP32[(((tempDoublePtr)+(4))>>2)]);
+      var $8=HEAP32[((((5244364)|0))>>2)];
+      var $cmp=(($8)|0)==33;
+      var $conv=(($cmp)&1);
+      var $l_p=$u;
+      var $arrayidx=(($l_p+($conv<<2))|0);
+      var $9=HEAP32[(($arrayidx)>>2)];
+      $k=$9;
+      var $10=$k;
+      var $conv5=(($10)|0);
+      var $11=$key_addr;
+      var $value_6=(($11)|0);
+      var $n7=$value_6;
+      var $12=(HEAP32[((tempDoublePtr)>>2)]=HEAP32[(($n7)>>2)],HEAP32[(((tempDoublePtr)+(4))>>2)]=HEAP32[((($n7)+(4))>>2)],HEAPF64[(tempDoublePtr)>>3]);
+      var $cmp8=$conv5 == $12;
+      if ($cmp8) { label = 6; break; } else { label = 7; break; }
     case 6: 
-      var $5=$lsize;
-      var $shl=1 << $5;
-      $size_addr=$shl;
-      var $6=$size_addr;
-      var $add=((($6)+(1))|0);
-      var $cmp3=(($add)>>>0) > 153391689;
-      if ($cmp3) { label = 7; break; } else { label = 8; break; }
+      var $13=$t_addr;
+      var $14=$k;
+      var $call10=_luaH_getint($13, $14);
+      $retval=$call10;
+      label = 16; break;
     case 7: 
-      var $7=$L_addr;
-      _luaM_toobig($7);
-
-      label = 9; break;
+      label = 8; break;
     case 8: 
-      var $9=$L_addr;
-      var $10=$size_addr;
-      var $mul=((($10)*(28))&-1);
-      var $call4=_luaM_realloc_($9, 0, 0, $mul);
-      var $cond = $call4;label = 9; break;
+      var $15=$t_addr;
+      var $16=$key_addr;
+      var $call12=_mainposition($15, $16);
+      $n11=$call12;
+      label = 9; break;
     case 9: 
-      var $cond;
-      var $11=$cond;
-      var $12=$t_addr;
-      var $node5=(($12+16)|0);
-      HEAP32[(($node5)>>2)]=$11;
-      $i=0;
-      label = 10; break;
+      var $17=$n11;
+      var $i_key=(($17+12)|0);
+      var $tvk=$i_key;
+      var $tt_13=(($tvk+8)|0);
+      var $18=HEAP32[(($tt_13)>>2)];
+      var $19=$key_addr;
+      var $tt_14=(($19+8)|0);
+      var $20=HEAP32[(($tt_14)>>2)];
+      var $cmp15=(($18)|0)==(($20)|0);
+      if ($cmp15) { label = 10; break; } else { label = 12; break; }
     case 10: 
-      var $13=$i;
-      var $14=$size_addr;
-      var $cmp6=(($13)|0) < (($14)|0);
-      if ($cmp6) { label = 11; break; } else { label = 13; break; }
+      var $21=$n11;
+      var $i_key17=(($21+12)|0);
+      var $tvk18=$i_key17;
+      var $22=$key_addr;
+      var $call19=_luaV_equalobj_(0, $tvk18, $22);
+      var $tobool=(($call19)|0)!=0;
+      if ($tobool) { label = 11; break; } else { label = 12; break; }
     case 11: 
-      var $15=$i;
-      var $16=$t_addr;
-      var $node7=(($16+16)|0);
-      var $17=HEAP32[(($node7)>>2)];
-      var $arrayidx=(($17+((($15)*(28))&-1))|0);
-      $n=$arrayidx;
-      var $18=$n;
-      var $i_key=(($18+12)|0);
-      var $nk=$i_key;
-      var $next=(($nk+12)|0);
-      HEAP32[(($next)>>2)]=0;
-      var $19=$n;
-      var $i_key8=(($19+12)|0);
-      var $tvk=$i_key8;
-      var $tt_=(($tvk+8)|0);
-      HEAP32[(($tt_)>>2)]=0;
-      var $20=$n;
-      var $i_val=(($20)|0);
-      var $tt_9=(($i_val+8)|0);
-      HEAP32[(($tt_9)>>2)]=0;
-      label = 12; break;
+      var $23=$n11;
+      var $i_val=(($23)|0);
+      $retval=$i_val;
+      label = 16; break;
     case 12: 
-      var $21=$i;
-      var $inc=((($21)+(1))|0);
-      $i=$inc;
-      label = 10; break;
+      var $24=$n11;
+      var $i_key21=(($24+12)|0);
+      var $nk=$i_key21;
+      var $next=(($nk+12)|0);
+      var $25=HEAP32[(($next)>>2)];
+      $n11=$25;
+      label = 13; break;
     case 13: 
       label = 14; break;
     case 14: 
-      var $22=$lsize;
-      var $conv=(($22) & 255);
-      var $23=$t_addr;
-      var $lsizenode=(($23+7)|0);
-      HEAP8[($lsizenode)]=$conv;
-      var $24=$size_addr;
-      var $25=$t_addr;
-      var $node11=(($25+16)|0);
-      var $26=HEAP32[(($node11)>>2)];
-      var $arrayidx12=(($26+((($24)*(28))&-1))|0);
-      var $27=$t_addr;
-      var $lastfree=(($27+20)|0);
-      HEAP32[(($lastfree)>>2)]=$arrayidx12;
+      var $26=$n11;
+      var $tobool23=(($26)|0)!=0;
+      if ($tobool23) { label = 9; break; } else { label = 15; break; }
+    case 15: 
+      $retval=5244092;
+      label = 16; break;
+    case 16: 
+      var $27=$retval;
       STACKTOP = __stackBase__;
-      return;
+      return $27;
   }
 
 }
-_setnodevector["X"]=1;
+_luaH_get["X"]=1;
 
 function _luaH_newkey($L, $t, $key) {
   var label = 0;
@@ -40434,149 +40677,6 @@ function _luaH_newkey($L, $t, $key) {
 
 }
 _luaH_newkey["X"]=1;
-
-function _hashnum($t, $n) {
-  var label = 0;
-  var __stackBase__  = STACKTOP; STACKTOP = (STACKTOP + 8)|0; _memset(__stackBase__, 0, 8);
-  label = 2; 
-  while(1) switch(label) {
-    case 2: 
-      var $t_addr;
-      var $n_addr;
-      var $i;
-      var $u=__stackBase__;
-      $t_addr=$t;
-      $n_addr=$n;
-      var $0=$n_addr;
-      var $add=($0)+(1);
-      var $l_d=$u;
-      (HEAPF64[(tempDoublePtr)>>3]=$add,HEAP32[(($l_d)>>2)]=HEAP32[((tempDoublePtr)>>2)],HEAP32[((($l_d)+(4))>>2)]=HEAP32[(((tempDoublePtr)+(4))>>2)]);
-      var $l_p=$u;
-      var $arrayidx=(($l_p)|0);
-      var $1=HEAP32[(($arrayidx)>>2)];
-      $i=$1;
-      var $l_p1=$u;
-      var $arrayidx2=(($l_p1+4)|0);
-      var $2=HEAP32[(($arrayidx2)>>2)];
-      var $3=$i;
-      var $add3=((($3)+($2))|0);
-      $i=$add3;
-      var $4=$i;
-      var $cmp=(($4)|0) < 0;
-      if ($cmp) { label = 3; break; } else { label = 6; break; }
-    case 3: 
-      var $5=$i;
-      var $6=$i;
-      var $sub=(((-$6))|0);
-      var $cmp4=(($5)|0)==(($sub)|0);
-      if ($cmp4) { label = 4; break; } else { label = 5; break; }
-    case 4: 
-      $i=0;
-      label = 5; break;
-    case 5: 
-      var $7=$i;
-      var $sub6=(((-$7))|0);
-      $i=$sub6;
-      label = 6; break;
-    case 6: 
-      var $8=$i;
-      var $9=$t_addr;
-      var $lsizenode=(($9+7)|0);
-      var $10=HEAP8[($lsizenode)];
-      var $conv=(($10)&255);
-      var $shl=1 << $conv;
-      var $sub8=((($shl)-(1))|0);
-      var $or=$sub8 | 1;
-      var $rem=((($8)|0))%((($or)|0));
-      var $11=$t_addr;
-      var $node=(($11+16)|0);
-      var $12=HEAP32[(($node)>>2)];
-      var $arrayidx9=(($12+((($rem)*(28))&-1))|0);
-      STACKTOP = __stackBase__;
-      return $arrayidx9;
-  }
-
-}
-
-
-function _luaH_getstr($t, $key) {
-  var label = 0;
-
-  label = 2; 
-  while(1) switch(label) {
-    case 2: 
-      var $retval;
-      var $t_addr;
-      var $key_addr;
-      var $n;
-      $t_addr=$t;
-      $key_addr=$key;
-      var $0=$key_addr;
-      var $tsv=$0;
-      var $hash=(($tsv+8)|0);
-      var $1=HEAP32[(($hash)>>2)];
-      var $2=$t_addr;
-      var $lsizenode=(($2+7)|0);
-      var $3=HEAP8[($lsizenode)];
-      var $conv=(($3)&255);
-      var $shl=1 << $conv;
-      var $sub=((($shl)-(1))|0);
-      var $and=$1 & $sub;
-      var $4=$t_addr;
-      var $node=(($4+16)|0);
-      var $5=HEAP32[(($node)>>2)];
-      var $arrayidx=(($5+((($and)*(28))&-1))|0);
-      $n=$arrayidx;
-      label = 3; break;
-    case 3: 
-      var $6=$n;
-      var $i_key=(($6+12)|0);
-      var $tvk=$i_key;
-      var $tt_=(($tvk+8)|0);
-      var $7=HEAP32[(($tt_)>>2)];
-      var $cmp=(($7)|0)==68;
-      if ($cmp) { label = 4; break; } else { label = 6; break; }
-    case 4: 
-      var $8=$n;
-      var $i_key2=(($8+12)|0);
-      var $tvk3=$i_key2;
-      var $value_=(($tvk3)|0);
-      var $gc=$value_;
-      var $9=HEAP32[(($gc)>>2)];
-      var $ts=$9;
-      var $10=$key_addr;
-      var $cmp4=(($ts)|0)==(($10)|0);
-      if ($cmp4) { label = 5; break; } else { label = 6; break; }
-    case 5: 
-      var $11=$n;
-      var $i_val=(($11)|0);
-      $retval=$i_val;
-      label = 10; break;
-    case 6: 
-      var $12=$n;
-      var $i_key6=(($12+12)|0);
-      var $nk=$i_key6;
-      var $next=(($nk+12)|0);
-      var $13=HEAP32[(($next)>>2)];
-      $n=$13;
-      label = 7; break;
-    case 7: 
-      label = 8; break;
-    case 8: 
-      var $14=$n;
-      var $tobool=(($14)|0)!=0;
-      if ($tobool) { label = 3; break; } else { label = 9; break; }
-    case 9: 
-      $retval=5244092;
-      label = 10; break;
-    case 10: 
-      var $15=$retval;
-
-      return $15;
-  }
-
-}
-_luaH_getstr["X"]=1;
 
 function _numusearray($t, $nums) {
   var label = 0;
@@ -40828,140 +40928,6 @@ function _arrayindex($key) {
 
 }
 
-
-function _luaH_get($t, $key) {
-  var label = 0;
-  var __stackBase__  = STACKTOP; STACKTOP = (STACKTOP + 8)|0; _memset(__stackBase__, 0, 8);
-  label = 2; 
-  while(1) switch(label) {
-    case 2: 
-      var $retval;
-      var $t_addr;
-      var $key_addr;
-      var $k;
-      var $n;
-      var $u=__stackBase__;
-      var $n11;
-      $t_addr=$t;
-      $key_addr=$key;
-      var $0=$key_addr;
-      var $tt_=(($0+8)|0);
-      var $1=HEAP32[(($tt_)>>2)];
-      var $and=$1 & 63;
-      if ((($and)|0)==0) {
-        label = 3; break;
-      }
-      else if ((($and)|0)==4) {
-        label = 4; break;
-      }
-      else if ((($and)|0)==3) {
-        label = 5; break;
-      }
-      else {
-      label = 8; break;
-      }
-      
-    case 3: 
-      $retval=5244092;
-      label = 16; break;
-    case 4: 
-      var $2=$t_addr;
-      var $3=$key_addr;
-      var $value_=(($3)|0);
-      var $gc=$value_;
-      var $4=HEAP32[(($gc)>>2)];
-      var $ts=$4;
-      var $call=_luaH_getstr($2, $ts);
-      $retval=$call;
-      label = 16; break;
-    case 5: 
-      var $5=$key_addr;
-      var $value_3=(($5)|0);
-      var $n4=$value_3;
-      var $6=(HEAP32[((tempDoublePtr)>>2)]=HEAP32[(($n4)>>2)],HEAP32[(((tempDoublePtr)+(4))>>2)]=HEAP32[((($n4)+(4))>>2)],HEAPF64[(tempDoublePtr)>>3]);
-      $n=$6;
-      var $7=$n;
-      var $add=($7)+(6755399441055744);
-      var $l_d=$u;
-      (HEAPF64[(tempDoublePtr)>>3]=$add,HEAP32[(($l_d)>>2)]=HEAP32[((tempDoublePtr)>>2)],HEAP32[((($l_d)+(4))>>2)]=HEAP32[(((tempDoublePtr)+(4))>>2)]);
-      var $8=HEAP32[((((5244364)|0))>>2)];
-      var $cmp=(($8)|0)==33;
-      var $conv=(($cmp)&1);
-      var $l_p=$u;
-      var $arrayidx=(($l_p+($conv<<2))|0);
-      var $9=HEAP32[(($arrayidx)>>2)];
-      $k=$9;
-      var $10=$k;
-      var $conv5=(($10)|0);
-      var $11=$key_addr;
-      var $value_6=(($11)|0);
-      var $n7=$value_6;
-      var $12=(HEAP32[((tempDoublePtr)>>2)]=HEAP32[(($n7)>>2)],HEAP32[(((tempDoublePtr)+(4))>>2)]=HEAP32[((($n7)+(4))>>2)],HEAPF64[(tempDoublePtr)>>3]);
-      var $cmp8=$conv5 == $12;
-      if ($cmp8) { label = 6; break; } else { label = 7; break; }
-    case 6: 
-      var $13=$t_addr;
-      var $14=$k;
-      var $call10=_luaH_getint($13, $14);
-      $retval=$call10;
-      label = 16; break;
-    case 7: 
-      label = 8; break;
-    case 8: 
-      var $15=$t_addr;
-      var $16=$key_addr;
-      var $call12=_mainposition($15, $16);
-      $n11=$call12;
-      label = 9; break;
-    case 9: 
-      var $17=$n11;
-      var $i_key=(($17+12)|0);
-      var $tvk=$i_key;
-      var $tt_13=(($tvk+8)|0);
-      var $18=HEAP32[(($tt_13)>>2)];
-      var $19=$key_addr;
-      var $tt_14=(($19+8)|0);
-      var $20=HEAP32[(($tt_14)>>2)];
-      var $cmp15=(($18)|0)==(($20)|0);
-      if ($cmp15) { label = 10; break; } else { label = 12; break; }
-    case 10: 
-      var $21=$n11;
-      var $i_key17=(($21+12)|0);
-      var $tvk18=$i_key17;
-      var $22=$key_addr;
-      var $call19=_luaV_equalobj_(0, $tvk18, $22);
-      var $tobool=(($call19)|0)!=0;
-      if ($tobool) { label = 11; break; } else { label = 12; break; }
-    case 11: 
-      var $23=$n11;
-      var $i_val=(($23)|0);
-      $retval=$i_val;
-      label = 16; break;
-    case 12: 
-      var $24=$n11;
-      var $i_key21=(($24+12)|0);
-      var $nk=$i_key21;
-      var $next=(($nk+12)|0);
-      var $25=HEAP32[(($next)>>2)];
-      $n11=$25;
-      label = 13; break;
-    case 13: 
-      label = 14; break;
-    case 14: 
-      var $26=$n11;
-      var $tobool23=(($26)|0)!=0;
-      if ($tobool23) { label = 9; break; } else { label = 15; break; }
-    case 15: 
-      $retval=5244092;
-      label = 16; break;
-    case 16: 
-      var $27=$retval;
-      STACKTOP = __stackBase__;
-      return $27;
-  }
-
-}
-_luaH_get["X"]=1;
 
 function _luaH_getn($t) {
   var label = 0;
@@ -41641,6 +41607,72 @@ function _luaU_undump($L, $Z, $buff, $name) {
 }
 _luaU_undump["X"]=1;
 
+function _LoadHeader($S) {
+  var label = 0;
+  var __stackBase__  = STACKTOP; STACKTOP = (STACKTOP + 40)|0; _memset(__stackBase__, 0, 40);
+  label = 2; 
+  while(1) switch(label) {
+    case 2: 
+      var $S_addr;
+      var $h=__stackBase__;
+      var $s=(__stackBase__)+(20);
+      $S_addr=$S;
+      var $arraydecay=(($h)|0);
+      _luaU_header($arraydecay);
+      var $0=$s;
+      var $1=$h;
+      HEAP8[($0)]=HEAP8[($1)];
+      var $2=$S_addr;
+      var $arraydecay1=(($s)|0);
+      var $add_ptr=(($arraydecay1+1)|0);
+      _LoadBlock($2, $add_ptr, 17);
+      var $arraydecay2=(($h)|0);
+      var $arraydecay3=(($s)|0);
+      var $call=_memcmp($arraydecay2, $arraydecay3, 18);
+      var $cmp=(($call)|0)==0;
+      if ($cmp) { label = 3; break; } else { label = 4; break; }
+    case 3: 
+      STACKTOP = __stackBase__;
+      return;
+    case 4: 
+      var $arraydecay4=(($h)|0);
+      var $arraydecay5=(($s)|0);
+      var $call6=_memcmp($arraydecay4, $arraydecay5, 4);
+      var $cmp7=(($call6)|0)!=0;
+      if ($cmp7) { label = 5; break; } else { label = 6; break; }
+    case 5: 
+      var $3=$S_addr;
+      _error($3, ((5245784)|0));
+
+    case 6: 
+      var $arraydecay10=(($h)|0);
+      var $arraydecay11=(($s)|0);
+      var $call12=_memcmp($arraydecay10, $arraydecay11, 6);
+      var $cmp13=(($call12)|0)!=0;
+      if ($cmp13) { label = 7; break; } else { label = 8; break; }
+    case 7: 
+      var $4=$S_addr;
+      _error($4, ((5245516)|0));
+
+    case 8: 
+      var $arraydecay16=(($h)|0);
+      var $arraydecay17=(($s)|0);
+      var $call18=_memcmp($arraydecay16, $arraydecay17, 12);
+      var $cmp19=(($call18)|0)!=0;
+      if ($cmp19) { label = 9; break; } else { label = 10; break; }
+    case 9: 
+      var $5=$S_addr;
+      _error($5, ((5253708)|0));
+
+    case 10: 
+      var $6=$S_addr;
+      _error($6, ((5246132)|0));
+
+  }
+
+}
+
+
 function _LoadFunction($S, $f) {
   var label = 0;
 
@@ -41773,71 +41805,148 @@ function _LoadChar($S) {
 }
 
 
-function _LoadHeader($S) {
+function _LoadString($S) {
   var label = 0;
-  var __stackBase__  = STACKTOP; STACKTOP = (STACKTOP + 40)|0; _memset(__stackBase__, 0, 40);
+  var __stackBase__  = STACKTOP; STACKTOP = (STACKTOP + 4)|0; _memset(__stackBase__, 0, 4);
   label = 2; 
   while(1) switch(label) {
     case 2: 
+      var $retval;
       var $S_addr;
-      var $h=__stackBase__;
-      var $s=(__stackBase__)+(20);
+      var $size=__stackBase__;
+      var $s;
       $S_addr=$S;
-      var $arraydecay=(($h)|0);
-      _luaU_header($arraydecay);
-      var $0=$s;
-      var $1=$h;
-      HEAP8[($0)]=HEAP8[($1)];
-      var $2=$S_addr;
-      var $arraydecay1=(($s)|0);
-      var $add_ptr=(($arraydecay1+1)|0);
-      _LoadBlock($2, $add_ptr, 17);
-      var $arraydecay2=(($h)|0);
-      var $arraydecay3=(($s)|0);
-      var $call=_memcmp($arraydecay2, $arraydecay3, 18);
-      var $cmp=(($call)|0)==0;
+      var $0=$S_addr;
+      var $1=$size;
+      _LoadBlock($0, $1, 4);
+      var $2=HEAP32[(($size)>>2)];
+      var $cmp=(($2)|0)==0;
       if ($cmp) { label = 3; break; } else { label = 4; break; }
     case 3: 
-      STACKTOP = __stackBase__;
-      return;
+      $retval=0;
+      label = 5; break;
     case 4: 
-      var $arraydecay4=(($h)|0);
-      var $arraydecay5=(($s)|0);
-      var $call6=_memcmp($arraydecay4, $arraydecay5, 4);
-      var $cmp7=(($call6)|0)!=0;
-      if ($cmp7) { label = 5; break; } else { label = 6; break; }
-    case 5: 
       var $3=$S_addr;
-      _error($3, ((5245784)|0));
-
-    case 6: 
-      var $arraydecay10=(($h)|0);
-      var $arraydecay11=(($s)|0);
-      var $call12=_memcmp($arraydecay10, $arraydecay11, 6);
-      var $cmp13=(($call12)|0)!=0;
-      if ($cmp13) { label = 7; break; } else { label = 8; break; }
-    case 7: 
-      var $4=$S_addr;
-      _error($4, ((5245516)|0));
-
-    case 8: 
-      var $arraydecay16=(($h)|0);
-      var $arraydecay17=(($s)|0);
-      var $call18=_memcmp($arraydecay16, $arraydecay17, 12);
-      var $cmp19=(($call18)|0)!=0;
-      if ($cmp19) { label = 9; break; } else { label = 10; break; }
-    case 9: 
+      var $L=(($3)|0);
+      var $4=HEAP32[(($L)>>2)];
       var $5=$S_addr;
-      _error($5, ((5253708)|0));
-
-    case 10: 
-      var $6=$S_addr;
-      _error($6, ((5246132)|0));
-
+      var $b=(($5+8)|0);
+      var $6=HEAP32[(($b)>>2)];
+      var $7=HEAP32[(($size)>>2)];
+      var $call=_luaZ_openspace($4, $6, $7);
+      $s=$call;
+      var $8=$S_addr;
+      var $9=$s;
+      var $10=HEAP32[(($size)>>2)];
+      var $mul=$10;
+      _LoadBlock($8, $9, $mul);
+      var $11=$S_addr;
+      var $L1=(($11)|0);
+      var $12=HEAP32[(($L1)>>2)];
+      var $13=$s;
+      var $14=HEAP32[(($size)>>2)];
+      var $sub=((($14)-(1))|0);
+      var $call2=_luaS_newlstr($12, $13, $sub);
+      $retval=$call2;
+      label = 5; break;
+    case 5: 
+      var $15=$retval;
+      STACKTOP = __stackBase__;
+      return $15;
   }
 
 }
 
+
+function _LoadNumber($S) {
+  var label = 0;
+  var __stackBase__  = STACKTOP; STACKTOP = (STACKTOP + 8)|0; _memset(__stackBase__, 0, 8);
+
+  var $S_addr;
+  var $x=__stackBase__;
+  $S_addr=$S;
+  var $0=$S_addr;
+  var $1=$x;
+  _LoadBlock($0, $1, 8);
+  var $2=(HEAP32[((tempDoublePtr)>>2)]=HEAP32[(($x)>>2)],HEAP32[(((tempDoublePtr)+(4))>>2)]=HEAP32[((($x)+(4))>>2)],HEAPF64[(tempDoublePtr)>>3]);
+  STACKTOP = __stackBase__;
+  return $2;
+}
+
+
+function _luaV_tonumber($obj, $n) {
+  var label = 0;
+  var __stackBase__  = STACKTOP; STACKTOP = (STACKTOP + 8)|0; _memset(__stackBase__, 0, 8);
+  label = 2; 
+  while(1) switch(label) {
+    case 2: 
+      var $retval;
+      var $obj_addr;
+      var $n_addr;
+      var $num=__stackBase__;
+      var $io;
+      $obj_addr=$obj;
+      $n_addr=$n;
+      var $0=$obj_addr;
+      var $tt_=(($0+8)|0);
+      var $1=HEAP32[(($tt_)>>2)];
+      var $cmp=(($1)|0)==3;
+      if ($cmp) { label = 3; break; } else { label = 4; break; }
+    case 3: 
+      var $2=$obj_addr;
+      $retval=$2;
+      label = 8; break;
+    case 4: 
+      var $3=$obj_addr;
+      var $tt_1=(($3+8)|0);
+      var $4=HEAP32[(($tt_1)>>2)];
+      var $and=$4 & 15;
+      var $cmp2=(($and)|0)==4;
+      if ($cmp2) { label = 5; break; } else { label = 7; break; }
+    case 5: 
+      var $5=$obj_addr;
+      var $value_=(($5)|0);
+      var $gc=$value_;
+      var $6=HEAP32[(($gc)>>2)];
+      var $ts=$6;
+      var $add_ptr=(($ts+16)|0);
+      var $7=$add_ptr;
+      var $8=$obj_addr;
+      var $value_3=(($8)|0);
+      var $gc4=$value_3;
+      var $9=HEAP32[(($gc4)>>2)];
+      var $ts5=$9;
+      var $tsv=$ts5;
+      var $len=(($tsv+12)|0);
+      var $10=HEAP32[(($len)>>2)];
+      var $call=_luaO_str2d($7, $10, $num);
+      var $tobool=(($call)|0)!=0;
+      if ($tobool) { label = 6; break; } else { label = 7; break; }
+    case 6: 
+      var $11=$n_addr;
+      $io=$11;
+      var $12=(HEAP32[((tempDoublePtr)>>2)]=HEAP32[(($num)>>2)],HEAP32[(((tempDoublePtr)+(4))>>2)]=HEAP32[((($num)+(4))>>2)],HEAPF64[(tempDoublePtr)>>3]);
+      var $13=$io;
+      var $value_7=(($13)|0);
+      var $n8=$value_7;
+      (HEAPF64[(tempDoublePtr)>>3]=$12,HEAP32[(($n8)>>2)]=HEAP32[((tempDoublePtr)>>2)],HEAP32[((($n8)+(4))>>2)]=HEAP32[(((tempDoublePtr)+(4))>>2)]);
+      var $14=$io;
+      var $tt_9=(($14+8)|0);
+      HEAP32[(($tt_9)>>2)]=3;
+      var $15=$n_addr;
+      $retval=$15;
+      label = 8; break;
+    case 7: 
+      $retval=0;
+      label = 8; break;
+    case 8: 
+      var $16=$retval;
+      STACKTOP = __stackBase__;
+      return $16;
+  }
+
+}
+_luaV_tonumber["X"]=1;
 
 function _LoadInt($S) {
   var label = 0;
@@ -42295,148 +42404,255 @@ function _LoadUpvalues($S, $f) {
 }
 _LoadUpvalues["X"]=1;
 
-function _LoadString($S) {
+function _LoadDebug($S, $f) {
   var label = 0;
-  var __stackBase__  = STACKTOP; STACKTOP = (STACKTOP + 4)|0; _memset(__stackBase__, 0, 4);
+
   label = 2; 
   while(1) switch(label) {
     case 2: 
-      var $retval;
       var $S_addr;
-      var $size=__stackBase__;
-      var $s;
+      var $f_addr;
+      var $i;
+      var $n;
       $S_addr=$S;
+      $f_addr=$f;
       var $0=$S_addr;
-      var $1=$size;
-      _LoadBlock($0, $1, 4);
-      var $2=HEAP32[(($size)>>2)];
-      var $cmp=(($2)|0)==0;
+      var $call=_LoadString($0);
+      var $1=$f_addr;
+      var $source=(($1+36)|0);
+      HEAP32[(($source)>>2)]=$call;
+      var $2=$S_addr;
+      var $call1=_LoadInt($2);
+      $n=$call1;
+      var $3=$n;
+      var $add=((($3)+(1))|0);
+      var $cmp=(($add)>>>0) > 1073741823;
       if ($cmp) { label = 3; break; } else { label = 4; break; }
     case 3: 
-      $retval=0;
+      var $4=$S_addr;
+      var $L=(($4)|0);
+      var $5=HEAP32[(($L)>>2)];
+      _luaM_toobig($5);
+
       label = 5; break;
     case 4: 
-      var $3=$S_addr;
-      var $L=(($3)|0);
-      var $4=HEAP32[(($L)>>2)];
-      var $5=$S_addr;
-      var $b=(($5+8)|0);
-      var $6=HEAP32[(($b)>>2)];
-      var $7=HEAP32[(($size)>>2)];
-      var $call=_luaZ_openspace($4, $6, $7);
-      $s=$call;
-      var $8=$S_addr;
-      var $9=$s;
-      var $10=HEAP32[(($size)>>2)];
-      var $mul=$10;
-      _LoadBlock($8, $9, $mul);
-      var $11=$S_addr;
-      var $L1=(($11)|0);
-      var $12=HEAP32[(($L1)>>2)];
-      var $13=$s;
-      var $14=HEAP32[(($size)>>2)];
-      var $sub=((($14)-(1))|0);
-      var $call2=_luaS_newlstr($12, $13, $sub);
-      $retval=$call2;
-      label = 5; break;
+      var $7=$S_addr;
+      var $L2=(($7)|0);
+      var $8=HEAP32[(($L2)>>2)];
+      var $9=$n;
+      var $mul=($9<<2);
+      var $call3=_luaM_realloc_($8, 0, 0, $mul);
+      var $cond = $call3;label = 5; break;
     case 5: 
-      var $15=$retval;
-      STACKTOP = __stackBase__;
-      return $15;
-  }
-
-}
-
-
-function _LoadNumber($S) {
-  var label = 0;
-  var __stackBase__  = STACKTOP; STACKTOP = (STACKTOP + 8)|0; _memset(__stackBase__, 0, 8);
-
-  var $S_addr;
-  var $x=__stackBase__;
-  $S_addr=$S;
-  var $0=$S_addr;
-  var $1=$x;
-  _LoadBlock($0, $1, 8);
-  var $2=(HEAP32[((tempDoublePtr)>>2)]=HEAP32[(($x)>>2)],HEAP32[(((tempDoublePtr)+(4))>>2)]=HEAP32[((($x)+(4))>>2)],HEAPF64[(tempDoublePtr)>>3]);
-  STACKTOP = __stackBase__;
-  return $2;
-}
-
-
-function _luaV_tonumber($obj, $n) {
-  var label = 0;
-  var __stackBase__  = STACKTOP; STACKTOP = (STACKTOP + 8)|0; _memset(__stackBase__, 0, 8);
-  label = 2; 
-  while(1) switch(label) {
-    case 2: 
-      var $retval;
-      var $obj_addr;
-      var $n_addr;
-      var $num=__stackBase__;
-      var $io;
-      $obj_addr=$obj;
-      $n_addr=$n;
-      var $0=$obj_addr;
-      var $tt_=(($0+8)|0);
-      var $1=HEAP32[(($tt_)>>2)];
-      var $cmp=(($1)|0)==3;
-      if ($cmp) { label = 3; break; } else { label = 4; break; }
-    case 3: 
-      var $2=$obj_addr;
-      $retval=$2;
-      label = 8; break;
-    case 4: 
-      var $3=$obj_addr;
-      var $tt_1=(($3+8)|0);
-      var $4=HEAP32[(($tt_1)>>2)];
-      var $and=$4 & 15;
-      var $cmp2=(($and)|0)==4;
-      if ($cmp2) { label = 5; break; } else { label = 7; break; }
-    case 5: 
-      var $5=$obj_addr;
-      var $value_=(($5)|0);
-      var $gc=$value_;
-      var $6=HEAP32[(($gc)>>2)];
-      var $ts=$6;
-      var $add_ptr=(($ts+16)|0);
-      var $7=$add_ptr;
-      var $8=$obj_addr;
-      var $value_3=(($8)|0);
-      var $gc4=$value_3;
-      var $9=HEAP32[(($gc4)>>2)];
-      var $ts5=$9;
-      var $tsv=$ts5;
-      var $len=(($tsv+12)|0);
-      var $10=HEAP32[(($len)>>2)];
-      var $call=_luaO_str2d($7, $10, $num);
-      var $tobool=(($call)|0)!=0;
-      if ($tobool) { label = 6; break; } else { label = 7; break; }
+      var $cond;
+      var $10=$cond;
+      var $11=$f_addr;
+      var $lineinfo=(($11+20)|0);
+      HEAP32[(($lineinfo)>>2)]=$10;
+      var $12=$n;
+      var $13=$f_addr;
+      var $sizelineinfo=(($13+52)|0);
+      HEAP32[(($sizelineinfo)>>2)]=$12;
+      var $14=$S_addr;
+      var $15=$f_addr;
+      var $lineinfo4=(($15+20)|0);
+      var $16=HEAP32[(($lineinfo4)>>2)];
+      var $17=$16;
+      var $18=$n;
+      var $mul5=($18<<2);
+      _LoadBlock($14, $17, $mul5);
+      var $19=$S_addr;
+      var $call6=_LoadInt($19);
+      $n=$call6;
+      var $20=$n;
+      var $add7=((($20)+(1))|0);
+      var $cmp8=(($add7)>>>0) > 357913941;
+      if ($cmp8) { label = 6; break; } else { label = 7; break; }
     case 6: 
-      var $11=$n_addr;
-      $io=$11;
-      var $12=(HEAP32[((tempDoublePtr)>>2)]=HEAP32[(($num)>>2)],HEAP32[(((tempDoublePtr)+(4))>>2)]=HEAP32[((($num)+(4))>>2)],HEAPF64[(tempDoublePtr)>>3]);
-      var $13=$io;
-      var $value_7=(($13)|0);
-      var $n8=$value_7;
-      (HEAPF64[(tempDoublePtr)>>3]=$12,HEAP32[(($n8)>>2)]=HEAP32[((tempDoublePtr)>>2)],HEAP32[((($n8)+(4))>>2)]=HEAP32[(((tempDoublePtr)+(4))>>2)]);
-      var $14=$io;
-      var $tt_9=(($14+8)|0);
-      HEAP32[(($tt_9)>>2)]=3;
-      var $15=$n_addr;
-      $retval=$15;
+      var $21=$S_addr;
+      var $L10=(($21)|0);
+      var $22=HEAP32[(($L10)>>2)];
+      _luaM_toobig($22);
+
       label = 8; break;
     case 7: 
-      $retval=0;
-      label = 8; break;
+      var $24=$S_addr;
+      var $L12=(($24)|0);
+      var $25=HEAP32[(($L12)>>2)];
+      var $26=$n;
+      var $mul13=((($26)*(12))&-1);
+      var $call14=_luaM_realloc_($25, 0, 0, $mul13);
+      var $cond16 = $call14;label = 8; break;
     case 8: 
-      var $16=$retval;
-      STACKTOP = __stackBase__;
-      return $16;
+      var $cond16;
+      var $27=$cond16;
+      var $28=$f_addr;
+      var $locvars=(($28+24)|0);
+      HEAP32[(($locvars)>>2)]=$27;
+      var $29=$n;
+      var $30=$f_addr;
+      var $sizelocvars=(($30+60)|0);
+      HEAP32[(($sizelocvars)>>2)]=$29;
+      $i=0;
+      label = 9; break;
+    case 9: 
+      var $31=$i;
+      var $32=$n;
+      var $cmp17=(($31)|0) < (($32)|0);
+      if ($cmp17) { label = 10; break; } else { label = 12; break; }
+    case 10: 
+      var $33=$i;
+      var $34=$f_addr;
+      var $locvars18=(($34+24)|0);
+      var $35=HEAP32[(($locvars18)>>2)];
+      var $arrayidx=(($35+((($33)*(12))&-1))|0);
+      var $varname=(($arrayidx)|0);
+      HEAP32[(($varname)>>2)]=0;
+      label = 11; break;
+    case 11: 
+      var $36=$i;
+      var $inc=((($36)+(1))|0);
+      $i=$inc;
+      label = 9; break;
+    case 12: 
+      $i=0;
+      label = 13; break;
+    case 13: 
+      var $37=$i;
+      var $38=$n;
+      var $cmp20=(($37)|0) < (($38)|0);
+      if ($cmp20) { label = 14; break; } else { label = 16; break; }
+    case 14: 
+      var $39=$S_addr;
+      var $call22=_LoadString($39);
+      var $40=$i;
+      var $41=$f_addr;
+      var $locvars23=(($41+24)|0);
+      var $42=HEAP32[(($locvars23)>>2)];
+      var $arrayidx24=(($42+((($40)*(12))&-1))|0);
+      var $varname25=(($arrayidx24)|0);
+      HEAP32[(($varname25)>>2)]=$call22;
+      var $43=$S_addr;
+      var $call26=_LoadInt($43);
+      var $44=$i;
+      var $45=$f_addr;
+      var $locvars27=(($45+24)|0);
+      var $46=HEAP32[(($locvars27)>>2)];
+      var $arrayidx28=(($46+((($44)*(12))&-1))|0);
+      var $startpc=(($arrayidx28+4)|0);
+      HEAP32[(($startpc)>>2)]=$call26;
+      var $47=$S_addr;
+      var $call29=_LoadInt($47);
+      var $48=$i;
+      var $49=$f_addr;
+      var $locvars30=(($49+24)|0);
+      var $50=HEAP32[(($locvars30)>>2)];
+      var $arrayidx31=(($50+((($48)*(12))&-1))|0);
+      var $endpc=(($arrayidx31+8)|0);
+      HEAP32[(($endpc)>>2)]=$call29;
+      label = 15; break;
+    case 15: 
+      var $51=$i;
+      var $inc33=((($51)+(1))|0);
+      $i=$inc33;
+      label = 13; break;
+    case 16: 
+      var $52=$S_addr;
+      var $call35=_LoadInt($52);
+      $n=$call35;
+      $i=0;
+      label = 17; break;
+    case 17: 
+      var $53=$i;
+      var $54=$n;
+      var $cmp37=(($53)|0) < (($54)|0);
+      if ($cmp37) { label = 18; break; } else { label = 20; break; }
+    case 18: 
+      var $55=$S_addr;
+      var $call39=_LoadString($55);
+      var $56=$i;
+      var $57=$f_addr;
+      var $upvalues=(($57+28)|0);
+      var $58=HEAP32[(($upvalues)>>2)];
+      var $arrayidx40=(($58+($56<<3))|0);
+      var $name=(($arrayidx40)|0);
+      HEAP32[(($name)>>2)]=$call39;
+      label = 19; break;
+    case 19: 
+      var $59=$i;
+      var $inc42=((($59)+(1))|0);
+      $i=$inc42;
+      label = 17; break;
+    case 20: 
+
+      return;
   }
 
 }
-_luaV_tonumber["X"]=1;
+_LoadDebug["X"]=1;
+
+function _LoadBlock($S, $b, $size) {
+  var label = 0;
+
+  label = 2; 
+  while(1) switch(label) {
+    case 2: 
+      var $S_addr;
+      var $b_addr;
+      var $size_addr;
+      $S_addr=$S;
+      $b_addr=$b;
+      $size_addr=$size;
+      var $0=$S_addr;
+      var $Z=(($0+4)|0);
+      var $1=HEAP32[(($Z)>>2)];
+      var $2=$b_addr;
+      var $3=$size_addr;
+      var $call=_luaZ_read($1, $2, $3);
+      var $cmp=(($call)|0)!=0;
+      if ($cmp) { label = 3; break; } else { label = 4; break; }
+    case 3: 
+      var $4=$S_addr;
+      _error($4, ((5246812)|0));
+
+    case 4: 
+
+      return;
+  }
+
+}
+
+
+function _error($S, $why) {
+  var label = 0;
+  var __stackBase__  = STACKTOP; _memset(__stackBase__, 0, 0);
+  label = 2; 
+  while(1) switch(label) {
+    case 2: 
+      var $S_addr;
+      var $why_addr;
+      $S_addr=$S;
+      $why_addr=$why;
+      var $0=$S_addr;
+      var $L=(($0)|0);
+      var $1=HEAP32[(($L)>>2)];
+      var $2=$S_addr;
+      var $name=(($2+12)|0);
+      var $3=HEAP32[(($name)>>2)];
+      var $4=$why_addr;
+      var $call=_luaO_pushfstring($1, ((5246528)|0), (tempInt=STACKTOP,_memset(STACKTOP, 0, 8),STACKTOP = (STACKTOP + 8)|0,HEAP32[((tempInt)>>2)]=$3,HEAP32[(((tempInt)+(4))>>2)]=$4,tempInt));
+      var $5=$S_addr;
+      var $L1=(($5)|0);
+      var $6=HEAP32[(($L1)>>2)];
+      _luaD_throw($6, 3);
+
+    case 3: 
+      STACKTOP = __stackBase__;
+      return;
+  }
+
+}
+
 
 function _luaV_tostring($L, $obj) {
   var label = 0;
@@ -42712,417 +42928,6 @@ function _callTM($L, $f, $p1, $p2, $p3, $hasres) {
 }
 _callTM["X"]=1;
 
-function _LoadDebug($S, $f) {
-  var label = 0;
-
-  label = 2; 
-  while(1) switch(label) {
-    case 2: 
-      var $S_addr;
-      var $f_addr;
-      var $i;
-      var $n;
-      $S_addr=$S;
-      $f_addr=$f;
-      var $0=$S_addr;
-      var $call=_LoadString($0);
-      var $1=$f_addr;
-      var $source=(($1+36)|0);
-      HEAP32[(($source)>>2)]=$call;
-      var $2=$S_addr;
-      var $call1=_LoadInt($2);
-      $n=$call1;
-      var $3=$n;
-      var $add=((($3)+(1))|0);
-      var $cmp=(($add)>>>0) > 1073741823;
-      if ($cmp) { label = 3; break; } else { label = 4; break; }
-    case 3: 
-      var $4=$S_addr;
-      var $L=(($4)|0);
-      var $5=HEAP32[(($L)>>2)];
-      _luaM_toobig($5);
-
-      label = 5; break;
-    case 4: 
-      var $7=$S_addr;
-      var $L2=(($7)|0);
-      var $8=HEAP32[(($L2)>>2)];
-      var $9=$n;
-      var $mul=($9<<2);
-      var $call3=_luaM_realloc_($8, 0, 0, $mul);
-      var $cond = $call3;label = 5; break;
-    case 5: 
-      var $cond;
-      var $10=$cond;
-      var $11=$f_addr;
-      var $lineinfo=(($11+20)|0);
-      HEAP32[(($lineinfo)>>2)]=$10;
-      var $12=$n;
-      var $13=$f_addr;
-      var $sizelineinfo=(($13+52)|0);
-      HEAP32[(($sizelineinfo)>>2)]=$12;
-      var $14=$S_addr;
-      var $15=$f_addr;
-      var $lineinfo4=(($15+20)|0);
-      var $16=HEAP32[(($lineinfo4)>>2)];
-      var $17=$16;
-      var $18=$n;
-      var $mul5=($18<<2);
-      _LoadBlock($14, $17, $mul5);
-      var $19=$S_addr;
-      var $call6=_LoadInt($19);
-      $n=$call6;
-      var $20=$n;
-      var $add7=((($20)+(1))|0);
-      var $cmp8=(($add7)>>>0) > 357913941;
-      if ($cmp8) { label = 6; break; } else { label = 7; break; }
-    case 6: 
-      var $21=$S_addr;
-      var $L10=(($21)|0);
-      var $22=HEAP32[(($L10)>>2)];
-      _luaM_toobig($22);
-
-      label = 8; break;
-    case 7: 
-      var $24=$S_addr;
-      var $L12=(($24)|0);
-      var $25=HEAP32[(($L12)>>2)];
-      var $26=$n;
-      var $mul13=((($26)*(12))&-1);
-      var $call14=_luaM_realloc_($25, 0, 0, $mul13);
-      var $cond16 = $call14;label = 8; break;
-    case 8: 
-      var $cond16;
-      var $27=$cond16;
-      var $28=$f_addr;
-      var $locvars=(($28+24)|0);
-      HEAP32[(($locvars)>>2)]=$27;
-      var $29=$n;
-      var $30=$f_addr;
-      var $sizelocvars=(($30+60)|0);
-      HEAP32[(($sizelocvars)>>2)]=$29;
-      $i=0;
-      label = 9; break;
-    case 9: 
-      var $31=$i;
-      var $32=$n;
-      var $cmp17=(($31)|0) < (($32)|0);
-      if ($cmp17) { label = 10; break; } else { label = 12; break; }
-    case 10: 
-      var $33=$i;
-      var $34=$f_addr;
-      var $locvars18=(($34+24)|0);
-      var $35=HEAP32[(($locvars18)>>2)];
-      var $arrayidx=(($35+((($33)*(12))&-1))|0);
-      var $varname=(($arrayidx)|0);
-      HEAP32[(($varname)>>2)]=0;
-      label = 11; break;
-    case 11: 
-      var $36=$i;
-      var $inc=((($36)+(1))|0);
-      $i=$inc;
-      label = 9; break;
-    case 12: 
-      $i=0;
-      label = 13; break;
-    case 13: 
-      var $37=$i;
-      var $38=$n;
-      var $cmp20=(($37)|0) < (($38)|0);
-      if ($cmp20) { label = 14; break; } else { label = 16; break; }
-    case 14: 
-      var $39=$S_addr;
-      var $call22=_LoadString($39);
-      var $40=$i;
-      var $41=$f_addr;
-      var $locvars23=(($41+24)|0);
-      var $42=HEAP32[(($locvars23)>>2)];
-      var $arrayidx24=(($42+((($40)*(12))&-1))|0);
-      var $varname25=(($arrayidx24)|0);
-      HEAP32[(($varname25)>>2)]=$call22;
-      var $43=$S_addr;
-      var $call26=_LoadInt($43);
-      var $44=$i;
-      var $45=$f_addr;
-      var $locvars27=(($45+24)|0);
-      var $46=HEAP32[(($locvars27)>>2)];
-      var $arrayidx28=(($46+((($44)*(12))&-1))|0);
-      var $startpc=(($arrayidx28+4)|0);
-      HEAP32[(($startpc)>>2)]=$call26;
-      var $47=$S_addr;
-      var $call29=_LoadInt($47);
-      var $48=$i;
-      var $49=$f_addr;
-      var $locvars30=(($49+24)|0);
-      var $50=HEAP32[(($locvars30)>>2)];
-      var $arrayidx31=(($50+((($48)*(12))&-1))|0);
-      var $endpc=(($arrayidx31+8)|0);
-      HEAP32[(($endpc)>>2)]=$call29;
-      label = 15; break;
-    case 15: 
-      var $51=$i;
-      var $inc33=((($51)+(1))|0);
-      $i=$inc33;
-      label = 13; break;
-    case 16: 
-      var $52=$S_addr;
-      var $call35=_LoadInt($52);
-      $n=$call35;
-      $i=0;
-      label = 17; break;
-    case 17: 
-      var $53=$i;
-      var $54=$n;
-      var $cmp37=(($53)|0) < (($54)|0);
-      if ($cmp37) { label = 18; break; } else { label = 20; break; }
-    case 18: 
-      var $55=$S_addr;
-      var $call39=_LoadString($55);
-      var $56=$i;
-      var $57=$f_addr;
-      var $upvalues=(($57+28)|0);
-      var $58=HEAP32[(($upvalues)>>2)];
-      var $arrayidx40=(($58+($56<<3))|0);
-      var $name=(($arrayidx40)|0);
-      HEAP32[(($name)>>2)]=$call39;
-      label = 19; break;
-    case 19: 
-      var $59=$i;
-      var $inc42=((($59)+(1))|0);
-      $i=$inc42;
-      label = 17; break;
-    case 20: 
-
-      return;
-  }
-
-}
-_LoadDebug["X"]=1;
-
-function _LoadBlock($S, $b, $size) {
-  var label = 0;
-
-  label = 2; 
-  while(1) switch(label) {
-    case 2: 
-      var $S_addr;
-      var $b_addr;
-      var $size_addr;
-      $S_addr=$S;
-      $b_addr=$b;
-      $size_addr=$size;
-      var $0=$S_addr;
-      var $Z=(($0+4)|0);
-      var $1=HEAP32[(($Z)>>2)];
-      var $2=$b_addr;
-      var $3=$size_addr;
-      var $call=_luaZ_read($1, $2, $3);
-      var $cmp=(($call)|0)!=0;
-      if ($cmp) { label = 3; break; } else { label = 4; break; }
-    case 3: 
-      var $4=$S_addr;
-      _error($4, ((5246812)|0));
-
-    case 4: 
-
-      return;
-  }
-
-}
-
-
-function _error($S, $why) {
-  var label = 0;
-  var __stackBase__  = STACKTOP; _memset(__stackBase__, 0, 0);
-  label = 2; 
-  while(1) switch(label) {
-    case 2: 
-      var $S_addr;
-      var $why_addr;
-      $S_addr=$S;
-      $why_addr=$why;
-      var $0=$S_addr;
-      var $L=(($0)|0);
-      var $1=HEAP32[(($L)>>2)];
-      var $2=$S_addr;
-      var $name=(($2+12)|0);
-      var $3=HEAP32[(($name)>>2)];
-      var $4=$why_addr;
-      var $call=_luaO_pushfstring($1, ((5246528)|0), (tempInt=STACKTOP,_memset(STACKTOP, 0, 8),STACKTOP = (STACKTOP + 8)|0,HEAP32[((tempInt)>>2)]=$3,HEAP32[(((tempInt)+(4))>>2)]=$4,tempInt));
-      var $5=$S_addr;
-      var $L1=(($5)|0);
-      var $6=HEAP32[(($L1)>>2)];
-      _luaD_throw($6, 3);
-
-    case 3: 
-      STACKTOP = __stackBase__;
-      return;
-  }
-
-}
-
-
-function _luaV_gettable($L, $t, $key, $val) {
-  var label = 0;
-  var __stackBase__  = STACKTOP; _memset(__stackBase__, 0, 0);
-  label = 2; 
-  while(1) switch(label) {
-    case 2: 
-      var $L_addr;
-      var $t_addr;
-      var $key_addr;
-      var $val_addr;
-      var $loop;
-      var $tm;
-      var $h;
-      var $res;
-      var $io2;
-      var $io1;
-      $L_addr=$L;
-      $t_addr=$t;
-      $key_addr=$key;
-      $val_addr=$val;
-      $loop=0;
-      label = 3; break;
-    case 3: 
-      var $0=$loop;
-      var $cmp=(($0)|0) < 100;
-      if ($cmp) { label = 4; break; } else { label = 22; break; }
-    case 4: 
-      var $1=$t_addr;
-      var $tt_=(($1+8)|0);
-      var $2=HEAP32[(($tt_)>>2)];
-      var $cmp1=(($2)|0)==69;
-      if ($cmp1) { label = 5; break; } else { label = 15; break; }
-    case 5: 
-      var $3=$t_addr;
-      var $value_=(($3)|0);
-      var $gc=$value_;
-      var $4=HEAP32[(($gc)>>2)];
-      var $h2=$4;
-      $h=$h2;
-      var $5=$h;
-      var $6=$key_addr;
-      var $call=_luaH_get($5, $6);
-      $res=$call;
-      var $7=$res;
-      var $tt_3=(($7+8)|0);
-      var $8=HEAP32[(($tt_3)>>2)];
-      var $cmp4=(($8)|0)==0;
-      if ($cmp4) { label = 6; break; } else { label = 13; break; }
-    case 6: 
-      var $9=$h;
-      var $metatable=(($9+8)|0);
-      var $10=HEAP32[(($metatable)>>2)];
-      var $cmp5=(($10)|0)==0;
-      if ($cmp5) { label = 7; break; } else { label = 8; break; }
-    case 7: 
-      var $cond12 = 0;label = 12; break;
-    case 8: 
-      var $11=$h;
-      var $metatable6=(($11+8)|0);
-      var $12=HEAP32[(($metatable6)>>2)];
-      var $flags=(($12+6)|0);
-      var $13=HEAP8[($flags)];
-      var $conv=(($13)&255);
-      var $and=$conv & 1;
-      var $tobool=(($and)|0)!=0;
-      if ($tobool) { label = 9; break; } else { label = 10; break; }
-    case 9: 
-      var $cond = 0;label = 11; break;
-    case 10: 
-      var $14=$h;
-      var $metatable9=(($14+8)|0);
-      var $15=HEAP32[(($metatable9)>>2)];
-      var $16=$L_addr;
-      var $l_G=(($16+12)|0);
-      var $17=HEAP32[(($l_G)>>2)];
-      var $tmname=(($17+164)|0);
-      var $arrayidx=(($tmname)|0);
-      var $18=HEAP32[(($arrayidx)>>2)];
-      var $call10=_luaT_gettm($15, 0, $18);
-      var $cond = $call10;label = 11; break;
-    case 11: 
-      var $cond;
-      var $cond12 = $cond;label = 12; break;
-    case 12: 
-      var $cond12;
-      $tm=$cond12;
-      var $cmp13=(($cond12)|0)==0;
-      if ($cmp13) { label = 13; break; } else { label = 14; break; }
-    case 13: 
-      var $19=$res;
-      $io2=$19;
-      var $20=$val_addr;
-      $io1=$20;
-      var $21=$io1;
-      var $value_16=(($21)|0);
-      var $22=$io2;
-      var $value_17=(($22)|0);
-      var $23=$value_16;
-      var $24=$value_17;
-      HEAP32[(($23)>>2)]=HEAP32[(($24)>>2)];HEAP32[((($23)+(4))>>2)]=HEAP32[((($24)+(4))>>2)];
-      var $25=$io2;
-      var $tt_18=(($25+8)|0);
-      var $26=HEAP32[(($tt_18)>>2)];
-      var $27=$io1;
-      var $tt_19=(($27+8)|0);
-      HEAP32[(($tt_19)>>2)]=$26;
-      label = 23; break;
-    case 14: 
-      label = 18; break;
-    case 15: 
-      var $28=$L_addr;
-      var $29=$t_addr;
-      var $call20=_luaT_gettmbyobj($28, $29, 0);
-      $tm=$call20;
-      var $tt_21=(($call20+8)|0);
-      var $30=HEAP32[(($tt_21)>>2)];
-      var $cmp22=(($30)|0)==0;
-      if ($cmp22) { label = 16; break; } else { label = 17; break; }
-    case 16: 
-      var $31=$L_addr;
-      var $32=$t_addr;
-      _luaG_typeerror($31, $32, ((5252840)|0));
-
-    case 17: 
-      label = 18; break;
-    case 18: 
-      var $33=$tm;
-      var $tt_27=(($33+8)|0);
-      var $34=HEAP32[(($tt_27)>>2)];
-      var $and28=$34 & 15;
-      var $cmp29=(($and28)|0)==6;
-      if ($cmp29) { label = 19; break; } else { label = 20; break; }
-    case 19: 
-      var $35=$L_addr;
-      var $36=$tm;
-      var $37=$t_addr;
-      var $38=$key_addr;
-      var $39=$val_addr;
-      _callTM($35, $36, $37, $38, $39, 1);
-      label = 23; break;
-    case 20: 
-      var $40=$tm;
-      $t_addr=$40;
-      label = 21; break;
-    case 21: 
-      var $41=$loop;
-      var $inc=((($41)+(1))|0);
-      $loop=$inc;
-      label = 3; break;
-    case 22: 
-      var $42=$L_addr;
-      _luaG_runerror($42, ((5250800)|0), (tempInt=STACKTOP,_memset(STACKTOP, 0, 1),STACKTOP = (STACKTOP + 1)|0,STACKTOP = ((((STACKTOP)+3)>>2)<<2),HEAP32[((tempInt)>>2)]=0,tempInt));
-
-    case 23: 
-      STACKTOP = __stackBase__;
-      return;
-  }
-
-}
-_luaV_gettable["X"]=1;
-
 function _l_strcmp($ls, $rs) {
   var label = 0;
 
@@ -43299,301 +43104,166 @@ function _call_orderTM($L, $p1, $p2, $event) {
 }
 _call_orderTM["X"]=1;
 
-function _luaV_equalobj_($L, $t1, $t2) {
+function _luaV_gettable($L, $t, $key, $val) {
   var label = 0;
-
+  var __stackBase__  = STACKTOP; _memset(__stackBase__, 0, 0);
   label = 2; 
   while(1) switch(label) {
     case 2: 
-      var $retval;
       var $L_addr;
-      var $t1_addr;
-      var $t2_addr;
+      var $t_addr;
+      var $key_addr;
+      var $val_addr;
+      var $loop;
       var $tm;
+      var $h;
+      var $res;
+      var $io2;
+      var $io1;
       $L_addr=$L;
-      $t1_addr=$t1;
-      $t2_addr=$t2;
-      var $0=$t1_addr;
-      var $tt_=(($0+8)|0);
-      var $1=HEAP32[(($tt_)>>2)];
-      var $and=$1 & 63;
-      if ((($and)|0)==0) {
-        label = 3; break;
-      }
-      else if ((($and)|0)==3) {
-        label = 4; break;
-      }
-      else if ((($and)|0)==1) {
-        label = 5; break;
-      }
-      else if ((($and)|0)==2) {
-        label = 6; break;
-      }
-      else if ((($and)|0)==22) {
-        label = 7; break;
-      }
-      else if ((($and)|0)==4) {
-        label = 8; break;
-      }
-      else if ((($and)|0)==20) {
-        label = 9; break;
-      }
-      else if ((($and)|0)==7) {
-        label = 10; break;
-      }
-      else if ((($and)|0)==5) {
-        label = 16; break;
-      }
-      else {
-      label = 22; break;
-      }
-      
+      $t_addr=$t;
+      $key_addr=$key;
+      $val_addr=$val;
+      $loop=0;
+      label = 3; break;
     case 3: 
-      $retval=1;
-      label = 30; break;
+      var $0=$loop;
+      var $cmp=(($0)|0) < 100;
+      if ($cmp) { label = 4; break; } else { label = 22; break; }
     case 4: 
-      var $2=$t1_addr;
-      var $value_=(($2)|0);
-      var $n=$value_;
-      var $3=(HEAP32[((tempDoublePtr)>>2)]=HEAP32[(($n)>>2)],HEAP32[(((tempDoublePtr)+(4))>>2)]=HEAP32[((($n)+(4))>>2)],HEAPF64[(tempDoublePtr)>>3]);
-      var $4=$t2_addr;
-      var $value_2=(($4)|0);
-      var $n3=$value_2;
-      var $5=(HEAP32[((tempDoublePtr)>>2)]=HEAP32[(($n3)>>2)],HEAP32[(((tempDoublePtr)+(4))>>2)]=HEAP32[((($n3)+(4))>>2)],HEAPF64[(tempDoublePtr)>>3]);
-      var $cmp=$3 == $5;
-      var $conv=(($cmp)&1);
-      $retval=$conv;
-      label = 30; break;
+      var $1=$t_addr;
+      var $tt_=(($1+8)|0);
+      var $2=HEAP32[(($tt_)>>2)];
+      var $cmp1=(($2)|0)==69;
+      if ($cmp1) { label = 5; break; } else { label = 15; break; }
     case 5: 
-      var $6=$t1_addr;
-      var $value_5=(($6)|0);
-      var $b=$value_5;
-      var $7=HEAP32[(($b)>>2)];
-      var $8=$t2_addr;
-      var $value_6=(($8)|0);
-      var $b7=$value_6;
-      var $9=HEAP32[(($b7)>>2)];
-      var $cmp8=(($7)|0)==(($9)|0);
-      var $conv9=(($cmp8)&1);
-      $retval=$conv9;
-      label = 30; break;
+      var $3=$t_addr;
+      var $value_=(($3)|0);
+      var $gc=$value_;
+      var $4=HEAP32[(($gc)>>2)];
+      var $h2=$4;
+      $h=$h2;
+      var $5=$h;
+      var $6=$key_addr;
+      var $call=_luaH_get($5, $6);
+      $res=$call;
+      var $7=$res;
+      var $tt_3=(($7+8)|0);
+      var $8=HEAP32[(($tt_3)>>2)];
+      var $cmp4=(($8)|0)==0;
+      if ($cmp4) { label = 6; break; } else { label = 13; break; }
     case 6: 
-      var $10=$t1_addr;
-      var $value_11=(($10)|0);
-      var $p=$value_11;
-      var $11=HEAP32[(($p)>>2)];
-      var $12=$t2_addr;
-      var $value_12=(($12)|0);
-      var $p13=$value_12;
-      var $13=HEAP32[(($p13)>>2)];
-      var $cmp14=(($11)|0)==(($13)|0);
-      var $conv15=(($cmp14)&1);
-      $retval=$conv15;
-      label = 30; break;
+      var $9=$h;
+      var $metatable=(($9+8)|0);
+      var $10=HEAP32[(($metatable)>>2)];
+      var $cmp5=(($10)|0)==0;
+      if ($cmp5) { label = 7; break; } else { label = 8; break; }
     case 7: 
-      var $14=$t1_addr;
-      var $value_17=(($14)|0);
-      var $f=$value_17;
-      var $15=HEAP32[(($f)>>2)];
-      var $16=$t2_addr;
-      var $value_18=(($16)|0);
-      var $f19=$value_18;
-      var $17=HEAP32[(($f19)>>2)];
-      var $cmp20=(($15)|0)==(($17)|0);
-      var $conv21=(($cmp20)&1);
-      $retval=$conv21;
-      label = 30; break;
+      var $cond12 = 0;label = 12; break;
     case 8: 
-      var $18=$t1_addr;
-      var $value_23=(($18)|0);
-      var $gc=$value_23;
-      var $19=HEAP32[(($gc)>>2)];
-      var $ts=$19;
-      var $20=$t2_addr;
-      var $value_24=(($20)|0);
-      var $gc25=$value_24;
-      var $21=HEAP32[(($gc25)>>2)];
-      var $ts26=$21;
-      var $cmp27=(($ts)|0)==(($ts26)|0);
-      var $conv28=(($cmp27)&1);
-      $retval=$conv28;
-      label = 30; break;
+      var $11=$h;
+      var $metatable6=(($11+8)|0);
+      var $12=HEAP32[(($metatable6)>>2)];
+      var $flags=(($12+6)|0);
+      var $13=HEAP8[($flags)];
+      var $conv=(($13)&255);
+      var $and=$conv & 1;
+      var $tobool=(($and)|0)!=0;
+      if ($tobool) { label = 9; break; } else { label = 10; break; }
     case 9: 
-      var $22=$t1_addr;
-      var $value_30=(($22)|0);
-      var $gc31=$value_30;
-      var $23=HEAP32[(($gc31)>>2)];
-      var $ts32=$23;
-      var $24=$t2_addr;
-      var $value_33=(($24)|0);
-      var $gc34=$value_33;
-      var $25=HEAP32[(($gc34)>>2)];
-      var $ts35=$25;
-      var $call=_luaS_eqlngstr($ts32, $ts35);
-      $retval=$call;
-      label = 30; break;
+      var $cond = 0;label = 11; break;
     case 10: 
-      var $26=$t1_addr;
-      var $value_37=(($26)|0);
-      var $gc38=$value_37;
-      var $27=HEAP32[(($gc38)>>2)];
-      var $u=$27;
-      var $uv=$u;
-      var $28=$t2_addr;
-      var $value_39=(($28)|0);
-      var $gc40=$value_39;
-      var $29=HEAP32[(($gc40)>>2)];
-      var $u41=$29;
-      var $uv42=$u41;
-      var $cmp43=(($uv)|0)==(($uv42)|0);
-      if ($cmp43) { label = 11; break; } else { label = 12; break; }
+      var $14=$h;
+      var $metatable9=(($14+8)|0);
+      var $15=HEAP32[(($metatable9)>>2)];
+      var $16=$L_addr;
+      var $l_G=(($16+12)|0);
+      var $17=HEAP32[(($l_G)>>2)];
+      var $tmname=(($17+164)|0);
+      var $arrayidx=(($tmname)|0);
+      var $18=HEAP32[(($arrayidx)>>2)];
+      var $call10=_luaT_gettm($15, 0, $18);
+      var $cond = $call10;label = 11; break;
     case 11: 
-      $retval=1;
-      label = 30; break;
+      var $cond;
+      var $cond12 = $cond;label = 12; break;
     case 12: 
-      var $30=$L_addr;
-      var $cmp45=(($30)|0)==0;
-      if ($cmp45) { label = 13; break; } else { label = 14; break; }
+      var $cond12;
+      $tm=$cond12;
+      var $cmp13=(($cond12)|0)==0;
+      if ($cmp13) { label = 13; break; } else { label = 14; break; }
     case 13: 
-      $retval=0;
-      label = 30; break;
-    case 14: 
-      label = 15; break;
-    case 15: 
-      var $31=$L_addr;
-      var $32=$t1_addr;
-      var $value_49=(($32)|0);
-      var $gc50=$value_49;
-      var $33=HEAP32[(($gc50)>>2)];
-      var $u51=$33;
-      var $uv52=$u51;
-      var $metatable=(($uv52+8)|0);
-      var $34=HEAP32[(($metatable)>>2)];
-      var $35=$t2_addr;
-      var $value_53=(($35)|0);
-      var $gc54=$value_53;
-      var $36=HEAP32[(($gc54)>>2)];
-      var $u55=$36;
-      var $uv56=$u55;
-      var $metatable57=(($uv56+8)|0);
-      var $37=HEAP32[(($metatable57)>>2)];
-      var $call58=_get_equalTM($31, $34, $37, 5);
-      $tm=$call58;
+      var $19=$res;
+      $io2=$19;
+      var $20=$val_addr;
+      $io1=$20;
+      var $21=$io1;
+      var $value_16=(($21)|0);
+      var $22=$io2;
+      var $value_17=(($22)|0);
+      var $23=$value_16;
+      var $24=$value_17;
+      HEAP32[(($23)>>2)]=HEAP32[(($24)>>2)];HEAP32[((($23)+(4))>>2)]=HEAP32[((($24)+(4))>>2)];
+      var $25=$io2;
+      var $tt_18=(($25+8)|0);
+      var $26=HEAP32[(($tt_18)>>2)];
+      var $27=$io1;
+      var $tt_19=(($27+8)|0);
+      HEAP32[(($tt_19)>>2)]=$26;
       label = 23; break;
+    case 14: 
+      label = 18; break;
+    case 15: 
+      var $28=$L_addr;
+      var $29=$t_addr;
+      var $call20=_luaT_gettmbyobj($28, $29, 0);
+      $tm=$call20;
+      var $tt_21=(($call20+8)|0);
+      var $30=HEAP32[(($tt_21)>>2)];
+      var $cmp22=(($30)|0)==0;
+      if ($cmp22) { label = 16; break; } else { label = 17; break; }
     case 16: 
-      var $38=$t1_addr;
-      var $value_60=(($38)|0);
-      var $gc61=$value_60;
-      var $39=HEAP32[(($gc61)>>2)];
-      var $h=$39;
-      var $40=$t2_addr;
-      var $value_62=(($40)|0);
-      var $gc63=$value_62;
-      var $41=HEAP32[(($gc63)>>2)];
-      var $h64=$41;
-      var $cmp65=(($h)|0)==(($h64)|0);
-      if ($cmp65) { label = 17; break; } else { label = 18; break; }
+      var $31=$L_addr;
+      var $32=$t_addr;
+      _luaG_typeerror($31, $32, ((5252840)|0));
+
     case 17: 
-      $retval=1;
-      label = 30; break;
+      label = 18; break;
     case 18: 
-      var $42=$L_addr;
-      var $cmp69=(($42)|0)==0;
-      if ($cmp69) { label = 19; break; } else { label = 20; break; }
+      var $33=$tm;
+      var $tt_27=(($33+8)|0);
+      var $34=HEAP32[(($tt_27)>>2)];
+      var $and28=$34 & 15;
+      var $cmp29=(($and28)|0)==6;
+      if ($cmp29) { label = 19; break; } else { label = 20; break; }
     case 19: 
-      $retval=0;
-      label = 30; break;
+      var $35=$L_addr;
+      var $36=$tm;
+      var $37=$t_addr;
+      var $38=$key_addr;
+      var $39=$val_addr;
+      _callTM($35, $36, $37, $38, $39, 1);
+      label = 23; break;
     case 20: 
+      var $40=$tm;
+      $t_addr=$40;
       label = 21; break;
     case 21: 
-      var $43=$L_addr;
-      var $44=$t1_addr;
-      var $value_74=(($44)|0);
-      var $gc75=$value_74;
-      var $45=HEAP32[(($gc75)>>2)];
-      var $h76=$45;
-      var $metatable77=(($h76+8)|0);
-      var $46=HEAP32[(($metatable77)>>2)];
-      var $47=$t2_addr;
-      var $value_78=(($47)|0);
-      var $gc79=$value_78;
-      var $48=HEAP32[(($gc79)>>2)];
-      var $h80=$48;
-      var $metatable81=(($h80+8)|0);
-      var $49=HEAP32[(($metatable81)>>2)];
-      var $call82=_get_equalTM($43, $46, $49, 5);
-      $tm=$call82;
-      label = 23; break;
+      var $41=$loop;
+      var $inc=((($41)+(1))|0);
+      $loop=$inc;
+      label = 3; break;
     case 22: 
-      var $50=$t1_addr;
-      var $value_83=(($50)|0);
-      var $gc84=$value_83;
-      var $51=HEAP32[(($gc84)>>2)];
-      var $52=$t2_addr;
-      var $value_85=(($52)|0);
-      var $gc86=$value_85;
-      var $53=HEAP32[(($gc86)>>2)];
-      var $cmp87=(($51)|0)==(($53)|0);
-      var $conv88=(($cmp87)&1);
-      $retval=$conv88;
-      label = 30; break;
-    case 23: 
-      var $54=$tm;
-      var $cmp89=(($54)|0)==0;
-      if ($cmp89) { label = 24; break; } else { label = 25; break; }
-    case 24: 
-      $retval=0;
-      label = 30; break;
-    case 25: 
-      var $55=$L_addr;
-      var $56=$tm;
-      var $57=$t1_addr;
-      var $58=$t2_addr;
-      var $59=$L_addr;
-      var $top=(($59+8)|0);
-      var $60=HEAP32[(($top)>>2)];
-      _callTM($55, $56, $57, $58, $60, 1);
-      var $61=$L_addr;
-      var $top93=(($61+8)|0);
-      var $62=HEAP32[(($top93)>>2)];
-      var $tt_94=(($62+8)|0);
-      var $63=HEAP32[(($tt_94)>>2)];
-      var $cmp95=(($63)|0)==0;
-      if ($cmp95) { var $71 = 1;label = 29; break; } else { label = 26; break; }
-    case 26: 
-      var $64=$L_addr;
-      var $top97=(($64+8)|0);
-      var $65=HEAP32[(($top97)>>2)];
-      var $tt_98=(($65+8)|0);
-      var $66=HEAP32[(($tt_98)>>2)];
-      var $cmp99=(($66)|0)==1;
-      if ($cmp99) { label = 27; break; } else { var $70 = 0;label = 28; break; }
-    case 27: 
-      var $67=$L_addr;
-      var $top101=(($67+8)|0);
-      var $68=HEAP32[(($top101)>>2)];
-      var $value_102=(($68)|0);
-      var $b103=$value_102;
-      var $69=HEAP32[(($b103)>>2)];
-      var $cmp104=(($69)|0)==0;
-      var $70 = $cmp104;label = 28; break;
-    case 28: 
-      var $70;
-      var $71 = $70;label = 29; break;
-    case 29: 
-      var $71;
-      var $lnot=$71 ^ 1;
-      var $lnot_ext=(($lnot)&1);
-      $retval=$lnot_ext;
-      label = 30; break;
-    case 30: 
-      var $72=$retval;
+      var $42=$L_addr;
+      _luaG_runerror($42, ((5250800)|0), (tempInt=STACKTOP,_memset(STACKTOP, 0, 1),STACKTOP = (STACKTOP + 1)|0,STACKTOP = ((((STACKTOP)+3)>>2)<<2),HEAP32[((tempInt)>>2)]=0,tempInt));
 
-      return $72;
+    case 23: 
+      STACKTOP = __stackBase__;
+      return;
   }
 
 }
-_luaV_equalobj_["X"]=1;
+_luaV_gettable["X"]=1;
 
 function _luaV_settable($L, $t, $key, $val) {
   var label = 0;
@@ -43904,7 +43574,7 @@ function _luaV_lessthan($L, $l, $r) {
 }
 _luaV_lessthan["X"]=1;
 
-function _luaV_lessequal($L, $l, $r) {
+function _luaV_equalobj_($L, $t1, $t2) {
   var label = 0;
 
   label = 2; 
@@ -43912,113 +43582,293 @@ function _luaV_lessequal($L, $l, $r) {
     case 2: 
       var $retval;
       var $L_addr;
-      var $l_addr;
-      var $r_addr;
-      var $res;
+      var $t1_addr;
+      var $t2_addr;
+      var $tm;
       $L_addr=$L;
-      $l_addr=$l;
-      $r_addr=$r;
-      var $0=$l_addr;
+      $t1_addr=$t1;
+      $t2_addr=$t2;
+      var $0=$t1_addr;
       var $tt_=(($0+8)|0);
       var $1=HEAP32[(($tt_)>>2)];
-      var $cmp=(($1)|0)==3;
-      if ($cmp) { label = 3; break; } else { label = 5; break; }
+      var $and=$1 & 63;
+      if ((($and)|0)==0) {
+        label = 3; break;
+      }
+      else if ((($and)|0)==3) {
+        label = 4; break;
+      }
+      else if ((($and)|0)==1) {
+        label = 5; break;
+      }
+      else if ((($and)|0)==2) {
+        label = 6; break;
+      }
+      else if ((($and)|0)==22) {
+        label = 7; break;
+      }
+      else if ((($and)|0)==4) {
+        label = 8; break;
+      }
+      else if ((($and)|0)==20) {
+        label = 9; break;
+      }
+      else if ((($and)|0)==7) {
+        label = 10; break;
+      }
+      else if ((($and)|0)==5) {
+        label = 16; break;
+      }
+      else {
+      label = 22; break;
+      }
+      
     case 3: 
-      var $2=$r_addr;
-      var $tt_1=(($2+8)|0);
-      var $3=HEAP32[(($tt_1)>>2)];
-      var $cmp2=(($3)|0)==3;
-      if ($cmp2) { label = 4; break; } else { label = 5; break; }
+      $retval=1;
+      label = 30; break;
     case 4: 
-      var $4=$l_addr;
-      var $value_=(($4)|0);
+      var $2=$t1_addr;
+      var $value_=(($2)|0);
       var $n=$value_;
-      var $5=(HEAP32[((tempDoublePtr)>>2)]=HEAP32[(($n)>>2)],HEAP32[(((tempDoublePtr)+(4))>>2)]=HEAP32[((($n)+(4))>>2)],HEAPF64[(tempDoublePtr)>>3]);
-      var $6=$r_addr;
-      var $value_3=(($6)|0);
-      var $n4=$value_3;
-      var $7=(HEAP32[((tempDoublePtr)>>2)]=HEAP32[(($n4)>>2)],HEAP32[(((tempDoublePtr)+(4))>>2)]=HEAP32[((($n4)+(4))>>2)],HEAPF64[(tempDoublePtr)>>3]);
-      var $cmp5=$5 <= $7;
-      var $conv=(($cmp5)&1);
+      var $3=(HEAP32[((tempDoublePtr)>>2)]=HEAP32[(($n)>>2)],HEAP32[(((tempDoublePtr)+(4))>>2)]=HEAP32[((($n)+(4))>>2)],HEAPF64[(tempDoublePtr)>>3]);
+      var $4=$t2_addr;
+      var $value_2=(($4)|0);
+      var $n3=$value_2;
+      var $5=(HEAP32[((tempDoublePtr)>>2)]=HEAP32[(($n3)>>2)],HEAP32[(((tempDoublePtr)+(4))>>2)]=HEAP32[((($n3)+(4))>>2)],HEAPF64[(tempDoublePtr)>>3]);
+      var $cmp=$3 == $5;
+      var $conv=(($cmp)&1);
       $retval=$conv;
-      label = 16; break;
+      label = 30; break;
     case 5: 
-      var $8=$l_addr;
-      var $tt_6=(($8+8)|0);
-      var $9=HEAP32[(($tt_6)>>2)];
-      var $and=$9 & 15;
-      var $cmp7=(($and)|0)==4;
-      if ($cmp7) { label = 6; break; } else { label = 8; break; }
+      var $6=$t1_addr;
+      var $value_5=(($6)|0);
+      var $b=$value_5;
+      var $7=HEAP32[(($b)>>2)];
+      var $8=$t2_addr;
+      var $value_6=(($8)|0);
+      var $b7=$value_6;
+      var $9=HEAP32[(($b7)>>2)];
+      var $cmp8=(($7)|0)==(($9)|0);
+      var $conv9=(($cmp8)&1);
+      $retval=$conv9;
+      label = 30; break;
     case 6: 
-      var $10=$r_addr;
-      var $tt_10=(($10+8)|0);
-      var $11=HEAP32[(($tt_10)>>2)];
-      var $and11=$11 & 15;
-      var $cmp12=(($and11)|0)==4;
-      if ($cmp12) { label = 7; break; } else { label = 8; break; }
+      var $10=$t1_addr;
+      var $value_11=(($10)|0);
+      var $p=$value_11;
+      var $11=HEAP32[(($p)>>2)];
+      var $12=$t2_addr;
+      var $value_12=(($12)|0);
+      var $p13=$value_12;
+      var $13=HEAP32[(($p13)>>2)];
+      var $cmp14=(($11)|0)==(($13)|0);
+      var $conv15=(($cmp14)&1);
+      $retval=$conv15;
+      label = 30; break;
     case 7: 
-      var $12=$l_addr;
-      var $value_15=(($12)|0);
-      var $gc=$value_15;
-      var $13=HEAP32[(($gc)>>2)];
-      var $ts=$13;
-      var $14=$r_addr;
-      var $value_16=(($14)|0);
-      var $gc17=$value_16;
-      var $15=HEAP32[(($gc17)>>2)];
-      var $ts18=$15;
-      var $call=_l_strcmp($ts, $ts18);
-      var $cmp19=(($call)|0) <= 0;
-      var $conv20=(($cmp19)&1);
-      $retval=$conv20;
-      label = 16; break;
+      var $14=$t1_addr;
+      var $value_17=(($14)|0);
+      var $f=$value_17;
+      var $15=HEAP32[(($f)>>2)];
+      var $16=$t2_addr;
+      var $value_18=(($16)|0);
+      var $f19=$value_18;
+      var $17=HEAP32[(($f19)>>2)];
+      var $cmp20=(($15)|0)==(($17)|0);
+      var $conv21=(($cmp20)&1);
+      $retval=$conv21;
+      label = 30; break;
     case 8: 
-      var $16=$L_addr;
-      var $17=$l_addr;
-      var $18=$r_addr;
-      var $call22=_call_orderTM($16, $17, $18, 14);
-      $res=$call22;
-      var $cmp23=(($call22)|0) >= 0;
-      if ($cmp23) { label = 9; break; } else { label = 10; break; }
+      var $18=$t1_addr;
+      var $value_23=(($18)|0);
+      var $gc=$value_23;
+      var $19=HEAP32[(($gc)>>2)];
+      var $ts=$19;
+      var $20=$t2_addr;
+      var $value_24=(($20)|0);
+      var $gc25=$value_24;
+      var $21=HEAP32[(($gc25)>>2)];
+      var $ts26=$21;
+      var $cmp27=(($ts)|0)==(($ts26)|0);
+      var $conv28=(($cmp27)&1);
+      $retval=$conv28;
+      label = 30; break;
     case 9: 
-      var $19=$res;
-      $retval=$19;
-      label = 16; break;
+      var $22=$t1_addr;
+      var $value_30=(($22)|0);
+      var $gc31=$value_30;
+      var $23=HEAP32[(($gc31)>>2)];
+      var $ts32=$23;
+      var $24=$t2_addr;
+      var $value_33=(($24)|0);
+      var $gc34=$value_33;
+      var $25=HEAP32[(($gc34)>>2)];
+      var $ts35=$25;
+      var $call=_luaS_eqlngstr($ts32, $ts35);
+      $retval=$call;
+      label = 30; break;
     case 10: 
-      var $20=$L_addr;
-      var $21=$r_addr;
-      var $22=$l_addr;
-      var $call27=_call_orderTM($20, $21, $22, 13);
-      $res=$call27;
-      var $cmp28=(($call27)|0) < 0;
-      if ($cmp28) { label = 11; break; } else { label = 12; break; }
+      var $26=$t1_addr;
+      var $value_37=(($26)|0);
+      var $gc38=$value_37;
+      var $27=HEAP32[(($gc38)>>2)];
+      var $u=$27;
+      var $uv=$u;
+      var $28=$t2_addr;
+      var $value_39=(($28)|0);
+      var $gc40=$value_39;
+      var $29=HEAP32[(($gc40)>>2)];
+      var $u41=$29;
+      var $uv42=$u41;
+      var $cmp43=(($uv)|0)==(($uv42)|0);
+      if ($cmp43) { label = 11; break; } else { label = 12; break; }
     case 11: 
-      var $23=$L_addr;
-      var $24=$l_addr;
-      var $25=$r_addr;
-      _luaG_ordererror($23, $24, $25);
-
+      $retval=1;
+      label = 30; break;
     case 12: 
-      label = 13; break;
+      var $30=$L_addr;
+      var $cmp45=(($30)|0)==0;
+      if ($cmp45) { label = 13; break; } else { label = 14; break; }
     case 13: 
-      label = 14; break;
+      $retval=0;
+      label = 30; break;
     case 14: 
       label = 15; break;
     case 15: 
-      var $26=$res;
-      var $tobool=(($26)|0)!=0;
-      var $lnot=$tobool ^ 1;
+      var $31=$L_addr;
+      var $32=$t1_addr;
+      var $value_49=(($32)|0);
+      var $gc50=$value_49;
+      var $33=HEAP32[(($gc50)>>2)];
+      var $u51=$33;
+      var $uv52=$u51;
+      var $metatable=(($uv52+8)|0);
+      var $34=HEAP32[(($metatable)>>2)];
+      var $35=$t2_addr;
+      var $value_53=(($35)|0);
+      var $gc54=$value_53;
+      var $36=HEAP32[(($gc54)>>2)];
+      var $u55=$36;
+      var $uv56=$u55;
+      var $metatable57=(($uv56+8)|0);
+      var $37=HEAP32[(($metatable57)>>2)];
+      var $call58=_get_equalTM($31, $34, $37, 5);
+      $tm=$call58;
+      label = 23; break;
+    case 16: 
+      var $38=$t1_addr;
+      var $value_60=(($38)|0);
+      var $gc61=$value_60;
+      var $39=HEAP32[(($gc61)>>2)];
+      var $h=$39;
+      var $40=$t2_addr;
+      var $value_62=(($40)|0);
+      var $gc63=$value_62;
+      var $41=HEAP32[(($gc63)>>2)];
+      var $h64=$41;
+      var $cmp65=(($h)|0)==(($h64)|0);
+      if ($cmp65) { label = 17; break; } else { label = 18; break; }
+    case 17: 
+      $retval=1;
+      label = 30; break;
+    case 18: 
+      var $42=$L_addr;
+      var $cmp69=(($42)|0)==0;
+      if ($cmp69) { label = 19; break; } else { label = 20; break; }
+    case 19: 
+      $retval=0;
+      label = 30; break;
+    case 20: 
+      label = 21; break;
+    case 21: 
+      var $43=$L_addr;
+      var $44=$t1_addr;
+      var $value_74=(($44)|0);
+      var $gc75=$value_74;
+      var $45=HEAP32[(($gc75)>>2)];
+      var $h76=$45;
+      var $metatable77=(($h76+8)|0);
+      var $46=HEAP32[(($metatable77)>>2)];
+      var $47=$t2_addr;
+      var $value_78=(($47)|0);
+      var $gc79=$value_78;
+      var $48=HEAP32[(($gc79)>>2)];
+      var $h80=$48;
+      var $metatable81=(($h80+8)|0);
+      var $49=HEAP32[(($metatable81)>>2)];
+      var $call82=_get_equalTM($43, $46, $49, 5);
+      $tm=$call82;
+      label = 23; break;
+    case 22: 
+      var $50=$t1_addr;
+      var $value_83=(($50)|0);
+      var $gc84=$value_83;
+      var $51=HEAP32[(($gc84)>>2)];
+      var $52=$t2_addr;
+      var $value_85=(($52)|0);
+      var $gc86=$value_85;
+      var $53=HEAP32[(($gc86)>>2)];
+      var $cmp87=(($51)|0)==(($53)|0);
+      var $conv88=(($cmp87)&1);
+      $retval=$conv88;
+      label = 30; break;
+    case 23: 
+      var $54=$tm;
+      var $cmp89=(($54)|0)==0;
+      if ($cmp89) { label = 24; break; } else { label = 25; break; }
+    case 24: 
+      $retval=0;
+      label = 30; break;
+    case 25: 
+      var $55=$L_addr;
+      var $56=$tm;
+      var $57=$t1_addr;
+      var $58=$t2_addr;
+      var $59=$L_addr;
+      var $top=(($59+8)|0);
+      var $60=HEAP32[(($top)>>2)];
+      _callTM($55, $56, $57, $58, $60, 1);
+      var $61=$L_addr;
+      var $top93=(($61+8)|0);
+      var $62=HEAP32[(($top93)>>2)];
+      var $tt_94=(($62+8)|0);
+      var $63=HEAP32[(($tt_94)>>2)];
+      var $cmp95=(($63)|0)==0;
+      if ($cmp95) { var $71 = 1;label = 29; break; } else { label = 26; break; }
+    case 26: 
+      var $64=$L_addr;
+      var $top97=(($64+8)|0);
+      var $65=HEAP32[(($top97)>>2)];
+      var $tt_98=(($65+8)|0);
+      var $66=HEAP32[(($tt_98)>>2)];
+      var $cmp99=(($66)|0)==1;
+      if ($cmp99) { label = 27; break; } else { var $70 = 0;label = 28; break; }
+    case 27: 
+      var $67=$L_addr;
+      var $top101=(($67+8)|0);
+      var $68=HEAP32[(($top101)>>2)];
+      var $value_102=(($68)|0);
+      var $b103=$value_102;
+      var $69=HEAP32[(($b103)>>2)];
+      var $cmp104=(($69)|0)==0;
+      var $70 = $cmp104;label = 28; break;
+    case 28: 
+      var $70;
+      var $71 = $70;label = 29; break;
+    case 29: 
+      var $71;
+      var $lnot=$71 ^ 1;
       var $lnot_ext=(($lnot)&1);
       $retval=$lnot_ext;
-      label = 16; break;
-    case 16: 
-      var $27=$retval;
+      label = 30; break;
+    case 30: 
+      var $72=$retval;
 
-      return $27;
+      return $72;
   }
 
 }
-_luaV_lessequal["X"]=1;
+_luaV_equalobj_["X"]=1;
 
 function _get_equalTM($L, $mt1, $mt2, $event) {
   var label = 0;
@@ -44221,6 +44071,122 @@ function _call_binTM($L, $p1, $p2, $res, $event) {
 
 }
 
+
+function _luaV_lessequal($L, $l, $r) {
+  var label = 0;
+
+  label = 2; 
+  while(1) switch(label) {
+    case 2: 
+      var $retval;
+      var $L_addr;
+      var $l_addr;
+      var $r_addr;
+      var $res;
+      $L_addr=$L;
+      $l_addr=$l;
+      $r_addr=$r;
+      var $0=$l_addr;
+      var $tt_=(($0+8)|0);
+      var $1=HEAP32[(($tt_)>>2)];
+      var $cmp=(($1)|0)==3;
+      if ($cmp) { label = 3; break; } else { label = 5; break; }
+    case 3: 
+      var $2=$r_addr;
+      var $tt_1=(($2+8)|0);
+      var $3=HEAP32[(($tt_1)>>2)];
+      var $cmp2=(($3)|0)==3;
+      if ($cmp2) { label = 4; break; } else { label = 5; break; }
+    case 4: 
+      var $4=$l_addr;
+      var $value_=(($4)|0);
+      var $n=$value_;
+      var $5=(HEAP32[((tempDoublePtr)>>2)]=HEAP32[(($n)>>2)],HEAP32[(((tempDoublePtr)+(4))>>2)]=HEAP32[((($n)+(4))>>2)],HEAPF64[(tempDoublePtr)>>3]);
+      var $6=$r_addr;
+      var $value_3=(($6)|0);
+      var $n4=$value_3;
+      var $7=(HEAP32[((tempDoublePtr)>>2)]=HEAP32[(($n4)>>2)],HEAP32[(((tempDoublePtr)+(4))>>2)]=HEAP32[((($n4)+(4))>>2)],HEAPF64[(tempDoublePtr)>>3]);
+      var $cmp5=$5 <= $7;
+      var $conv=(($cmp5)&1);
+      $retval=$conv;
+      label = 16; break;
+    case 5: 
+      var $8=$l_addr;
+      var $tt_6=(($8+8)|0);
+      var $9=HEAP32[(($tt_6)>>2)];
+      var $and=$9 & 15;
+      var $cmp7=(($and)|0)==4;
+      if ($cmp7) { label = 6; break; } else { label = 8; break; }
+    case 6: 
+      var $10=$r_addr;
+      var $tt_10=(($10+8)|0);
+      var $11=HEAP32[(($tt_10)>>2)];
+      var $and11=$11 & 15;
+      var $cmp12=(($and11)|0)==4;
+      if ($cmp12) { label = 7; break; } else { label = 8; break; }
+    case 7: 
+      var $12=$l_addr;
+      var $value_15=(($12)|0);
+      var $gc=$value_15;
+      var $13=HEAP32[(($gc)>>2)];
+      var $ts=$13;
+      var $14=$r_addr;
+      var $value_16=(($14)|0);
+      var $gc17=$value_16;
+      var $15=HEAP32[(($gc17)>>2)];
+      var $ts18=$15;
+      var $call=_l_strcmp($ts, $ts18);
+      var $cmp19=(($call)|0) <= 0;
+      var $conv20=(($cmp19)&1);
+      $retval=$conv20;
+      label = 16; break;
+    case 8: 
+      var $16=$L_addr;
+      var $17=$l_addr;
+      var $18=$r_addr;
+      var $call22=_call_orderTM($16, $17, $18, 14);
+      $res=$call22;
+      var $cmp23=(($call22)|0) >= 0;
+      if ($cmp23) { label = 9; break; } else { label = 10; break; }
+    case 9: 
+      var $19=$res;
+      $retval=$19;
+      label = 16; break;
+    case 10: 
+      var $20=$L_addr;
+      var $21=$r_addr;
+      var $22=$l_addr;
+      var $call27=_call_orderTM($20, $21, $22, 13);
+      $res=$call27;
+      var $cmp28=(($call27)|0) < 0;
+      if ($cmp28) { label = 11; break; } else { label = 12; break; }
+    case 11: 
+      var $23=$L_addr;
+      var $24=$l_addr;
+      var $25=$r_addr;
+      _luaG_ordererror($23, $24, $25);
+
+    case 12: 
+      label = 13; break;
+    case 13: 
+      label = 14; break;
+    case 14: 
+      label = 15; break;
+    case 15: 
+      var $26=$res;
+      var $tobool=(($26)|0)!=0;
+      var $lnot=$tobool ^ 1;
+      var $lnot_ext=(($lnot)&1);
+      $retval=$lnot_ext;
+      label = 16; break;
+    case 16: 
+      var $27=$retval;
+
+      return $27;
+  }
+
+}
+_luaV_lessequal["X"]=1;
 
 function _luaV_concat($L, $total) {
   var label = 0;
@@ -44562,235 +44528,6 @@ function _luaV_concat($L, $total) {
 }
 _luaV_concat["X"]=1;
 
-function _luaV_objlen($L, $ra, $rb) {
-  var label = 0;
-
-  label = 2; 
-  while(1) switch(label) {
-    case 2: 
-      var $L_addr;
-      var $ra_addr;
-      var $rb_addr;
-      var $tm;
-      var $h;
-      var $io;
-      var $io15;
-      $L_addr=$L;
-      $ra_addr=$ra;
-      $rb_addr=$rb;
-      var $0=$rb_addr;
-      var $tt_=(($0+8)|0);
-      var $1=HEAP32[(($tt_)>>2)];
-      var $and=$1 & 15;
-      if ((($and)|0)==5) {
-        label = 3; break;
-      }
-      else if ((($and)|0)==4) {
-        label = 12; break;
-      }
-      else {
-      label = 13; break;
-      }
-      
-    case 3: 
-      var $2=$rb_addr;
-      var $value_=(($2)|0);
-      var $gc=$value_;
-      var $3=HEAP32[(($gc)>>2)];
-      var $h1=$3;
-      $h=$h1;
-      var $4=$h;
-      var $metatable=(($4+8)|0);
-      var $5=HEAP32[(($metatable)>>2)];
-      var $cmp=(($5)|0)==0;
-      if ($cmp) { label = 4; break; } else { label = 5; break; }
-    case 4: 
-      var $cond8 = 0;label = 9; break;
-    case 5: 
-      var $6=$h;
-      var $metatable2=(($6+8)|0);
-      var $7=HEAP32[(($metatable2)>>2)];
-      var $flags=(($7+6)|0);
-      var $8=HEAP8[($flags)];
-      var $conv=(($8)&255);
-      var $and3=$conv & 16;
-      var $tobool=(($and3)|0)!=0;
-      if ($tobool) { label = 6; break; } else { label = 7; break; }
-    case 6: 
-      var $cond = 0;label = 8; break;
-    case 7: 
-      var $9=$h;
-      var $metatable6=(($9+8)|0);
-      var $10=HEAP32[(($metatable6)>>2)];
-      var $11=$L_addr;
-      var $l_G=(($11+12)|0);
-      var $12=HEAP32[(($l_G)>>2)];
-      var $tmname=(($12+164)|0);
-      var $arrayidx=(($tmname+16)|0);
-      var $13=HEAP32[(($arrayidx)>>2)];
-      var $call=_luaT_gettm($10, 4, $13);
-      var $cond = $call;label = 8; break;
-    case 8: 
-      var $cond;
-      var $cond8 = $cond;label = 9; break;
-    case 9: 
-      var $cond8;
-      $tm=$cond8;
-      var $14=$tm;
-      var $tobool9=(($14)|0)!=0;
-      if ($tobool9) { label = 10; break; } else { label = 11; break; }
-    case 10: 
-      label = 16; break;
-    case 11: 
-      var $15=$ra_addr;
-      $io=$15;
-      var $16=$h;
-      var $call10=_luaH_getn($16);
-      var $conv11=(($call10)|0);
-      var $17=$io;
-      var $value_12=(($17)|0);
-      var $n=$value_12;
-      (HEAPF64[(tempDoublePtr)>>3]=$conv11,HEAP32[(($n)>>2)]=HEAP32[((tempDoublePtr)>>2)],HEAP32[((($n)+(4))>>2)]=HEAP32[(((tempDoublePtr)+(4))>>2)]);
-      var $18=$io;
-      var $tt_13=(($18+8)|0);
-      HEAP32[(($tt_13)>>2)]=3;
-      label = 17; break;
-    case 12: 
-      var $19=$ra_addr;
-      $io15=$19;
-      var $20=$rb_addr;
-      var $value_16=(($20)|0);
-      var $gc17=$value_16;
-      var $21=HEAP32[(($gc17)>>2)];
-      var $ts=$21;
-      var $tsv=$ts;
-      var $len=(($tsv+12)|0);
-      var $22=HEAP32[(($len)>>2)];
-      var $conv18=(($22)>>>0);
-      var $23=$io15;
-      var $value_19=(($23)|0);
-      var $n20=$value_19;
-      (HEAPF64[(tempDoublePtr)>>3]=$conv18,HEAP32[(($n20)>>2)]=HEAP32[((tempDoublePtr)>>2)],HEAP32[((($n20)+(4))>>2)]=HEAP32[(((tempDoublePtr)+(4))>>2)]);
-      var $24=$io15;
-      var $tt_21=(($24+8)|0);
-      HEAP32[(($tt_21)>>2)]=3;
-      label = 17; break;
-    case 13: 
-      var $25=$L_addr;
-      var $26=$rb_addr;
-      var $call22=_luaT_gettmbyobj($25, $26, 4);
-      $tm=$call22;
-      var $27=$tm;
-      var $tt_23=(($27+8)|0);
-      var $28=HEAP32[(($tt_23)>>2)];
-      var $cmp24=(($28)|0)==0;
-      if ($cmp24) { label = 14; break; } else { label = 15; break; }
-    case 14: 
-      var $29=$L_addr;
-      var $30=$rb_addr;
-      _luaG_typeerror($29, $30, ((5246776)|0));
-
-    case 15: 
-      label = 16; break;
-    case 16: 
-      var $31=$L_addr;
-      var $32=$tm;
-      var $33=$rb_addr;
-      var $34=$rb_addr;
-      var $35=$ra_addr;
-      _callTM($31, $32, $33, $34, $35, 1);
-      label = 17; break;
-    case 17: 
-
-      return;
-  }
-
-}
-_luaV_objlen["X"]=1;
-
-function _luaV_arith($L, $ra, $rb, $rc, $op) {
-  var label = 0;
-  var __stackBase__  = STACKTOP; STACKTOP = (STACKTOP + 24)|0; _memset(__stackBase__, 0, 24);
-  label = 2; 
-  while(1) switch(label) {
-    case 2: 
-      var $L_addr;
-      var $ra_addr;
-      var $rb_addr;
-      var $rc_addr;
-      var $op_addr;
-      var $tempb=__stackBase__;
-      var $tempc=(__stackBase__)+(12);
-      var $b;
-      var $c;
-      var $res;
-      var $io;
-      $L_addr=$L;
-      $ra_addr=$ra;
-      $rb_addr=$rb;
-      $rc_addr=$rc;
-      $op_addr=$op;
-      var $0=$rb_addr;
-      var $call=_luaV_tonumber($0, $tempb);
-      $b=$call;
-      var $cmp=(($call)|0)!=0;
-      if ($cmp) { label = 3; break; } else { label = 5; break; }
-    case 3: 
-      var $1=$rc_addr;
-      var $call1=_luaV_tonumber($1, $tempc);
-      $c=$call1;
-      var $cmp2=(($call1)|0)!=0;
-      if ($cmp2) { label = 4; break; } else { label = 5; break; }
-    case 4: 
-      var $2=$op_addr;
-      var $sub=((($2)-(6))|0);
-      var $add=(($sub)|0);
-      var $3=$b;
-      var $value_=(($3)|0);
-      var $n=$value_;
-      var $4=(HEAP32[((tempDoublePtr)>>2)]=HEAP32[(($n)>>2)],HEAP32[(((tempDoublePtr)+(4))>>2)]=HEAP32[((($n)+(4))>>2)],HEAPF64[(tempDoublePtr)>>3]);
-      var $5=$c;
-      var $value_3=(($5)|0);
-      var $n4=$value_3;
-      var $6=(HEAP32[((tempDoublePtr)>>2)]=HEAP32[(($n4)>>2)],HEAP32[(((tempDoublePtr)+(4))>>2)]=HEAP32[((($n4)+(4))>>2)],HEAPF64[(tempDoublePtr)>>3]);
-      var $call5=_luaO_arith($add, $4, $6);
-      $res=$call5;
-      var $7=$ra_addr;
-      $io=$7;
-      var $8=$res;
-      var $9=$io;
-      var $value_6=(($9)|0);
-      var $n7=$value_6;
-      (HEAPF64[(tempDoublePtr)>>3]=$8,HEAP32[(($n7)>>2)]=HEAP32[((tempDoublePtr)>>2)],HEAP32[((($n7)+(4))>>2)]=HEAP32[(((tempDoublePtr)+(4))>>2)]);
-      var $10=$io;
-      var $tt_=(($10+8)|0);
-      HEAP32[(($tt_)>>2)]=3;
-      label = 8; break;
-    case 5: 
-      var $11=$L_addr;
-      var $12=$rb_addr;
-      var $13=$rc_addr;
-      var $14=$ra_addr;
-      var $15=$op_addr;
-      var $call8=_call_binTM($11, $12, $13, $14, $15);
-      var $tobool=(($call8)|0)!=0;
-      if ($tobool) { label = 7; break; } else { label = 6; break; }
-    case 6: 
-      var $16=$L_addr;
-      var $17=$rb_addr;
-      var $18=$rc_addr;
-      _luaG_aritherror($16, $17, $18);
-
-    case 7: 
-      label = 8; break;
-    case 8: 
-      STACKTOP = __stackBase__;
-      return;
-  }
-
-}
-_luaV_arith["X"]=1;
-
 function _luaV_finishOp($L) {
   var label = 0;
 
@@ -45089,6 +44826,235 @@ function _luaV_finishOp($L) {
 
 }
 _luaV_finishOp["X"]=1;
+
+function _luaV_objlen($L, $ra, $rb) {
+  var label = 0;
+
+  label = 2; 
+  while(1) switch(label) {
+    case 2: 
+      var $L_addr;
+      var $ra_addr;
+      var $rb_addr;
+      var $tm;
+      var $h;
+      var $io;
+      var $io15;
+      $L_addr=$L;
+      $ra_addr=$ra;
+      $rb_addr=$rb;
+      var $0=$rb_addr;
+      var $tt_=(($0+8)|0);
+      var $1=HEAP32[(($tt_)>>2)];
+      var $and=$1 & 15;
+      if ((($and)|0)==5) {
+        label = 3; break;
+      }
+      else if ((($and)|0)==4) {
+        label = 12; break;
+      }
+      else {
+      label = 13; break;
+      }
+      
+    case 3: 
+      var $2=$rb_addr;
+      var $value_=(($2)|0);
+      var $gc=$value_;
+      var $3=HEAP32[(($gc)>>2)];
+      var $h1=$3;
+      $h=$h1;
+      var $4=$h;
+      var $metatable=(($4+8)|0);
+      var $5=HEAP32[(($metatable)>>2)];
+      var $cmp=(($5)|0)==0;
+      if ($cmp) { label = 4; break; } else { label = 5; break; }
+    case 4: 
+      var $cond8 = 0;label = 9; break;
+    case 5: 
+      var $6=$h;
+      var $metatable2=(($6+8)|0);
+      var $7=HEAP32[(($metatable2)>>2)];
+      var $flags=(($7+6)|0);
+      var $8=HEAP8[($flags)];
+      var $conv=(($8)&255);
+      var $and3=$conv & 16;
+      var $tobool=(($and3)|0)!=0;
+      if ($tobool) { label = 6; break; } else { label = 7; break; }
+    case 6: 
+      var $cond = 0;label = 8; break;
+    case 7: 
+      var $9=$h;
+      var $metatable6=(($9+8)|0);
+      var $10=HEAP32[(($metatable6)>>2)];
+      var $11=$L_addr;
+      var $l_G=(($11+12)|0);
+      var $12=HEAP32[(($l_G)>>2)];
+      var $tmname=(($12+164)|0);
+      var $arrayidx=(($tmname+16)|0);
+      var $13=HEAP32[(($arrayidx)>>2)];
+      var $call=_luaT_gettm($10, 4, $13);
+      var $cond = $call;label = 8; break;
+    case 8: 
+      var $cond;
+      var $cond8 = $cond;label = 9; break;
+    case 9: 
+      var $cond8;
+      $tm=$cond8;
+      var $14=$tm;
+      var $tobool9=(($14)|0)!=0;
+      if ($tobool9) { label = 10; break; } else { label = 11; break; }
+    case 10: 
+      label = 16; break;
+    case 11: 
+      var $15=$ra_addr;
+      $io=$15;
+      var $16=$h;
+      var $call10=_luaH_getn($16);
+      var $conv11=(($call10)|0);
+      var $17=$io;
+      var $value_12=(($17)|0);
+      var $n=$value_12;
+      (HEAPF64[(tempDoublePtr)>>3]=$conv11,HEAP32[(($n)>>2)]=HEAP32[((tempDoublePtr)>>2)],HEAP32[((($n)+(4))>>2)]=HEAP32[(((tempDoublePtr)+(4))>>2)]);
+      var $18=$io;
+      var $tt_13=(($18+8)|0);
+      HEAP32[(($tt_13)>>2)]=3;
+      label = 17; break;
+    case 12: 
+      var $19=$ra_addr;
+      $io15=$19;
+      var $20=$rb_addr;
+      var $value_16=(($20)|0);
+      var $gc17=$value_16;
+      var $21=HEAP32[(($gc17)>>2)];
+      var $ts=$21;
+      var $tsv=$ts;
+      var $len=(($tsv+12)|0);
+      var $22=HEAP32[(($len)>>2)];
+      var $conv18=(($22)>>>0);
+      var $23=$io15;
+      var $value_19=(($23)|0);
+      var $n20=$value_19;
+      (HEAPF64[(tempDoublePtr)>>3]=$conv18,HEAP32[(($n20)>>2)]=HEAP32[((tempDoublePtr)>>2)],HEAP32[((($n20)+(4))>>2)]=HEAP32[(((tempDoublePtr)+(4))>>2)]);
+      var $24=$io15;
+      var $tt_21=(($24+8)|0);
+      HEAP32[(($tt_21)>>2)]=3;
+      label = 17; break;
+    case 13: 
+      var $25=$L_addr;
+      var $26=$rb_addr;
+      var $call22=_luaT_gettmbyobj($25, $26, 4);
+      $tm=$call22;
+      var $27=$tm;
+      var $tt_23=(($27+8)|0);
+      var $28=HEAP32[(($tt_23)>>2)];
+      var $cmp24=(($28)|0)==0;
+      if ($cmp24) { label = 14; break; } else { label = 15; break; }
+    case 14: 
+      var $29=$L_addr;
+      var $30=$rb_addr;
+      _luaG_typeerror($29, $30, ((5246776)|0));
+
+    case 15: 
+      label = 16; break;
+    case 16: 
+      var $31=$L_addr;
+      var $32=$tm;
+      var $33=$rb_addr;
+      var $34=$rb_addr;
+      var $35=$ra_addr;
+      _callTM($31, $32, $33, $34, $35, 1);
+      label = 17; break;
+    case 17: 
+
+      return;
+  }
+
+}
+_luaV_objlen["X"]=1;
+
+function _luaV_arith($L, $ra, $rb, $rc, $op) {
+  var label = 0;
+  var __stackBase__  = STACKTOP; STACKTOP = (STACKTOP + 24)|0; _memset(__stackBase__, 0, 24);
+  label = 2; 
+  while(1) switch(label) {
+    case 2: 
+      var $L_addr;
+      var $ra_addr;
+      var $rb_addr;
+      var $rc_addr;
+      var $op_addr;
+      var $tempb=__stackBase__;
+      var $tempc=(__stackBase__)+(12);
+      var $b;
+      var $c;
+      var $res;
+      var $io;
+      $L_addr=$L;
+      $ra_addr=$ra;
+      $rb_addr=$rb;
+      $rc_addr=$rc;
+      $op_addr=$op;
+      var $0=$rb_addr;
+      var $call=_luaV_tonumber($0, $tempb);
+      $b=$call;
+      var $cmp=(($call)|0)!=0;
+      if ($cmp) { label = 3; break; } else { label = 5; break; }
+    case 3: 
+      var $1=$rc_addr;
+      var $call1=_luaV_tonumber($1, $tempc);
+      $c=$call1;
+      var $cmp2=(($call1)|0)!=0;
+      if ($cmp2) { label = 4; break; } else { label = 5; break; }
+    case 4: 
+      var $2=$op_addr;
+      var $sub=((($2)-(6))|0);
+      var $add=(($sub)|0);
+      var $3=$b;
+      var $value_=(($3)|0);
+      var $n=$value_;
+      var $4=(HEAP32[((tempDoublePtr)>>2)]=HEAP32[(($n)>>2)],HEAP32[(((tempDoublePtr)+(4))>>2)]=HEAP32[((($n)+(4))>>2)],HEAPF64[(tempDoublePtr)>>3]);
+      var $5=$c;
+      var $value_3=(($5)|0);
+      var $n4=$value_3;
+      var $6=(HEAP32[((tempDoublePtr)>>2)]=HEAP32[(($n4)>>2)],HEAP32[(((tempDoublePtr)+(4))>>2)]=HEAP32[((($n4)+(4))>>2)],HEAPF64[(tempDoublePtr)>>3]);
+      var $call5=_luaO_arith($add, $4, $6);
+      $res=$call5;
+      var $7=$ra_addr;
+      $io=$7;
+      var $8=$res;
+      var $9=$io;
+      var $value_6=(($9)|0);
+      var $n7=$value_6;
+      (HEAPF64[(tempDoublePtr)>>3]=$8,HEAP32[(($n7)>>2)]=HEAP32[((tempDoublePtr)>>2)],HEAP32[((($n7)+(4))>>2)]=HEAP32[(((tempDoublePtr)+(4))>>2)]);
+      var $10=$io;
+      var $tt_=(($10+8)|0);
+      HEAP32[(($tt_)>>2)]=3;
+      label = 8; break;
+    case 5: 
+      var $11=$L_addr;
+      var $12=$rb_addr;
+      var $13=$rc_addr;
+      var $14=$ra_addr;
+      var $15=$op_addr;
+      var $call8=_call_binTM($11, $12, $13, $14, $15);
+      var $tobool=(($call8)|0)!=0;
+      if ($tobool) { label = 7; break; } else { label = 6; break; }
+    case 6: 
+      var $16=$L_addr;
+      var $17=$rb_addr;
+      var $18=$rc_addr;
+      _luaG_aritherror($16, $17, $18);
+
+    case 7: 
+      label = 8; break;
+    case 8: 
+      STACKTOP = __stackBase__;
+      return;
+  }
+
+}
+_luaV_arith["X"]=1;
 
 function _luaV_execute($L) {
   var label = 0;
@@ -50933,56 +50899,6 @@ function _skipcomment($lf, $cp) {
 }
 
 
-
-function _getS($L, $ud, $size) {
-  var label = 0;
-
-  label = 2; 
-  while(1) switch(label) {
-    case 2: 
-      var $retval;
-      var $L_addr;
-      var $ud_addr;
-      var $size_addr;
-      var $ls;
-      $L_addr=$L;
-      $ud_addr=$ud;
-      $size_addr=$size;
-      var $0=$ud_addr;
-      var $1=$0;
-      $ls=$1;
-      var $2=$L_addr;
-      var $3=$ls;
-      var $size1=(($3+4)|0);
-      var $4=HEAP32[(($size1)>>2)];
-      var $cmp=(($4)|0)==0;
-      if ($cmp) { label = 3; break; } else { label = 4; break; }
-    case 3: 
-      $retval=0;
-      label = 5; break;
-    case 4: 
-      var $5=$ls;
-      var $size2=(($5+4)|0);
-      var $6=HEAP32[(($size2)>>2)];
-      var $7=$size_addr;
-      HEAP32[(($7)>>2)]=$6;
-      var $8=$ls;
-      var $size3=(($8+4)|0);
-      HEAP32[(($size3)>>2)]=0;
-      var $9=$ls;
-      var $s=(($9)|0);
-      var $10=HEAP32[(($s)>>2)];
-      $retval=$10;
-      label = 5; break;
-    case 5: 
-      var $11=$retval;
-
-      return $11;
-  }
-
-}
-
-
 function _getF($L, $ud, $size) {
   var label = 0;
 
@@ -51082,6 +50998,56 @@ function _luaL_loadbufferx($L, $buff, $size, $name, $mode) {
   return $call;
 }
 Module["_luaL_loadbufferx"] = _luaL_loadbufferx;
+
+
+function _getS($L, $ud, $size) {
+  var label = 0;
+
+  label = 2; 
+  while(1) switch(label) {
+    case 2: 
+      var $retval;
+      var $L_addr;
+      var $ud_addr;
+      var $size_addr;
+      var $ls;
+      $L_addr=$L;
+      $ud_addr=$ud;
+      $size_addr=$size;
+      var $0=$ud_addr;
+      var $1=$0;
+      $ls=$1;
+      var $2=$L_addr;
+      var $3=$ls;
+      var $size1=(($3+4)|0);
+      var $4=HEAP32[(($size1)>>2)];
+      var $cmp=(($4)|0)==0;
+      if ($cmp) { label = 3; break; } else { label = 4; break; }
+    case 3: 
+      $retval=0;
+      label = 5; break;
+    case 4: 
+      var $5=$ls;
+      var $size2=(($5+4)|0);
+      var $6=HEAP32[(($size2)>>2)];
+      var $7=$size_addr;
+      HEAP32[(($7)>>2)]=$6;
+      var $8=$ls;
+      var $size3=(($8+4)|0);
+      HEAP32[(($size3)>>2)]=0;
+      var $9=$ls;
+      var $s=(($9)|0);
+      var $10=HEAP32[(($s)>>2)];
+      $retval=$10;
+      label = 5; break;
+    case 5: 
+      var $11=$retval;
+
+      return $11;
+  }
+
+}
+
 
 function _luaL_getmetafield($L, $obj, $event) {
   var label = 0;
@@ -55271,69 +55237,6 @@ function _checkupval($L, $argf, $argnup) {
 }
 
 
-function _unmakemask($mask, $smask) {
-  var label = 0;
-
-  label = 2; 
-  while(1) switch(label) {
-    case 2: 
-      var $mask_addr;
-      var $smask_addr;
-      var $i;
-      $mask_addr=$mask;
-      $smask_addr=$smask;
-      $i=0;
-      var $0=$mask_addr;
-      var $and=$0 & 1;
-      var $tobool=(($and)|0)!=0;
-      if ($tobool) { label = 3; break; } else { label = 4; break; }
-    case 3: 
-      var $1=$i;
-      var $inc=((($1)+(1))|0);
-      $i=$inc;
-      var $2=$smask_addr;
-      var $arrayidx=(($2+$1)|0);
-      HEAP8[($arrayidx)]=99;
-      label = 4; break;
-    case 4: 
-      var $3=$mask_addr;
-      var $and1=$3 & 2;
-      var $tobool2=(($and1)|0)!=0;
-      if ($tobool2) { label = 5; break; } else { label = 6; break; }
-    case 5: 
-      var $4=$i;
-      var $inc4=((($4)+(1))|0);
-      $i=$inc4;
-      var $5=$smask_addr;
-      var $arrayidx5=(($5+$4)|0);
-      HEAP8[($arrayidx5)]=114;
-      label = 6; break;
-    case 6: 
-      var $6=$mask_addr;
-      var $and7=$6 & 4;
-      var $tobool8=(($and7)|0)!=0;
-      if ($tobool8) { label = 7; break; } else { label = 8; break; }
-    case 7: 
-      var $7=$i;
-      var $inc10=((($7)+(1))|0);
-      $i=$inc10;
-      var $8=$smask_addr;
-      var $arrayidx11=(($8+$7)|0);
-      HEAP8[($arrayidx11)]=108;
-      label = 8; break;
-    case 8: 
-      var $9=$i;
-      var $10=$smask_addr;
-      var $arrayidx13=(($10+$9)|0);
-      HEAP8[($arrayidx13)]=0;
-      var $11=$smask_addr;
-
-      return $11;
-  }
-
-}
-
-
 function _settabss($L, $i, $v) {
   var label = 0;
 
@@ -55394,6 +55297,69 @@ function _settabsb($L, $i, $v) {
   _lua_setfield($2, -2, $3);
 
   return;
+}
+
+
+function _unmakemask($mask, $smask) {
+  var label = 0;
+
+  label = 2; 
+  while(1) switch(label) {
+    case 2: 
+      var $mask_addr;
+      var $smask_addr;
+      var $i;
+      $mask_addr=$mask;
+      $smask_addr=$smask;
+      $i=0;
+      var $0=$mask_addr;
+      var $and=$0 & 1;
+      var $tobool=(($and)|0)!=0;
+      if ($tobool) { label = 3; break; } else { label = 4; break; }
+    case 3: 
+      var $1=$i;
+      var $inc=((($1)+(1))|0);
+      $i=$inc;
+      var $2=$smask_addr;
+      var $arrayidx=(($2+$1)|0);
+      HEAP8[($arrayidx)]=99;
+      label = 4; break;
+    case 4: 
+      var $3=$mask_addr;
+      var $and1=$3 & 2;
+      var $tobool2=(($and1)|0)!=0;
+      if ($tobool2) { label = 5; break; } else { label = 6; break; }
+    case 5: 
+      var $4=$i;
+      var $inc4=((($4)+(1))|0);
+      $i=$inc4;
+      var $5=$smask_addr;
+      var $arrayidx5=(($5+$4)|0);
+      HEAP8[($arrayidx5)]=114;
+      label = 6; break;
+    case 6: 
+      var $6=$mask_addr;
+      var $and7=$6 & 4;
+      var $tobool8=(($and7)|0)!=0;
+      if ($tobool8) { label = 7; break; } else { label = 8; break; }
+    case 7: 
+      var $7=$i;
+      var $inc10=((($7)+(1))|0);
+      $i=$inc10;
+      var $8=$smask_addr;
+      var $arrayidx11=(($8+$7)|0);
+      HEAP8[($arrayidx11)]=108;
+      label = 8; break;
+    case 8: 
+      var $9=$i;
+      var $10=$smask_addr;
+      var $arrayidx13=(($10+$9)|0);
+      HEAP8[($arrayidx13)]=0;
+      var $11=$smask_addr;
+
+      return $11;
+  }
+
 }
 
 
@@ -72676,7 +72642,7 @@ if (shouldRunNow) {
   // {{MODULE_ADDITIONS}}
 
 
-// EMSCRIPTEN_GENERATED_FUNCTIONS: ["_luaL_checkstack","_computesizes","_pushnexttemplate","_b_replace","_txtToken","_dothecall","_luaV_settable","_singlematch","_assignment","_str_dump","_lua_pushlightuserdata","_luaB_next","_searcher_Lua","_tmalloc_large","_read_number","_luaB_pcall","_luaK_jump","_luaK_storevar","_lua_setmetatable","_match_class","_freeobj","_luaopen_io","_str_checkname","_luaX_lookahead","_internshrstr","_luaC_barrierback_","_test_then_block","_moveto","_luaopen_math","_getfield","_lua_setupvalue","_findvararg","_read_numeral","_new_localvar","_db_setupvalue","_countlevels","_freestack","_lua_xmove","_luaC_fullgc","_luaH_new","_luaB_auxwrap","_aux_upvalue","_lua_touserdata","_math_atan","_read_chars","_luaX_syntaxerror","_posrelat","_findindex","_retstat","_ifstat","_markupval","_loadfunc","_pushfuncname","_b_and","_codestring","_error_expected","_luaO_arith","_DumpChar","_lua_remove","_luaL_loadfilex","_closelistfield","_luaZ_openspace","_str_upper","_lua_len","_os_tmpname","_luaK_self","_field","_lua_pushvfstring","_lua_rawequal","_traceexec","_luaZ_fill","_str_rep","_checkmode","_llex","_f_parser","_luaS_new","_luaH_get","_gmatch","_luaD_throw","_luaV_tonumber","_str_find","_check_next","_resume","_luaL_optinteger","_luaC_newobj","_init_registry","_luaL_addstring","_lua_pushfstring","_findgotos","_sweeptolive","_db_upvaluejoin","_lua_tolstring","_lua_rawset","_LoadString","_propagateall","_io_readline","_subexpr","_sys_trim","_g_iofile","_gmatch_aux","_l_alloc","_load_aux","_luaK_codeABC","_luaV_arith","_luaL_checkinteger","_math_frexp","_codenot","_add_value","_separatetobefnz","_db_sethook","_searcher_preload","_lua_settable","_mainfunc","_str_char","_patchtestreg","_setfield","_lua_gethook","_lua_gethookcount","_luaK_codeABx","_luaB_rawlen","_luaB_yield","_primaryexp","_lua_tounsignedx","_luaK_infix","_matchbalance","_atomic","_typeerror","_luaH_free","_save","_freeexp","_luaV_equalobj_","_str_len","_str_byte","_luaD_shrinkstack","_luaX_init","_cond","_db_traceback","_io_type","_addinfo","_os_rename","_luaK_posfix","_resume_error","_lua_sethook","_forbody","_luaS_newlstr","_math_ldexp","_luaB_setmetatable","_pushstr","_luaL_callmeta","_luaF_newproto","_luaG_aritherror","_db_getlocal","_malloc","_generationalcollection","_luaV_finishOp","_io_open","_math_log","_luaB_costatus","_luaV_lessthan","_DumpDebug","_lua_close","_LoadUpvalues","_statlist","_discharge2anyreg","_traversestack","_luaB_coresume","_adjust_assign","_tconcat","_luaV_execute","_luaL_addvalue","_math_sin","_recfield","_str_format","_luaL_getmetafield","_luaT_gettmbyobj","_unlinkupval","_getboolfield","_callallpendingfinalizers","_read_all","_getcached","_read_string","_luaG_typeerror","_ipairsaux","_luaL_checkudata","_math_atan2","_localstat","_ll_searchpath","_luaZ_init","_luaL_getsubtable","_math_sqrt","_math_ceil","_luaF_newCclosure","_luaX_setinput","_luaO_pushfstring","_breaklabel","_luaL_optnumber","_getupvalref","_lua_gethookmask","_scanformat","_ll_sym","_traverseproto","_whilestat","_skipcomment","_luaB_pairs","_createmetatable","_b_rshift","_buffreplace","_check_conflict","_luaK_getlabel","_luaF_getlocalname","_luaB_tonumber","_luaH_newkey","_b_shift","_isnumeral","_math_abs","_luaG_ordererror","_db_upvalueid","_traverseweakvalue","_newprefile","_math_tan","_f_lines","_finishpcall","_os_clock","_f_write","_luaF_freeproto","_str_reverse","_luaB_load","_sys_alloc","_singlevar","_check_capture","_codeextraarg","_undefgoto","_lua_load","_luaO_pushvfstring","_skipnoopstat","_lua_pcallk","_math_deg","_traverseLclosure","_parlist","_free","_findlocal","_getupvalname","_funcname","_luaC_step","_read_line","_traversetable","_luaL_loadbufferx","_luaU_undump","_luaB_assert","_lua_resume","_lua_iscfunction","_math_floor","_makemask","_luaC_checkfinalizer","_DumpBlock","_opencheck","_forlist","_luaT_init","_tmalloc_small","_lua_rawlen","_match_capture","_luaK_checkstack","_need_value","_lua_isnumber","_enterblock","_luaM_toobig","_lexerror","_createsearcherstable","_removevalues","_luaO_chunkid","_getiofile","_luaopen_os","_luaopen_coroutine","_luaU_header","_math_cos","_luaF_findupval","_luaX_newstring","_prepend_alloc","_luaH_setint","_luaK_goiftrue","_luaF_close","_luaK_setreturns","_singlestep","_luaB_cocreate","_lua_strx2number","_block_follow","_classend","_checkupval","_settabss","_propagatelist","_luaL_traceback","_DumpUpvalues","_ll_checkclib","_settabsi","_luaB_corunning","_luaD_hook","_settabsb","_luaopen_package","_luaO_hexavalue","_read_long_string","_unbound_search","_b_extract","_block","_io_popen","_hashnum","_realloc","_lua_getstack","_lua_gettop","_lua_getlocal","_lua_setuservalue","_math_tanh","_getlocvar","_readdecesc","_luaG_errormsg","_lua_toboolean","_aux_close","_fieldargs","_tremove","_DumpHeader","_luaK_concat","_l_strcmp","_luaB_error","_lua_tothread","_str_lower","_isneg","_f_gc","_lua_getctx","_remarkupvals","_addfield","_luaC_freeallobjects","_iscleared","_luaK_indexed","_findfield","_closegoto","_LoadNumber","_currentline","_luaB_getmetatable","_luaK_goiffalse","_io_read","_luaV_concat","_makeseed","_codecomp","_LoadChar","_luaE_setdebt","_exprstat","_luaB_loadfile","_os_getenv","_os_difftime","_luaC_barrierproto_","_g_read","_skipBOM","_upvalname","_luaL_checkversion_","_math_max","_growstack","_luaL_buffinitsize","_luaT_gettm","_unmakemask","_luaopen_base","_luaH_set","_countint","_callTM","_lua_atpanic","_getbinopr","_db_setuservalue","_luaE_freethread","_lua_getinfo","_luaK_patchclose","_set2","_luaB_select","_luaB_dofile","_init_top","_b_test","_lua_setfield","_statement","_max_expand","_internal_realloc","_io_tmpfile","_str_match","_sweeplist","_lua_next","_lua_concat","_sort_comp","_luaL_testudata","_luaD_reallocstack","_luaopen_table","_funcargs","_luaF_newupval","_recover","_seterrorobj","_lua_rawseti","_collectvalidlines","_getF","_g_write","_db_getinfo","_getobjname","_luaM_realloc_","_lua_absindex","_stackinuse","_db_setmetatable","_boolK","_luaL_error","_LoadFunction","_luaK_dischargevars","_luaU_dump","_luaB_type","_f_seek","_gctm","_f_call","_fornum","_code_label","_findloader","_checklimit","_traverseCclosure","_end_capture","_entersweep","_new_localvarliteral_","_lua_copy","_db_getregistry","_luaL_argerror","_math_modf","_constfolding","_errorlimit","_luaH_next","_lua_pushnil","_f_flush","_removeentry","_LoadInt","_luaL_pushresultsize","_DumpInt","_findfile","_luaO_int2fb","_callhook","_newupvalue","_ll_unloadlib","_addk","_release_unused_segments","_luaL_prepbuffsize","_explist","_searchupvalue","_createstdfile","_lua_rawget","_get_equalTM","_io_lines","_constructor","_condjump","_ll_addtoclib","_luaopen_string","_b_or","_f_luaopen","_luaL_buffinit","_b_arshift","_luaL_execresult","_init_bins","_newlabelentry","_checkoption","_index2addr","_luaG_concaterror","_luaS_eqstr","_readhexaesc","_mmap_alloc","_LoadDebug","_currentpc","_getjump","_tag_error","_patchlistaux","_incstep","_matchbracketclass","_luaK_prefix","_listfield","_freereg","_init_exp","_lua_pushlstring","_findsetreg","_lastlistfield","_noenv","_findlabel","_luaL_len","_setnodevector","_generic_reader","_reallymarkobject","_checkname","_sweepthread","_luaK_patchlist","_close_func","_convergeephemerons","_luaD_poscall","_db_getupvalue","_lua_insert","_io_close","_enterlevel","_finishCcall","_treatstackoption","_math_random","_luaK_ret","_luaB_xpcall","_lua_getupvalue","_push_captures","_fieldsel","_LoadBlock","_lua_checkstack","_luaL_pushresult","_movegotosout","_lua_error","_andaux","_match","_luaL_setfuncs","_lua_upvalueid","_luaL_optlstring","_clearvalues","_luaL_checkunsigned","_checknext","_luaK_exp2RK","_luaL_checklstring","_getfuncname","_pcallcont","_checkrepeated","_yindex","_codearith","_b_lrot","_luaH_resizearray","_db_setlocal","_lua_setlocal","_lua_yieldk","_ll_require","_math_min","_lua_newstate","_db_getmetatable","_markbeingfnz","_setarrayvector","_luaV_gettable","_hookf","_luaK_exp2anyreg","_luaE_freeCI","_gotostat","_math_randomseed","_unroll","_luaB_rawequal","_luaO_str2d","_math_acos","_checkSizes","_auxsort","_add_segment","_addprototype","_ll_loadfunc","_pushclosure","_inclinenumber","_luaD_precall","_str_sub","_searcher_Croot","_lua_getfield","_createstrobj","_tryfuncTM","_luaK_numberK","_luaD_protectedparser","_math_fmod","_DumpNumber","_traverseephemeron","_luaL_newmetatable","_luaB_ipairs","_luaL_requiref","_getthread","_luaopen_bit32","_setboolfield","_DumpFunction","_add_s","_lua_settop","_lua_pushboolean","_addlenmod","_capture_to_close","_lua_replace","_luaB_rawset","_ll_loadlib","_b_rrot","_retraversegrays","_adjust_varargs","_luaB_collectgarbage","_luaK_codek","_os_time","_searcher_C","_luaO_fb2int","_luaV_objlen","_io_pclose","_numusehash","_luaD_call","_test_eof","_discharge2reg","_localfunc","_os_date","_readhexa","_lua_getuservalue","_pushglobalfuncname","_addquoted","_labelstat","_getS","_luaY_parser","_luaL_setmetatable","_lua_status","_lua_tonumberx","_luaZ_read","_io_flush","_suffixedexp","_jumponcond","_getfreepos","_lmemfind","_lua_setglobal","_io_input","_f_tostring","_io_write","_getjumpcontrol","_luaK_reserveregs","_leaveblock","_clearkeys","_call_binTM","_pack","_lua_createtable","_kname","_math_sinh","_funcinfo","_db_gethook","_luaF_freeupval","_luaC_forcestep","_lua_pushthread","_call_orderTM","_exp1","_luaK_stringK","_singlevaraux","_correctstack","_luaK_exp2anyregup","_codeclosure","_writer","_luaF_newLclosure","_udata2finalize","_math_asin","_luaopen_debug","_os_remove","_traversestrongtable","_luaS_resize","_luaM_growaux_","_getunopr","_lua_getglobal","_error","_nospecials","_lua_pushcclosure","_lua_pushstring","_luaH_getstr","_lua_upvaluejoin","_math_rad","_exp2reg","_init_mparams","_expr","_luaK_exp2val","_luaK_setlist","_mainposition","_math_cosh","_searchpath","_preinit_state","_testnext","_body","_trydecpoint","_DumpVector","_GCTM","_panic","_tinsert","_luaD_growstack","_escerror","_io_fclose","_luaX_token2str","_isinstack","_tofile","_b_xor","_newfile","_lua_isstring","_luaD_pcall","_searchvar","_luaH_getn","_nilK","_luaS_hash","_luaK_code","_unpack","_simpleexp","_lua_callk","_luaL_checkany","_luaK_setoneret","_setpath","_luaC_checkupvalcolor","_invertjump","_luaV_lessequal","_check","_auxupvalue","_removevars","_luaO_ceillog2","_skip_sep","_newshrstr","_lua_newthread","_min_expand","_str_gsub","_DumpConstants","_markroot","_markmt","_luaE_extendCI","_f_read","_luaB_cowrap","_luaH_getint","_lua_pushnumber","_math_pow","_io_noclose","_luaB_tostring","_lua_topointer","_luaC_barrier_","_luaV_tostring","_luaK_patchtohere","_str_find_aux","_lua_gettable","_fixjump","_mmap_resize","_lua_compare","_luaX_next","_close_state","_dofilecont","_lua_gc","_lua_newuserdata","_luaL_addlstring","_start_capture","_pairsmeta","_luaL_fileresult","_lua_tointegerx","_lua_version","_registerlocalvar","_auxresume","_luaG_runerror","_luaL_openlibs","_luaL_checkoption","_DumpString","_lua_pushvalue","_luaH_resize","_checkload","_b_rot","_lua_typename","_luaC_changemode","_luaS_newudata","_os_setlocale","_sort","_lua_rawgeti","_propagatemark","_auxgetinfo","_luaD_rawrunprotected","_luaS_eqlngstr","_push_onecapture","_luaK_exp2nextreg","_math_exp","_lua_type","_lua_dump","_LoadConstants","_stack_init","_luaK_nil","_luaK_fixline","_db_debug","_luaL_checknumber","_createmeta","_lua_getmetatable","_lua_pushunsigned","_luaL_gsub","_luaL_tolstring","_b_lshift","_findpcall","_forstat","_anchor_token","_os_exit","_rehash","_luaL_checktype","_dischargejpc","_funcstat","_readable","_io_output","_ll_load","_errfile","_LoadCode","_LoadHeader","_segment_holding","_b_not","_semerror","_luaB_rawget","_os_execute","_repeatstat","_lua_pushinteger","_adjustlocalvars","_check_match","_open_func","_luaL_newstate","_aux_lines","_luaL_where","_luaC_runtilstate","_luaB_print","_db_getuservalue","_f_setvbuf","_arrayindex","_numusearray"]
+// EMSCRIPTEN_GENERATED_FUNCTIONS: ["_luaL_checkstack","_computesizes","_pushnexttemplate","_b_replace","_txtToken","_dothecall","_luaV_settable","_singlematch","_assignment","_str_dump","_lua_pushlightuserdata","_luaB_next","_searcher_Lua","_tmalloc_large","_read_number","_luaB_pcall","_luaK_jump","_luaK_storevar","_lua_setmetatable","_match_class","_freeobj","_luaopen_io","_str_checkname","_luaX_lookahead","_internshrstr","_luaC_barrierback_","_test_then_block","_moveto","_luaopen_math","_getfield","_lua_setupvalue","_findvararg","_read_numeral","_new_localvar","_db_setupvalue","_countlevels","_freestack","_lua_xmove","_luaC_fullgc","_luaH_new","_luaB_auxwrap","_aux_upvalue","_lua_touserdata","_math_atan","_read_chars","_luaX_syntaxerror","_posrelat","_findindex","_retstat","_ifstat","_markupval","_loadfunc","_pushfuncname","_b_and","_codestring","_error_expected","_luaO_arith","_DumpChar","_lua_remove","_luaL_loadfilex","_closelistfield","_luaZ_openspace","_str_upper","_lua_len","_os_tmpname","_luaK_self","_field","_lua_pushvfstring","_lua_rawequal","_traceexec","_luaZ_fill","_str_rep","_checkmode","_llex","_f_parser","_luaS_new","_luaH_get","_gmatch","_luaD_throw","_luaV_tonumber","_str_find","_check_next","_resume","_luaL_optinteger","_luaC_newobj","_init_registry","_luaL_addstring","_lua_pushfstring","_findgotos","_sweeptolive","_db_upvaluejoin","_lua_tolstring","_lua_rawset","_LoadString","_propagateall","_io_readline","_subexpr","_sys_trim","_g_iofile","_gmatch_aux","_l_alloc","_load_aux","_luaK_codeABC","_luaV_arith","_luaL_checkinteger","_math_frexp","_codenot","_add_value","_separatetobefnz","_db_sethook","_searcher_preload","_mainfunc","_str_char","_patchtestreg","_setfield","_lua_gethook","_lua_gethookcount","_luaK_codeABx","_luaB_rawlen","_luaB_yield","_primaryexp","_lua_tounsignedx","_luaK_infix","_matchbalance","_atomic","_typeerror","_luaH_free","_save","_freeexp","_luaV_equalobj_","_str_len","_str_byte","_luaD_shrinkstack","_luaX_init","_cond","_db_traceback","_io_type","_addinfo","_os_rename","_luaK_posfix","_resume_error","_lua_sethook","_forbody","_luaS_newlstr","_math_ldexp","_luaB_setmetatable","_pushstr","_luaL_callmeta","_luaF_newproto","_luaG_aritherror","_db_getlocal","_malloc","_generationalcollection","_luaV_finishOp","_io_open","_math_log","_luaB_costatus","_luaV_lessthan","_DumpDebug","_lua_close","_LoadUpvalues","_statlist","_discharge2anyreg","_traversestack","_luaB_coresume","_adjust_assign","_tconcat","_luaV_execute","_luaL_addvalue","_math_sin","_recfield","_str_format","_luaL_getmetafield","_luaT_gettmbyobj","_unlinkupval","_getboolfield","_callallpendingfinalizers","_read_all","_getcached","_read_string","_luaG_typeerror","_ipairsaux","_luaL_checkudata","_math_atan2","_localstat","_ll_searchpath","_luaZ_init","_luaL_getsubtable","_math_sqrt","_math_ceil","_luaF_newCclosure","_luaX_setinput","_luaO_pushfstring","_breaklabel","_luaL_optnumber","_getupvalref","_lua_gethookmask","_scanformat","_ll_sym","_traverseproto","_whilestat","_skipcomment","_luaB_pairs","_createmetatable","_b_rshift","_buffreplace","_check_conflict","_luaK_getlabel","_luaF_getlocalname","_luaB_tonumber","_luaH_newkey","_b_shift","_isnumeral","_math_abs","_luaG_ordererror","_db_upvalueid","_traverseweakvalue","_newprefile","_math_tan","_f_lines","_finishpcall","_os_clock","_f_write","_luaF_freeproto","_str_reverse","_luaB_load","_sys_alloc","_singlevar","_check_capture","_codeextraarg","_undefgoto","_lua_load","_luaO_pushvfstring","_skipnoopstat","_lua_pcallk","_math_deg","_traverseLclosure","_parlist","_free","_findlocal","_getupvalname","_funcname","_luaC_step","_read_line","_traversetable","_luaL_loadbufferx","_luaU_undump","_luaB_assert","_lua_resume","_lua_iscfunction","_math_floor","_makemask","_luaC_checkfinalizer","_DumpBlock","_opencheck","_forlist","_luaT_init","_tmalloc_small","_lua_rawlen","_match_capture","_luaK_checkstack","_need_value","_lua_isnumber","_enterblock","_luaM_toobig","_lexerror","_createsearcherstable","_removevalues","_luaO_chunkid","_getiofile","_luaopen_os","_luaopen_coroutine","_luaU_header","_math_cos","_luaF_findupval","_luaX_newstring","_prepend_alloc","_luaH_setint","_luaK_goiftrue","_luaF_close","_luaK_setreturns","_singlestep","_luaB_cocreate","_lua_strx2number","_block_follow","_classend","_checkupval","_settabss","_propagatelist","_luaL_traceback","_DumpUpvalues","_ll_checkclib","_settabsi","_luaB_corunning","_luaD_hook","_settabsb","_luaopen_package","_luaO_hexavalue","_read_long_string","_unbound_search","_b_extract","_block","_io_popen","_hashnum","_realloc","_lua_getstack","_lua_gettop","_lua_getlocal","_lua_setuservalue","_math_tanh","_getlocvar","_readdecesc","_luaG_errormsg","_lua_toboolean","_aux_close","_fieldargs","_tremove","_DumpHeader","_luaK_concat","_l_strcmp","_luaB_error","_lua_tothread","_str_lower","_isneg","_f_gc","_lua_getctx","_remarkupvals","_addfield","_luaC_freeallobjects","_iscleared","_luaK_indexed","_findfield","_closegoto","_LoadNumber","_currentline","_luaB_getmetatable","_luaK_goiffalse","_io_read","_luaV_concat","_makeseed","_codecomp","_LoadChar","_luaE_setdebt","_exprstat","_luaB_loadfile","_os_getenv","_os_difftime","_luaC_barrierproto_","_g_read","_skipBOM","_upvalname","_luaL_checkversion_","_math_max","_growstack","_luaL_buffinitsize","_luaT_gettm","_unmakemask","_luaopen_base","_luaH_set","_countint","_callTM","_lua_atpanic","_getbinopr","_db_setuservalue","_luaE_freethread","_lua_getinfo","_luaK_patchclose","_set2","_luaB_select","_luaB_dofile","_init_top","_b_test","_lua_setfield","_statement","_max_expand","_internal_realloc","_io_tmpfile","_str_match","_sweeplist","_lua_next","_lua_concat","_sort_comp","_luaL_testudata","_luaD_reallocstack","_luaopen_table","_funcargs","_luaF_newupval","_recover","_seterrorobj","_lua_rawseti","_collectvalidlines","_getF","_g_write","_db_getinfo","_getobjname","_luaM_realloc_","_lua_absindex","_stackinuse","_db_setmetatable","_boolK","_luaL_error","_LoadFunction","_luaK_dischargevars","_luaU_dump","_luaB_type","_f_seek","_gctm","_f_call","_fornum","_code_label","_findloader","_checklimit","_traverseCclosure","_end_capture","_entersweep","_new_localvarliteral_","_lua_copy","_db_getregistry","_luaL_argerror","_math_modf","_constfolding","_errorlimit","_luaH_next","_lua_pushnil","_f_flush","_removeentry","_LoadInt","_luaL_pushresultsize","_DumpInt","_findfile","_luaO_int2fb","_callhook","_newupvalue","_ll_unloadlib","_addk","_release_unused_segments","_luaL_prepbuffsize","_explist","_searchupvalue","_createstdfile","_lua_rawget","_get_equalTM","_io_lines","_constructor","_condjump","_ll_addtoclib","_luaopen_string","_b_or","_f_luaopen","_luaL_buffinit","_b_arshift","_luaL_execresult","_init_bins","_newlabelentry","_checkoption","_index2addr","_luaG_concaterror","_luaS_eqstr","_readhexaesc","_mmap_alloc","_LoadDebug","_currentpc","_getjump","_tag_error","_patchlistaux","_incstep","_matchbracketclass","_luaK_prefix","_listfield","_freereg","_init_exp","_lua_pushlstring","_findsetreg","_lastlistfield","_noenv","_findlabel","_luaL_len","_setnodevector","_generic_reader","_reallymarkobject","_checkname","_sweepthread","_luaK_patchlist","_close_func","_convergeephemerons","_luaD_poscall","_db_getupvalue","_lua_insert","_io_close","_enterlevel","_finishCcall","_treatstackoption","_math_random","_luaK_ret","_luaB_xpcall","_lua_getupvalue","_push_captures","_fieldsel","_LoadBlock","_lua_checkstack","_luaL_pushresult","_movegotosout","_lua_error","_andaux","_match","_luaL_setfuncs","_lua_upvalueid","_luaL_optlstring","_clearvalues","_luaL_checkunsigned","_checknext","_luaK_exp2RK","_luaL_checklstring","_getfuncname","_pcallcont","_checkrepeated","_yindex","_codearith","_b_lrot","_luaH_resizearray","_db_setlocal","_lua_setlocal","_lua_yieldk","_ll_require","_math_min","_lua_newstate","_db_getmetatable","_markbeingfnz","_setarrayvector","_luaV_gettable","_hookf","_luaK_exp2anyreg","_luaE_freeCI","_gotostat","_math_randomseed","_unroll","_luaB_rawequal","_luaO_str2d","_math_acos","_checkSizes","_auxsort","_add_segment","_addprototype","_ll_loadfunc","_pushclosure","_inclinenumber","_luaD_precall","_str_sub","_searcher_Croot","_lua_getfield","_createstrobj","_tryfuncTM","_luaK_numberK","_luaD_protectedparser","_math_fmod","_DumpNumber","_traverseephemeron","_luaL_newmetatable","_luaB_ipairs","_luaL_requiref","_getthread","_luaopen_bit32","_setboolfield","_DumpFunction","_add_s","_lua_settop","_lua_pushboolean","_addlenmod","_capture_to_close","_lua_replace","_luaB_rawset","_ll_loadlib","_b_rrot","_retraversegrays","_adjust_varargs","_luaB_collectgarbage","_luaK_codek","_os_time","_searcher_C","_luaO_fb2int","_luaV_objlen","_io_pclose","_numusehash","_luaD_call","_test_eof","_discharge2reg","_localfunc","_os_date","_readhexa","_lua_getuservalue","_pushglobalfuncname","_addquoted","_labelstat","_getS","_luaY_parser","_luaL_setmetatable","_lua_status","_lua_tonumberx","_luaZ_read","_io_flush","_suffixedexp","_jumponcond","_getfreepos","_lmemfind","_lua_setglobal","_io_input","_f_tostring","_io_write","_getjumpcontrol","_luaK_reserveregs","_leaveblock","_clearkeys","_call_binTM","_pack","_lua_createtable","_kname","_math_sinh","_funcinfo","_db_gethook","_luaF_freeupval","_luaC_forcestep","_lua_pushthread","_call_orderTM","_exp1","_luaK_stringK","_singlevaraux","_correctstack","_luaK_exp2anyregup","_codeclosure","_writer","_luaF_newLclosure","_udata2finalize","_math_asin","_luaopen_debug","_os_remove","_traversestrongtable","_luaS_resize","_luaM_growaux_","_getunopr","_lua_getglobal","_error","_nospecials","_lua_pushcclosure","_lua_pushstring","_luaH_getstr","_lua_upvaluejoin","_math_rad","_exp2reg","_init_mparams","_expr","_luaK_exp2val","_luaK_setlist","_mainposition","_math_cosh","_searchpath","_preinit_state","_testnext","_body","_trydecpoint","_DumpVector","_GCTM","_panic","_tinsert","_luaD_growstack","_escerror","_io_fclose","_luaX_token2str","_isinstack","_tofile","_b_xor","_newfile","_lua_isstring","_luaD_pcall","_searchvar","_luaH_getn","_nilK","_luaS_hash","_luaK_code","_unpack","_simpleexp","_lua_callk","_luaL_checkany","_luaK_setoneret","_setpath","_luaC_checkupvalcolor","_invertjump","_luaV_lessequal","_check","_auxupvalue","_removevars","_luaO_ceillog2","_skip_sep","_newshrstr","_lua_newthread","_min_expand","_str_gsub","_DumpConstants","_markroot","_markmt","_luaE_extendCI","_f_read","_luaB_cowrap","_luaH_getint","_lua_pushnumber","_math_pow","_io_noclose","_luaB_tostring","_lua_topointer","_luaC_barrier_","_luaV_tostring","_luaK_patchtohere","_str_find_aux","_lua_gettable","_fixjump","_mmap_resize","_lua_compare","_luaX_next","_close_state","_dofilecont","_lua_gc","_lua_newuserdata","_luaL_addlstring","_start_capture","_pairsmeta","_luaL_fileresult","_lua_tointegerx","_lua_version","_registerlocalvar","_auxresume","_luaG_runerror","_luaL_openlibs","_luaL_checkoption","_DumpString","_lua_pushvalue","_luaH_resize","_checkload","_b_rot","_lua_typename","_luaC_changemode","_luaS_newudata","_os_setlocale","_sort","_lua_rawgeti","_propagatemark","_auxgetinfo","_luaD_rawrunprotected","_luaS_eqlngstr","_push_onecapture","_luaK_exp2nextreg","_math_exp","_lua_type","_lua_dump","_LoadConstants","_stack_init","_luaK_nil","_luaK_fixline","_db_debug","_luaL_checknumber","_createmeta","_lua_getmetatable","_lua_pushunsigned","_luaL_gsub","_luaL_tolstring","_b_lshift","_findpcall","_forstat","_anchor_token","_os_exit","_rehash","_luaL_checktype","_dischargejpc","_funcstat","_readable","_io_output","_ll_load","_errfile","_LoadCode","_LoadHeader","_segment_holding","_b_not","_semerror","_luaB_rawget","_os_execute","_repeatstat","_lua_pushinteger","_adjustlocalvars","_check_match","_open_func","_luaL_newstate","_aux_lines","_luaL_where","_luaC_runtilstate","_luaB_print","_db_getuservalue","_f_setvbuf","_arrayindex","_numusearray"]
 
 
 // This file is appended to the end of build/liblua.js
@@ -72717,13 +72683,15 @@ this['Lua'] = {
         // Put new function, from buffer, at the top of the stack
         this.require_initialization();
         var commandPtr = this.allocate_string(command);
+        var namePtr    = this.allocate_string(source_name);
         var parseFailed = _luaL_loadbufferx(
-            this.state, commandPtr, command.length, source_name
+            this.state, commandPtr, command.length, namePtr
         );
         if (parseFailed) {
             this.report_error("Parsing failure");
         }
         _free(commandPtr);
+        _free(namePtr);
         return !parseFailed;
     },
     eval: function (command, source_name, source) {
