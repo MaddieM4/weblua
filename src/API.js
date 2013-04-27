@@ -268,7 +268,7 @@ this['Lua'] = {
                     if (result == undefined || result == null) {
                         result = [];
                     }
-                    if (!( typeof result == 'object' && result.length)) {
+                    if (!( typeof result == 'object' && typeof result.length == "number")) {
                         throw new Error("Expected array return type from JS function");
                     }
                     for (var i = 0; i < result.length; i++) {
