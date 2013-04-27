@@ -72693,6 +72693,10 @@ this['Lua'] = {
     state: null,
     tmp_id: 0,
     default_source_name: 'stdin',
+    preallocated_strings: {
+        '__handle': null,
+        '__index': null,
+    },
     initialize: function (source_name, stdout, stderr) {
         if (this.isInitialized) throw new Error('Lua already initialized');
         this.default_source_name = source_name || this.default_source_name;
@@ -72701,6 +72705,9 @@ this['Lua'] = {
         run();
         this.state = _luaL_newstate();
         _luaL_openlibs(this.state);
+        for (var key in this.preallocated_strings) {
+            this.preallocated_strings[key] = this.allocate_string(key);
+        }
         this.isInitialized = true;
     },
     require_initialization: function(){
@@ -72811,18 +72818,17 @@ this['Lua'] = {
                 var max_key = 0;
 
                 // Check for handle
-                this.pushStack("__handle")
+                _lua_pushstring(this.state, this.preallocated_strings['__handle']);
                 _lua_rawget(this.state, index-1);
                 var handle = this.popStack();
                 if (handle) {
                     // Return original value
-                    var ptr = this.allocate_string("__index")
+                    var ptr = this.preallocated_strings["__index"];
                     var success = _luaL_getmetafield(
                         this.state,
                         index,
                         ptr
                     );
-                    _free(ptr)
                     var __indexfunc = this.popStack();
                     var source = __indexfunc.source;
                     return source;
