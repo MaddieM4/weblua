@@ -72785,8 +72785,7 @@ this['Lua'] = {
     peekStack: function(index, source) {
         this.require_initialization();
         var ret;
-        var inspection = this.inspect(index);
-        var type = inspection.type;
+        var type = _lua_type(this.state, index);
         switch (type) {
             case -1: // LUA_TNONE
             case 0:  // LUA_TNIL
@@ -72908,6 +72907,7 @@ this['Lua'] = {
                 ret.address = address;
                 break;
             default: // Other Lua type
+                var inspection = this.inspect(index);
                 ret = inspection.typename + " (typecode "+type+"): 0x" + inspection.addrstr;
         }
         return ret;
