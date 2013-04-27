@@ -286,12 +286,17 @@ this['Lua'] = {
                     _lua_createtable(this.state, 0, 0);
                     if (object['__handle']) {
                         // Handled object
+                        var source = object;
                         var metatable = {
                             '__index': function (table, key) {
-                                return [object[key]];
-                            }
+                                return [source[key]];
+                            },
+                            '__newindex': function (table, key, value) {
+                                source[key] = value;
+                                return [];
+                            },
                         }
-                        metatable['__index'].source = object;
+                        metatable['__index'].source = source;
 
                         this.pushStack(metatable);
                         _lua_setmetatable(this.state, -2);
@@ -299,10 +304,9 @@ this['Lua'] = {
                         object = {'__handle': object.toString()};
                     }
                     for (var k in object) {
+                        this.pushStack(k);
                         this.pushStack(object[k]);
-                        var strptr = this.allocate_string(k);
-                        _lua_setfield(this.state, -2, strptr);
-                        _free(strptr);
+                        _lua_rawset(this.state, -3);
                     }
                 } else {
                     // Array
@@ -311,7 +315,7 @@ this['Lua'] = {
                         k = 1*k;
                         this.pushStack(k+1)
                         this.pushStack(object[k]);
-                        _lua_settable(this.state, -3);
+                        _lua_rawset(this.state, -3);
                     }
                 }
                 return 1;
