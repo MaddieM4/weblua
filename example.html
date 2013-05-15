@@ -72,7 +72,7 @@
                 stderr("inject eval failure: " + e, "Encountered while parsing:\n\n" +value)
                 return
             }
-            do_eval(Lua.js_to_lua(value));
+            do_eval(Lua.inject(value));
         }
 
         function initialize() {
