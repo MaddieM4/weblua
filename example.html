@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Lua Emscripten Example</title>
+    <script src="stringview.js"></script>
     <script src="build/weblua.js"></script>
     <style>
         .interpreter {
@@ -77,6 +78,9 @@
 
         function initialize() {
             Lua.initialize('stdin', stdout, stderr);
+            Lua.set_lua_string_to_js(function(arr) {
+                return (new StringView(arr)).toString();
+            });
             stdout('Lua interpreter v5.2.1, converted to JS with Emscripten and weblua.');
             stdout('Enter your code below, using the buttons on the left to execute it.');
         }
