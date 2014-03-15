@@ -1,12 +1,12 @@
 LUA_VERSION=5.2.1
-WEBLUA_VERSION=0.1.5
+WEBLUA_VERSION=0.1.6
 
 DOWNLOAD_PROGRAM=wget
 LUA_SRC_URL=http://www.lua.org/ftp/lua-$(LUA_VERSION).tar.gz
 LUA_SRC_LOCATION=src/lua-$(LUA_VERSION).tar.gz
 LUA_ROOT=src/lua-$(LUA_VERSION)
 
-CLOSURE_SRC_URL=http://closure-compiler.googlecode.com/files/compiler-latest.zip
+CLOSURE_SRC_URL=http://dl.google.com/closure-compiler/compiler-latest.zip
 CLOSURE_SRC_LOCATION=src/closure.zip
 CLOSURE_UNPACK_LOCATION=src/closure
 CLOSURE_COMMAND=java -jar $(CLOSURE_UNPACK_LOCATION)/compiler.jar
