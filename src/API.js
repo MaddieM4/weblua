@@ -16,6 +16,23 @@ this['Lua'] = {
         '__handle': null,
         '__index': null,
     },
+    js_string_to_lua: function(str) {
+        ret = intArrayFromString(str);
+        return ret;
+    },
+    lua_string_to_js: function(int8_array) {
+        var buffer = [];
+        for (var i = 0; i < int8_array.length; i++) {
+            buffer.push(String.fromCharCode(int8_array[i]));
+        }
+        return buffer.join('');
+    },
+    set_js_string_to_lua: function(f) {
+        this.js_string_to_lua = f;
+    },
+    set_lua_string_to_js: function(f) {
+        this.lua_string_to_js = f;
+    },
     initialize: function (source_name, stdout, stderr) {
         if (this.isInitialized) throw new Error('Lua already initialized');
         this.default_source_name = source_name || this.default_source_name;
@@ -35,10 +52,11 @@ this['Lua'] = {
     parse: function (command, source_name) {
         // Put new function, from buffer, at the top of the stack
         this.require_initialization();
-        var commandPtr = this.allocate_string(command);
+        var command_array = this.js_string_to_lua(command);
+        var commandPtr = allocate(command_array, 'i8', 0); // ALLOC_NORMAL
         var namePtr    = this.allocate_string(source_name);
         var parseFailed = _luaL_loadbufferx(
-            this.state, commandPtr, command.length, namePtr
+            this.state, commandPtr, command_array.length - 1, namePtr
         );
         if (parseFailed) {
             this.report_error("Parsing failure");
@@ -95,7 +113,7 @@ this['Lua'] = {
         return func.apply(null, args);
     },
     allocate_string: function(str) {
-        var arr = intArrayFromString(str);
+        var arr = this.js_string_to_lua(str);
         return allocate(arr, 'i8', 0);  // ALLOC_NORMAL
     },
     inspect: function(index) {
@@ -129,10 +147,7 @@ this['Lua'] = {
             case 4:  // LUA_TSTRING
                 var ptr = _lua_tolstring(this.state, index, 0);
                 var len = _lua_rawlen(this.state, index);
-                var buffer = [];
-                for (var i = 0; i < len; i++)
-                    buffer.push(String.fromCharCode(HEAP8[ptr+i]));
-                ret = buffer.join('');
+                ret = this.lua_string_to_js(HEAPU8.subarray(ptr, ptr+len));
                 break;
             case 5:  // LUA_TTABLE
                 var is_array = true;
@@ -384,6 +399,8 @@ this['Lua']['exec'] = this['Lua'].exec;
 this['Lua']['anon_lua_object'] = this['Lua'].anon_lua_object;
 this['Lua']['inject'] = this['Lua'].inject;
 this['Lua']['cache'] = this['Lua'].cache;
+this['Lua']['set_js_string_to_lua'] = this['Lua'].set_js_string_to_lua;
+this['Lua']['set_lua_string_to_js'] = this['Lua'].set_lua_string_to_js;
 
 Lua.cache['items'] = {};
 Lua.cache['clear'] = function (evalstring) { delete Lua.cache['items'][evalstring] }
