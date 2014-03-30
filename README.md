@@ -59,6 +59,20 @@ Return an anonymous Lua object based on the JS object given. Will use Lua.inject
 
 Always returns a string that will be eval-able by the interpreter.
 
+#### Lua.set_js_string_to_lua(function)
+
+Expects a function that takes a JavaScript string and returns a Uint8Array containing the Lua string with a null terminator at the end. Weblua will call this function when it needs to convert a JavaScript string to a Lua string. The default implementation (which weblua inherits from emscripten) encodes the JavaScript string as UTF-8.
+
+#### Lua.set_lua_string_to_js(function)
+
+Expects a function that takes a Uint8Array containing a Lua string (without the null terminator) and returns a JavaScript string. Weblua will call this function when it needs to convert a Lua string to JavaScript. The default implementation interprets each byte of a Lua string as an Unicode codepoint using String.fromCharCode().
+
+#### Getting full Unicode support
+
+Note that the default string conversion behaviour described above will fail for characters that are represented by more than one byte in UTF-8 when converting a Lua string to a JavaScript string. If you need to pass non-ASCII characters from Lua to JavaScript (or Luas print() function which logs to the JS console), you need to call Lua.set_lua_string_to_js with a function that decodes UTF-8. See the example.html source code to see how you can use the StringView library (GPLv3 License) to do this.
+
+This extra step is not required if non-ASCII characters only appear as input to Lua code (including in string literals and comments).
+
 ## Current progress
 
 All basic functionality seems done. Work on filesystems code and such will proceed as I try to integrate weblua into [love-webplayer](https://github.com/ghoulsblade/love-webplayer).
